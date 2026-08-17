@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P0-06: create application stores`
+- HEAD commit: `P0-07: add typed mock configuration`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -15,17 +15,19 @@
 - [x] P0-04 — Scaffold cấu trúc thư mục
 - [x] P0-05 — Data Contract
 - [x] P0-06 — Zustand stores
+- [x] P0-07 — Mock config
 
 ## Đang làm
-- Task: Không có; dừng trước P0-07.
+- Task: Không có; dừng trước P0-08.
 - Mục tiêu: None.
 - File liên quan: None.
 
 ## Verification
 - `npm run build` — PASS
 - `npm run lint` — PASS
-- Store runtime assertions — PASS; initial state, partial merge và toàn bộ actions
-- Store safety scan — PASS; không `any`, TypeScript escape hatch hoặc import Three/R3F/Drei
+- Mock count/uniqueness/order checks — PASS
+- Hotspot/panorama/tour ID relationship checks — PASS; không có dangling reference
+- Config TODO/type/boundary checks — PASS; component mapping không bị sửa
 - Manual checkpoint còn thiếu: Không có.
 
 ## Quyết định đã chốt
@@ -53,14 +55,20 @@
 - Quyết định: partial update của `camera`, `mapView`, `tour` và drawer dùng immutable merge để giữ field không được cập nhật.
 - Lý do: đáp ứng state contract và tránh làm mất nested state.
 - Contract/file bị ảnh hưởng: `src/store/useCampusStore.ts`, `src/store/useUIStore.ts`.
+- Quyết định: dùng ba building ID `building-gate`, `building-academic`, `building-library` và ba panorama ID tương ứng làm mapping mock thống nhất.
+- Lý do: đảm bảo hotspot, panorama và tour resolve trực tiếp qua typed config.
+- Contract/file bị ảnh hưởng: sáu file trong `src/config/`.
+- Quyết định: ba panorama tạm cùng khai báo `/src/assets/mock/sample-panorama-grid.svg`.
+- Lý do: P0-08 sẽ tạo local deterministic asset tại đúng vị trí này.
+- Contract/file bị ảnh hưởng: `src/config/panorama.config.ts`.
 
 ## Blocker / known issue
-- None.
+- Asset `src/assets/mock/sample-panorama-grid.svg` chưa tồn tại; đây là phạm vi kế tiếp P0-08, không phải blocker của P0-07.
 
 ## Working tree
-- Clean sau commit P0-06.
+- Clean sau commit P0-07.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P0-07 — Mock config, chỉ khi người dùng yêu cầu tiếp tục.
-- Check đầu tiên: tạo typed mock data đúng số lượng và xác minh toàn bộ ID relationship.
-- Prompt gợi ý cho Codex session tiếp: đọc `AGENTS.md` → `STATUS.md` → P0-07 trong `task.md` → Data Contract/quan hệ ID trong `plan.md`, rồi đối chiếu Git.
+- Task tiếp: P0-08 — Tạo local panorama test grid, chỉ khi người dùng yêu cầu tiếp tục.
+- Check đầu tiên: tạo asset SVG 2:1 có directional marker và xác minh panorama config trỏ đúng asset.
+- Prompt gợi ý cho Codex session tiếp: đọc `AGENTS.md` → `STATUS.md` → P0-08 trong `task.md` → Panorama mock trong `plan.md`, rồi đối chiếu Git.
