@@ -1,0 +1,25 @@
+:root {
+  --color-navy-900: #0B2140;
+  --color-navy-700: #14335E;
+  --color-tech-blue: #2F80FF;
+  --color-academic-gold: #C9A227;
+  --color-cloud: #F5F7FA;
+  --color-slate-500: #64748B;
+
+  --font-display: "Be Vietnam Pro", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@theme inline {
+  --color-uet-navy: var(--color-navy-900);
+  --color-uet-navy-soft: var(--color-navy-700);
+  --color-uet-blue: var(--color-tech-blue);
+  --color-uet-gold: var(--color-academic-gold);
+  --color-uet-cloud: var(--color-cloud);
+  --color-uet-slate: var(--color-slate-500);
+
+  --font-uet-display: var(--font-display);
+  --font-uet-body: var(--font-body);
+  --font-uet-mono: var(--font-mono);
+}
