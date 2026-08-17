@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P0-04: scaffold project structure`
+- HEAD commit: `P0-05: define campus data contracts`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -13,17 +13,18 @@
 - [x] P0-02 — Cài dependencies
 - [x] P0-03 — Cấu hình Tailwind v4 + brand tokens (người dùng nghiệm thu checkpoint 👁️)
 - [x] P0-04 — Scaffold cấu trúc thư mục
+- [x] P0-05 — Data Contract
 
 ## Đang làm
-- Task: Không có; dừng trước P0-05.
+- Task: Không có; dừng trước P0-06.
 - Mục tiêu: None.
 - File liên quan: None.
 
 ## Verification
 - `npm run build` — PASS
 - `npm run lint` — PASS
-- Required scaffold files check — PASS
-- Architecture boundary check — PASS; `components/` không import 3D, `config/` chỉ là stub không logic/import
+- Exact six-interface AST check — PASS
+- Forbidden `any`/TypeScript escape hatch check — PASS
 - Manual checkpoint còn thiếu: Không có.
 
 ## Quyết định đã chốt
@@ -42,14 +43,17 @@
 - Quyết định: scaffold dùng named component stub và module rỗng; `App` chỉ ghép `AppShell`.
 - Lý do: xác lập đúng boundary mà không triển khai sớm data contract, store hoặc feature logic.
 - Contract/file bị ảnh hưởng: cây thư mục bắt buộc dưới `src/`, `src/App.tsx`, `src/main.tsx`.
+- Quyết định: định nghĩa nguyên vẹn sáu interface theo Data Contract trong `plan.md`, không thêm type/helper phụ.
+- Lý do: giữ shared contract đúng phạm vi P0-05 và ổn định cho config/store ở các task sau.
+- Contract/file bị ảnh hưởng: `src/types/campus.types.ts`.
 
 ## Blocker / known issue
 - None.
 
 ## Working tree
-- Clean sau commit P0-04.
+- Clean sau commit P0-05.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P0-05 — Data Contract, chỉ khi người dùng yêu cầu tiếp tục.
-- Check đầu tiên: điền đúng 6 interface trong `src/types/campus.types.ts` theo `plan.md`, không đổi field.
-- Prompt gợi ý cho Codex session tiếp: đọc `AGENTS.md` → `STATUS.md` → P0-05 trong `task.md` → Data Contract trong `plan.md`, rồi đối chiếu Git.
+- Task tiếp: P0-06 — Zustand stores, chỉ khi người dùng yêu cầu tiếp tục.
+- Check đầu tiên: triển khai đúng Campus/UI state contract và initial values, không lưu Three.js instance.
+- Prompt gợi ý cho Codex session tiếp: đọc `AGENTS.md` → `STATUS.md` → P0-06 trong `task.md` → State Contract trong `plan.md`, rồi đối chiếu Git.
