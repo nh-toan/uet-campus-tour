@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P0-08: add panorama test asset`
+- HEAD commit: `P0-09: add r3f foundation scene`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -17,19 +17,20 @@
 - [x] P0-06 — Zustand stores
 - [x] P0-07 — Mock config
 - [x] P0-08 — Local panorama test grid
+- [x] P0-09 — R3F Hello World (người dùng nghiệm thu checkpoint 👁️)
 
 ## Đang làm
-- Task: Không có; dừng trước P0-09.
+- Task: Không có; dừng trước P0-10.
 - Mục tiêu: None.
 - File liên quan: None.
 
 ## Verification
 - `npm run build` — PASS
 - `npm run lint` — PASS
-- SVG XML/dimension check — PASS; `1600×800`, tỷ lệ 2:1
-- Directional marker/local-only check — PASS; NORTH/EAST/SOUTH/WEST/ZENITH/NADIR, không external reference
-- Vite config asset-resolution build — PASS với `write: false`
-- Manual checkpoint còn thiếu: Không có.
+- R3F structure/useFrame allocation check — PASS
+- Brand token boundary/hardcoded color check — PASS
+- Vite dev server + module transform — PASS; không có runtime error rõ ràng
+- Manual checkpoint còn thiếu: Không có; người dùng xác nhận box hiển thị/xoay, OrbitControls và polar constraint đạt.
 
 ## Quyết định đã chốt
 - Quyết định: chỉ tạo `STATUS.md` trong root repository `campus-tour/`, không tạo ở thư mục cha.
@@ -65,14 +66,18 @@
 - Quyết định: panorama config dùng static import tới SVG local `1600×800` có grid, horizon, seam và sáu directional marker.
 - Lý do: Vite resolve/bundle URL ổn định và asset hỗ trợ kiểm tra orientation/distortion trong Phase 1.
 - Contract/file bị ảnh hưởng: `src/assets/mock/sample-panorama-grid.svg`, `src/config/panorama.config.ts`.
+- Quyết định: resolve `--color-tech-blue` tại `AppShell` bằng DOM API rồi truyền giá trị màu đã resolve vào `CampusMap3D`.
+- Lý do: giữ brand token là source of truth và không truyền CSS variable trực tiếp cho Three.js material.
+- Contract/file bị ảnh hưởng: `src/app/AppShell.tsx`, `src/scenes/CampusMap3D/index.tsx`.
 
 ## Blocker / known issue
-- None.
+- Build cảnh báo chunk R3F/Three khoảng 1,088 kB minified (khoảng 299 kB gzip); chưa tối ưu trong P0-09 vì ngoài scope Phase 0 foundation.
+- Runtime dev warning: R3F `9.7.0` nội bộ dùng `THREE.Clock`, API đã deprecated trong Three r185; code dự án không trực tiếp dùng `Clock`, scene vẫn hoạt động đúng.
 
 ## Working tree
-- Clean sau commit P0-08.
+- Clean sau commit P0-09.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P0-09 — R3F Hello World, chỉ khi người dùng yêu cầu tiếp tục.
-- Check đầu tiên: triển khai Canvas/box/light/OrbitControls đúng performance và brand-token boundary.
-- Prompt gợi ý cho Codex session tiếp: đọc `AGENTS.md` → `STATUS.md` → P0-09 trong `task.md` → R3F/performance/camera sections trong `plan.md`, rồi đối chiếu Git.
+- Task tiếp: P0-10 — i18n skeleton, chỉ khi người dùng yêu cầu tiếp tục.
+- Check đầu tiên: thêm cùng bộ key vào `vi.json`/`en.json` mà không cài i18n dependency.
+- Prompt gợi ý cho Codex session tiếp: đọc `AGENTS.md` → `STATUS.md` → P0-10 trong `task.md` → i18n scope trong `plan.md`, rồi đối chiếu Git.
