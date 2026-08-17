@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P0-05: define campus data contracts`
+- HEAD commit: `P0-06: create application stores`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -14,17 +14,18 @@
 - [x] P0-03 — Cấu hình Tailwind v4 + brand tokens (người dùng nghiệm thu checkpoint 👁️)
 - [x] P0-04 — Scaffold cấu trúc thư mục
 - [x] P0-05 — Data Contract
+- [x] P0-06 — Zustand stores
 
 ## Đang làm
-- Task: Không có; dừng trước P0-06.
+- Task: Không có; dừng trước P0-07.
 - Mục tiêu: None.
 - File liên quan: None.
 
 ## Verification
 - `npm run build` — PASS
 - `npm run lint` — PASS
-- Exact six-interface AST check — PASS
-- Forbidden `any`/TypeScript escape hatch check — PASS
+- Store runtime assertions — PASS; initial state, partial merge và toàn bộ actions
+- Store safety scan — PASS; không `any`, TypeScript escape hatch hoặc import Three/R3F/Drei
 - Manual checkpoint còn thiếu: Không có.
 
 ## Quyết định đã chốt
@@ -46,14 +47,20 @@
 - Quyết định: định nghĩa nguyên vẹn sáu interface theo Data Contract trong `plan.md`, không thêm type/helper phụ.
 - Lý do: giữ shared contract đúng phạm vi P0-05 và ổn định cho config/store ở các task sau.
 - Contract/file bị ảnh hưởng: `src/types/campus.types.ts`.
+- Quyết định: `stopTour()` đặt `status: "idle"` và reset `currentIndex` về `0`; `pauseTour()` giữ nguyên `currentIndex`.
+- Lý do: người dùng xác nhận contract trước khi triển khai P0-06.
+- Contract/file bị ảnh hưởng: `src/store/useCampusStore.ts`.
+- Quyết định: partial update của `camera`, `mapView`, `tour` và drawer dùng immutable merge để giữ field không được cập nhật.
+- Lý do: đáp ứng state contract và tránh làm mất nested state.
+- Contract/file bị ảnh hưởng: `src/store/useCampusStore.ts`, `src/store/useUIStore.ts`.
 
 ## Blocker / known issue
 - None.
 
 ## Working tree
-- Clean sau commit P0-05.
+- Clean sau commit P0-06.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P0-06 — Zustand stores, chỉ khi người dùng yêu cầu tiếp tục.
-- Check đầu tiên: triển khai đúng Campus/UI state contract và initial values, không lưu Three.js instance.
-- Prompt gợi ý cho Codex session tiếp: đọc `AGENTS.md` → `STATUS.md` → P0-06 trong `task.md` → State Contract trong `plan.md`, rồi đối chiếu Git.
+- Task tiếp: P0-07 — Mock config, chỉ khi người dùng yêu cầu tiếp tục.
+- Check đầu tiên: tạo typed mock data đúng số lượng và xác minh toàn bộ ID relationship.
+- Prompt gợi ý cho Codex session tiếp: đọc `AGENTS.md` → `STATUS.md` → P0-07 trong `task.md` → Data Contract/quan hệ ID trong `plan.md`, rồi đối chiếu Git.
