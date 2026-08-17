@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P0-09: add r3f foundation scene`
+- HEAD commit: `P0-10: add language dictionaries`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -18,15 +18,17 @@
 - [x] P0-07 — Mock config
 - [x] P0-08 — Local panorama test grid
 - [x] P0-09 — R3F Hello World (người dùng nghiệm thu checkpoint 👁️)
+- [x] P0-10 — i18n skeleton
 
 ## Đang làm
-- Task: Không có; dừng trước P0-10.
+- Task: Không có; dừng trước P0-11.
 - Mục tiêu: None.
 - File liên quan: None.
 
 ## Verification
 - `npm run build` — PASS
 - `npm run lint` — PASS
+- i18n VI/EN key parity check — PASS; đủ 8 key bắt buộc
 - R3F structure/useFrame allocation check — PASS
 - Brand token boundary/hardcoded color check — PASS
 - Vite dev server + module transform — PASS; không có runtime error rõ ràng
@@ -69,15 +71,18 @@
 - Quyết định: resolve `--color-tech-blue` tại `AppShell` bằng DOM API rồi truyền giá trị màu đã resolve vào `CampusMap3D`.
 - Lý do: giữ brand token là source of truth và không truyền CSS variable trực tiếp cho Three.js material.
 - Contract/file bị ảnh hưởng: `src/app/AppShell.tsx`, `src/scenes/CampusMap3D/index.tsx`.
+- Quyết định: P0-10 chỉ dùng hai JSON dictionary có cùng cấu trúc lồng `nav`/`tour`/`common`, không thêm helper hay i18n dependency.
+- Lý do: đáp ứng skeleton hiện tại với phạm vi nhỏ nhất; chưa có consumer cần abstraction dịch thuật.
+- Contract/file bị ảnh hưởng: `src/i18n/vi.json`, `src/i18n/en.json`.
 
 ## Blocker / known issue
 - Build cảnh báo chunk R3F/Three khoảng 1,088 kB minified (khoảng 299 kB gzip); chưa tối ưu trong P0-09 vì ngoài scope Phase 0 foundation.
 - Runtime dev warning: R3F `9.7.0` nội bộ dùng `THREE.Clock`, API đã deprecated trong Three r185; code dự án không trực tiếp dùng `Clock`, scene vẫn hoạt động đúng.
 
 ## Working tree
-- Clean sau commit P0-09.
+- Clean sau commit P0-10.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P0-10 — i18n skeleton, chỉ khi người dùng yêu cầu tiếp tục.
-- Check đầu tiên: thêm cùng bộ key vào `vi.json`/`en.json` mà không cài i18n dependency.
-- Prompt gợi ý cho Codex session tiếp: đọc `AGENTS.md` → `STATUS.md` → P0-10 trong `task.md` → i18n scope trong `plan.md`, rồi đối chiếu Git.
+- Task tiếp: P0-11 — Phase 0 review, chỉ khi người dùng yêu cầu tiếp tục.
+- Check đầu tiên: đối chiếu `STATUS.md` với Git, sau đó chạy đầy đủ review command của P0-11 mà không thêm feature.
+- Prompt gợi ý cho Codex session tiếp: đọc `AGENTS.md` → `STATUS.md` → P0-11 trong `task.md` → Phase 0 scope trong `plan.md`, rồi đối chiếu Git.

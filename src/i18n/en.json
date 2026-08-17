@@ -1,1 +1,16 @@
-{}
+{
+  "nav": {
+    "about": "About",
+    "faculty": "Faculties",
+    "club": "Clubs"
+  },
+  "tour": {
+    "play": "Play",
+    "pause": "Pause",
+    "next": "Next",
+    "prev": "Previous"
+  },
+  "common": {
+    "back": "Back"
+  }
+}

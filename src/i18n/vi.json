@@ -1,1 +1,16 @@
-{}
+{
+  "nav": {
+    "about": "Về trường",
+    "faculty": "Khoa",
+    "club": "Câu lạc bộ"
+  },
+  "tour": {
+    "play": "Phát",
+    "pause": "Tạm dừng",
+    "next": "Tiếp theo",
+    "prev": "Trước"
+  },
+  "common": {
+    "back": "Quay lại"
+  }
+}
