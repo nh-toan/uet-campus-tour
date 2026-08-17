@@ -1,8 +1,7 @@
+import mockPanoramaUrl from '../assets/mock/sample-panorama-grid.svg'
 import type { PanoramaScene } from '../types/campus.types'
 
 // TODO: thay bằng dữ liệu thật
-const mockPanoramaUrl = '/src/assets/mock/sample-panorama-grid.svg'
-
 export const panoramaScenes: PanoramaScene[] = [
   {
     id: 'panorama-gate',

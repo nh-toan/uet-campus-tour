@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P0-07: add typed mock configuration`
+- HEAD commit: `P0-08: add panorama test asset`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -16,18 +16,19 @@
 - [x] P0-05 — Data Contract
 - [x] P0-06 — Zustand stores
 - [x] P0-07 — Mock config
+- [x] P0-08 — Local panorama test grid
 
 ## Đang làm
-- Task: Không có; dừng trước P0-08.
+- Task: Không có; dừng trước P0-09.
 - Mục tiêu: None.
 - File liên quan: None.
 
 ## Verification
 - `npm run build` — PASS
 - `npm run lint` — PASS
-- Mock count/uniqueness/order checks — PASS
-- Hotspot/panorama/tour ID relationship checks — PASS; không có dangling reference
-- Config TODO/type/boundary checks — PASS; component mapping không bị sửa
+- SVG XML/dimension check — PASS; `1600×800`, tỷ lệ 2:1
+- Directional marker/local-only check — PASS; NORTH/EAST/SOUTH/WEST/ZENITH/NADIR, không external reference
+- Vite config asset-resolution build — PASS với `write: false`
 - Manual checkpoint còn thiếu: Không có.
 
 ## Quyết định đã chốt
@@ -58,17 +59,20 @@
 - Quyết định: dùng ba building ID `building-gate`, `building-academic`, `building-library` và ba panorama ID tương ứng làm mapping mock thống nhất.
 - Lý do: đảm bảo hotspot, panorama và tour resolve trực tiếp qua typed config.
 - Contract/file bị ảnh hưởng: sáu file trong `src/config/`.
-- Quyết định: ba panorama tạm cùng khai báo `/src/assets/mock/sample-panorama-grid.svg`.
-- Lý do: P0-08 sẽ tạo local deterministic asset tại đúng vị trí này.
+- Quyết định tại P0-07: ba panorama tạm cùng khai báo `/src/assets/mock/sample-panorama-grid.svg`.
+- Lý do: dành sẵn target cho local deterministic asset của P0-08 trước khi chuyển sang static import.
 - Contract/file bị ảnh hưởng: `src/config/panorama.config.ts`.
+- Quyết định: panorama config dùng static import tới SVG local `1600×800` có grid, horizon, seam và sáu directional marker.
+- Lý do: Vite resolve/bundle URL ổn định và asset hỗ trợ kiểm tra orientation/distortion trong Phase 1.
+- Contract/file bị ảnh hưởng: `src/assets/mock/sample-panorama-grid.svg`, `src/config/panorama.config.ts`.
 
 ## Blocker / known issue
-- Asset `src/assets/mock/sample-panorama-grid.svg` chưa tồn tại; đây là phạm vi kế tiếp P0-08, không phải blocker của P0-07.
+- None.
 
 ## Working tree
-- Clean sau commit P0-07.
+- Clean sau commit P0-08.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P0-08 — Tạo local panorama test grid, chỉ khi người dùng yêu cầu tiếp tục.
-- Check đầu tiên: tạo asset SVG 2:1 có directional marker và xác minh panorama config trỏ đúng asset.
-- Prompt gợi ý cho Codex session tiếp: đọc `AGENTS.md` → `STATUS.md` → P0-08 trong `task.md` → Panorama mock trong `plan.md`, rồi đối chiếu Git.
+- Task tiếp: P0-09 — R3F Hello World, chỉ khi người dùng yêu cầu tiếp tục.
+- Check đầu tiên: triển khai Canvas/box/light/OrbitControls đúng performance và brand-token boundary.
+- Prompt gợi ý cho Codex session tiếp: đọc `AGENTS.md` → `STATUS.md` → P0-09 trong `task.md` → R3F/performance/camera sections trong `plan.md`, rồi đối chiếu Git.
