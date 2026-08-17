@@ -1,5 +1,5 @@
-function App() {
-  return <main />
-}
+import { AppShell } from './app/AppShell'
 
-export default App
+export function App() {
+  return <AppShell />
+}
