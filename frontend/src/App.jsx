@@ -1,4 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
+
+const CampusMapModule = lazy(() => import('./features/campus-map/CampusMapModule'));
 
 const sections = [
   ['gioi-thieu', 'Giới thiệu'],
@@ -45,7 +47,7 @@ function IntroPage({ navigate }) {
 }
 
 function MapPage({ navigate }) {
-  return <section className="map-page"><div className="map-copy"><p className="eyebrow">BẢN ĐỒ KHUÔN VIÊN</p><h1>Khám phá Hòa Lạc<br /><em>theo cách của bạn.</em></h1><p>Khu vực bản đồ đã được tách riêng để sẵn sàng tích hợp dữ liệu 2D, panorama hoặc mô hình 3D khi được bàn giao. Các section thông tin khác vẫn hoạt động độc lập.</p><div className="actions"><button className="primary" onClick={() => document.querySelector('#map-viewer')?.requestFullscreen?.()}>Mở toàn màn hình ↗</button><button className="secondary" onClick={() => navigate('cau-lac-bo')}>Khám phá CLB →</button></div><div className="stats"><span><b>01</b>Khu vực<br />bản đồ</span><span><b>08</b>Liên chi</span><span><b>24</b>Câu lạc bộ</span></div></div><div id="map-viewer" className="map-viewer" role="img" aria-label="Bản đồ khuôn viên Hòa Lạc đang chờ dữ liệu chi tiết"><div className="map-nav"><b>UET NAVIGATOR</b><span>BẢN ĐỒ</span><span>HÒA LẠC</span></div><div className="map-point point-one">⌖ <small>Trung tâm Hòa Lạc</small></div><div className="map-point point-two">◉ <small>Khu học tập</small></div><div className="map-status"><i /> SẴN SÀNG TÍCH HỢP</div><div className="map-wait"><strong>Dữ liệu bản đồ đang chờ bàn giao</strong><span>Đặt các tệp <code>GLB / glTF / panorama</code> vào <code>frontend/public/assets/map/</code> khi có dữ liệu chính thức.</span></div></div></section>;
+  return <section className="map-page"><div className="map-copy"><p className="eyebrow">BẢN ĐỒ KHUÔN VIÊN</p><h1>Khám phá Hòa Lạc<br /><em>theo cách của bạn.</em></h1><p>Khu vực bản đồ đã được tách riêng để sẵn sàng tích hợp dữ liệu 2D, panorama hoặc mô hình 3D khi được bàn giao. Các section thông tin khác vẫn hoạt động độc lập.</p><div className="actions"><button className="primary" onClick={() => document.querySelector('#map-viewer')?.requestFullscreen?.()}>Mở toàn màn hình ↗</button><button className="secondary" onClick={() => navigate('cau-lac-bo')}>Khám phá CLB →</button></div><div className="stats"><span><b>01</b>Khu vực<br />bản đồ</span><span><b>08</b>Liên chi</span><span><b>24</b>Câu lạc bộ</span></div></div><div id="map-viewer" className="map-viewer"><Suspense fallback={<div className="map-wait" role="status"><strong>Đang tải bản đồ 3D…</strong><span>Đang chuẩn bị không gian tham quan khuôn viên.</span></div>}><CampusMapModule /></Suspense></div></section>;
 }
 
 function Logo({ item }) {
