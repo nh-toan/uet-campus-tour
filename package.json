@@ -1,0 +1,20 @@
+{
+  "name": "uet-navigator",
+  "version": "2.0.0",
+  "private": true,
+  "description": "UET Hòa Lạc Navigator - React frontend and Node.js API.",
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "server": "node backend/server.js",
+    "client": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "start": "node backend/server.js",
+    "check": "node --check backend/server.js && npm --prefix frontend run build"
+  },
+  "devDependencies": {
+    "concurrently": "9.1.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

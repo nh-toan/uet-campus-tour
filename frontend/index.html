@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="UET Navigator - Bản đồ khuôn viên Hòa Lạc và cẩm nang sinh viên." />
+    <title>UET Navigator</title>
+  </head>
+  <body>
+    <div id="root">
+      <main class="app-fallback" role="status">
+        <p>ĐANG KHỞI TẠO UET NAVIGATOR…</p>
+        <span>Nếu thông báo này không tự biến mất, giao diện React chưa tải được.</span>
+      </main>
+    </div>
+    <script>
+      window.addEventListener('error', function (event) {
+        var root = document.getElementById('root');
+        if (root && !root.dataset.mounted) {
+          root.innerHTML = '<main class="app-fallback"><p>KHÔNG THỂ TẢI GIAO DIỆN REACT</p><span>' + String(event.message || 'Lỗi JavaScript không xác định.') + '</span></main>';
+        }
+      });
+    </script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
