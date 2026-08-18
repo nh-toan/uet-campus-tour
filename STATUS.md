@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P1-06: add scene transition and map restore`
+- HEAD commit: `P1-07: add campus info drawer`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -26,9 +26,10 @@
 - [x] P1-04 — Hotspot markers (người dùng nghiệm thu checkpoint 👁️)
 - [x] P1-05 — PanoramaViewer (người dùng nghiệm thu checkpoint 👁️)
 - [x] P1-06 — Map ↔ Panorama + restore camera (người dùng nghiệm thu checkpoint 👁️)
+- [x] P1-07 — InfoDrawer (người dùng nghiệm thu checkpoint 👁️)
 
 ## Đang làm
-- Task: Không có; P1-06 đã hoàn tất và đang dừng trước P1-07.
+- Task: Không có; P1-07 đã hoàn tất và đang dừng trước P1-08.
 - Mục tiêu: None.
 - File liên quan: None.
 
@@ -75,7 +76,12 @@
 - P1-06 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
 - P1-06 `npm run lint`, architecture/hygiene scan và `git diff --check` — PASS
 - P1-06 Vite dev server + module transform — PASS; endpoint local trả HTTP 200
-- Manual checkpoint còn thiếu: Không có; người dùng xác nhận hotspot → panorama → Back hoạt động, map restore gần đúng góc trước đó và transition ổn.
+- P1-07 TypeScript check `npx tsc -p tsconfig.app.json --noEmit --pretty false` — PASS
+- P1-07 config/UIStore/DOM boundary/accessibility check — PASS; ba tab đọc đúng campus/faculty/club config, dùng selector/action từ UIStore, không import Three/R3F/Drei, vùng scroll và tap target tối thiểu 44×44px tồn tại
+- P1-07 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
+- P1-07 `npm run lint`, debug/color scan và `git diff --check` — PASS
+- P1-07 Vite dev server + module transform — PASS; app và module InfoDrawer trả HTTP 200
+- Manual checkpoint còn thiếu: Không có; người dùng xác nhận drawer mở/đóng, ba tab hoạt động, nội dung scroll và mobile layout ổn.
 
 ## Quyết định đã chốt
 - Quyết định: chỉ tạo `STATUS.md` trong root repository `campus-tour/`, không tạo ở thư mục cha.
@@ -162,15 +168,21 @@
 - Quyết định: `CampusMap3D` snapshot `mapView.position`, `mapView.target` và `mapView.fov` từ Zustand khi mount, copy tuple sang plain serializable state rồi khởi tạo camera/OrbitControls từ snapshot đó.
 - Lý do: Back khôi phục góc map gần nhất mà không lưu controls ref hoặc Three.js object trong Zustand.
 - Contract/file bị ảnh hưởng: `src/scenes/CampusMap3D/index.tsx`; không đổi store contract.
+- Quyết định: `InfoDrawer` render trực tiếp ba nguồn config bằng component DOM, còn `drawer.open/tab` và action mở/đóng lấy qua selector nhỏ từ `useUIStore`; nút `Thông tin` trong `AppShell` mở tab `about`.
+- Lý do: giữ config là source of truth, UI state tồn tại ngoài component và không đưa Three/R3F/Drei qua boundary `components/`.
+- Contract/file bị ảnh hưởng: `src/components/InfoDrawer/index.tsx`, `src/app/AppShell.tsx`; không đổi config/store contract.
+- Quyết định: drawer luôn mounted để chạy animation 300ms, nhưng dùng `aria-hidden`, `inert` và `pointer-events-none` khi đóng; mobile trượt bottom-up với `max-height: 82svh`, desktop trượt từ phải và content dùng vùng `overflow-y-auto` riêng.
+- Lý do: đóng/mở mượt, không chặn Canvas/focus khi ẩn và tránh overflow trên màn hình nhỏ.
+- Contract/file bị ảnh hưởng: `src/components/InfoDrawer/index.tsx`.
 
 ## Blocker / known issue
 - Build cảnh báo chunk R3F/Three khoảng 1,088 kB minified (khoảng 299 kB gzip); chưa tối ưu trong P0-09 vì ngoài scope Phase 0 foundation.
 - Runtime dev warning: R3F `9.7.0` nội bộ dùng `THREE.Clock`, API đã deprecated trong Three r185; code dự án không trực tiếp dùng `Clock`, scene vẫn hoạt động đúng.
 
 ## Working tree
-- Clean sau commit P1-06.
+- Clean sau commit P1-07.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P1-07 — InfoDrawer, chỉ khi người dùng yêu cầu bắt đầu.
-- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-07 và các section UI layer/InfoDrawer liên quan trong `plan.md`.
-- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-06 đã nghiệm thu và thực hiện đúng P1-07; không merge donor UI nếu task mới chưa cho phép và dừng tại mọi blocker hoặc checkpoint được quy định.
+- Task tiếp: P1-08 — TourControls, chỉ khi người dùng yêu cầu bắt đầu.
+- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-08 và các section Guided Tour/state lifetime liên quan trong `plan.md`.
+- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-07 đã nghiệm thu và thực hiện đúng P1-08; không merge donor UI nếu task mới chưa cho phép và dừng tại mọi blocker hoặc checkpoint được quy định.

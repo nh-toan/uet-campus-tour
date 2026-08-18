@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { InfoDrawer } from '../components/InfoDrawer'
 import { RadarMinimap } from '../components/RadarMinimap'
 import { CampusMap3D } from '../scenes/CampusMap3D'
 import { PanoramaViewer } from '../scenes/PanoramaViewer'
@@ -6,6 +7,7 @@ import {
   useCampusStore,
   type ViewMode,
 } from '../store/useCampusStore'
+import { useUIStore } from '../store/useUIStore'
 
 const VIEW_TRANSITION_MS = 300
 
@@ -27,6 +29,8 @@ export function AppShell() {
   const [sceneColors, setSceneColors] = useState<SceneColors | null>(null)
   const viewMode = useCampusStore((state) => state.viewMode)
   const setViewMode = useCampusStore((state) => state.setViewMode)
+  const drawerOpen = useUIStore((state) => state.drawer.open)
+  const openDrawer = useUIStore((state) => state.openDrawer)
   const [displayedViewMode, setDisplayedViewMode] =
     useState<ViewMode>(viewMode)
   const [sceneVisible, setSceneVisible] = useState(true)
@@ -98,6 +102,18 @@ export function AppShell() {
           </button>
         )}
       </div>
+
+      <button
+        aria-controls="campus-info-drawer"
+        aria-expanded={drawerOpen}
+        className="absolute bottom-3 left-3 z-20 flex min-h-11 min-w-11 touch-manipulation items-center rounded-full border border-uet-cloud/40 bg-uet-navy/90 px-4 py-2 font-uet-body text-sm font-semibold text-uet-cloud shadow-lg outline-none active:bg-uet-navy-soft focus-visible:ring-2 focus-visible:ring-uet-gold"
+        onClick={() => openDrawer('about')}
+        type="button"
+      >
+        Thông tin
+      </button>
+
+      <InfoDrawer />
     </main>
   )
 }
