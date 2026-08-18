@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P0-11: complete phase 0 review`
+- HEAD commit: `P1-01: build placeholder campus map`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -20,9 +20,10 @@
 - [x] P0-09 — R3F Hello World (người dùng nghiệm thu checkpoint 👁️)
 - [x] P0-10 — i18n skeleton
 - [x] P0-11 — Phase 0 review
+- [x] P1-01 — Placeholder campus map (người dùng nghiệm thu checkpoint 👁️)
 
 ## Đang làm
-- Task: Không có; Phase 0 đã hoàn tất về machine checks và đang dừng trước Phase 1.
+- Task: Không có; P1-01 đã hoàn tất và đang dừng trước P1-02.
 - Mục tiêu: None.
 - File liên quan: None.
 
@@ -40,7 +41,11 @@
 - R3F structure/useFrame allocation check — PASS
 - Brand token boundary/hardcoded color check — PASS
 - Vite dev server + module transform — PASS; không có runtime error rõ ràng
-- Manual checkpoint còn thiếu: Không có; người dùng xác nhận box hiển thị/xoay, OrbitControls và polar constraint đạt.
+- P1-01 TypeScript check `npx tsc -p tsconfig.app.json --noEmit --pretty false` — PASS
+- P1-01 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
+- P1-01 `npm run lint` — PASS
+- P1-01 `git diff --check` — PASS
+- Manual checkpoint còn thiếu: Không có; người dùng xác nhận 3 building phân biệt được, có ground, rotate/zoom hoạt động và góc nhìn/giới hạn zoom ổn.
 
 ## Quyết định đã chốt
 - Quyết định: chỉ tạo `STATUS.md` trong root repository `campus-tour/`, không tạo ở thư mục cha.
@@ -88,15 +93,21 @@
 - Quyết định: xóa ba asset scaffold không dùng `hero.png`, `react.svg`, `vite.svg` sau khi xác nhận không còn reference.
 - Lý do: loại bỏ dead asset mà không thay đổi runtime behavior hoặc thêm feature.
 - Contract/file bị ảnh hưởng: `src/assets/hero.png`, `src/assets/react.svg`, `src/assets/vite.svg`.
+- Quyết định: P1-01 lấy building ID và vị trí X/Z trực tiếp từ `hotspots.config.ts`; ba mesh dùng kích thước khác nhau và `mesh.name` bằng `buildingId`.
+- Lý do: giữ config hiện có là source of truth cho ba ID, đồng thời tạo placeholder map phân biệt được mà không thêm building contract hoặc model loader.
+- Contract/file bị ảnh hưởng: `src/scenes/CampusMap3D/index.tsx`.
+- Quyết định: resolve bốn brand token tại `AppShell`, truyền màu đã resolve vào scene; OrbitControls giới hạn khoảng cách `7–24` và giữ polar constraint trên ground.
+- Lý do: phân biệt building/ground, tuân thủ token boundary và giữ thao tác rotate/zoom dễ kiểm soát.
+- Contract/file bị ảnh hưởng: `src/app/AppShell.tsx`, `src/scenes/CampusMap3D/index.tsx`.
 
 ## Blocker / known issue
 - Build cảnh báo chunk R3F/Three khoảng 1,088 kB minified (khoảng 299 kB gzip); chưa tối ưu trong P0-09 vì ngoài scope Phase 0 foundation.
 - Runtime dev warning: R3F `9.7.0` nội bộ dùng `THREE.Clock`, API đã deprecated trong Three r185; code dự án không trực tiếp dùng `Clock`, scene vẫn hoạt động đúng.
 
 ## Working tree
-- Clean sau commit P0-11.
+- Clean sau commit P1-01.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P1-01 — Placeholder campus map, chỉ sau khi người dùng nghiệm thu P0-11 và yêu cầu bắt đầu Phase 1.
-- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-01 và section Map mock Phase 1 trong `plan.md`.
-- Prompt gợi ý cho Codex session tiếp: nghiệm thu kết quả P0-11; nếu đồng ý bắt đầu Phase 1, yêu cầu đọc nguồn sự thật và thực hiện đúng P1-01.
+- Task tiếp: P1-02 — Sync camera vào CampusStore, chỉ khi người dùng yêu cầu bắt đầu.
+- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-02 và các section camera/state liên quan trong `plan.md`.
+- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-01 đã nghiệm thu và thực hiện đúng P1-02; dừng tại mọi blocker hoặc checkpoint được quy định.
