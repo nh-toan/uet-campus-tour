@@ -9,13 +9,12 @@ import {
 } from 'react'
 import { MathUtils, PerspectiveCamera, Vector3 } from 'three'
 import { hotspots } from '../../config/hotspots.config'
-import { useCampusStore } from '../../store/useCampusStore'
+import {
+  useCampusStore,
+  type MapViewState,
+} from '../../store/useCampusStore'
 import { Hotspots } from '../Hotspots'
 
-const CAMERA_CONFIG = {
-  position: [10, 8, 14] as [number, number, number],
-  fov: 45,
-}
 const BUILDING_SIZES: [number, number, number][] = [
   [3.6, 1.2, 1.1],
   [3.8, 2.8, 3],
@@ -23,7 +22,6 @@ const BUILDING_SIZES: [number, number, number][] = [
 ]
 const GROUND_SIZE: [number, number] = [18, 16]
 const KEY_LIGHT_POSITION: [number, number, number] = [6, 10, 8]
-const CONTROL_TARGET: [number, number, number] = [0, 1, 1]
 const MIN_CAMERA_DISTANCE = 7
 const MAX_CAMERA_DISTANCE = 24
 const MAX_POLAR_ANGLE = Math.PI / 2.05
@@ -52,7 +50,11 @@ function hasYawChanged(current: number, next: number) {
   return Math.abs(shortestDelta) > ANGLE_EPSILON_DEGREES
 }
 
-function SyncedOrbitControls() {
+interface SyncedOrbitControlsProps {
+  initialTarget: MapViewState['target']
+}
+
+function SyncedOrbitControls({ initialTarget }: SyncedOrbitControlsProps) {
   const controlsRef = useRef<ComponentRef<typeof OrbitControls>>(null)
   const direction = useMemo(() => new Vector3(), [])
   const camera = useThree((state) => state.camera)
@@ -143,12 +145,25 @@ function SyncedOrbitControls() {
       maxPolarAngle={MAX_POLAR_ANGLE}
       minDistance={MIN_CAMERA_DISTANCE}
       onChange={syncCameraState}
-      target={CONTROL_TARGET}
+      target={initialTarget}
     />
   )
 }
 
 export function CampusMap3D({ colors }: CampusMap3DProps) {
+  const initialMapViewRef = useRef<MapViewState | null>(null)
+
+  if (initialMapViewRef.current === null) {
+    const { position, target, fov } = useCampusStore.getState().mapView
+
+    initialMapViewRef.current = {
+      position: [...position],
+      target: [...target],
+      fov,
+    }
+  }
+
+  const initialMapView = initialMapViewRef.current
   const buildingColors = [
     colors.buildingGate,
     colors.buildingAcademic,
@@ -156,7 +171,12 @@ export function CampusMap3D({ colors }: CampusMap3DProps) {
   ]
 
   return (
-    <Canvas camera={CAMERA_CONFIG}>
+    <Canvas
+      camera={{
+        fov: initialMapView.fov,
+        position: initialMapView.position,
+      }}
+    >
       <ambientLight intensity={1.1} />
       <directionalLight intensity={1.6} position={KEY_LIGHT_POSITION} />
 
@@ -182,7 +202,7 @@ export function CampusMap3D({ colors }: CampusMap3DProps) {
       </mesh>
 
       <Hotspots />
-      <SyncedOrbitControls />
+      <SyncedOrbitControls initialTarget={initialMapView.target} />
     </Canvas>
   )
 }

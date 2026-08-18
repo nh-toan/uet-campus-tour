@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P1-05: add panorama viewer`
+- HEAD commit: `P1-06: add scene transition and map restore`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -25,9 +25,10 @@
 - [x] P1-03 — RadarMinimap (người dùng nghiệm thu checkpoint 👁️)
 - [x] P1-04 — Hotspot markers (người dùng nghiệm thu checkpoint 👁️)
 - [x] P1-05 — PanoramaViewer (người dùng nghiệm thu checkpoint 👁️)
+- [x] P1-06 — Map ↔ Panorama + restore camera (người dùng nghiệm thu checkpoint 👁️)
 
 ## Đang làm
-- Task: Không có; P1-05 đã hoàn tất và đang dừng trước P1-06.
+- Task: Không có; P1-06 đã hoàn tất và đang dừng trước P1-07.
 - Mục tiêu: None.
 - File liên quan: None.
 
@@ -69,7 +70,12 @@
 - P1-05 headless runtime check — PASS; hotspot đặt đúng `activeSceneId`, texture chuyển sang ready, Canvas render grid với NORTH/yaw `0°` ở hướng khởi đầu
 - P1-05 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
 - P1-05 `npm run lint`, debug/suppression scan và `git diff --check` — PASS
-- Manual checkpoint còn thiếu: Không có; người dùng xác nhận panorama render được, texture ready, drag hoạt động và orientation về bản chất đúng. Tinh chỉnh `initialYawPitch` cho asset thật được hoãn và sẽ thực hiện bằng config.
+- P1-06 TypeScript check `npx tsc -p tsconfig.app.json --noEmit --pretty false` — PASS
+- P1-06 transition/restore/accessibility check — PASS; `AppShell` render một scene theo `viewMode`, opacity 300ms, Back button tối thiểu 44×44px có `aria-label`, map remount từ `mapView.position/target/fov`
+- P1-06 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
+- P1-06 `npm run lint`, architecture/hygiene scan và `git diff --check` — PASS
+- P1-06 Vite dev server + module transform — PASS; endpoint local trả HTTP 200
+- Manual checkpoint còn thiếu: Không có; người dùng xác nhận hotspot → panorama → Back hoạt động, map restore gần đúng góc trước đó và transition ổn.
 
 ## Quyết định đã chốt
 - Quyết định: chỉ tạo `STATUS.md` trong root repository `campus-tour/`, không tạo ở thư mục cha.
@@ -150,15 +156,21 @@
 - Quyết định: xóa toàn bộ preview wiring và diagnostic tạm trước commit; P1-06 mới chịu trách nhiệm chuyển/render Map↔Panorama.
 - Lý do: giữ P1-05 đúng phạm vi viewer và không triển khai sớm task kế tiếp.
 - Contract/file bị ảnh hưởng: không còn diff trong `src/app/AppShell.tsx`.
+- Quyết định: `AppShell` dùng fade-out → đổi scene → fade-in với opacity 300ms trên nền Navy; pointer interaction bị khóa trong lúc fade và tại mỗi thời điểm chỉ mount một Canvas.
+- Lý do: tránh nháy trắng, không giữ hai heavy Canvas hoạt động để bảo toàn camera và vẫn giữ transition dễ debug trên mobile.
+- Contract/file bị ảnh hưởng: `src/app/AppShell.tsx`; không đổi shared contract.
+- Quyết định: `CampusMap3D` snapshot `mapView.position`, `mapView.target` và `mapView.fov` từ Zustand khi mount, copy tuple sang plain serializable state rồi khởi tạo camera/OrbitControls từ snapshot đó.
+- Lý do: Back khôi phục góc map gần nhất mà không lưu controls ref hoặc Three.js object trong Zustand.
+- Contract/file bị ảnh hưởng: `src/scenes/CampusMap3D/index.tsx`; không đổi store contract.
 
 ## Blocker / known issue
 - Build cảnh báo chunk R3F/Three khoảng 1,088 kB minified (khoảng 299 kB gzip); chưa tối ưu trong P0-09 vì ngoài scope Phase 0 foundation.
 - Runtime dev warning: R3F `9.7.0` nội bộ dùng `THREE.Clock`, API đã deprecated trong Three r185; code dự án không trực tiếp dùng `Clock`, scene vẫn hoạt động đúng.
 
 ## Working tree
-- Clean sau commit P1-05.
+- Clean sau commit P1-06.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P1-06 — Map ↔ Panorama + restore camera, chỉ khi người dùng yêu cầu bắt đầu.
-- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-06 và các section scene transition/map view restore liên quan trong `plan.md`.
-- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-05 đã nghiệm thu và thực hiện đúng P1-06; dừng tại mọi blocker hoặc checkpoint được quy định.
+- Task tiếp: P1-07 — InfoDrawer, chỉ khi người dùng yêu cầu bắt đầu.
+- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-07 và các section UI layer/InfoDrawer liên quan trong `plan.md`.
+- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-06 đã nghiệm thu và thực hiện đúng P1-07; không merge donor UI nếu task mới chưa cho phép và dừng tại mọi blocker hoặc checkpoint được quy định.
