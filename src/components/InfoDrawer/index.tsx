@@ -216,7 +216,7 @@ export function InfoDrawer() {
 
         <div
           aria-labelledby={`drawer-tab-${activeTab}`}
-          className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-4 pb-6"
+          className="min-h-0 flex-1 touch-pan-y overflow-y-auto overscroll-contain p-4 pb-6"
           id="drawer-panel"
           key={activeTab}
           role="tabpanel"

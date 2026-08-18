@@ -176,6 +176,7 @@ export function CampusMap3D({ colors }: CampusMap3DProps) {
         fov: initialMapView.fov,
         position: initialMapView.position,
       }}
+      className="touch-none"
     >
       <ambientLight intensity={1.1} />
       <directionalLight intensity={1.6} position={KEY_LIGHT_POSITION} />

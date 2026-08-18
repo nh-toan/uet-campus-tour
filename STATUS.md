@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P1-09: add language control skeleton`
+- HEAD commit: `P1-10: refine mobile touch interactions`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -29,9 +29,10 @@
 - [x] P1-07 — InfoDrawer (người dùng nghiệm thu checkpoint 👁️)
 - [x] P1-08 — TourControls (người dùng nghiệm thu checkpoint 👁️)
 - [x] P1-09 — VI/EN language control skeleton (người dùng nghiệm thu chức năng state; theme control được loại khỏi UI theo product decision)
+- [x] P1-10 — Mobile touch pass (người dùng nghiệm thu checkpoint 👁️)
 
 ## Đang làm
-- Task: Không có; P1-09 đã hoàn tất và đang dừng trước P1-10.
+- Task: Không có; P1-10 đã hoàn tất và đang dừng trước P1-11.
 - Mục tiêu: None.
 - File liên quan: None.
 
@@ -96,7 +97,13 @@
 - P1-09 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
 - P1-09 `npm run lint`, debug/color scan và `git diff --check` — PASS
 - P1-09 Vite dev server + module transform — PASS; app và module LangThemeToggle trả HTTP 200 trước product adjustment, HMR nhận thay đổi cuối
-- Manual checkpoint còn thiếu: Không có; người dùng xác nhận chức năng state P1-09 đạt và chốt chỉ giữ VI/EN trong UI.
+- P1-10 TypeScript check `npx tsc -p tsconfig.app.json --noEmit --pretty false` — PASS
+- P1-10 touch/pointer/layering check — PASS; chỉ hai scene Canvas dùng `touch-none`, overlay DOM giữ pointer layering và z-index đúng, Drawer dùng `touch-pan-y` với vùng `overflow-y-auto`, không có global scroll lock
+- P1-10 accessibility/tap-target check — PASS; Back, Hotspot, Info, TourControls và VI/EN giữ tap target tối thiểu 44px, icon-only control có ARIA phù hợp
+- P1-10 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
+- P1-10 `npm run lint`, debug/suppression scan và `git diff --check` — PASS
+- P1-10 Vite dev server — PASS; endpoint local trả HTTP 200
+- Manual checkpoint còn thiếu: Không có; người dùng xác nhận Map/Panorama drag tốt, button/hotspot tap ổn, Drawer scroll được và các overlay không xung đột hoặc bị Canvas nuốt thao tác.
 
 ## Quyết định đã chốt
 - Quyết định: chỉ tạo `STATUS.md` trong root repository `campus-tour/`, không tạo ở thư mục cha.
@@ -204,15 +211,19 @@
 - Quyết định: giữ nguyên `theme: "day" | "night"`, default `day` và `setTheme` trong `useUIStore` dù chưa có UI consumer.
 - Lý do: không thay shared contract ngoài scope; dành khả năng tích hợp theme chính thức sau này.
 - Contract/file bị ảnh hưởng: `src/store/useUIStore.ts` không sửa.
+- Quyết định: áp `touch-none` trực tiếp cho cả Map và Panorama Canvas; vùng nội dung Drawer dùng `touch-pan-y`, `overflow-y-auto` và `overscroll-contain`; không đặt touch/scroll lock ở CSS global.
+- Lý do: Canvas nhận drag ổn định mà không nuốt tương tác overlay, đồng thời Drawer vẫn scroll dọc được trên mobile.
+- Contract/file bị ảnh hưởng: `src/scenes/CampusMap3D/index.tsx`, `src/components/InfoDrawer/index.tsx`; Panorama Canvas đã đúng từ trước, không đổi shared contract.
 
 ## Blocker / known issue
 - Build cảnh báo chunk R3F/Three khoảng 1,088 kB minified (khoảng 299 kB gzip); chưa tối ưu trong P0-09 vì ngoài scope Phase 0 foundation.
 - Runtime dev warning: R3F `9.7.0` nội bộ dùng `THREE.Clock`, API đã deprecated trong Three r185; code dự án không trực tiếp dùng `Clock`, scene vẫn hoạt động đúng.
+- Một số UI trên mobile còn hơi lớn; checkpoint P1-10 xác nhận đây không phải blocker interaction và chưa xử lý trong task này.
 
 ## Working tree
-- Clean sau commit P1-09.
+- Clean sau commit P1-10.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P1-10 — Mobile touch pass, chỉ khi người dùng yêu cầu bắt đầu.
-- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-10 và các section mobile performance/touch/accessibility liên quan trong `plan.md`.
-- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-09 đã nghiệm thu và product decision chỉ hiển thị VI/EN; thực hiện đúng P1-10 và dừng tại checkpoint mobile bắt buộc.
+- Task tiếp: P1-11 — Demo checkpoint Phase 1, chỉ khi người dùng yêu cầu bắt đầu.
+- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-11 và section demo checkpoint Phase 1 liên quan trong `plan.md`.
+- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-10 đã nghiệm thu và known UI issue mobile hơi lớn không phải blocker; thực hiện đúng P1-11 và dừng tại checkpoint bắt buộc.
