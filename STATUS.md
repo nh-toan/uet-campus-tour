@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P1-02: synchronize map camera state`
+- HEAD commit: `P1-03: add radar minimap`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -22,9 +22,10 @@
 - [x] P0-11 — Phase 0 review
 - [x] P1-01 — Placeholder campus map (người dùng nghiệm thu checkpoint 👁️)
 - [x] P1-02 — Sync camera vào CampusStore (người dùng nghiệm thu checkpoint 👁️)
+- [x] P1-03 — RadarMinimap (người dùng nghiệm thu checkpoint 👁️)
 
 ## Đang làm
-- Task: Không có; P1-02 đã hoàn tất và đang dừng trước P1-03.
+- Task: Không có; P1-03 đã hoàn tất và đang dừng trước P1-04.
 - Mục tiêu: None.
 - File liên quan: None.
 
@@ -51,7 +52,12 @@
 - P1-02 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
 - P1-02 `npm run lint` — PASS
 - P1-02 debug/suppression scan và `git diff --check` — PASS
-- Manual checkpoint còn thiếu: Không có; người dùng xác nhận camera state thay đổi liên tục khi orbit/zoom, pitch âm hơn khi nâng camera cao hơn quanh target và yaw thay đổi theo hai chiều orbit.
+- P1-03 TypeScript check `npx tsc -p tsconfig.app.json --noEmit --pretty false` — PASS
+- P1-03 radar math check — PASS; yaw `0°` hướng lên, `+90°` hướng phải, FOV lớn hơn tạo cone rộng hơn
+- P1-03 component boundary/selector check — PASS; không import Three/R3F/Drei và chỉ subscribe `camera.yaw`/`camera.fov`
+- P1-03 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
+- P1-03 `npm run lint`, debug/color scan và `git diff --check` — PASS
+- Manual checkpoint còn thiếu: Không có; người dùng xác nhận RadarMinimap quay đúng trực quan theo camera, không lệch 90°/180° và không cản rotate/zoom.
 
 ## Quyết định đã chốt
 - Quyết định: chỉ tạo `STATUS.md` trong root repository `campus-tour/`, không tạo ở thư mục cha.
@@ -111,15 +117,21 @@
 - Quyết định: dùng epsilon riêng cho angle, position và FOV; đọc snapshot bằng `useCampusStore.getState()` rồi chỉ gọi `setCamera`/`setMapView` khi giá trị thay đổi đáng kể.
 - Lý do: tránh update thừa ở camera frequency, không subscribe broad state trong scene và chỉ cấp phát tuple update khi cần.
 - Contract/file bị ảnh hưởng: `src/scenes/CampusMap3D/index.tsx`.
+- Quyết định: RadarMinimap dùng SVG viewBox `120×120`, cone gốc hướng lên và quay bằng SVG `rotate(yaw ...)`; độ mở cone tính từ nửa FOV degree và clamp trong khoảng an toàn.
+- Lý do: SVG có trục Y hướng xuống nên góc quay dương đi clockwise đúng convention màn hình, đồng thời không cần import Three.js.
+- Contract/file bị ảnh hưởng: `src/components/RadarMinimap/index.tsx`.
+- Quyết định: ghép Radar ở góc trên phải của `AppShell` bằng overlay `pointer-events-none`; Radar chỉ dùng hai selector primitive `camera.yaw` và `camera.fov`.
+- Lý do: giữ component DOM/SVG độc lập, không cản Canvas và tránh subscribe toàn store ở camera frequency.
+- Contract/file bị ảnh hưởng: `src/app/AppShell.tsx`, `src/components/RadarMinimap/index.tsx`.
 
 ## Blocker / known issue
 - Build cảnh báo chunk R3F/Three khoảng 1,088 kB minified (khoảng 299 kB gzip); chưa tối ưu trong P0-09 vì ngoài scope Phase 0 foundation.
 - Runtime dev warning: R3F `9.7.0` nội bộ dùng `THREE.Clock`, API đã deprecated trong Three r185; code dự án không trực tiếp dùng `Clock`, scene vẫn hoạt động đúng.
 
 ## Working tree
-- Clean sau commit P1-02.
+- Clean sau commit P1-03.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P1-03 — RadarMinimap, chỉ khi người dùng yêu cầu bắt đầu.
-- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-03 và section Radar/camera convention liên quan trong `plan.md`.
-- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-02 đã nghiệm thu và thực hiện đúng P1-03; dừng tại mọi blocker hoặc checkpoint được quy định.
+- Task tiếp: P1-04 — Hotspot markers, chỉ khi người dùng yêu cầu bắt đầu.
+- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-04 và section hotspot/config mapping liên quan trong `plan.md`.
+- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-03 đã nghiệm thu và thực hiện đúng P1-04; dừng tại mọi blocker hoặc checkpoint được quy định.

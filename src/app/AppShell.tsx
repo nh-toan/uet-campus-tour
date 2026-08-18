@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { RadarMinimap } from '../components/RadarMinimap'
 import { CampusMap3D } from '../scenes/CampusMap3D'
 
 const SCENE_COLOR_TOKENS = {
@@ -39,8 +40,11 @@ export function AppShell() {
   }, [])
 
   return (
-    <main className="h-svh w-full bg-uet-cloud">
+    <main className="relative h-svh w-full bg-uet-cloud">
       {sceneColors ? <CampusMap3D colors={sceneColors} /> : null}
+      <div className="pointer-events-none absolute top-3 right-3 z-10">
+        <RadarMinimap />
+      </div>
     </main>
   )
 }
