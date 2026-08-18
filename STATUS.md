@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P1-04: add campus hotspot markers`
+- HEAD commit: `P1-05: add panorama viewer`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -24,9 +24,10 @@
 - [x] P1-02 — Sync camera vào CampusStore (người dùng nghiệm thu checkpoint 👁️)
 - [x] P1-03 — RadarMinimap (người dùng nghiệm thu checkpoint 👁️)
 - [x] P1-04 — Hotspot markers (người dùng nghiệm thu checkpoint 👁️)
+- [x] P1-05 — PanoramaViewer (người dùng nghiệm thu checkpoint 👁️)
 
 ## Đang làm
-- Task: Không có; P1-04 đã hoàn tất và đang dừng trước P1-05.
+- Task: Không có; P1-05 đã hoàn tất và đang dừng trước P1-06.
 - Mục tiêu: None.
 - File liên quan: None.
 
@@ -63,7 +64,12 @@
 - P1-04 tap-target/scope scan — PASS; button tối thiểu 44×44px, không import/call UIStore hoặc InfoDrawer
 - P1-04 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
 - P1-04 `npm run lint`, debug/color scan và `git diff --check` — PASS
-- Manual checkpoint còn thiếu: Không có; người dùng xác nhận 3 marker đúng building, label dễ đọc, tap dễ, marker không kéo map và vùng ngoài vẫn rotate/zoom bình thường.
+- P1-05 TypeScript check `npx tsc -p tsconfig.app.json --noEmit --pretty false` — PASS
+- P1-05 config/asset/lookup/loader/winding/initialYawPitch checks — PASS; active scene resolve qua config, local SVG được Vite transform và tải thành công, sphere dùng `BackSide`, yaw/pitch degree đúng convention
+- P1-05 headless runtime check — PASS; hotspot đặt đúng `activeSceneId`, texture chuyển sang ready, Canvas render grid với NORTH/yaw `0°` ở hướng khởi đầu
+- P1-05 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
+- P1-05 `npm run lint`, debug/suppression scan và `git diff --check` — PASS
+- Manual checkpoint còn thiếu: Không có; người dùng xác nhận panorama render được, texture ready, drag hoạt động và orientation về bản chất đúng. Tinh chỉnh `initialYawPitch` cho asset thật được hoãn và sẽ thực hiện bằng config.
 
 ## Quyết định đã chốt
 - Quyết định: chỉ tạo `STATUS.md` trong root repository `campus-tour/`, không tạo ở thư mục cha.
@@ -135,15 +141,24 @@
 - Quyết định: marker là button DOM tối thiểu 44×44px dùng brand-token utility; pointer-down/click dừng propagation, còn state side effect chỉ là `setActiveScene` rồi `setViewMode('panorama')`.
 - Lý do: tap dễ trên mobile, không kéo OrbitControls và không mở InfoDrawer trước requirement.
 - Contract/file bị ảnh hưởng: `src/scenes/Hotspots/index.tsx`.
+- Quyết định: PanoramaViewer lookup `activeSceneId` qua `panorama.config.ts`, tải local texture bằng `TextureLoader` với trạng thái loading/error rõ ràng và cleanup texture; sphere dùng material `BackSide` trong Canvas riêng.
+- Lý do: giữ config là source of truth, tránh hardcode sample asset và bảo đảm lỗi texture không treo ở màn hình trắng.
+- Contract/file bị ảnh hưởng: `src/scenes/PanoramaViewer/index.tsx`; không đổi shared contract hoặc dependency.
+- Quyết định: chuẩn equirectangular của viewer đặt tâm ảnh tại yaw `0°`/NORTH; `initialYawPitch` degree điều khiển hướng camera theo convention chung, còn mock SVG được sắp lại theo cùng chuẩn.
+- Lý do: orientation độc lập với sample asset và asset thật có thể tinh chỉnh hướng bắt đầu chỉ bằng config.
+- Contract/file bị ảnh hưởng: `src/scenes/PanoramaViewer/index.tsx`, `src/assets/mock/sample-panorama-grid.svg`.
+- Quyết định: xóa toàn bộ preview wiring và diagnostic tạm trước commit; P1-06 mới chịu trách nhiệm chuyển/render Map↔Panorama.
+- Lý do: giữ P1-05 đúng phạm vi viewer và không triển khai sớm task kế tiếp.
+- Contract/file bị ảnh hưởng: không còn diff trong `src/app/AppShell.tsx`.
 
 ## Blocker / known issue
 - Build cảnh báo chunk R3F/Three khoảng 1,088 kB minified (khoảng 299 kB gzip); chưa tối ưu trong P0-09 vì ngoài scope Phase 0 foundation.
 - Runtime dev warning: R3F `9.7.0` nội bộ dùng `THREE.Clock`, API đã deprecated trong Three r185; code dự án không trực tiếp dùng `Clock`, scene vẫn hoạt động đúng.
 
 ## Working tree
-- Clean sau commit P1-04.
+- Clean sau commit P1-05.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P1-05 — PanoramaViewer, chỉ khi người dùng yêu cầu bắt đầu.
-- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-05 và các section panorama/config selection liên quan trong `plan.md`.
-- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-04 đã nghiệm thu và thực hiện đúng P1-05; dừng tại mọi blocker hoặc checkpoint được quy định.
+- Task tiếp: P1-06 — Map ↔ Panorama + restore camera, chỉ khi người dùng yêu cầu bắt đầu.
+- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-06 và các section scene transition/map view restore liên quan trong `plan.md`.
+- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-05 đã nghiệm thu và thực hiện đúng P1-06; dừng tại mọi blocker hoặc checkpoint được quy định.
