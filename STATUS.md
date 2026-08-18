@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P1-10: refine mobile touch interactions`
+- HEAD commit: `P1-11: accept phase 1 demo`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -30,10 +30,11 @@
 - [x] P1-08 — TourControls (người dùng nghiệm thu checkpoint 👁️)
 - [x] P1-09 — VI/EN language control skeleton (người dùng nghiệm thu chức năng state; theme control được loại khỏi UI theo product decision)
 - [x] P1-10 — Mobile touch pass (người dùng nghiệm thu checkpoint 👁️)
+- [x] P1-11 — Demo checkpoint Phase 1 (người dùng nghiệm thu checkpoint 👁️; Phase 1 accepted)
 
 ## Đang làm
-- Task: Không có; P1-10 đã hoàn tất và đang dừng trước P1-11.
-- Mục tiêu: None.
+- Task: Không có; Phase 1 đã được người dùng nghiệm thu và accepted tại P1-11.
+- Mục tiêu: Dừng, không tự chuyển Phase 2.
 - File liên quan: None.
 
 ## Verification
@@ -103,7 +104,14 @@
 - P1-10 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
 - P1-10 `npm run lint`, debug/suppression scan và `git diff --check` — PASS
 - P1-10 Vite dev server — PASS; endpoint local trả HTTP 200
-- Manual checkpoint còn thiếu: Không có; người dùng xác nhận Map/Panorama drag tốt, button/hotspot tap ổn, Drawer scroll được và các overlay không xung đột hoặc bị Canvas nuốt thao tác.
+- P1-10 manual checkpoint — PASS; người dùng xác nhận Map/Panorama drag tốt, button/hotspot tap ổn, Drawer scroll được và các overlay không xung đột hoặc bị Canvas nuốt thao tác.
+- P1-11 TypeScript check `npx tsc -p tsconfig.app.json --noEmit --pretty false` — PASS
+- P1-11 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
+- P1-11 `npm run lint` và `git diff --check` — PASS
+- P1-11 Vite dev server — PASS; server chạy trên LAN để kiểm tra điện thoại thật
+- P1-11 layering fix — PASS; giới hạn Drei `<Html>` hotspot bằng `zIndexRange={[9, 0]}` để nằm dưới Radar/UI/Drawer
+- P1-11 manual checkpoint — PASS; người dùng xác nhận hotspot không đè hoặc nhận tap xuyên Drawer, Drawer/tab/scroll hoạt động, hotspot hoạt động lại sau khi đóng Drawer và toàn bộ flow Phase 1 đạt
+- Manual checkpoint còn thiếu: Không có; Phase 1 accepted theo xác nhận của người dùng.
 
 ## Quyết định đã chốt
 - Quyết định: chỉ tạo `STATUS.md` trong root repository `campus-tour/`, không tạo ở thư mục cha.
@@ -214,6 +222,12 @@
 - Quyết định: áp `touch-none` trực tiếp cho cả Map và Panorama Canvas; vùng nội dung Drawer dùng `touch-pan-y`, `overflow-y-auto` và `overscroll-contain`; không đặt touch/scroll lock ở CSS global.
 - Lý do: Canvas nhận drag ổn định mà không nuốt tương tác overlay, đồng thời Drawer vẫn scroll dọc được trên mobile.
 - Contract/file bị ảnh hưởng: `src/scenes/CampusMap3D/index.tsx`, `src/components/InfoDrawer/index.tsx`; Panorama Canvas đã đúng từ trước, không đổi shared contract.
+- Quyết định: giới hạn Drei `<Html>` của hotspot bằng `zIndexRange={[9, 0]}`.
+- Lý do: z-index động mặc định của Drei có thể vượt Drawer `z-30`; range `0–9` giữ hotspot dưới Radar `z-10`, UI `z-20` và Drawer/backdrop `z-30` mà không đổi interaction contract.
+- Contract/file bị ảnh hưởng: `src/scenes/Hotspots/index.tsx`; không đổi shared contract hoặc dependency.
+- Quyết định: Phase 1 accepted sau checkpoint P1-11 trên điện thoại thật.
+- Lý do: người dùng xác nhận toàn bộ flow Map → Radar → Hotspot → Panorama → Back → Drawer → Guided Tour và mobile interaction đạt.
+- Contract/file bị ảnh hưởng: `STATUS.md`; không chuyển Phase 2.
 
 ## Blocker / known issue
 - Build cảnh báo chunk R3F/Three khoảng 1,088 kB minified (khoảng 299 kB gzip); chưa tối ưu trong P0-09 vì ngoài scope Phase 0 foundation.
@@ -221,9 +235,9 @@
 - Một số UI trên mobile còn hơi lớn; checkpoint P1-10 xác nhận đây không phải blocker interaction và chưa xử lý trong task này.
 
 ## Working tree
-- Clean sau commit P1-10.
+- Clean sau commit P1-11.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P1-11 — Demo checkpoint Phase 1, chỉ khi người dùng yêu cầu bắt đầu.
-- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-11 và section demo checkpoint Phase 1 liên quan trong `plan.md`.
-- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-10 đã nghiệm thu và known UI issue mobile hơi lớn không phải blocker; thực hiện đúng P1-11 và dừng tại checkpoint bắt buộc.
+- Task tiếp: Không có; dừng sau khi Phase 1 accepted, không tự chuyển Phase 2.
+- Check đầu tiên: chỉ khi người dùng giao task mới, đọc lại nguồn sự thật và xác nhận phạm vi/asset/data trước khi triển khai.
+- Prompt gợi ý cho Codex session tiếp: đọc `AGENTS.md` → `STATUS.md` → `task.md` → section liên quan trong `plan.md`; Phase 1 đã accepted, không bắt đầu Phase 2 nếu chưa có yêu cầu rõ ràng.
