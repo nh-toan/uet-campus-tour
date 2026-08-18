@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P1-01: build placeholder campus map`
+- HEAD commit: `P1-02: synchronize map camera state`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -21,9 +21,10 @@
 - [x] P0-10 — i18n skeleton
 - [x] P0-11 — Phase 0 review
 - [x] P1-01 — Placeholder campus map (người dùng nghiệm thu checkpoint 👁️)
+- [x] P1-02 — Sync camera vào CampusStore (người dùng nghiệm thu checkpoint 👁️)
 
 ## Đang làm
-- Task: Không có; P1-01 đã hoàn tất và đang dừng trước P1-02.
+- Task: Không có; P1-02 đã hoàn tất và đang dừng trước P1-03.
 - Mục tiêu: None.
 - File liên quan: None.
 
@@ -45,7 +46,12 @@
 - P1-01 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
 - P1-01 `npm run lint` — PASS
 - P1-01 `git diff --check` — PASS
-- Manual checkpoint còn thiếu: Không có; người dùng xác nhận 3 building phân biệt được, có ground, rotate/zoom hoạt động và góc nhìn/giới hạn zoom ổn.
+- P1-02 TypeScript check `npx tsc -p tsconfig.app.json --noEmit --pretty false` — PASS
+- P1-02 camera formula check — PASS; `-Z → yaw 0°`, `+X → yaw +90°`, nhìn lên → pitch dương
+- P1-02 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
+- P1-02 `npm run lint` — PASS
+- P1-02 debug/suppression scan và `git diff --check` — PASS
+- Manual checkpoint còn thiếu: Không có; người dùng xác nhận camera state thay đổi liên tục khi orbit/zoom, pitch âm hơn khi nâng camera cao hơn quanh target và yaw thay đổi theo hai chiều orbit.
 
 ## Quyết định đã chốt
 - Quyết định: chỉ tạo `STATUS.md` trong root repository `campus-tour/`, không tạo ở thư mục cha.
@@ -99,15 +105,21 @@
 - Quyết định: resolve bốn brand token tại `AppShell`, truyền màu đã resolve vào scene; OrbitControls giới hạn khoảng cách `7–24` và giữ polar constraint trên ground.
 - Lý do: phân biệt building/ground, tuân thủ token boundary và giữ thao tác rotate/zoom dễ kiểm soát.
 - Contract/file bị ảnh hưởng: `src/app/AppShell.tsx`, `src/scenes/CampusMap3D/index.tsx`.
+- Quyết định: đồng bộ camera qua OrbitControls `onChange`; hướng camera được đổi sang yaw/pitch degree bằng `atan2(direction.x, -direction.z)` và `asin(direction.y)`.
+- Lý do: tuân thủ convention yaw `0° = -Z`, yaw dương về `+X`, pitch dương nhìn lên tại boundary Three.js → shared state.
+- Contract/file bị ảnh hưởng: `src/scenes/CampusMap3D/index.tsx`, không đổi store contract.
+- Quyết định: dùng epsilon riêng cho angle, position và FOV; đọc snapshot bằng `useCampusStore.getState()` rồi chỉ gọi `setCamera`/`setMapView` khi giá trị thay đổi đáng kể.
+- Lý do: tránh update thừa ở camera frequency, không subscribe broad state trong scene và chỉ cấp phát tuple update khi cần.
+- Contract/file bị ảnh hưởng: `src/scenes/CampusMap3D/index.tsx`.
 
 ## Blocker / known issue
 - Build cảnh báo chunk R3F/Three khoảng 1,088 kB minified (khoảng 299 kB gzip); chưa tối ưu trong P0-09 vì ngoài scope Phase 0 foundation.
 - Runtime dev warning: R3F `9.7.0` nội bộ dùng `THREE.Clock`, API đã deprecated trong Three r185; code dự án không trực tiếp dùng `Clock`, scene vẫn hoạt động đúng.
 
 ## Working tree
-- Clean sau commit P1-01.
+- Clean sau commit P1-02.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P1-02 — Sync camera vào CampusStore, chỉ khi người dùng yêu cầu bắt đầu.
-- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-02 và các section camera/state liên quan trong `plan.md`.
-- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-01 đã nghiệm thu và thực hiện đúng P1-02; dừng tại mọi blocker hoặc checkpoint được quy định.
+- Task tiếp: P1-03 — RadarMinimap, chỉ khi người dùng yêu cầu bắt đầu.
+- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-03 và section Radar/camera convention liên quan trong `plan.md`.
+- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-02 đã nghiệm thu và thực hiện đúng P1-03; dừng tại mọi blocker hoặc checkpoint được quy định.
