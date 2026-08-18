@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P1-08: add guided tour controls`
+- HEAD commit: `P1-09: add language control skeleton`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -28,9 +28,10 @@
 - [x] P1-06 — Map ↔ Panorama + restore camera (người dùng nghiệm thu checkpoint 👁️)
 - [x] P1-07 — InfoDrawer (người dùng nghiệm thu checkpoint 👁️)
 - [x] P1-08 — TourControls (người dùng nghiệm thu checkpoint 👁️)
+- [x] P1-09 — VI/EN language control skeleton (người dùng nghiệm thu chức năng state; theme control được loại khỏi UI theo product decision)
 
 ## Đang làm
-- Task: Không có; P1-08 đã hoàn tất và đang dừng trước P1-09.
+- Task: Không có; P1-09 đã hoàn tất và đang dừng trước P1-10.
 - Mục tiêu: None.
 - File liên quan: None.
 
@@ -89,7 +90,13 @@
 - P1-08 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
 - P1-08 `npm run lint`, debug/color scan và `git diff --check` — PASS
 - P1-08 Vite dev server + module transform — PASS; app và module TourControls trả HTTP 200
-- Manual checkpoint còn thiếu: Không có; người dùng xác nhận Play/Pause/Resume, auto-next, Next/Prev, Stop và progress hoạt động đúng; controls không che Back/Thông tin.
+- P1-09 TypeScript check `npx tsc -p tsconfig.app.json --noEmit --pretty false` — PASS
+- P1-09 UIStore runtime check — PASS; `lang` đổi `vi ↔ en`, shared `theme/setTheme` vẫn tồn tại và đổi `day ↔ night` đúng contract dù không có UI consumer
+- P1-09 product-scope/accessibility check — PASS; UI chỉ render control VI/EN với icon/label/ARIA và tap target tối thiểu 44px; không render Ngày/Đêm, không áp theme side effect, không đổi dependency/store
+- P1-09 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
+- P1-09 `npm run lint`, debug/color scan và `git diff --check` — PASS
+- P1-09 Vite dev server + module transform — PASS; app và module LangThemeToggle trả HTTP 200 trước product adjustment, HMR nhận thay đổi cuối
+- Manual checkpoint còn thiếu: Không có; người dùng xác nhận chức năng state P1-09 đạt và chốt chỉ giữ VI/EN trong UI.
 
 ## Quyết định đã chốt
 - Quyết định: chỉ tạo `STATUS.md` trong root repository `campus-tour/`, không tạo ở thư mục cha.
@@ -191,15 +198,21 @@
 - Quyết định: TourControls đặt giữa cạnh dưới; nút Thông tin chuyển lên góc trái ở map và góc phải ở panorama.
 - Lý do: tránh chồng TourControls với Back, Radar và Info trên mobile.
 - Contract/file bị ảnh hưởng: `src/app/AppShell.tsx`.
+- Quyết định: P1-09 chỉ hiển thị toggle VI/EN với icon/label phản ánh `useUIStore.lang`; không hiển thị control Ngày/Đêm và chưa dịch nội dung app.
+- Lý do: MVP không cần night theme và trạng thái giao diện phải đồng bộ với website chính thức UET trước khi có theme UI.
+- Contract/file bị ảnh hưởng: `src/components/LangThemeToggle/index.tsx`, `src/app/AppShell.tsx`.
+- Quyết định: giữ nguyên `theme: "day" | "night"`, default `day` và `setTheme` trong `useUIStore` dù chưa có UI consumer.
+- Lý do: không thay shared contract ngoài scope; dành khả năng tích hợp theme chính thức sau này.
+- Contract/file bị ảnh hưởng: `src/store/useUIStore.ts` không sửa.
 
 ## Blocker / known issue
 - Build cảnh báo chunk R3F/Three khoảng 1,088 kB minified (khoảng 299 kB gzip); chưa tối ưu trong P0-09 vì ngoài scope Phase 0 foundation.
 - Runtime dev warning: R3F `9.7.0` nội bộ dùng `THREE.Clock`, API đã deprecated trong Three r185; code dự án không trực tiếp dùng `Clock`, scene vẫn hoạt động đúng.
 
 ## Working tree
-- Clean sau commit P1-08.
+- Clean sau commit P1-09.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P1-09 — LangThemeToggle skeleton, chỉ khi người dùng yêu cầu bắt đầu.
-- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-09 và các section UIStore/i18n/theme liên quan trong `plan.md`.
-- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-08 đã nghiệm thu và thực hiện đúng P1-09; không merge donor UI nếu task mới chưa cho phép và dừng tại mọi blocker hoặc checkpoint được quy định.
+- Task tiếp: P1-10 — Mobile touch pass, chỉ khi người dùng yêu cầu bắt đầu.
+- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-10 và các section mobile performance/touch/accessibility liên quan trong `plan.md`.
+- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-09 đã nghiệm thu và product decision chỉ hiển thị VI/EN; thực hiện đúng P1-10 và dừng tại checkpoint mobile bắt buộc.

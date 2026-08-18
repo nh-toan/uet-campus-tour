@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { InfoDrawer } from '../components/InfoDrawer'
+import { LangThemeToggle } from '../components/LangThemeToggle'
 import { RadarMinimap } from '../components/RadarMinimap'
 import { TourControls } from '../components/TourControls'
 import { CampusMap3D } from '../scenes/CampusMap3D'
@@ -115,7 +116,10 @@ export function AppShell() {
       </button>
 
       <div className="pointer-events-none absolute inset-x-3 bottom-3 z-20 mx-auto max-w-md">
-        <div className="pointer-events-auto">
+        <div className="pointer-events-auto space-y-2">
+          <div className="flex justify-end">
+            <LangThemeToggle />
+          </div>
           <TourControls />
         </div>
       </div>
