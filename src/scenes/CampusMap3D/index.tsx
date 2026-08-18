@@ -10,6 +10,7 @@ import {
 import { MathUtils, PerspectiveCamera, Vector3 } from 'three'
 import { hotspots } from '../../config/hotspots.config'
 import { useCampusStore } from '../../store/useCampusStore'
+import { Hotspots } from '../Hotspots'
 
 const CAMERA_CONFIG = {
   position: [10, 8, 14] as [number, number, number],
@@ -180,6 +181,7 @@ export function CampusMap3D({ colors }: CampusMap3DProps) {
         <meshStandardMaterial color={colors.ground} roughness={0.95} />
       </mesh>
 
+      <Hotspots />
       <SyncedOrbitControls />
     </Canvas>
   )
