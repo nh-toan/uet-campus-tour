@@ -2,7 +2,7 @@
 
 ## Baseline hiện tại
 - Branch: `master`
-- HEAD commit: `P1-07: add campus info drawer`
+- HEAD commit: `P1-08: add guided tour controls`
 - Node/npm: Node `v24.15.0`, npm `11.12.1`
 - Dependency majors chính: React 19, Vite 8, TypeScript 6, Three r185, R3F 9, Drei 10, Zustand 5, Tailwind CSS 4, Lucide React 1
 
@@ -27,9 +27,10 @@
 - [x] P1-05 — PanoramaViewer (người dùng nghiệm thu checkpoint 👁️)
 - [x] P1-06 — Map ↔ Panorama + restore camera (người dùng nghiệm thu checkpoint 👁️)
 - [x] P1-07 — InfoDrawer (người dùng nghiệm thu checkpoint 👁️)
+- [x] P1-08 — TourControls (người dùng nghiệm thu checkpoint 👁️)
 
 ## Đang làm
-- Task: Không có; P1-07 đã hoàn tất và đang dừng trước P1-08.
+- Task: Không có; P1-08 đã hoàn tất và đang dừng trước P1-09.
 - Mục tiêu: None.
 - File liên quan: None.
 
@@ -81,7 +82,14 @@
 - P1-07 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
 - P1-07 `npm run lint`, debug/color scan và `git diff --check` — PASS
 - P1-07 Vite dev server + module transform — PASS; app và module InfoDrawer trả HTTP 200
-- Manual checkpoint còn thiếu: Không có; người dùng xác nhận drawer mở/đóng, ba tab hoạt động, nội dung scroll và mobile layout ổn.
+- P1-08 TypeScript check `npx tsc -p tsconfig.app.json --noEmit --pretty false` — PASS
+- P1-08 tour order/mapping check — PASS; order `1 → 2 → 3`, cả ba `sceneId` resolve tới panorama config
+- P1-08 timer/store/bounds check — PASS; một `setTimeout`, cleanup bằng `clearTimeout`, stale callback guard `status/currentIndex`, navigation clamp và `stopTour()` vẫn là `idle + currentIndex 0`
+- P1-08 component boundary/accessibility check — PASS; TourControls không import Three/R3F/Drei, controls tối thiểu 44px và progress có semantics
+- P1-08 `npm run build` — PASS; chỉ lặp lại cảnh báo chunk R3F/Three đã biết
+- P1-08 `npm run lint`, debug/color scan và `git diff --check` — PASS
+- P1-08 Vite dev server + module transform — PASS; app và module TourControls trả HTTP 200
+- Manual checkpoint còn thiếu: Không có; người dùng xác nhận Play/Pause/Resume, auto-next, Next/Prev, Stop và progress hoạt động đúng; controls không che Back/Thông tin.
 
 ## Quyết định đã chốt
 - Quyết định: chỉ tạo `STATUS.md` trong root repository `campus-tour/`, không tạo ở thư mục cha.
@@ -174,15 +182,24 @@
 - Quyết định: drawer luôn mounted để chạy animation 300ms, nhưng dùng `aria-hidden`, `inert` và `pointer-events-none` khi đóng; mobile trượt bottom-up với `max-height: 82svh`, desktop trượt từ phải và content dùng vùng `overflow-y-auto` riêng.
 - Lý do: đóng/mở mượt, không chặn Canvas/focus khi ẩn và tránh overflow trên màn hình nhỏ.
 - Contract/file bị ảnh hưởng: `src/components/InfoDrawer/index.tsx`.
+- Quyết định: TourControls sort bản sao `tour.config.ts` theo `order`; mọi navigation clamp index rồi cập nhật `tour.currentIndex`, `activeSceneId` và `viewMode = panorama`, còn label scene lookup từ panorama config.
+- Lý do: giữ config là source of truth, không hardcode mapping và rapid click không thể tạo index ngoài biên.
+- Contract/file bị ảnh hưởng: `src/components/TourControls/index.tsx`; không đổi config/store contract.
+- Quyết định: autoplay dùng đúng một timer trong `useEffect` theo `status/currentIndex/currentStop`; cleanup khi pause/index đổi/unmount và callback kiểm tra lại snapshot Store trước khi advance. Hết tour hoặc Stop gọi `stopTour()` rồi đồng bộ `activeSceneId` về stop đầu mà không đổi contract `idle + index 0`.
+- Lý do: ngăn duplicate/stale timer, Pause giữ index và Resume tiếp tục từ stop hiện tại.
+- Contract/file bị ảnh hưởng: `src/components/TourControls/index.tsx`, không đổi `src/store/useCampusStore.ts`.
+- Quyết định: TourControls đặt giữa cạnh dưới; nút Thông tin chuyển lên góc trái ở map và góc phải ở panorama.
+- Lý do: tránh chồng TourControls với Back, Radar và Info trên mobile.
+- Contract/file bị ảnh hưởng: `src/app/AppShell.tsx`.
 
 ## Blocker / known issue
 - Build cảnh báo chunk R3F/Three khoảng 1,088 kB minified (khoảng 299 kB gzip); chưa tối ưu trong P0-09 vì ngoài scope Phase 0 foundation.
 - Runtime dev warning: R3F `9.7.0` nội bộ dùng `THREE.Clock`, API đã deprecated trong Three r185; code dự án không trực tiếp dùng `Clock`, scene vẫn hoạt động đúng.
 
 ## Working tree
-- Clean sau commit P1-07.
+- Clean sau commit P1-08.
 
 ## Bước tiếp theo chính xác
-- Task tiếp: P1-08 — TourControls, chỉ khi người dùng yêu cầu bắt đầu.
-- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-08 và các section Guided Tour/state lifetime liên quan trong `plan.md`.
-- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-07 đã nghiệm thu và thực hiện đúng P1-08; không merge donor UI nếu task mới chưa cho phép và dừng tại mọi blocker hoặc checkpoint được quy định.
+- Task tiếp: P1-09 — LangThemeToggle skeleton, chỉ khi người dùng yêu cầu bắt đầu.
+- Check đầu tiên: đối chiếu `STATUS.md` với Git, đọc P1-09 và các section UIStore/i18n/theme liên quan trong `plan.md`.
+- Prompt gợi ý cho Codex session tiếp: đọc nguồn sự thật, xác nhận P1-08 đã nghiệm thu và thực hiện đúng P1-09; không merge donor UI nếu task mới chưa cho phép và dừng tại mọi blocker hoặc checkpoint được quy định.

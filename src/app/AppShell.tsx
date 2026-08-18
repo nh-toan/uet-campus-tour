@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { InfoDrawer } from '../components/InfoDrawer'
 import { RadarMinimap } from '../components/RadarMinimap'
+import { TourControls } from '../components/TourControls'
 import { CampusMap3D } from '../scenes/CampusMap3D'
 import { PanoramaViewer } from '../scenes/PanoramaViewer'
 import {
@@ -106,12 +107,18 @@ export function AppShell() {
       <button
         aria-controls="campus-info-drawer"
         aria-expanded={drawerOpen}
-        className="absolute bottom-3 left-3 z-20 flex min-h-11 min-w-11 touch-manipulation items-center rounded-full border border-uet-cloud/40 bg-uet-navy/90 px-4 py-2 font-uet-body text-sm font-semibold text-uet-cloud shadow-lg outline-none active:bg-uet-navy-soft focus-visible:ring-2 focus-visible:ring-uet-gold"
+        className={`absolute z-20 flex min-h-11 min-w-11 touch-manipulation items-center rounded-full border border-uet-cloud/40 bg-uet-navy/90 px-4 py-2 font-uet-body text-sm font-semibold text-uet-cloud shadow-lg outline-none active:bg-uet-navy-soft focus-visible:ring-2 focus-visible:ring-uet-gold ${displayedViewMode === 'map3d' ? 'top-3 left-3' : 'top-3 right-3'}`}
         onClick={() => openDrawer('about')}
         type="button"
       >
         Thông tin
       </button>
+
+      <div className="pointer-events-none absolute inset-x-3 bottom-3 z-20 mx-auto max-w-md">
+        <div className="pointer-events-auto">
+          <TourControls />
+        </div>
+      </div>
 
       <InfoDrawer />
     </main>
