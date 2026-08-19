@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UET Navigator — Khoa & Viện / Liên chi</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="tech-bg">
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <div class="brand-mark">UET</div>
+      <div class="brand-copy"><strong>UET NAVIGATOR</strong><span>HÒA LẠC · K71</span></div>
+    </a>
+    <nav class="main-nav">
+      <a href="#">Khám phá</a>
+      <a href="index.html">Về UET</a>
+      <a class="active" href="faculties.html">Khoa & Viện</a>
+      <a href="clubs.html">Cộng đồng</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button" aria-label="Tìm kiếm">⌕</button>
+      <button class="btn btn-secondary">Đăng nhập</button>
+      <a class="btn btn-primary" href="clubs.html">Câu lạc bộ</a>
+    </div>
+  </div>
+</header>
+
+<main class="directory-shell">
+  <div class="container directory-layout">
+    <section>
+      <header class="directory-head">
+        <p class="eyebrow">Academic communities</p>
+        <h1 class="heading-xl">Khám phá Khoa & Viện / Liên chi</h1>
+        <p><!-- FILL LATER -->Mô tả ngắn 1–2 câu về hệ sinh thái đào tạo, nghiên cứu và cộng đồng sinh viên.</p>
+      </header>
+
+      <div class="toolbar">
+        <input class="search" placeholder="Tìm kiếm Khoa, Viện hoặc lĩnh vực..." />
+        <div class="chips">
+          <button class="chip active">Tất cả</button>
+          <button class="chip">Khoa</button>
+          <button class="chip">Viện</button>
+        </div>
+      </div>
+
+      <div class="entity-grid">
+        <!-- COMPONENT: AcademicUnitCard -->
+        <article class="card entity-card selected">
+          <div class="entity-logo">FIT</div>
+          <span class="entity-type">Liên chi · Khoa</span>
+          <h3>Công nghệ Thông tin</h3>
+          <div class="entity-meta">Computing</div>
+          <a class="entity-link" href="#">Xem giới thiệu →</a>
+        </article>
+
+        <article class="card entity-card">
+          <div class="entity-logo">FET</div>
+          <span class="entity-type">Liên chi · Khoa</span>
+          <h3>Điện tử – Viễn thông</h3>
+          <div class="entity-meta">Electronics & Telecom</div>
+          <a class="entity-link" href="#">Xem giới thiệu →</a>
+        </article>
+
+        <article class="card entity-card">
+          <div class="entity-logo">FMA</div>
+          <span class="entity-type">Liên chi · Khoa</span>
+          <h3>Cơ học Kỹ thuật & Tự động hóa</h3>
+          <div class="entity-meta">Mechanical Engineering</div>
+          <a class="entity-link" href="#">Xem giới thiệu →</a>
+        </article>
+
+        <article class="card entity-card">
+          <div class="entity-logo">FEPN</div>
+          <span class="entity-type">Liên chi · Khoa</span>
+          <h3>Vật lý Kỹ thuật & Công nghệ Nano</h3>
+          <div class="entity-meta">Nano Technology</div>
+          <a class="entity-link" href="#">Xem giới thiệu →</a>
+        </article>
+
+        <article class="card entity-card">
+          <div class="entity-logo">FCE</div>
+          <span class="entity-type">Liên chi · Khoa</span>
+          <h3>Công nghệ Xây dựng Giao thông</h3>
+          <div class="entity-meta">Civil Engineering</div>
+          <a class="entity-link" href="#">Xem giới thiệu →</a>
+        </article>
+
+        <article class="card entity-card">
+          <div class="entity-logo">FAT</div>
+          <span class="entity-type">Liên chi · Khoa</span>
+          <h3>Công nghệ Nông nghiệp</h3>
+          <div class="entity-meta">Agricultural Technology</div>
+          <a class="entity-link" href="#">Xem giới thiệu →</a>
+        </article>
+
+        <article class="card entity-card">
+          <div class="entity-logo">IAI</div>
+          <span class="entity-type">Liên chi · Viện</span>
+          <h3>Trí tuệ Nhân tạo</h3>
+          <div class="entity-meta">Artificial Intelligence</div>
+          <a class="entity-link" href="#">Xem giới thiệu →</a>
+        </article>
+
+        <article class="card entity-card">
+          <div class="entity-logo">SAE</div>
+          <span class="entity-type">Liên chi · Viện</span>
+          <h3>Công nghệ Hàng không Vũ trụ</h3>
+          <div class="entity-meta">Aerospace Engineering</div>
+          <a class="entity-link" href="#">Xem giới thiệu →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- COMPONENT: AcademicUnitDetailPanel -->
+    <aside class="detail-panel">
+      <div class="detail-visual">
+        <div class="entity-logo">FIT</div>
+        <span class="entity-type" style="color:var(--cyan-400)">Đơn vị được chọn</span>
+        <h2>Công nghệ Thông tin</h2>
+        <p>Computing</p>
+        <p><!-- FILL LATER -->Đoạn giới thiệu ngắn 2–3 dòng về đơn vị.</p>
+      </div>
+      <div class="detail-body">
+        <div class="metrics">
+          <div class="metric"><strong>25+</strong><span>Năm phát triển</span></div>
+          <div class="metric"><strong>120+</strong><span>Giảng viên</span></div>
+          <div class="metric"><strong>2.5K+</strong><span>Sinh viên</span></div>
+          <div class="metric"><strong>50+</strong><span>Đối tác</span></div>
+        </div>
+        <div class="detail-section">
+          <h4>Lĩnh vực đào tạo & nghiên cứu</h4>
+          <div class="chips">
+            <span class="chip">Khoa học máy tính</span>
+            <span class="chip">Kỹ thuật phần mềm</span>
+            <span class="chip">AI</span>
+          </div>
+        </div>
+        <div class="detail-section">
+          <h4>Liên kết nhanh</h4>
+          <p>Trang thông tin chính thức ↗</p>
+          <p>Chương trình đào tạo ↗</p>
+          <p>Tin tức & sự kiện ↗</p>
+        </div>
+        <a class="btn btn-primary" style="width:100%" href="#">Xem chi tiết đơn vị →</a>
+      </div>
+    </aside>
+  </div>
+</main>
+</body>
+</html>
