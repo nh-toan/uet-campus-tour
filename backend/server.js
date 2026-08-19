@@ -3,7 +3,7 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const crypto = require('node:crypto');
 
-const PORT = Number(process.env.PORT || 3000);
+const PORT = Number(process.env.PORT || 3001);
 const ROOT_DIRECTORY = __dirname;
 const FRONTEND_DIRECTORY = path.resolve(ROOT_DIRECTORY, '..', 'frontend', 'dist');
 const DATA_DIRECTORY = path.join(ROOT_DIRECTORY, 'data');
