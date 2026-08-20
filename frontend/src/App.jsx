@@ -1,13 +1,13 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
-import { ArrowRight, Building2, CalendarDays, ExternalLink, Eye, HeartHandshake, MapPinned, Maximize2, Menu, Rocket, Search, UsersRound, X } from 'lucide-react';
+import { ArrowRight, ExternalLink, Eye, HeartHandshake, Menu, Rocket, Search, X } from 'lucide-react';
 
 const CampusMapModule = lazy(() => import('./features/campus-map/CampusMapModule'));
 
 const sections = [
   ['ban-do', 'Khám phá'],
-  ['gioi-thieu', 'Về UET'],
+  ['gioi-thieu', 'Giới thiệu'],
   ['lien-chi', 'Khoa & Viện'],
-  ['cau-lac-bo', 'Cộng đồng']
+  ['cau-lac-bo', 'Câu lạc bộ']
 ];
 const clubCategories = [['academic', 'Học thuật'], ['tech', 'Công nghệ'], ['art', 'Nghệ thuật'], ['sport', 'Thể thao'], ['media', 'Truyền thông'], ['community', 'Cộng đồng']];
 const clubCategoryLabels = Object.fromEntries(clubCategories);
@@ -55,11 +55,11 @@ export default function App() {
     <Header current={activeRoute} navigate={navigate} />
     <main>
       {activeRoute === 'gioi-thieu' && <IntroPage navigate={navigate} />}
-      {activeRoute === 'ban-do' && <MapPage navigate={navigate} />}
+      {activeRoute === 'ban-do' && <MapPage />}
       {activeRoute === 'lien-chi' && <LienChiPage />}
       {activeRoute === 'cau-lac-bo' && <ClubPage />}
     </main>
-    <Footer />
+    {activeRoute !== 'ban-do' && <Footer />}
   </div>;
 }
 
@@ -74,17 +74,12 @@ function Header({ current, navigate }) {
     <div className="site-container header-inner">
       <button className="brand" onClick={() => goTo('gioi-thieu')} aria-label="Về trang giới thiệu UET Navigator">
         <span className="brand-mark">UET</span>
-        <span className="brand-copy"><strong>UET NAVIGATOR</strong><small>HÒA LẠC · K71</small></span>
+        <span className="brand-copy"><strong>UET NAVIGATOR</strong></span>
       </button>
       <nav className="main-nav" aria-label="Điều hướng chính">
         {sections.map(([id, label]) => <button key={id} className={current === id ? 'active' : ''} aria-current={current === id ? 'page' : undefined} onClick={() => goTo(id)}>{label}</button>)}
       </nav>
-      <div className="header-actions">
-        <button className="icon-button" type="button" aria-label="Tìm kiếm (chưa khả dụng)" title="Tìm kiếm đang được phát triển" disabled><Search size={19} aria-hidden="true" /></button>
-        <button className="btn btn-secondary header-login" type="button" disabled>Đăng nhập</button>
-        <button className="btn btn-primary header-club-link" onClick={() => goTo('cau-lac-bo')}>Câu lạc bộ</button>
-        <button className="mobile-menu" onClick={() => setOpen(value => !value)} aria-label={open ? 'Đóng menu' : 'Mở menu'} aria-expanded={open}>{open ? <X size={21} /> : <Menu size={22} />}</button>
-      </div>
+      <button className="mobile-menu" type="button" onClick={() => setOpen(value => !value)} aria-label={open ? 'Đóng menu' : 'Mở menu'} aria-expanded={open}>{open ? <X size={21} /> : <Menu size={22} />}</button>
       {open && <nav className="mobile-nav" aria-label="Điều hướng di động">
         {sections.map(([id, label]) => <button key={id} className={current === id ? 'active' : ''} onClick={() => goTo(id)}>{label}<ArrowRight size={16} aria-hidden="true" /></button>)}
       </nav>}
@@ -102,12 +97,12 @@ function IntroPage({ navigate }) {
       <div className="site-container hero-inner">
         <div className="hero-copy">
           <p className="eyebrow">Khám phá UET Hòa Lạc</p>
-          <h1>Trường Đại học Công nghệ<br /><span>ĐHQGHN — Hòa Lạc</span></h1>
+          <h1><span className="hero-title-primary">Trường Đại học Công nghệ</span><span className="hero-title-location">ĐHQGHN – Hòa Lạc</span></h1>
           <p>UET Navigator là cánh cửa số để khám phá không gian, con người và cộng đồng của UET.</p>
           <div className="actions"><button className="btn btn-primary" onClick={() => navigate('ban-do')}>Khám phá bản đồ <ArrowRight size={17} aria-hidden="true" /></button><button className="btn btn-dark-secondary" onClick={() => navigate('lien-chi')}>Xem Khoa & Viện</button></div>
         </div>
       </div>
-      <div className="site-container hero-stats-wrap"><section className="stat-bar" aria-label="Tổng quan UET Navigator"><Stat icon={Building2} value="08" label="Khoa & Viện" caption="Đa lĩnh vực, tiên phong công nghệ" /><Stat icon={UsersRound} value="24+" label="Câu lạc bộ" caption="Năng động – Sáng tạo – Kết nối" /><Stat icon={CalendarDays} value="20+" label="Năm phát triển" caption="Vững nền tảng, bứt phá tương lai" /><Stat icon={MapPinned} value="25.000+" label="Sinh viên & Cựu sinh viên" caption="Cộng đồng mạnh mẽ, toàn cầu" /></section></div>
+      <div className="site-container hero-stats-wrap"><section className="stat-bar" aria-label="Tổng quan UET Navigator"><Stat value="08" label="Khoa & Viện" caption="Đa lĩnh vực, tiên phong công nghệ" /><Stat value="24+" label="Câu lạc bộ" caption="Năng động – Sáng tạo – Kết nối" /><Stat value="20+" label="Năm phát triển" caption="Vững nền tảng, bứt phá tương lai" /><Stat value="25.000+" label="Sinh viên & Cựu sinh viên" caption="Cộng đồng mạnh mẽ, toàn cầu" /></section></div>
     </section>
     <section className="story-section tech-bg">
       <div className="site-container about-layout">
@@ -121,20 +116,16 @@ function IntroPage({ navigate }) {
   </>;
 }
 
-function Stat({ icon: Icon, value, label, caption }) {
-  return <article className="stat"><span className="stat-icon"><Icon size={20} aria-hidden="true" /></span><div><strong>{value}</strong><span>{label}</span><small>{caption}</small></div></article>;
+function Stat({ value, label, caption }) {
+  return <article className="stat"><strong>{value}</strong><span>{label}</span><small>{caption}</small></article>;
 }
 
 function Principle({ icon: Icon, title, text }) {
   return <article className="principle-card"><span className="principle-icon"><Icon size={24} aria-hidden="true" /></span><h3>{title}</h3><p>{text}</p></article>;
 }
 
-function MapPage({ navigate }) {
-  const openFullscreen = () => document.querySelector('#map-viewer')?.requestFullscreen?.();
-  return <section className="explorer-page">
-    <div className="site-container explorer-header"><div><p className="eyebrow">Campus explorer</p><h1>Khám phá không gian<br /><span>UET Hòa Lạc.</span></h1><p>Di chuyển, quan sát các điểm nổi bật và bắt đầu hành trình tham quan trong không gian 3D.</p></div><div className="explorer-actions"><button className="btn btn-dark-secondary" onClick={() => navigate('cau-lac-bo')}>Khám phá cộng đồng</button><button className="btn btn-primary" onClick={openFullscreen}><Maximize2 size={17} aria-hidden="true" />Toàn màn hình</button></div></div>
-    <div className="site-container"><MapCanvas className="explorer-map-viewer" /></div>
-  </section>;
+function MapPage() {
+  return <section className="explorer-page" aria-label="Bản đồ 3D khuôn viên UET"><MapCanvas className="explorer-map-viewer" /></section>;
 }
 
 function Logo({ item }) {
