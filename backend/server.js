@@ -26,8 +26,36 @@ function normalizeLink(value) { const link = typeof value === 'string' ? value.t
 function normalizePublicLogo(value, directory) { const logoPath = typeof value === 'string' ? value.trim() : ''; return new RegExp(`^/assets/${directory}/[a-zA-Z0-9_-]+\\.(svg|png|webp|jpe?g)$`, 'i').test(logoPath) ? logoPath : ''; }
 function normalizeLienChiBackground(value) { const backgroundPath = typeof value === 'string' ? value.trim() : ''; return /^\/assets\/lien-chi\/backgrounds\/[a-z0-9-]+\.jpe?g$/i.test(backgroundPath) ? backgroundPath : ''; }
 function normalizeParagraphs(value, label) { return (Array.isArray(value) ? value : []).map(item => ({ text: normalizeText(item?.text, label, 4000), isBullet: item?.isBullet === true })).filter(item => item.text); }
+const CLUB_SECTION_TITLES = ['Giới thiệu', 'Hoạt động nổi bật', 'Cơ cấu tổ chức', 'Thành tích'];
+function normalizeClubSections(value) {
+  const source = Array.isArray(value) ? value : [];
+  return CLUB_SECTION_TITLES.map(title => {
+    const section = source.find(item => item?.title === title);
+    if (!section) return null;
+    const items = normalizeParagraphs(section.items, `Nội dung ${title}`);
+    return items.length ? { title, items } : null;
+  }).filter(Boolean);
+}
 function normalizeLienChi(input, existing = {}, index = 0) { const source = input && typeof input === 'object' ? input : {}; const pick = field => typeof source[field] === 'string' ? source[field] : (existing[field] || ''); return { id: typeof source.id === 'string' && /^[a-z0-9-]+$/.test(source.id) ? source.id : (existing.id || `lien-chi-${index + 1}`), sortOrder: Number.isInteger(source.sortOrder) ? source.sortOrder : (existing.sortOrder || index + 1), name: normalizeText(pick('name'), 'Tên Liên chi', 160, true), shortName: normalizeText(pick('shortName'), 'Tên viết tắt', 80), monogram: normalizeText(pick('monogram'), 'Chữ lồng logo', 6), unitType: ['Khoa', 'Viện'].includes(pick('unitType')) ? pick('unitType') : 'Khoa', logoUrl: normalizePublicLogo(pick('logoUrl'), 'lien-chi'), backgroundImage: normalizeLienChiBackground(pick('backgroundImage')), accentColor: normalizeColor(pick('accentColor'), '#087ea4'), fanpageUrl: normalizeLink(pick('fanpageUrl')), summary: normalizeText(pick('summary') || pick('description'), 'Câu dẫn Liên chi', 400), paragraphs: normalizeParagraphs(source.paragraphs ?? existing.paragraphs, 'Đoạn giới thiệu Liên chi') }; }
-function normalizeClub(input, index) { return { id: typeof input?.id === 'string' && /^[a-z0-9-]+$/.test(input.id) ? input.id : `clb-${index + 1}`, sortOrder: Number.isInteger(input?.sortOrder) ? input.sortOrder : index + 1, name: normalizeText(input?.name, 'Tên câu lạc bộ', 160, true), shortName: normalizeText(input?.shortName, 'Tên viết tắt', 80), monogram: normalizeText(input?.monogram, 'Chữ lồng logo', 6), logoUrl: normalizePublicLogo(input?.logoUrl, 'clubs'), accentColor: normalizeColor(input?.accentColor, '#087ea4'), category: CLUB_CATEGORIES.has(input?.category) ? input.category : 'community', governingBody: normalizeText(input?.governingBody, 'Đơn vị chủ quản', 200), fanpageUrl: normalizeLink(input?.fanpageUrl), summary: normalizeText(input?.summary, 'Câu dẫn', 400), paragraphs: normalizeParagraphs(input?.paragraphs, 'Đoạn giới thiệu câu lạc bộ') }; }
+function normalizeClub(input, index) {
+  const paragraphs = normalizeParagraphs(input?.paragraphs, 'Đoạn giới thiệu câu lạc bộ');
+  const sections = normalizeClubSections(input?.sections);
+  return {
+    id: typeof input?.id === 'string' && /^[a-z0-9-]+$/.test(input.id) ? input.id : `clb-${index + 1}`,
+    sortOrder: Number.isInteger(input?.sortOrder) ? input.sortOrder : index + 1,
+    name: normalizeText(input?.name, 'Tên câu lạc bộ', 160, true),
+    shortName: normalizeText(input?.shortName, 'Tên viết tắt', 80),
+    monogram: normalizeText(input?.monogram, 'Chữ lồng logo', 6),
+    logoUrl: normalizePublicLogo(input?.logoUrl, 'clubs'),
+    accentColor: normalizeColor(input?.accentColor, '#087ea4'),
+    category: CLUB_CATEGORIES.has(input?.category) ? input.category : 'community',
+    governingBody: normalizeText(input?.governingBody, 'Đơn vị chủ quản', 200),
+    fanpageUrl: normalizeLink(input?.fanpageUrl),
+    summary: normalizeText(input?.summary, 'Câu dẫn', 400),
+    sections: sections.length ? sections : (paragraphs.length ? [{ title: 'Giới thiệu', items: paragraphs }] : []),
+    paragraphs
+  };
+}
 async function readLienChi() { const items = await readJson(LIEN_CHI_FILE); if (!Array.isArray(items)) throw new Error('Dữ liệu Liên chi không hợp lệ.'); return items.map(normalizeLienChi).sort((a, b) => a.sortOrder - b.sortOrder); }
 async function readClubs() { const items = await readJson(CLUBS_FILE); if (!Array.isArray(items)) throw new Error('Dữ liệu câu lạc bộ không hợp lệ.'); return items.map(normalizeClub).sort((a, b) => a.sortOrder - b.sortOrder); }
 function readRequestBody(request) { return new Promise((resolve, reject) => { let size = 0; let body = ''; request.setEncoding('utf8'); request.on('data', chunk => { size += Buffer.byteLength(chunk); if (size > MAX_BODY_SIZE) { reject(new Error('Dữ liệu gửi lên quá lớn.')); request.destroy(); return; } body += chunk; }); request.on('end', () => { try { resolve(body ? JSON.parse(body) : {}); } catch { reject(new Error('Dữ liệu JSON không hợp lệ.')); } }); request.on('error', reject); }); }

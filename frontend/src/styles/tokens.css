@@ -36,3 +36,36 @@
   --page-gutter: clamp(16px, 3vw, 32px);
   --focus-ring: 0 0 0 4px rgb(20 107 255 / 18%);
 }
+
+
+/* Semantic theme tokens. `--logo-surface` stays white in both modes. */
+:root {
+  --page-bg: var(--surface);
+  --panel-bg: var(--white);
+  --control-bg: rgb(255 255 255 / 92%);
+  --header-bg: rgb(255 255 255 / 93%);
+  --text-primary: var(--ink-950);
+  --text-secondary: var(--ink-600);
+  --logo-surface: #ffffff;
+}
+
+:root[data-theme='dark'] {
+  --surface: #0b1729;
+  --surface-2: #11223a;
+  --surface-3: #172c48;
+  --ink-950: #f6f9ff;
+  --ink-800: #d9e4f4;
+  --ink-600: #aebed3;
+  --ink-500: #8ea1bb;
+  --line: #29415f;
+  --line-strong: #3a5574;
+  --shadow-sm: 0 8px 24px rgb(0 0 0 / 22%);
+  --shadow-md: 0 18px 48px rgb(0 0 0 / 34%);
+  --shadow-blue: 0 0 0 1px rgb(89 161 255 / 30%), 0 18px 50px rgb(0 0 0 / 30%);
+  --page-bg: #0b1729;
+  --panel-bg: #10233e;
+  --control-bg: #152b49;
+  --header-bg: rgb(10 24 43 / 93%);
+  --text-primary: #f6f9ff;
+  --text-secondary: #aebed3;
+}
