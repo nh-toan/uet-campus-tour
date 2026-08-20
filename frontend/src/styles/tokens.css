@@ -32,7 +32,7 @@
   --radius-panel: 28px;
   --radius-hero: 36px;
   --container: 1480px;
-  --header-h: 76px;
+  --header-h: 72px;
   --page-gutter: clamp(16px, 3vw, 32px);
   --focus-ring: 0 0 0 4px rgb(20 107 255 / 18%);
 }
