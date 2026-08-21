@@ -1,13 +1,14 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import uetLogoUrl from '../../LOGO KHOA - BO MON - VIEN/UET.png';
-import { ArrowRight, ExternalLink, Eye, HeartHandshake, Menu, Rocket, Search, X } from 'lucide-react';
+import { ArrowRight, ChevronDown, ExternalLink, Menu, Search, X } from 'lucide-react';
+import { introContent, introTabs } from './content/introContent';
 
-const CampusMapModule = lazy(() => import('./features/campus-map/CampusMapModule'));
+const ExternalVirtualTour = lazy(() => import('./features/campus-map/ExternalVirtualTour'));
 
 const sections = [
   ['ban-do', 'Bản đồ khuôn viên'],
   ['gioi-thieu', 'Giới thiệu chung'],
-  ['lien-chi', 'Khoa & Viện'],
+  ['lien-chi', 'Liên chi Khoa/ Viện'],
   ['cau-lac-bo', 'Câu lạc bộ']
 ];
 const clubCategories = [['academic', 'Học thuật'], ['tech', 'Công nghệ'], ['art', 'Nghệ thuật'], ['sport', 'Thể thao'], ['media', 'Truyền thông'], ['community', 'Cộng đồng']];
@@ -38,10 +39,10 @@ function currentRoute() {
   return location.pathname.replace(/\/+$/, '').slice(1) || 'gioi-thieu';
 }
 
-function MapCanvas({ className = '' }) {
+function VirtualTourFrame({ className = '' }) {
   return <div id="map-viewer" className={className}>
-    <Suspense fallback={<div className="map-wait" role="status"><strong>Đang tải bản đồ 3D…</strong><span>Đang chuẩn bị không gian tham quan khuôn viên.</span></div>}>
-      <CampusMapModule />
+    <Suspense fallback={<div className="map-wait" role="status"><strong>Đang tải bản đồ khuôn viên…</strong><span>Đang chuẩn bị không gian tham quan.</span></div>}>
+      <ExternalVirtualTour />
     </Suspense>
   </div>;
 }
@@ -76,7 +77,7 @@ export default function App() {
   return <div className="app-shell">
     <Header current={activeRoute} navigate={navigate} theme={theme} onThemeToggle={() => setTheme(value => value === 'dark' ? 'light' : 'dark')} />
     <main>
-      {activeRoute === 'gioi-thieu' && <IntroPage navigate={navigate} />}
+      {activeRoute === 'gioi-thieu' && <IntroPage />}
       {activeRoute === 'ban-do' && <MapPage />}
       {activeRoute === 'lien-chi' && <LienChiPage />}
       {activeRoute === 'cau-lac-bo' && <ClubPage />}
@@ -113,7 +114,7 @@ function Header({ current, navigate, theme, onThemeToggle }) {
   </header>;
 }
 
-function IntroPage({ navigate }) {
+function IntroPage() {
   return <>
     <section className="intro-hero">
       <div className="hero-media" aria-hidden="true">
@@ -123,35 +124,133 @@ function IntroPage({ navigate }) {
       <div className="site-container hero-inner">
         <div className="hero-copy">
           <p className="eyebrow">Khám phá</p>
-          <h1>Trường Đại học Công nghệ<br /><span>ĐHQGHN – Hòa Lạc</span></h1>
+          <h1><span className="hero-title-primary">Trường Đại học Công nghệ</span><span className="hero-title-location">ĐHQGHN – Hòa Lạc</span></h1>
           <p className="hero-tagline">Công nghệ tiên phong, Kiến tạo tương lai</p>
           <p className="hero-description">UET Navigator giúp bạn khám phá toàn diện Trường Đại học Công nghệ – ĐHQGHN: từ bản đồ, khoa & viện, câu lạc bộ đến cộng đồng sinh viên năng động. Hành trình bắt đầu từ đây.</p>
         </div>
       </div>
-      <div className="site-container hero-stats-wrap"><section className="stat-bar" aria-label="Tổng quan UET Navigator"><Stat value="08" label="Khoa & Viện" caption="Đa lĩnh vực, tiên phong công nghệ" /><Stat value="24+" label="Câu lạc bộ" caption="Năng động – Sáng tạo – Kết nối" /><Stat value="20+" label="Năm phát triển" caption="Vững nền tảng, bứt phá tương lai" /><Stat value="25.000+" label="Sinh viên & Cựu sinh viên" caption="Cộng đồng mạnh mẽ, toàn cầu" /></section></div>
     </section>
-    <section className="story-section tech-bg">
-      <div className="site-container about-layout">
-        <div className="about-copy"><p className="eyebrow">Về UET</p><h2>Kiến tạo công nghệ vì con người và tương lai</h2><p className="story-lead">Khám phá hành trình học tập, nghiên cứu và kết nối cộng đồng trong một không gian số trực quan, luôn sẵn sàng cho những trải nghiệm đầu tiên tại Hòa Lạc.</p><button className="btn btn-ghost" onClick={() => navigate('lien-chi')}>Khám phá hệ sinh thái UET <ArrowRight size={17} aria-hidden="true" /></button></div>
-        <Principle icon={Rocket} title="Sứ mệnh" text="Đào tạo nguồn nhân lực công nghệ chất lượng cao, tạo ra tri thức và giá trị bền vững." />
-        <Principle icon={Eye} title="Tầm nhìn" text="Trở thành trung tâm đổi mới sáng tạo, kết nối nghiên cứu với những thách thức của tương lai." />
-        <Principle icon={HeartHandshake} title="Giá trị cốt lõi" text="Đổi mới sáng tạo, chất lượng cao, hợp tác và tinh thần nhân văn." />
-        <blockquote className="future-quote"><p className="eyebrow">UET / FUTURE</p><strong>Innovative Thinking for the Future</strong></blockquote>
-      </div>
-    </section>
+    <div className="intro-content-flow tech-bg">
+      <section className="intro-banner-section" aria-label="Hơn 20 năm phát triển và khẳng định vị thế">
+        <div className="site-container intro-banner-frame">
+          <img src="/assets/intro/uet-20-years-banner.webp" alt="Hơn 20 năm phát triển và khẳng định vị thế trên bản đồ giáo dục toàn cầu" width="2103" height="748" />
+        </div>
+      </section>
+      <OrganizationChart />
+      <StrategicContent />
+    </div>
   </>;
 }
 
-function Stat({ value, label, caption }) {
-  return <article className="stat"><strong>{value}</strong><span>{label}</span><small>{caption}</small></article>;
+function OrganizationChart() {
+  return <section className="intro-organization-section" aria-label="Cơ cấu tổ chức Trường Đại học Công nghệ">
+    <div className="site-container intro-organization-frame">
+      <img src="/assets/intro/uet-organization-chart.webp" alt="Sơ đồ cơ cấu tổ chức Trường Đại học Công nghệ" width="1448" height="1086" />
+    </div>
+  </section>;
 }
 
-function Principle({ icon: Icon, title, text }) {
-  return <article className="principle-card"><span className="principle-icon"><Icon size={24} aria-hidden="true" /></span><h3>{title}</h3><p>{text}</p></article>;
+function StrategicContent() {
+  const [activeTabId, setActiveTabId] = useState(introContent.context.id);
+
+  const onTabKeyDown = (event, currentIndex) => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+    const lastIndex = introTabs.length - 1;
+    const nextIndex = event.key === 'Home'
+      ? 0
+      : event.key === 'End'
+        ? lastIndex
+        : (currentIndex + (event.key === 'ArrowRight' ? 1 : -1) + introTabs.length) % introTabs.length;
+    const nextTab = introTabs[nextIndex];
+    setActiveTabId(nextTab.id);
+    document.getElementById(`intro-tab-${nextTab.id}`)?.focus();
+  };
+
+  return <section className="intro-strategy-section" aria-labelledby="strategy-title">
+    <div className="site-container">
+      <header className="intro-section-heading intro-strategy-heading">
+        <p className="eyebrow">Nội dung chính thức</p>
+        <h2 id="strategy-title">Định hướng phát triển</h2>
+      </header>
+      <div className="intro-tabs" role="tablist" aria-label="Nội dung định hướng phát triển">
+        {introTabs.map((tab, index) => <button
+          id={`intro-tab-${tab.id}`}
+          key={tab.id}
+          type="button"
+          role="tab"
+          aria-selected={activeTabId === tab.id}
+          aria-controls={`intro-panel-${tab.id}`}
+          tabIndex={activeTabId === tab.id ? 0 : -1}
+          className={activeTabId === tab.id ? 'active' : ''}
+          onClick={() => setActiveTabId(tab.id)}
+          onKeyDown={event => onTabKeyDown(event, index)}
+        >{tab.label}</button>)}
+      </div>
+      {introTabs.map(tab => <div
+        id={`intro-panel-${tab.id}`}
+        className="intro-tab-panel"
+        key={tab.id}
+        role="tabpanel"
+        aria-labelledby={`intro-tab-${tab.id}`}
+        tabIndex={activeTabId === tab.id ? 0 : -1}
+        hidden={activeTabId !== tab.id}
+      >
+        {tab.id === introContent.keyTasks.id
+          ? <KeyTasksAccordion sections={introContent.keyTasks.sections} />
+          : tab.id === introContent.missionVision.id
+            ? <MissionVisionContent sections={introContent.missionVision.sections} />
+            : <IntroContentCards sections={tab.sections} variant={tab.id} />}
+      </div>)}
+    </div>
+  </section>;
+}
+
+function IntroContentCards({ sections, variant }) {
+  return <div className={`intro-content-grid intro-content-grid-${variant}`}>
+    {sections.map(section => <article className="intro-content-card" key={section.id}>
+      <h3>{section.title}</h3>
+      <div className="intro-content-copy">
+        {section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+      </div>
+    </article>)}
+  </div>;
+}
+
+function MissionVisionContent({ sections }) {
+  return <div className="intro-mission-content">
+    {sections.map(section => <section className={`intro-mission-section intro-mission-section-${section.id}`} key={section.id}>
+      <h3>{section.title}</h3>
+      <div className="intro-content-copy">
+        {section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+      </div>
+    </section>)}
+  </div>;
+}
+
+function KeyTasksAccordion({ sections }) {
+  const [openSectionId, setOpenSectionId] = useState(sections[0]?.id ?? null);
+
+  return <div className="intro-accordion">
+    {sections.map(section => {
+      const isOpen = openSectionId === section.id;
+      const panelId = `intro-accordion-panel-${section.id}`;
+      return <section className={`intro-accordion-item${isOpen ? ' open' : ''}`} key={section.id}>
+        <h3>
+          <button type="button" aria-expanded={isOpen} aria-controls={panelId} onClick={() => setOpenSectionId(current => current === section.id ? null : section.id)}>
+            <span>{section.title}</span><ChevronDown size={21} aria-hidden="true" />
+          </button>
+        </h3>
+        {isOpen && <div id={panelId} className="intro-accordion-panel">
+          <ul>{section.items.map(item => <li key={item}>{item}</li>)}</ul>
+        </div>}
+      </section>;
+    })}
+  </div>;
 }
 
 function MapPage() {
-  return <section className="explorer-page" aria-label="Bản đồ 3D khuôn viên UET"><MapCanvas className="explorer-map-viewer" /></section>;
+  return <section className="explorer-page" aria-label="Bản đồ khuôn viên UET"><VirtualTourFrame className="explorer-map-viewer" /></section>;
 }
 
 function Logo({ item }) {
@@ -241,7 +340,7 @@ function LienChiPage() {
   const selected = useDirectorySelection(selectedId, setSelectedId, shown);
   if (!items) return <Loading error={error} />;
 
-  return <section className="directory-page academic-page tech-bg"><div className={`site-container directory-layout${selected ? ' has-detail' : ' is-full-width'}`}><div><header className="directory-head"><h1>Khám phá Liên chi Khoa / Viện</h1></header><div className="toolbar"><SearchInput value={query} onChange={setQuery} placeholder="Tìm kiếm Khoa, Viện hoặc lĩnh vực..." /></div><div className="entity-grid">{shown.map(item => <EntityCard key={item.id} item={item} type={`Liên chi · ${item.unitType}`} meta={lienChiEnglishNames[item.id]} selected={selected?.id === item.id} onSelect={() => setSelectedId(current => current === item.id ? null : item.id)} actionLabel="Xem giới thiệu" />)}</div>{!shown.length && <p className="empty-state">Không tìm thấy Liên chi khớp bộ lọc.</p>}</div>{selected && <DetailPanel item={selected} type={`Liên chi · ${selected.unitType}`} subtitle={lienChiEnglishNames[selected.id]} showLienChiGallery onClose={() => setSelectedId(null)} />}</div></section>;
+  return <section className="directory-page academic-page tech-bg"><div className={`site-container directory-layout${selected ? ' has-detail' : ' is-full-width'}`}><div><header className="directory-head directory-hero"><h1>Khám phá Liên chi Khoa / Viện</h1></header><div className="toolbar"><SearchInput value={query} onChange={setQuery} placeholder="Tìm kiếm Khoa, Viện hoặc lĩnh vực..." /></div><div className="entity-grid">{shown.map(item => <EntityCard key={item.id} item={item} type="Liên chi Đoàn - Liên chi Hội" meta={lienChiEnglishNames[item.id]} selected={selected?.id === item.id} onSelect={() => setSelectedId(current => current === item.id ? null : item.id)} actionLabel="Xem giới thiệu" />)}</div>{!shown.length && <p className="empty-state">Không tìm thấy Liên chi khớp bộ lọc.</p>}</div>{selected && <DetailPanel item={selected} type={`Liên chi · ${selected.unitType}`} subtitle={lienChiEnglishNames[selected.id]} showLienChiGallery onClose={() => setSelectedId(null)} />}</div></section>;
 }
 
 function clubDisplayName(club) {
@@ -264,7 +363,7 @@ function ClubPage() {
   const selected = useDirectorySelection(selectedId, setSelectedId, shown);
   if (!clubs) return <Loading error={error} />;
 
-  return <section className="directory-page club-page tech-bg"><div className={`site-container directory-layout${selected ? ' has-detail' : ' is-full-width'}`}><div><header className="directory-head"><p className="eyebrow">Cộng đồng câu lạc bộ</p><h1>Kết nối đam mê — Kiến tạo giá trị — Lan tỏa ảnh hưởng</h1><p>Khám phá một cộng đồng đa dạng, nơi mỗi ý tưởng và sở thích đều có không gian để phát triển.</p></header><div className="toolbar"><SearchInput value={query} onChange={setQuery} placeholder="Tìm kiếm câu lạc bộ, lĩnh vực, kỹ năng..." /></div><div className="chips" aria-label="Lọc câu lạc bộ">{[['all', 'Tất cả'], ...available].map(([id, label]) => <button key={id} className={`chip${filter === id ? ' active' : ''}`} onClick={() => setFilter(id)} aria-pressed={filter === id}>{label}</button>)}</div><div className="entity-grid club-grid">{shown.map(club => <EntityCard key={club.id} item={club} type={clubCategoryLabels[club.category]} meta={clubDisplayName(club)} selected={selected?.id === club.id} onSelect={() => setSelectedId(current => current === club.id ? null : club.id)} actionLabel="Khám phá" />)}</div>{!shown.length && <p className="empty-state">Không tìm thấy CLB khớp bộ lọc.</p>}</div>{selected && <DetailPanel item={selected} type={`UET Hòa Lạc · ${clubCategoryLabels[selected.category]}`} subtitle={clubDisplayName(selected)} dark onClose={() => setSelectedId(null)} />}</div></section>;
+  return <section className="directory-page club-page tech-bg"><div className={`site-container directory-layout${selected ? ' has-detail' : ' is-full-width'}`}><div><header className="directory-head directory-hero"><p className="eyebrow">Cộng đồng câu lạc bộ</p><h1>Kết nối đam mê — Kiến tạo giá trị — Lan tỏa ảnh hưởng</h1><p>Khám phá một cộng đồng đa dạng, nơi mỗi ý tưởng và sở thích đều có không gian để phát triển.</p></header><div className="toolbar"><SearchInput value={query} onChange={setQuery} placeholder="Tìm kiếm câu lạc bộ, lĩnh vực, kỹ năng..." /></div><div className="chips" aria-label="Lọc câu lạc bộ">{[['all', 'Tất cả'], ...available].map(([id, label]) => <button key={id} className={`chip${filter === id ? ' active' : ''}`} onClick={() => setFilter(id)} aria-pressed={filter === id}>{label}</button>)}</div><div className="entity-grid club-grid">{shown.map(club => <EntityCard key={club.id} item={club} type={clubCategoryLabels[club.category]} meta={clubDisplayName(club)} selected={selected?.id === club.id} onSelect={() => setSelectedId(current => current === club.id ? null : club.id)} actionLabel="Khám phá" />)}</div>{!shown.length && <p className="empty-state">Không tìm thấy CLB khớp bộ lọc.</p>}</div>{selected && <DetailPanel item={selected} type={`UET Hòa Lạc · ${clubCategoryLabels[selected.category]}`} subtitle={clubDisplayName(selected)} dark onClose={() => setSelectedId(null)} />}</div></section>;
 }
 
 function Footer() {
