@@ -1,18 +1,38 @@
-import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import uetLogoUrl from '../../LOGO KHOA - BO MON - VIEN/UET.png';
-import { ArrowRight, ChevronDown, ExternalLink, Menu, Search, X } from 'lucide-react';
+import { ArrowRight, Building2, ChevronDown, ChevronRight, ExternalLink, Flag, Gem, Globe2, GraduationCap, Handshake, Lightbulb, ListChecks, Megaphone, Menu, Microscope, Search, Target, Telescope, X, ZoomIn } from 'lucide-react';
 import { introContent, introTabs } from './content/introContent';
+import { YouthUnionPage } from './components/YouthUnionPage';
 
 const ExternalVirtualTour = lazy(() => import('./features/campus-map/ExternalVirtualTour'));
 
 const sections = [
   ['ban-do', 'Bản đồ khuôn viên'],
   ['gioi-thieu', 'Giới thiệu chung'],
+  ['doan-thanh-nien-hoi-sinh-vien', 'Đoàn Thanh niên – Hội Sinh viên'],
   ['lien-chi', 'Liên chi Khoa/ Viện'],
   ['cau-lac-bo', 'Câu lạc bộ']
 ];
 const clubCategories = [['academic', 'Học thuật'], ['tech', 'Công nghệ'], ['art', 'Nghệ thuật'], ['sport', 'Thể thao'], ['media', 'Truyền thông'], ['community', 'Cộng đồng']];
 const clubCategoryLabels = Object.fromEntries(clubCategories);
+const introPrimaryIcons = {
+  context: Globe2,
+  'mission-vision': Target,
+  'key-tasks': ListChecks
+};
+const introMissionIcons = {
+  mission: Flag,
+  vision: Telescope,
+  'education-philosophy': Lightbulb,
+  'core-values': Gem,
+  'action-slogan': Megaphone
+};
+const introTaskIcons = {
+  training: GraduationCap,
+  'science-technology': Microscope,
+  'organization-governance': Building2,
+  'international-integration': Handshake
+};
 const lienChiEnglishNames = {
   'co-hoc-ky-thuat-tu-dong-hoa': 'Faculty of Engineering Mechanics and Automation (FEMA)',
   'cong-nghe-thong-tin': 'Faculty of Information Technology (FIT)',
@@ -79,6 +99,7 @@ export default function App() {
     <main>
       {activeRoute === 'gioi-thieu' && <IntroPage />}
       {activeRoute === 'ban-do' && <MapPage />}
+      {activeRoute === 'doan-thanh-nien-hoi-sinh-vien' && <YouthUnionPage navigate={navigate} />}
       {activeRoute === 'lien-chi' && <LienChiPage />}
       {activeRoute === 'cau-lac-bo' && <ClubPage />}
     </main>
@@ -131,100 +152,204 @@ function IntroPage() {
       </div>
     </section>
     <div className="intro-content-flow tech-bg">
-      <section className="intro-banner-section" aria-label="Hơn 20 năm phát triển và khẳng định vị thế">
-        <div className="site-container intro-banner-frame">
-          <img src="/assets/intro/uet-20-years-banner.webp" alt="Hơn 20 năm phát triển và khẳng định vị thế trên bản đồ giáo dục toàn cầu" width="2103" height="748" />
-        </div>
-      </section>
-      <OrganizationChart />
       <StrategicContent />
+      <IntroClosingSection />
     </div>
   </>;
 }
 
 function OrganizationChart() {
-  return <section className="intro-organization-section" aria-label="Cơ cấu tổ chức Trường Đại học Công nghệ">
-    <div className="site-container intro-organization-frame">
-      <img src="/assets/intro/uet-organization-chart.webp" alt="Sơ đồ cơ cấu tổ chức Trường Đại học Công nghệ" width="1448" height="1086" />
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const triggerRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const openLightbox = event => {
+    triggerRef.current = event.currentTarget;
+    setLightboxOpen(true);
+  };
+
+  useEffect(() => {
+    if (!lightboxOpen) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = event => {
+      if (event.key === 'Escape') setLightboxOpen(false);
+    };
+
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', closeOnEscape);
+    closeButtonRef.current?.focus();
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', closeOnEscape);
+      triggerRef.current?.focus();
+    };
+  }, [lightboxOpen]);
+
+  return <>
+    <article className="intro-media-card intro-organization-card">
+      <button className="intro-organization-preview" type="button" onClick={openLightbox} aria-label="Mở sơ đồ cơ cấu tổ chức đầy đủ">
+        <img src="/assets/intro/uet-organization-chart.webp" alt="Sơ đồ cơ cấu tổ chức Trường Đại học Công nghệ" width="1448" height="1086" />
+      </button>
+      <div className="intro-media-actions">
+        <button type="button" onClick={openLightbox}><ZoomIn size={19} aria-hidden="true" />Xem sơ đồ đầy đủ</button>
+      </div>
+    </article>
+    {lightboxOpen && <div className="intro-lightbox" role="dialog" aria-modal="true" aria-labelledby="intro-lightbox-title" onClick={event => {
+      if (event.target === event.currentTarget) setLightboxOpen(false);
+    }}>
+      <h2 id="intro-lightbox-title" className="visually-hidden">Sơ đồ cơ cấu tổ chức Trường Đại học Công nghệ</h2>
+      <button ref={closeButtonRef} className="intro-lightbox-close" type="button" onClick={() => setLightboxOpen(false)} aria-label="Đóng sơ đồ đầy đủ"><X size={24} aria-hidden="true" /></button>
+      <div className="intro-lightbox-image">
+        <img src="/assets/intro/uet-organization-chart.webp" alt="Sơ đồ cơ cấu tổ chức Trường Đại học Công nghệ phóng to" width="1448" height="1086" />
+      </div>
+    </div>}
+  </>;
+}
+
+function IntroClosingSection() {
+  return <section className="intro-closing-section" aria-labelledby="organization-title">
+    <div className="site-container intro-page-container">
+      <header className="intro-section-heading">
+        <p className="eyebrow">Cơ cấu tổ chức</p>
+        <h2 id="organization-title">Hệ thống tổ chức UET</h2>
+        <span className="intro-heading-line" aria-hidden="true" />
+      </header>
+      <div className="intro-final-grid">
+        <OrganizationChart />
+        <figure className="intro-media-card intro-milestone-card">
+          <img src="/assets/intro/uet-20-years-banner.webp" alt="Hơn 20 năm phát triển và khẳng định vị thế trên bản đồ giáo dục toàn cầu" width="2103" height="748" />
+        </figure>
+      </div>
     </div>
   </section>;
 }
 
 function StrategicContent() {
-  const [activeTabId, setActiveTabId] = useState(introContent.context.id);
+  const [activeSectionId, setActiveSectionId] = useState(introContent.context.id);
+  const activeSection = introTabs.find(section => section.id === activeSectionId) ?? introContent.context;
 
-  const onTabKeyDown = (event, currentIndex) => {
-    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+  const onSectionKeyDown = (event, currentIndex) => {
+    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault();
     const lastIndex = introTabs.length - 1;
+    const direction = ['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : -1;
     const nextIndex = event.key === 'Home'
       ? 0
       : event.key === 'End'
         ? lastIndex
-        : (currentIndex + (event.key === 'ArrowRight' ? 1 : -1) + introTabs.length) % introTabs.length;
-    const nextTab = introTabs[nextIndex];
-    setActiveTabId(nextTab.id);
-    document.getElementById(`intro-tab-${nextTab.id}`)?.focus();
+        : (currentIndex + direction + introTabs.length) % introTabs.length;
+    const nextSection = introTabs[nextIndex];
+    setActiveSectionId(nextSection.id);
+    document.getElementById(`intro-tab-${nextSection.id}`)?.focus();
   };
 
   return <section className="intro-strategy-section" aria-labelledby="strategy-title">
-    <div className="site-container">
+    <div className="site-container intro-page-container">
       <header className="intro-section-heading intro-strategy-heading">
-        <p className="eyebrow">Nội dung chính thức</p>
-        <h2 id="strategy-title">Định hướng phát triển</h2>
+        <p className="eyebrow">Định hướng phát triển</p>
+        <h2 id="strategy-title">Nền tảng và tầm nhìn phát triển bền vững</h2>
+        <span className="intro-heading-line" aria-hidden="true" />
       </header>
-      <div className="intro-tabs" role="tablist" aria-label="Nội dung định hướng phát triển">
-        {introTabs.map((tab, index) => <button
-          id={`intro-tab-${tab.id}`}
-          key={tab.id}
-          type="button"
-          role="tab"
-          aria-selected={activeTabId === tab.id}
-          aria-controls={`intro-panel-${tab.id}`}
-          tabIndex={activeTabId === tab.id ? 0 : -1}
-          className={activeTabId === tab.id ? 'active' : ''}
-          onClick={() => setActiveTabId(tab.id)}
-          onKeyDown={event => onTabKeyDown(event, index)}
-        >{tab.label}</button>)}
+      <div className="intro-primary-tabs" role="tablist" aria-label="Nội dung định hướng phát triển">
+        {introTabs.map((section, index) => {
+          const Icon = introPrimaryIcons[section.id];
+          const isActive = activeSectionId === section.id;
+          return <button
+            id={`intro-tab-${section.id}`}
+            key={section.id}
+            type="button"
+            role="tab"
+            aria-selected={isActive}
+            aria-controls="intro-strategy-panel"
+            tabIndex={isActive ? 0 : -1}
+            className={`intro-primary-tab${isActive ? ' active' : ''}`}
+            onClick={() => setActiveSectionId(section.id)}
+            onKeyDown={event => onSectionKeyDown(event, index)}
+          >
+            <span className="intro-primary-tab-icon"><Icon size={21} aria-hidden="true" /></span>
+            <span>{section.label}</span>
+            <ChevronRight className="intro-primary-tab-arrow" size={20} aria-hidden="true" />
+          </button>;
+        })}
       </div>
-      {introTabs.map(tab => <div
-        id={`intro-panel-${tab.id}`}
-        className="intro-tab-panel"
-        key={tab.id}
-        role="tabpanel"
-        aria-labelledby={`intro-tab-${tab.id}`}
-        tabIndex={activeTabId === tab.id ? 0 : -1}
-        hidden={activeTabId !== tab.id}
-      >
-        {tab.id === introContent.keyTasks.id
+      <div id="intro-strategy-panel" className="intro-section-panel" role="tabpanel" aria-labelledby={`intro-tab-${activeSection.id}`}>
+        {activeSection.id === introContent.keyTasks.id
           ? <KeyTasksAccordion sections={introContent.keyTasks.sections} />
-          : tab.id === introContent.missionVision.id
+          : activeSection.id === introContent.missionVision.id
             ? <MissionVisionContent sections={introContent.missionVision.sections} />
-            : <IntroContentCards sections={tab.sections} variant={tab.id} />}
-      </div>)}
+            : <ContextContent sections={introContent.context.sections} />}
+      </div>
     </div>
   </section>;
 }
 
-function IntroContentCards({ sections, variant }) {
-  return <div className={`intro-content-grid intro-content-grid-${variant}`}>
-    {sections.map(section => <article className="intro-content-card" key={section.id}>
-      <h3>{section.title}</h3>
+function ContextContent({ sections }) {
+  const [activeContextId, setActiveContextId] = useState(sections[0]?.id ?? null);
+  const activeContext = sections.find(section => section.id === activeContextId) ?? sections[0];
+
+  const onContextKeyDown = (event, currentIndex) => {
+    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+    const lastIndex = sections.length - 1;
+    const direction = ['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : -1;
+    const nextIndex = event.key === 'Home'
+      ? 0
+      : event.key === 'End'
+        ? lastIndex
+        : (currentIndex + direction + sections.length) % sections.length;
+    const nextSection = sections[nextIndex];
+    setActiveContextId(nextSection.id);
+    document.getElementById(`intro-context-tab-${nextSection.id}`)?.focus();
+  };
+
+  if (!activeContext) return null;
+
+  return <div className="intro-context-layout">
+    <div className="intro-context-nav" role="tablist" aria-label="Bối cảnh phát triển">
+      {sections.map((section, index) => {
+        const isActive = activeContext.id === section.id;
+        return <button
+          id={`intro-context-tab-${section.id}`}
+          key={section.id}
+          type="button"
+          role="tab"
+          aria-selected={isActive}
+          aria-controls="intro-context-panel"
+          tabIndex={isActive ? 0 : -1}
+          className={isActive ? 'active' : ''}
+          onClick={() => setActiveContextId(section.id)}
+          onKeyDown={event => onContextKeyDown(event, index)}
+        >{section.title}</button>;
+      })}
+    </div>
+    <article id="intro-context-panel" className="intro-context-reading" role="tabpanel" aria-labelledby={`intro-context-tab-${activeContext.id}`}>
+      <h3>{activeContext.title}</h3>
       <div className="intro-content-copy">
-        {section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+        {activeContext.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
       </div>
-    </article>)}
+    </article>
   </div>;
 }
 
 function MissionVisionContent({ sections }) {
-  return <div className="intro-mission-content">
-    {sections.map(section => <section className={`intro-mission-section intro-mission-section-${section.id}`} key={section.id}>
-      <h3>{section.title}</h3>
-      <div className="intro-content-copy">
-        {section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-      </div>
-    </section>)}
+  const cards = sections.flatMap(section => section.id === 'core-values'
+    ? [
+        { id: 'core-values', title: 'Giá trị cốt lõi', paragraphs: section.paragraphs.slice(0, -2) },
+        { id: 'action-slogan', title: 'Khẩu hiệu hành động', paragraphs: section.paragraphs.slice(-2) }
+      ]
+    : [section]);
+
+  return <div className="intro-mission-grid">
+    {cards.map(card => {
+      const Icon = introMissionIcons[card.id];
+      return <article className={`intro-mission-card intro-mission-card-${card.id}`} key={card.id}>
+        <span className="intro-card-icon"><Icon size={22} aria-hidden="true" /></span>
+        <h3>{card.title}</h3>
+        <div className="intro-content-copy">
+          {card.paragraphs.map((paragraph, index) => <p key={`${card.id}-${index}`}>{paragraph}</p>)}
+        </div>
+      </article>;
+    })}
   </div>;
 }
 
@@ -235,10 +360,11 @@ function KeyTasksAccordion({ sections }) {
     {sections.map(section => {
       const isOpen = openSectionId === section.id;
       const panelId = `intro-accordion-panel-${section.id}`;
+      const Icon = introTaskIcons[section.id];
       return <section className={`intro-accordion-item${isOpen ? ' open' : ''}`} key={section.id}>
         <h3>
           <button type="button" aria-expanded={isOpen} aria-controls={panelId} onClick={() => setOpenSectionId(current => current === section.id ? null : section.id)}>
-            <span>{section.title}</span><ChevronDown size={21} aria-hidden="true" />
+            <span className="intro-accordion-title"><span className="intro-accordion-icon"><Icon size={20} aria-hidden="true" /></span><span>{section.title}</span></span><ChevronDown size={21} aria-hidden="true" />
           </button>
         </h3>
         {isOpen && <div id={panelId} className="intro-accordion-panel">

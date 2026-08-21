@@ -11,7 +11,7 @@ const LIEN_CHI_FILE = path.join(DATA_DIRECTORY, 'lien-chi.json');
 const CLUBS_FILE = path.join(DATA_DIRECTORY, 'clubs.json');
 const ADMIN_KEY = process.env.UET_ADMIN_KEY || 'uet-admin-2026';
 const MAX_BODY_SIZE = 4_000_000;
-const APP_ROUTES = new Set(['/', '/gioi-thieu', '/ban-do', '/lien-chi', '/cau-lac-bo']);
+const APP_ROUTES = new Set(['/', '/gioi-thieu', '/ban-do', '/doan-thanh-nien-hoi-sinh-vien', '/lien-chi', '/cau-lac-bo']);
 const MIME_TYPES = { '.css': 'text/css; charset=utf-8', '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.glb': 'model/gltf-binary', '.gltf': 'model/gltf+json', '.bin': 'application/octet-stream' };
 const CLUB_CATEGORIES = new Set(['academic', 'tech', 'art', 'sport', 'media', 'community']);
 
