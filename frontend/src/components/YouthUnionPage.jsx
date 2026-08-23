@@ -1,9 +1,16 @@
+import { useEffect, useState } from 'react';
 import {
   ArrowRight,
+  BookOpen,
   ExternalLink,
-  Image as ImageIcon,
+  FlaskConical,
+  HeartHandshake,
+  Megaphone,
   MessageCircle,
-  Sparkles
+  Palette,
+  Sparkles,
+  Trophy,
+  X
 } from 'lucide-react';
 import {
   affiliatedUnits,
@@ -15,21 +22,25 @@ import {
 } from '../content/youthUnionContent';
 import '../styles/youth-union.css';
 
+const categoryIcons = {
+  book: BookOpen,
+  research: FlaskConical,
+  arts: Palette,
+  sports: Trophy,
+  community: HeartHandshake,
+  media: Megaphone
+};
+
 function OrganizationLogo({ image, label, alt }) {
   return image
     ? <img className="youth-logo" src={image} alt={alt} width="68" height="68" />
-    : <span className="youth-logo youth-logo-placeholder" aria-label={`Vị trí logo ${alt}`}>{label}</span>;
+    : <span className="youth-logo youth-logo-placeholder" aria-label={alt}>{label}</span>;
 }
 
-function MediaSlot({ image, label, alt = label, className = '' }) {
-  return <div className={`youth-media-slot ${className}${image ? ' has-image' : ''}`}>
-    {image
-      ? <img src={image} alt={alt} loading="lazy" decoding="async" />
-      : <div className="youth-media-placeholder" aria-label={`${label} — chưa có asset`}>
-          <ImageIcon size={30} aria-hidden="true" />
-          <strong>{label}</strong>
-          <span>TODO(asset)</span>
-        </div>}
+function MediaSlot({ image, alt, className = '', children }) {
+  return <div className={`youth-media-slot ${className}`}>
+    <img src={image} alt={alt} loading="lazy" decoding="async" />
+    {children && <div className="youth-media-overlay">{children}</div>}
   </div>;
 }
 
@@ -38,31 +49,36 @@ function SectionHeading({ eyebrow, title, description, id }) {
     <p className="eyebrow">{eyebrow}</p>
     <h2 id={id}>{title}</h2>
     {description && <p>{description}</p>}
-    <span aria-hidden="true" />
   </header>;
 }
 
+function ActivityModal({ activity, onClose }) {
+  useEffect(() => {
+    const onKeyDown = event => { if (event.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [onClose]);
+
+  return <div className="youth-activity-modal-backdrop" role="presentation" onMouseDown={event => { if (event.target === event.currentTarget) onClose(); }}>
+    <section className="youth-activity-modal" role="dialog" aria-modal="true" aria-labelledby={`activity-dialog-${activity.id}`}>
+      <button className="youth-activity-modal-close" type="button" onClick={onClose} aria-label="Đóng hoạt động"><X size={22} aria-hidden="true" /></button>
+      <header className="youth-activity-modal-header"><h2 id={`activity-dialog-${activity.id}`}>{activity.title}</h2></header>
+      <div className="youth-activity-modal-media">
+        <img src={activity.image} alt={activity.title} />
+        {activity.gallery?.map(image => <img key={image} src={image} alt="Hình ảnh hoạt động bổ sung" loading="lazy" decoding="async" />)}
+      </div>
+    </section>
+  </div>;
+}
+
 export function YouthUnionPage({ navigate }) {
-  const unitNames = affiliatedUnits.length > 0
-    ? affiliatedUnits
-    : [
-        ...Array.from({ length: youthUnionOverview.affiliatedCount }, (_, index) => `Liên chi ${String(index + 1).padStart(2, '0')}`),
-        'Cán bộ khối Hiệu bộ'
-      ];
+  const [selectedActivity, setSelectedActivity] = useState(null);
 
   return <div className="youth-page">
-    <section className="youth-hero" aria-labelledby="youth-hero-title">
-      <div className="site-container youth-container youth-hero-grid">
-        <div className="youth-hero-copy">
-          <div className="youth-logos">
-            <OrganizationLogo image={youthUnionMedia.youthUnionLogo} label="ĐOÀN" alt="Đoàn Thanh niên" />
-            <OrganizationLogo image={youthUnionMedia.studentAssociationLogo} label="HỘI" alt="Hội Sinh viên" />
-          </div>
-          <p className="eyebrow">Đoàn Thanh niên – Hội Sinh viên UET</p>
-          <h1 id="youth-hero-title">Tiên phong – Bản lĩnh – Sáng tạo –<br />Tình nguyện – Hội nhập</h1>
-          <p className="youth-placeholder-copy">[Nội dung giới thiệu chính thức sẽ được bổ sung từ handbook]</p>
-        </div>
-        <MediaSlot image={youthUnionMedia.heroImage} label="HERO IMAGE" alt="Hoạt động Đoàn Thanh niên – Hội Sinh viên UET" className="youth-hero-media" />
+    <section className="youth-hero youth-reference-hero" aria-labelledby="youth-hero-title">
+      <h1 className="visually-hidden" id="youth-hero-title">Tuổi trẻ Trường Đại học Công nghệ: Kết nối - Kiến tạo - Đổi mới</h1>
+      <div className="youth-reference-hero-image" aria-hidden="true">
+        <img src="/assets/youth-union/hero/visual-header-reference.png" alt="" />
       </div>
     </section>
 
@@ -70,57 +86,56 @@ export function YouthUnionPage({ navigate }) {
       <div className="site-container youth-container">
         <div className="youth-overview-card">
           <div className="youth-overview-copy">
-            <p className="eyebrow">Về ĐTN – HSV UET</p>
-            <h2 id="youth-overview-title">Đoàn Thanh niên – Hội Sinh viên UET</h2>
-            <p>{youthUnionOverview.intro || '[Nội dung giới thiệu chính thức sẽ được bổ sung từ handbook]'}</p>
+            <p className="eyebrow">Giới thiệu</p>
+            <h2 id="youth-overview-title">Đoàn Thanh niên – Hội Sinh viên Trường Đại học Công nghệ</h2>
+            <p>{youthUnionOverview.intro}</p>
           </div>
           <div className="youth-overview-stats" aria-label="Quy mô tổ chức">
-            <div className="youth-stat"><strong>{youthUnionOverview.affiliatedCount}</strong><span>Liên chi Đoàn – Hội Khoa/Viện</span></div>
-            <div className="youth-stat"><strong>+ {youthUnionOverview.staffUnitCount}</strong><span>Cán bộ khối Hiệu bộ</span></div>
-            <div className="youth-stat"><strong>{youthUnionOverview.clubCount}</strong><span>Câu lạc bộ trực thuộc</span></div>
+            <div className="youth-stat"><strong>{youthUnionOverview.affiliatedCount}</strong><span>Liên chi Khoa/ Viện</span></div>
+            <div className="youth-stat"><strong>{youthUnionOverview.staffUnitCount}</strong><span>Chi Đoàn Cán bộ<br />khối Hiệu bộ</span></div>
+            <div className="youth-stat"><strong>{youthUnionOverview.clubCount}</strong><span>Câu lạc bộ<br />trực thuộc</span></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section className="youth-editorial-section" aria-labelledby="youth-affiliated-title">
-      <div className="site-container youth-container">
-        <SectionHeading eyebrow="Hệ thống trực thuộc" title="Liên chi Đoàn – Liên chi Hội trực thuộc" id="youth-affiliated-title" />
-        <div className="youth-editorial-copy youth-editorial-copy-wide">
-          <p className="youth-placeholder-copy">[Nội dung giới thiệu sẽ bổ sung]</p>
-          {!affiliatedUnits.length && <p className="youth-placeholder-note">Danh sách dưới đây là placeholder để kiểm tra nhịp và khoảng cách.</p>}
-          <ul className="youth-unit-list">
-            {unitNames.map(name => <li key={name}>{name}</li>)}
-          </ul>
-          <button className="youth-link-button" type="button" onClick={() => navigate('lien-chi')}>Tìm hiểu về Liên chi Đoàn – Hội <ArrowRight size={17} aria-hidden="true" /></button>
+    <section className="youth-showcase-section youth-affiliated-section" aria-labelledby="youth-affiliated-title">
+      <div className="site-container youth-container youth-showcase-grid">
+        <div className="youth-showcase-copy">
+          <SectionHeading title="Liên chi Đoàn – Liên chi Hội" id="youth-affiliated-title" />
+          <p className="youth-lead">Các Liên chi Đoàn – Liên chi Hội là cầu nối gần gũi giữa Đoàn Thanh niên- Hội Sinh viên trường với sinh viên tại từng Khoa, Viện; cùng tạo nên một cộng đồng UET năng động, gắn kết và trách nhiệm.</p>
+          <ul className="youth-unit-list">{affiliatedUnits.map(name => <li key={name}>{name}</li>)}</ul>
         </div>
+        <MediaSlot image={youthUnionMedia.affiliatedImage} alt="Hoạt động của Liên chi Đoàn – Hội UET" className="youth-showcase-media">
+          <button className="youth-showcase-cta" type="button" onClick={() => navigate('lien-chi')}>Tìm hiểu về Liên chi <ArrowRight size={18} aria-hidden="true" /></button>
+        </MediaSlot>
       </div>
     </section>
 
-    <section className="youth-editorial-section youth-clubs-section" aria-labelledby="youth-clubs-title">
-      <div className="site-container youth-container">
-        <SectionHeading eyebrow="Cộng đồng sinh viên" title="Các Câu lạc bộ trực thuộc" id="youth-clubs-title" />
-        <div className="youth-editorial-copy youth-editorial-copy-wide">
-          <p className="youth-placeholder-copy">[Nội dung giới thiệu sẽ bổ sung]</p>
-          <p className="youth-domain-line">{clubCategories.map(category => category.label).join(' · ')}</p>
-          <button className="youth-link-button" type="button" onClick={() => navigate('cau-lac-bo')}>Khám phá các Câu lạc bộ <ArrowRight size={17} aria-hidden="true" /></button>
+    <section className="youth-showcase-section youth-clubs-section" aria-labelledby="youth-clubs-title">
+      <div className="site-container youth-container youth-showcase-grid youth-showcase-grid-reverse">
+        <MediaSlot image={youthUnionMedia.clubsImage} alt="Sinh viên UET tại hoạt động Câu lạc bộ" className="youth-showcase-media">
+          <button className="youth-showcase-cta" type="button" onClick={() => navigate('cau-lac-bo')}>Khám phá các Câu lạc bộ <ArrowRight size={18} aria-hidden="true" /></button>
+        </MediaSlot>
+        <div className="youth-showcase-copy">
+          <SectionHeading title="Các Câu lạc bộ trực thuộc" id="youth-clubs-title" />
+          <p className="youth-lead">Từ học thuật, nghiên cứu đến nghệ thuật, thể thao và hoạt động cộng đồng, các câu lạc bộ là không gian để sinh viên khám phá đam mê và tìm thấy những người đồng hành.</p>
+          <div className="youth-category-grid">{clubCategories.map(category => {
+            const Icon = categoryIcons[category.icon];
+            return <div className="youth-category" key={category.id}><Icon size={20} aria-hidden="true" /><span>{category.label}</span></div>;
+          })}</div>
         </div>
       </div>
     </section>
 
     <section className="youth-activities-section" aria-labelledby="youth-activities-title">
       <div className="site-container youth-container">
-        <SectionHeading eyebrow="Dấu ấn sinh viên" title="Hoạt động nổi bật" description="Khung hình đang chờ ảnh và mô tả chính thức từ handbook." id="youth-activities-title" />
+        <SectionHeading eyebrow="Dấu ấn sinh viên" title="Hoạt động nổi bật" description="Bấm vào mỗi hoạt động để xem hình ảnh." id="youth-activities-title" />
         <div className="youth-activities-grid">
-          {featuredActivities.map((activity, index) => <article className={`youth-activity youth-activity-${(index % 5) + 1}${activity.image ? ' has-image' : ''}`} key={activity.id}>
-            {activity.image && <img src={activity.image} alt={activity.title} loading="lazy" decoding="async" />}
-            {!activity.image && <span className="youth-activity-image-label"><ImageIcon size={16} aria-hidden="true" /> IMAGE</span>}
-            <div className="youth-activity-overlay">
-              <Sparkles size={17} aria-hidden="true" />
-              <h3>{activity.title}</h3>
-              {activity.description && <p>{activity.description}</p>}
-            </div>
-          </article>)}
+          {featuredActivities.map(activity => <button className="youth-activity" type="button" key={activity.id} onClick={() => setSelectedActivity(activity)} aria-haspopup="dialog">
+            <img src={activity.image} alt="" loading="lazy" decoding="async" />
+            <span className="youth-activity-overlay"><Sparkles size={16} aria-hidden="true" /><span>{activity.title}</span><small>XEM HÌNH ẢNH</small></span>
+          </button>)}
         </div>
       </div>
     </section>
@@ -129,10 +144,12 @@ export function YouthUnionPage({ navigate }) {
       <div className="site-container youth-container">
         <div className="youth-facebook-card">
           <span className="youth-facebook-icon"><MessageCircle size={27} aria-hidden="true" /></span>
-          <div><h2>Kết nối với Đoàn Thanh niên – Hội Sinh viên UET</h2><p>Theo dõi kênh Facebook để cập nhật thông tin và hoạt động mới nhất.</p></div>
+          <div><p className="eyebrow">Cập nhật cùng ĐTN – HSV UET</p><h2>Kết nối và đồng hành cùng tuổi trẻ UET</h2><p>Theo dõi Facebook để không bỏ lỡ các tin tức, sự kiện và hoạt động mới nhất.</p></div>
           <a href={youthUnionFacebookUrl} target="_blank" rel="noopener noreferrer">Theo dõi Facebook <ExternalLink size={17} aria-hidden="true" /></a>
         </div>
       </div>
     </section>
+
+    {selectedActivity && <ActivityModal activity={selectedActivity} onClose={() => setSelectedActivity(null)} />}
   </div>;
 }
