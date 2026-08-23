@@ -14,6 +14,27 @@ const MAX_BODY_SIZE = 4_000_000;
 const APP_ROUTES = new Set(['/', '/gioi-thieu', '/ban-do', '/doan-thanh-nien-hoi-sinh-vien', '/lien-chi', '/cau-lac-bo']);
 const MIME_TYPES = { '.css': 'text/css; charset=utf-8', '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.glb': 'model/gltf-binary', '.gltf': 'model/gltf+json', '.bin': 'application/octet-stream' };
 const CLUB_CATEGORIES = new Set(['academic', 'tech', 'art', 'sport', 'media', 'community']);
+const DEFAULT_CLUB_BACKGROUND = '/assets/clubs/backgrounds/default.jpg';
+const CLUB_BACKGROUND_IMAGES = Object.freeze({
+  'clb-nghe-thuat': '/assets/clubs/backgrounds/clb-nghe-thuat.jpg',
+  'clb-van-dong-hien-mau': '/assets/clubs/backgrounds/clb-van-dong-hien-mau.jpg',
+  'clb-nguon-nhan-luc': '/assets/clubs/backgrounds/clb-nguon-nhan-luc.jpg',
+  'clb-thu-vien-hoi-sinh-vien': '/assets/clubs/backgrounds/clb-thu-vien-hoi-sinh-vien.jpg',
+  'clb-nhay-co-dong': '/assets/clubs/backgrounds/clb-nhay-co-dong.jpg',
+  'clb-cau-long': '/assets/clubs/backgrounds/clb-cau-long.jpg',
+  'clb-bong-ro': '/assets/clubs/backgrounds/clb-bong-ro.jpg',
+  'clb-thuyet-trinh': '/assets/clubs/backgrounds/clb-thuyet-trinh.jpg',
+  'clb-hang-khong-vu-tru': '/assets/clubs/backgrounds/clb-hang-khong-vu-tru.png',
+  'clb-tieng-anh': '/assets/clubs/backgrounds/clb-tieng-anh.jpg',
+  'clb-tieng-nhat': '/assets/clubs/backgrounds/clb-tieng-nhat.jpg',
+  'clb-dien-tu-va-tu-dong-hoa': '/assets/clubs/backgrounds/clb-dien-tu-va-tu-dong-hoa.png',
+  'clb-robotics': '/assets/clubs/backgrounds/clb-robotics.jpg',
+  'clb-ly-luan-tre': '/assets/clubs/backgrounds/clb-ly-luan-tre.jpg',
+  'clb-thiet-ke-he-thong-va-vi-mach': '/assets/clubs/backgrounds/clb-thiet-ke-he-thong-va-vi-mach.jpg',
+  'clb-sinh-vien-5-tot': '/assets/clubs/backgrounds/clb-sinh-vien-5-tot.png',
+  'clb-ho-tro-sinh-vien': '/assets/clubs/backgrounds/clb-ho-tro-sinh-vien.jpg'
+});
+function normalizeClubBackground(value) { const backgroundPath = typeof value === 'string' ? value.trim() : ''; return /^\/assets\/clubs\/backgrounds\/[a-z0-9-]+\.(jpg|jpeg|png|webp)$/i.test(backgroundPath) ? backgroundPath : ''; }
 
 function sendJson(response, statusCode, payload) { response.writeHead(statusCode, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }); response.end(JSON.stringify(payload)); }
 function sendError(response, statusCode, message) { sendJson(response, statusCode, { error: message }); }
@@ -37,22 +58,33 @@ function normalizeClubSections(value) {
   }).filter(Boolean);
 }
 function normalizeLienChi(input, existing = {}, index = 0) { const source = input && typeof input === 'object' ? input : {}; const pick = field => typeof source[field] === 'string' ? source[field] : (existing[field] || ''); return { id: typeof source.id === 'string' && /^[a-z0-9-]+$/.test(source.id) ? source.id : (existing.id || `lien-chi-${index + 1}`), sortOrder: Number.isInteger(source.sortOrder) ? source.sortOrder : (existing.sortOrder || index + 1), name: normalizeText(pick('name'), 'Tên Liên chi', 160, true), shortName: normalizeText(pick('shortName'), 'Tên viết tắt', 80), monogram: normalizeText(pick('monogram'), 'Chữ lồng logo', 6), unitType: ['Khoa', 'Viện'].includes(pick('unitType')) ? pick('unitType') : 'Khoa', logoUrl: normalizePublicLogo(pick('logoUrl'), 'lien-chi'), backgroundImage: normalizeLienChiBackground(pick('backgroundImage')), accentColor: normalizeColor(pick('accentColor'), '#087ea4'), fanpageUrl: normalizeLink(pick('fanpageUrl')), summary: normalizeText(pick('summary') || pick('description'), 'Câu dẫn Liên chi', 400), paragraphs: normalizeParagraphs(source.paragraphs ?? existing.paragraphs, 'Đoạn giới thiệu Liên chi') }; }
+function normalizeClubActivityImages(value, clubId) {
+  const route = new RegExp(`^/assets/clubs/activity/${clubId}/[a-z0-9-]+\\.(jpg|jpeg|png|webp)$`, 'i');
+  return (Array.isArray(value) ? value : []).map(item => {
+    const src = typeof item?.src === 'string' ? item.src.trim() : '';
+    const alt = typeof item?.alt === 'string' ? item.alt.trim().slice(0, 240) : '';
+    return route.test(src) && alt ? { src, alt } : null;
+  }).filter(Boolean).slice(0, 20);
+}
 function normalizeClub(input, index) {
+  const id = typeof input?.id === 'string' && /^[a-z0-9-]+$/.test(input.id) ? input.id : `clb-${index + 1}`;
   const paragraphs = normalizeParagraphs(input?.paragraphs, 'Đoạn giới thiệu câu lạc bộ');
   const sections = normalizeClubSections(input?.sections);
   return {
-    id: typeof input?.id === 'string' && /^[a-z0-9-]+$/.test(input.id) ? input.id : `clb-${index + 1}`,
+    id,
     sortOrder: Number.isInteger(input?.sortOrder) ? input.sortOrder : index + 1,
     name: normalizeText(input?.name, 'Tên câu lạc bộ', 160, true),
     shortName: normalizeText(input?.shortName, 'Tên viết tắt', 80),
     monogram: normalizeText(input?.monogram, 'Chữ lồng logo', 6),
     logoUrl: normalizePublicLogo(input?.logoUrl, 'clubs'),
+    backgroundImage: normalizeClubBackground(input?.backgroundImage) || CLUB_BACKGROUND_IMAGES[id] || DEFAULT_CLUB_BACKGROUND,
     accentColor: normalizeColor(input?.accentColor, '#087ea4'),
     category: CLUB_CATEGORIES.has(input?.category) ? input.category : 'community',
     governingBody: normalizeText(input?.governingBody, 'Đơn vị chủ quản', 200),
     fanpageUrl: normalizeLink(input?.fanpageUrl),
     summary: normalizeText(input?.summary, 'Câu dẫn', 400),
     sections: sections.length ? sections : (paragraphs.length ? [{ title: 'Giới thiệu', items: paragraphs }] : []),
+    activityImages: normalizeClubActivityImages(input?.activityImages, id),
     paragraphs
   };
 }
