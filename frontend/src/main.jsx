@@ -2,6 +2,7 @@ import { Component, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.jsx';
 import './styles.css';
+import './styles/intro.css';
 
 class AppErrorBoundary extends Component {
   constructor(props) {

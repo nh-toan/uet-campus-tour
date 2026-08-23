@@ -1,11 +1,12 @@
 .campus-map-root {
-  --campus-map-color-navy: #0b2140;
-  --campus-map-color-navy-soft: #14335e;
-  --campus-map-color-blue: #2f80ff;
-  --campus-map-color-gold: #c9a227;
-  --campus-map-color-cloud: #f5f7fa;
-  --campus-map-color-slate: #64748b;
-  --campus-map-font-display: "Be Vietnam Pro", sans-serif;
-  --campus-map-font-body: "Inter", sans-serif;
-  --campus-map-font-mono: "JetBrains Mono", monospace;
+  /* Scoped aliases of the application tokens: HUD styling only, no scene state. */
+  --campus-map-color-navy: var(--navy-950, #04152a);
+  --campus-map-color-navy-soft: var(--navy-900, #082443);
+  --campus-map-color-blue: var(--blue-600, #146bff);
+  --campus-map-color-gold: var(--cyan-400, #4cc9ff);
+  --campus-map-color-cloud: var(--surface, #f7fafe);
+  --campus-map-color-slate: var(--ink-500, #728197);
+  --campus-map-font-display: var(--font-sans, "Be Vietnam Pro", sans-serif);
+  --campus-map-font-body: var(--font-sans, "Be Vietnam Pro", sans-serif);
+  --campus-map-font-mono: var(--font-mono, "JetBrains Mono", monospace);
 }
