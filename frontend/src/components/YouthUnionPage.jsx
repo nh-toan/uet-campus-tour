@@ -21,6 +21,7 @@ import {
   youthUnionMedia,
   youthUnionOverview
 } from '../content/youthUnionContent';
+import { mediaUrl } from '../lib/media';
 import '../styles/youth-union.css';
 
 const categoryIcons = {
@@ -34,13 +35,13 @@ const categoryIcons = {
 
 function OrganizationLogo({ image, label, alt }) {
   return image
-    ? <img className="youth-logo" src={image} alt={alt} width="68" height="68" />
+    ? <img className="youth-logo" src={mediaUrl(image)} alt={alt} width="68" height="68" decoding="async" />
     : <span className="youth-logo youth-logo-placeholder" aria-label={alt}>{label}</span>;
 }
 
 function MediaSlot({ image, alt, className = '', children }) {
   return <div className={`youth-media-slot ${className}`}>
-    <img src={image} alt={alt} loading="lazy" decoding="async" />
+    <img src={mediaUrl(image)} alt={alt} loading="lazy" decoding="async" />
     {children && <div className="youth-media-overlay">{children}</div>}
   </div>;
 }
@@ -86,8 +87,8 @@ function ActivityModal({ activity, onClose }) {
       <button ref={closeButtonRef} className="youth-activity-modal-close" type="button" onClick={onClose} aria-label="Đóng hoạt động"><X size={22} aria-hidden="true" /></button>
       <header className="youth-activity-modal-header"><h2 id={`activity-dialog-${activity.id}`}>{activity.title}</h2></header>
       <div className="youth-activity-modal-media">
-        <img src={activity.image} alt={activity.title} />
-        {activity.gallery?.map(image => <img key={image} src={image} alt="Hình ảnh hoạt động bổ sung" loading="lazy" decoding="async" />)}
+        <img src={mediaUrl(activity.image)} alt={activity.title} decoding="async" />
+        {activity.gallery?.map(image => <img key={image} src={mediaUrl(image)} alt="Hình ảnh hoạt động bổ sung" loading="lazy" decoding="async" />)}
       </div>
     </section>
   </div>, document.body);
@@ -100,7 +101,7 @@ export function YouthUnionPage({ navigate }) {
   return <div className="youth-page">
     <section className="youth-hero youth-reference-hero" aria-labelledby="youth-hero-title">
       <div className="youth-reference-hero-media" aria-hidden="true">
-        <img src={youthUnionMedia.heroImage} alt="" />
+        <img src={mediaUrl(youthUnionMedia.heroImage)} alt="" fetchPriority="high" />
         <div className="youth-reference-hero-media-blend" />
       </div>
       <div className="site-container youth-container youth-reference-hero-inner">
@@ -168,7 +169,7 @@ export function YouthUnionPage({ navigate }) {
         <SectionHeading eyebrow="Dấu ấn sinh viên" title="Hoạt động nổi bật" description="Bấm vào mỗi hoạt động để xem hình ảnh." id="youth-activities-title" />
         <div className="youth-activities-grid">
           {featuredActivities.map(activity => <button className="youth-activity" type="button" key={activity.id} onClick={() => setSelectedActivity(activity)} aria-haspopup="dialog">
-            <img src={activity.image} alt="" loading="lazy" decoding="async" />
+            <img src={mediaUrl(activity.image)} alt="" loading="lazy" decoding="async" />
             <span className="youth-activity-overlay"><Sparkles size={16} aria-hidden="true" /><span>{activity.title}</span><small>XEM HÌNH ẢNH</small></span>
           </button>)}
         </div>

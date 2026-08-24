@@ -1,12 +1,14 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-const uetLogoUrl = '/assets/intro/uet.png';
 import { ArrowRight, Building2, ChevronDown, ExternalLink, Flag, Gem, GraduationCap, Handshake, Lightbulb, Menu, Megaphone, Microscope, Search, Target, Telescope, X } from 'lucide-react';
 import { introContent, introTabs } from './content/introContent';
-import { YouthUnionPage } from './components/YouthUnionPage';
 import { api } from './lib/api';
+import { mediaUrl } from './lib/media';
+
+const uetLogoUrl = mediaUrl('intro/uet.png');
 
 const ExternalVirtualTour = lazy(() => import('./features/campus-map/ExternalVirtualTour'));
+const YouthUnionPage = lazy(() => import('./components/YouthUnionPage').then(module => ({ default: module.YouthUnionPage })));
 
 const sections = [
   ['ban-do', 'Bản đồ khuôn viên'],
@@ -93,11 +95,13 @@ export default function App() {
   return <div className="app-shell">
     <Header current={activeRoute} navigate={navigate} theme={theme} onThemeToggle={() => setTheme(value => value === 'dark' ? 'light' : 'dark')} />
     <main>
-      {activeRoute === 'gioi-thieu' && <IntroPage />}
-      {activeRoute === 'ban-do' && <MapPage />}
-      {activeRoute === 'doan-thanh-nien-hoi-sinh-vien' && <YouthUnionPage navigate={navigate} />}
-      {activeRoute === 'lien-chi' && <LienChiPage />}
-      {activeRoute === 'cau-lac-bo' && <ClubPage />}
+      <Suspense fallback={<section className="loading-page site-container" role="status"><p className="eyebrow">Đang tải</p><h1>Đang chuẩn bị nội dung…</h1></section>}>
+        {activeRoute === 'gioi-thieu' && <IntroPage />}
+        {activeRoute === 'ban-do' && <MapPage />}
+        {activeRoute === 'doan-thanh-nien-hoi-sinh-vien' && <YouthUnionPage navigate={navigate} />}
+        {activeRoute === 'lien-chi' && <LienChiPage />}
+        {activeRoute === 'cau-lac-bo' && <ClubPage />}
+      </Suspense>
     </main>
     {activeRoute !== 'ban-do' && <Footer />}
   </div>;
@@ -135,7 +139,7 @@ function IntroPage() {
   return <>
     <section className="intro-hero">
       <div className="hero-media" aria-hidden="true">
-        <img src="/assets/map/map_tech_hero.png" alt="" />
+        <img src={mediaUrl('map/map_tech_hero.png')} alt="" fetchPriority="high" />
         <div className="hero-media-blend" />
       </div>
       <div className="site-container hero-inner">
@@ -184,7 +188,7 @@ function OrganizationChart() {
   return <>
     <div className="intro-organization-diagram">
       <button className="intro-organization-preview" type="button" onClick={openLightbox} aria-label="Mở sơ đồ cơ cấu tổ chức đầy đủ">
-        <img src="/assets/intro/uet-organization-chart.webp" alt="Sơ đồ cơ cấu tổ chức Trường Đại học Công nghệ" width="1448" height="1086" loading="lazy" decoding="async" />
+        <img src={mediaUrl('intro/uet-organization-chart.webp')} alt="Sơ đồ cơ cấu tổ chức Trường Đại học Công nghệ" width="1448" height="1086" loading="lazy" decoding="async" />
       </button>
       <div className="intro-organization-link-wrap">
         <button className="intro-organization-link" type="button" onClick={openLightbox}>Xem sơ đồ tổ chức đầy đủ <ArrowRight size={17} aria-hidden="true" /></button>
@@ -196,7 +200,7 @@ function OrganizationChart() {
       <h2 id="intro-lightbox-title" className="visually-hidden">Sơ đồ cơ cấu tổ chức Trường Đại học Công nghệ</h2>
       <button ref={closeButtonRef} className="intro-lightbox-close" type="button" onClick={() => setLightboxOpen(false)} aria-label="Đóng sơ đồ đầy đủ"><X size={24} aria-hidden="true" /></button>
       <div className="intro-lightbox-image">
-        <img src="/assets/intro/uet-organization-chart.webp" alt="Sơ đồ cơ cấu tổ chức Trường Đại học Công nghệ phóng to" width="1448" height="1086" />
+        <img src={mediaUrl('intro/uet-organization-chart.webp')} alt="Sơ đồ cơ cấu tổ chức Trường Đại học Công nghệ phóng to" width="1448" height="1086" decoding="async" />
       </div>
     </div>, document.body)}
   </>;
@@ -204,7 +208,7 @@ function OrganizationChart() {
 
 function MilestoneSection() {
   return <section className="intro-milestone-artwork-section" aria-label="Hơn 20 năm phát triển của UET">
-    <img className="intro-milestone-artwork" src="/assets/intro/uet-20-years-banner.webp" alt="Hơn 20 năm phát triển và khẳng định vị thế trên bản đồ giáo dục toàn cầu" />
+    <img className="intro-milestone-artwork" src={mediaUrl('intro/uet-20-years-banner.webp')} alt="Hơn 20 năm phát triển và khẳng định vị thế trên bản đồ giáo dục toàn cầu" loading="lazy" decoding="async" />
   </section>;
 }
 
@@ -434,7 +438,7 @@ function MapPage() {
 function Logo({ item }) {
   const [broken, setBroken] = useState(false);
   const monogram = item.monogram || item.name.replace(/^(CLB|Liên chi)\s+/i, '').slice(0, 3).toUpperCase();
-  return !item.logoUrl || broken ? <span className="entity-logo is-monogram" aria-hidden="true">{monogram}</span> : <img className="entity-logo" src={item.logoUrl} alt={`Logo ${item.name}`} width="128" height="128" loading="lazy" decoding="async" onError={() => setBroken(true)} />;
+  return !item.logoUrl || broken ? <span className="entity-logo is-monogram" aria-hidden="true">{monogram}</span> : <img className="entity-logo" src={mediaUrl(item.logoUrl)} alt={`Logo ${item.name}`} width="128" height="128" loading="lazy" decoding="async" onError={() => setBroken(true)} />;
 }
 
 function groupParagraphs(paragraphs = []) {
@@ -456,7 +460,7 @@ function Loading({ error }) {
 }
 
 function EntityCard({ item, type, meta, selected, onSelect, actionLabel }) {
-  const backgroundStyle = item.backgroundImage ? { backgroundImage: `url("${item.backgroundImage}")` } : undefined;
+  const backgroundStyle = item.backgroundImage ? { backgroundImage: `url("${mediaUrl(item.backgroundImage)}")` } : undefined;
   const metaText = meta ?? item.summary ?? 'Thông tin đang được cập nhật';
   return <button type="button" className={`entity-card${selected ? ' selected' : ''}${item.backgroundImage ? ' has-background-image' : ''}`} onClick={onSelect} aria-pressed={selected}>
     {item.backgroundImage && <span className="entity-visual-media" style={backgroundStyle} aria-hidden="true" />}
@@ -498,8 +502,8 @@ function DetailPanel({ item, type, dark = false, onClose, subtitle = item.shortN
     <div className="detail-modal-backdrop" aria-hidden="true" onClick={onClose} />
     <aside className={`detail-panel${dark ? ' detail-panel-dark' : ''}`} aria-label={`Thông tin ${item.name}`}>
       <div className="detail-close-bar"><button className="detail-close" type="button" onClick={onClose} aria-label="Đóng thông tin chi tiết"><X size={18} aria-hidden="true" /></button></div>
-      <div className={`detail-visual${item.backgroundImage ? ' has-background-image' : ''}`}>{item.backgroundImage && <span className="detail-visual-media" style={{ backgroundImage: `url("${item.backgroundImage}")` }} aria-hidden="true" />}<Logo item={item} /><span className="entity-type">{type}</span><h2>{item.name}</h2>{subtitle && <p className="detail-short">{subtitle}</p>}{item.summary && <p>{item.summary}</p>}</div>
-      <div className="detail-body">{detailSections.map(section => { const blocks = groupParagraphs(section.items); return <section className="detail-section" key={section.title}><h3>{section.title}</h3>{blocks.map((block, index) => block.type === 'list' ? <ul key={index}>{block.items.map((text, itemIndex) => <li key={itemIndex}>{text}</li>)}</ul> : <p key={index}>{block.text}</p>)}</section>; })}{detailSections.length > 0 && item.governingBody && <section className="detail-section"><h3>Đơn vị chủ quản</h3><p>{item.governingBody}</p></section>}{showActivityGallery && dark && galleryItems.length > 0 && <section className="activity-gallery" aria-labelledby="activity-gallery-title"><div className="activity-gallery-head"><h3 id="activity-gallery-title">Các hoạt động nổi bật của CLB</h3></div><div className={`activity-gallery-grid ${galleryItems.length === 1 ? 'count-1' : galleryItems.length === 2 ? 'count-2' : galleryItems.length === 3 ? 'count-3' : 'count-many'}`}>{galleryItems.map(image => <figure key={image.src}><img src={image.src} alt="" loading="lazy" decoding="async" /></figure>)}</div></section>}<section className="detail-section detail-contact"><h3>Liên hệ</h3>{item.fanpageUrl ? <a className="btn btn-primary" href={item.fanpageUrl} target="_blank" rel="noreferrer">Fanpage <ExternalLink size={16} aria-hidden="true" /></a> : <p className="empty-contact">Đơn vị chưa cung cấp liên kết chính thức.</p>}</section></div>
+      <div className={`detail-visual${item.backgroundImage ? ' has-background-image' : ''}`}>{item.backgroundImage && <span className="detail-visual-media" style={{ backgroundImage: `url("${mediaUrl(item.backgroundImage)}")` }} aria-hidden="true" />}<Logo item={item} /><span className="entity-type">{type}</span><h2>{item.name}</h2>{subtitle && <p className="detail-short">{subtitle}</p>}{item.summary && <p>{item.summary}</p>}</div>
+      <div className="detail-body">{detailSections.map(section => { const blocks = groupParagraphs(section.items); return <section className="detail-section" key={section.title}><h3>{section.title}</h3>{blocks.map((block, index) => block.type === 'list' ? <ul key={index}>{block.items.map((text, itemIndex) => <li key={itemIndex}>{text}</li>)}</ul> : <p key={index}>{block.text}</p>)}</section>; })}{detailSections.length > 0 && item.governingBody && <section className="detail-section"><h3>Đơn vị chủ quản</h3><p>{item.governingBody}</p></section>}{showActivityGallery && dark && galleryItems.length > 0 && <section className="activity-gallery" aria-labelledby="activity-gallery-title"><div className="activity-gallery-head"><h3 id="activity-gallery-title">Các hoạt động nổi bật của CLB</h3></div><div className={`activity-gallery-grid ${galleryItems.length === 1 ? 'count-1' : galleryItems.length === 2 ? 'count-2' : galleryItems.length === 3 ? 'count-3' : 'count-many'}`}>{galleryItems.map(image => <figure key={image.src}><img src={mediaUrl(image.src)} alt="" loading="lazy" decoding="async" /></figure>)}</div></section>}<section className="detail-section detail-contact"><h3>Liên hệ</h3>{item.fanpageUrl ? <a className="btn btn-primary" href={item.fanpageUrl} target="_blank" rel="noreferrer">Fanpage <ExternalLink size={16} aria-hidden="true" /></a> : <p className="empty-contact">Đơn vị chưa cung cấp liên kết chính thức.</p>}</section></div>
     </aside>
   </>;
 

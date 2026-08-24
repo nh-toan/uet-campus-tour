@@ -1,6 +1,7 @@
 import { Component, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.jsx';
+import { applyMediaCssVariables } from './lib/media';
 import './styles.css';
 import './styles/intro.css';
 
@@ -31,6 +32,7 @@ class AppErrorBoundary extends Component {
 
 const rootElement = document.getElementById('root');
 rootElement.dataset.mounted = 'true';
+applyMediaCssVariables();
 
 createRoot(rootElement).render(
   <StrictMode><AppErrorBoundary><App /></AppErrorBoundary></StrictMode>

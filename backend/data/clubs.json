@@ -5,7 +5,7 @@
     "name": "Câu lạc bộ Nghệ Thuật",
     "shortName": "Passion Club",
     "monogram": "PC",
-    "logoUrl": "/assets/clubs/clb-nghe-thuat-2026-logo.png",
+    "logoUrl": "clubs/clb-nghe-thuat-2026-logo.png",
     "accentColor": "#e8447f",
     "category": "art",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -70,59 +70,59 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-nghe-thuat/01.jpg",
+        "src": "clubs/activity/clb-nghe-thuat/01.jpg",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Nghệ Thuật"
       },
       {
-        "src": "/assets/clubs/activity/clb-nghe-thuat/02.jpg",
+        "src": "clubs/activity/clb-nghe-thuat/02.jpg",
         "alt": "Ảnh hoạt động 2 của Câu lạc bộ Nghệ Thuật"
       },
       {
-        "src": "/assets/clubs/activity/clb-nghe-thuat/03.jpg",
+        "src": "clubs/activity/clb-nghe-thuat/03.jpg",
         "alt": "Ảnh hoạt động 3 của Câu lạc bộ Nghệ Thuật"
       },
       {
-        "src": "/assets/clubs/activity/clb-nghe-thuat/04.jpg",
+        "src": "clubs/activity/clb-nghe-thuat/04.jpg",
         "alt": "Ảnh hoạt động 4 của Câu lạc bộ Nghệ Thuật"
       },
       {
-        "src": "/assets/clubs/activity/clb-nghe-thuat/05.jpg",
+        "src": "clubs/activity/clb-nghe-thuat/05.jpg",
         "alt": "Ảnh hoạt động 5 của Câu lạc bộ Nghệ Thuật"
       },
       {
-        "src": "/assets/clubs/activity/clb-nghe-thuat/06.jpg",
+        "src": "clubs/activity/clb-nghe-thuat/06.jpg",
         "alt": "Ảnh hoạt động 6 của Câu lạc bộ Nghệ Thuật"
       },
       {
-        "src": "/assets/clubs/activity/clb-nghe-thuat/07.jpg",
+        "src": "clubs/activity/clb-nghe-thuat/07.jpg",
         "alt": "Ảnh hoạt động 7 của Câu lạc bộ Nghệ Thuật"
       },
       {
-        "src": "/assets/clubs/activity/clb-nghe-thuat/08.jpg",
+        "src": "clubs/activity/clb-nghe-thuat/08.jpg",
         "alt": "Ảnh hoạt động 8 của Câu lạc bộ Nghệ Thuật"
       },
       {
-        "src": "/assets/clubs/activity/clb-nghe-thuat/09.jpg",
+        "src": "clubs/activity/clb-nghe-thuat/09.jpg",
         "alt": "Ảnh hoạt động 9 của Câu lạc bộ Nghệ Thuật"
       },
       {
-        "src": "/assets/clubs/activity/clb-nghe-thuat/10.jpg",
+        "src": "clubs/activity/clb-nghe-thuat/10.jpg",
         "alt": "Ảnh hoạt động 10 của Câu lạc bộ Nghệ Thuật"
       },
       {
-        "src": "/assets/clubs/activity/clb-nghe-thuat/11.jpg",
+        "src": "clubs/activity/clb-nghe-thuat/11.jpg",
         "alt": "Ảnh hoạt động 11 của Câu lạc bộ Nghệ Thuật"
       },
       {
-        "src": "/assets/clubs/activity/clb-nghe-thuat/12.jpg",
+        "src": "clubs/activity/clb-nghe-thuat/12.jpg",
         "alt": "Ảnh hoạt động 12 của Câu lạc bộ Nghệ Thuật"
       },
       {
-        "src": "/assets/clubs/activity/clb-nghe-thuat/13.jpg",
+        "src": "clubs/activity/clb-nghe-thuat/13.jpg",
         "alt": "Ảnh hoạt động 13 của Câu lạc bộ Nghệ Thuật"
       },
       {
-        "src": "/assets/clubs/activity/clb-nghe-thuat/14.jpg",
+        "src": "clubs/activity/clb-nghe-thuat/14.jpg",
         "alt": "Ảnh hoạt động 14 của Câu lạc bộ Nghệ Thuật"
       }
     ]
@@ -133,7 +133,7 @@
     "name": "Câu lạc bộ Hỗ trợ sinh viên",
     "shortName": "SGUET",
     "monogram": "SG",
-    "logoUrl": "/assets/clubs/clb-ho-tro-sinh-vien-2026-logo.png",
+    "logoUrl": "clubs/clb-ho-tro-sinh-vien-2026-logo.png",
     "accentColor": "#2f7fd1",
     "category": "community",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -194,7 +194,7 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-ho-tro-sinh-vien/01.jpg",
+        "src": "clubs/activity/clb-ho-tro-sinh-vien/01.jpg",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Hỗ trợ sinh viên"
       }
     ]
@@ -205,7 +205,7 @@
     "name": "Câu lạc bộ Sinh viên vận động hiến máu",
     "shortName": "Đội máu Người Việt Trẻ",
     "monogram": "NVT",
-    "logoUrl": "/assets/clubs/clb-van-dong-hien-mau-2026-logo.png",
+    "logoUrl": "clubs/clb-van-dong-hien-mau-2026-logo.png",
     "accentColor": "#d63131",
     "category": "community",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -278,35 +278,35 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-van-dong-hien-mau/01.jpg",
+        "src": "clubs/activity/clb-van-dong-hien-mau/01.jpg",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Sinh viên vận động hiến máu"
       },
       {
-        "src": "/assets/clubs/activity/clb-van-dong-hien-mau/02.jpg",
+        "src": "clubs/activity/clb-van-dong-hien-mau/02.jpg",
         "alt": "Ảnh hoạt động 2 của Câu lạc bộ Sinh viên vận động hiến máu"
       },
       {
-        "src": "/assets/clubs/activity/clb-van-dong-hien-mau/03.jpg",
+        "src": "clubs/activity/clb-van-dong-hien-mau/03.jpg",
         "alt": "Ảnh hoạt động 3 của Câu lạc bộ Sinh viên vận động hiến máu"
       },
       {
-        "src": "/assets/clubs/activity/clb-van-dong-hien-mau/04.jpg",
+        "src": "clubs/activity/clb-van-dong-hien-mau/04.jpg",
         "alt": "Ảnh hoạt động 4 của Câu lạc bộ Sinh viên vận động hiến máu"
       },
       {
-        "src": "/assets/clubs/activity/clb-van-dong-hien-mau/05.jpg",
+        "src": "clubs/activity/clb-van-dong-hien-mau/05.jpg",
         "alt": "Ảnh hoạt động 5 của Câu lạc bộ Sinh viên vận động hiến máu"
       },
       {
-        "src": "/assets/clubs/activity/clb-van-dong-hien-mau/06.jpg",
+        "src": "clubs/activity/clb-van-dong-hien-mau/06.jpg",
         "alt": "Ảnh hoạt động 6 của Câu lạc bộ Sinh viên vận động hiến máu"
       },
       {
-        "src": "/assets/clubs/activity/clb-van-dong-hien-mau/07.jpg",
+        "src": "clubs/activity/clb-van-dong-hien-mau/07.jpg",
         "alt": "Ảnh hoạt động 7 của Câu lạc bộ Sinh viên vận động hiến máu"
       },
       {
-        "src": "/assets/clubs/activity/clb-van-dong-hien-mau/08.jpg",
+        "src": "clubs/activity/clb-van-dong-hien-mau/08.jpg",
         "alt": "Ảnh hoạt động 8 của Câu lạc bộ Sinh viên vận động hiến máu"
       }
     ]
@@ -317,7 +317,7 @@
     "name": "Câu lạc bộ Thư viện Hội Sinh viên",
     "shortName": "LSA",
     "monogram": "LSA",
-    "logoUrl": "/assets/clubs/clb-thu-vien-hoi-sinh-vien-2026-logo.png",
+    "logoUrl": "clubs/clb-thu-vien-hoi-sinh-vien-2026-logo.png",
     "accentColor": "#0f8a6e",
     "category": "academic",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -382,39 +382,39 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-thu-vien-hoi-sinh-vien/01.jpg",
+        "src": "clubs/activity/clb-thu-vien-hoi-sinh-vien/01.jpg",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Thư viện Hội Sinh viên"
       },
       {
-        "src": "/assets/clubs/activity/clb-thu-vien-hoi-sinh-vien/02.jpg",
+        "src": "clubs/activity/clb-thu-vien-hoi-sinh-vien/02.jpg",
         "alt": "Ảnh hoạt động 2 của Câu lạc bộ Thư viện Hội Sinh viên"
       },
       {
-        "src": "/assets/clubs/activity/clb-thu-vien-hoi-sinh-vien/03.jpg",
+        "src": "clubs/activity/clb-thu-vien-hoi-sinh-vien/03.jpg",
         "alt": "Ảnh hoạt động 3 của Câu lạc bộ Thư viện Hội Sinh viên"
       },
       {
-        "src": "/assets/clubs/activity/clb-thu-vien-hoi-sinh-vien/04.jpg",
+        "src": "clubs/activity/clb-thu-vien-hoi-sinh-vien/04.jpg",
         "alt": "Ảnh hoạt động 4 của Câu lạc bộ Thư viện Hội Sinh viên"
       },
       {
-        "src": "/assets/clubs/activity/clb-thu-vien-hoi-sinh-vien/05.jpg",
+        "src": "clubs/activity/clb-thu-vien-hoi-sinh-vien/05.jpg",
         "alt": "Ảnh hoạt động 5 của Câu lạc bộ Thư viện Hội Sinh viên"
       },
       {
-        "src": "/assets/clubs/activity/clb-thu-vien-hoi-sinh-vien/06.jpg",
+        "src": "clubs/activity/clb-thu-vien-hoi-sinh-vien/06.jpg",
         "alt": "Ảnh hoạt động 6 của Câu lạc bộ Thư viện Hội Sinh viên"
       },
       {
-        "src": "/assets/clubs/activity/clb-thu-vien-hoi-sinh-vien/07.jpg",
+        "src": "clubs/activity/clb-thu-vien-hoi-sinh-vien/07.jpg",
         "alt": "Ảnh hoạt động 7 của Câu lạc bộ Thư viện Hội Sinh viên"
       },
       {
-        "src": "/assets/clubs/activity/clb-thu-vien-hoi-sinh-vien/08.jpg",
+        "src": "clubs/activity/clb-thu-vien-hoi-sinh-vien/08.jpg",
         "alt": "Ảnh hoạt động 8 của Câu lạc bộ Thư viện Hội Sinh viên"
       },
       {
-        "src": "/assets/clubs/activity/clb-thu-vien-hoi-sinh-vien/09.jpg",
+        "src": "clubs/activity/clb-thu-vien-hoi-sinh-vien/09.jpg",
         "alt": "Ảnh hoạt động 9 của Câu lạc bộ Thư viện Hội Sinh viên"
       }
     ]
@@ -425,7 +425,7 @@
     "name": "Câu lạc bộ Bóng đá",
     "shortName": "UET FC",
     "monogram": "FC",
-    "logoUrl": "/assets/clubs/clb-bong-da-2026-logo.png",
+    "logoUrl": "clubs/clb-bong-da-2026-logo.png",
     "accentColor": "#1f7a3d",
     "category": "sport",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -504,7 +504,7 @@
     "name": "Câu lạc bộ Nhảy cổ động",
     "shortName": "GALAXY - UET Cheerleading Squad",
     "monogram": "GX",
-    "logoUrl": "/assets/clubs/clb-nhay-co-dong-2026-logo.png",
+    "logoUrl": "clubs/clb-nhay-co-dong-2026-logo.png",
     "accentColor": "#7b45d6",
     "category": "art",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -590,23 +590,23 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-nhay-co-dong/01.jpg",
+        "src": "clubs/activity/clb-nhay-co-dong/01.jpg",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Nhảy cổ động"
       },
       {
-        "src": "/assets/clubs/activity/clb-nhay-co-dong/02.jpg",
+        "src": "clubs/activity/clb-nhay-co-dong/02.jpg",
         "alt": "Ảnh hoạt động 2 của Câu lạc bộ Nhảy cổ động"
       },
       {
-        "src": "/assets/clubs/activity/clb-nhay-co-dong/03.jpg",
+        "src": "clubs/activity/clb-nhay-co-dong/03.jpg",
         "alt": "Ảnh hoạt động 3 của Câu lạc bộ Nhảy cổ động"
       },
       {
-        "src": "/assets/clubs/activity/clb-nhay-co-dong/04.jpg",
+        "src": "clubs/activity/clb-nhay-co-dong/04.jpg",
         "alt": "Ảnh hoạt động 4 của Câu lạc bộ Nhảy cổ động"
       },
       {
-        "src": "/assets/clubs/activity/clb-nhay-co-dong/05.jpg",
+        "src": "clubs/activity/clb-nhay-co-dong/05.jpg",
         "alt": "Ảnh hoạt động 5 của Câu lạc bộ Nhảy cổ động"
       }
     ]
@@ -617,7 +617,7 @@
     "name": "Câu lạc bộ Cầu lông",
     "shortName": "B-UET",
     "monogram": "BL",
-    "logoUrl": "/assets/clubs/clb-cau-long-2026-logo.png",
+    "logoUrl": "clubs/clb-cau-long-2026-logo.png",
     "accentColor": "#12897f",
     "category": "sport",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -670,15 +670,15 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-cau-long/01.jpg",
+        "src": "clubs/activity/clb-cau-long/01.jpg",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Cầu lông"
       },
       {
-        "src": "/assets/clubs/activity/clb-cau-long/02.jpg",
+        "src": "clubs/activity/clb-cau-long/02.jpg",
         "alt": "Ảnh hoạt động 2 của Câu lạc bộ Cầu lông"
       },
       {
-        "src": "/assets/clubs/activity/clb-cau-long/03.jpg",
+        "src": "clubs/activity/clb-cau-long/03.jpg",
         "alt": "Ảnh hoạt động 3 của Câu lạc bộ Cầu lông"
       }
     ]
@@ -689,7 +689,7 @@
     "name": "Câu lạc bộ Bóng rổ",
     "shortName": "UETBC",
     "monogram": "BR",
-    "logoUrl": "/assets/clubs/clb-bong-ro-2026-logo.png",
+    "logoUrl": "clubs/clb-bong-ro-2026-logo.png",
     "accentColor": "#e2661f",
     "category": "sport",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -746,11 +746,11 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-bong-ro/01.jpg",
+        "src": "clubs/activity/clb-bong-ro/01.jpg",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Bóng rổ"
       },
       {
-        "src": "/assets/clubs/activity/clb-bong-ro/02.jpg",
+        "src": "clubs/activity/clb-bong-ro/02.jpg",
         "alt": "Ảnh hoạt động 2 của Câu lạc bộ Bóng rổ"
       }
     ]
@@ -761,7 +761,7 @@
     "name": "Câu lạc bộ Thuyết trình",
     "shortName": "",
     "monogram": "TT",
-    "logoUrl": "/assets/clubs/clb-thuyet-trinh-2026-logo.png",
+    "logoUrl": "clubs/clb-thuyet-trinh-2026-logo.png",
     "accentColor": "#1c5fa8",
     "category": "academic",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -848,7 +848,7 @@
     "name": "Câu lạc bộ Truyền thông",
     "shortName": "UETLC",
     "monogram": "LC",
-    "logoUrl": "/assets/clubs/clb-truyen-thong-2026-logo.png",
+    "logoUrl": "clubs/clb-truyen-thong-2026-logo.png",
     "accentColor": "#c2317a",
     "category": "media",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -910,7 +910,7 @@
     "name": "Câu lạc bộ Hàng không Vũ trụ",
     "shortName": "ACUET",
     "monogram": "AC",
-    "logoUrl": "/assets/clubs/clb-hang-khong-vu-tru-2026-logo.png",
+    "logoUrl": "clubs/clb-hang-khong-vu-tru-2026-logo.png",
     "accentColor": "#3b5bd4",
     "category": "tech",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -975,51 +975,51 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-hang-khong-vu-tru/01.jpg",
+        "src": "clubs/activity/clb-hang-khong-vu-tru/01.jpg",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Hàng không Vũ trụ"
       },
       {
-        "src": "/assets/clubs/activity/clb-hang-khong-vu-tru/02.jpg",
+        "src": "clubs/activity/clb-hang-khong-vu-tru/02.jpg",
         "alt": "Ảnh hoạt động 2 của Câu lạc bộ Hàng không Vũ trụ"
       },
       {
-        "src": "/assets/clubs/activity/clb-hang-khong-vu-tru/03.jpg",
+        "src": "clubs/activity/clb-hang-khong-vu-tru/03.jpg",
         "alt": "Ảnh hoạt động 3 của Câu lạc bộ Hàng không Vũ trụ"
       },
       {
-        "src": "/assets/clubs/activity/clb-hang-khong-vu-tru/04.jpg",
+        "src": "clubs/activity/clb-hang-khong-vu-tru/04.jpg",
         "alt": "Ảnh hoạt động 4 của Câu lạc bộ Hàng không Vũ trụ"
       },
       {
-        "src": "/assets/clubs/activity/clb-hang-khong-vu-tru/05.jpg",
+        "src": "clubs/activity/clb-hang-khong-vu-tru/05.jpg",
         "alt": "Ảnh hoạt động 5 của Câu lạc bộ Hàng không Vũ trụ"
       },
       {
-        "src": "/assets/clubs/activity/clb-hang-khong-vu-tru/06.jpg",
+        "src": "clubs/activity/clb-hang-khong-vu-tru/06.jpg",
         "alt": "Ảnh hoạt động 6 của Câu lạc bộ Hàng không Vũ trụ"
       },
       {
-        "src": "/assets/clubs/activity/clb-hang-khong-vu-tru/07.jpg",
+        "src": "clubs/activity/clb-hang-khong-vu-tru/07.jpg",
         "alt": "Ảnh hoạt động 7 của Câu lạc bộ Hàng không Vũ trụ"
       },
       {
-        "src": "/assets/clubs/activity/clb-hang-khong-vu-tru/08.jpg",
+        "src": "clubs/activity/clb-hang-khong-vu-tru/08.jpg",
         "alt": "Ảnh hoạt động 8 của Câu lạc bộ Hàng không Vũ trụ"
       },
       {
-        "src": "/assets/clubs/activity/clb-hang-khong-vu-tru/09.jpg",
+        "src": "clubs/activity/clb-hang-khong-vu-tru/09.jpg",
         "alt": "Ảnh hoạt động 9 của Câu lạc bộ Hàng không Vũ trụ"
       },
       {
-        "src": "/assets/clubs/activity/clb-hang-khong-vu-tru/10.jpg",
+        "src": "clubs/activity/clb-hang-khong-vu-tru/10.jpg",
         "alt": "Ảnh hoạt động 10 của Câu lạc bộ Hàng không Vũ trụ"
       },
       {
-        "src": "/assets/clubs/activity/clb-hang-khong-vu-tru/11.jpg",
+        "src": "clubs/activity/clb-hang-khong-vu-tru/11.jpg",
         "alt": "Ảnh hoạt động 11 của Câu lạc bộ Hàng không Vũ trụ"
       },
       {
-        "src": "/assets/clubs/activity/clb-hang-khong-vu-tru/12.png",
+        "src": "clubs/activity/clb-hang-khong-vu-tru/12.png",
         "alt": "Ảnh hoạt động 12 của Câu lạc bộ Hàng không Vũ trụ"
       }
     ]
@@ -1030,7 +1030,7 @@
     "name": "Câu lạc bộ tiếng Anh",
     "shortName": "EC",
     "monogram": "EC",
-    "logoUrl": "/assets/clubs/clb-tieng-anh-2026-logo.png",
+    "logoUrl": "clubs/clb-tieng-anh-2026-logo.png",
     "accentColor": "#d4472a",
     "category": "academic",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -1083,15 +1083,15 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-tieng-anh/01.jpg",
+        "src": "clubs/activity/clb-tieng-anh/01.jpg",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ tiếng Anh"
       },
       {
-        "src": "/assets/clubs/activity/clb-tieng-anh/02.jpg",
+        "src": "clubs/activity/clb-tieng-anh/02.jpg",
         "alt": "Ảnh hoạt động 2 của Câu lạc bộ tiếng Anh"
       },
       {
-        "src": "/assets/clubs/activity/clb-tieng-anh/03.jpg",
+        "src": "clubs/activity/clb-tieng-anh/03.jpg",
         "alt": "Ảnh hoạt động 3 của Câu lạc bộ tiếng Anh"
       }
     ]
@@ -1102,7 +1102,7 @@
     "name": "Câu lạc bộ Tiếng Nhật",
     "shortName": "JAPIT",
     "monogram": "JP",
-    "logoUrl": "/assets/clubs/clb-tieng-nhat-2026-logo.png",
+    "logoUrl": "clubs/clb-tieng-nhat-2026-logo.png",
     "accentColor": "#d6355c",
     "category": "academic",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -1159,7 +1159,7 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-tieng-nhat/01.jpg",
+        "src": "clubs/activity/clb-tieng-nhat/01.jpg",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Tiếng Nhật"
       }
     ]
@@ -1170,7 +1170,7 @@
     "name": "Câu lạc bộ Điện tử và Tự động hóa",
     "shortName": "UETX",
     "monogram": "X",
-    "logoUrl": "/assets/clubs/clb-dien-tu-va-tu-dong-hoa-2026-logo.png",
+    "logoUrl": "clubs/clb-dien-tu-va-tu-dong-hoa-2026-logo.png",
     "accentColor": "#0b7fa6",
     "category": "tech",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -1256,15 +1256,15 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-dien-tu-va-tu-dong-hoa/01.jpg",
+        "src": "clubs/activity/clb-dien-tu-va-tu-dong-hoa/01.jpg",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Điện tử và Tự động hóa"
       },
       {
-        "src": "/assets/clubs/activity/clb-dien-tu-va-tu-dong-hoa/02.jpg",
+        "src": "clubs/activity/clb-dien-tu-va-tu-dong-hoa/02.jpg",
         "alt": "Ảnh hoạt động 2 của Câu lạc bộ Điện tử và Tự động hóa"
       },
       {
-        "src": "/assets/clubs/activity/clb-dien-tu-va-tu-dong-hoa/03.jpg",
+        "src": "clubs/activity/clb-dien-tu-va-tu-dong-hoa/03.jpg",
         "alt": "Ảnh hoạt động 3 của Câu lạc bộ Điện tử và Tự động hóa"
       }
     ]
@@ -1275,7 +1275,7 @@
     "name": "Câu lạc bộ Nguồn nhân lực",
     "shortName": "HRTech",
     "monogram": "HR",
-    "logoUrl": "/assets/clubs/clb-nguon-nhan-luc-2026-logo.png",
+    "logoUrl": "clubs/clb-nguon-nhan-luc-2026-logo.png",
     "accentColor": "#8a3fbf",
     "category": "academic",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -1357,19 +1357,19 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-nguon-nhan-luc/01.jpg",
+        "src": "clubs/activity/clb-nguon-nhan-luc/01.jpg",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Nguồn nhân lực"
       },
       {
-        "src": "/assets/clubs/activity/clb-nguon-nhan-luc/02.jpg",
+        "src": "clubs/activity/clb-nguon-nhan-luc/02.jpg",
         "alt": "Ảnh hoạt động 2 của Câu lạc bộ Nguồn nhân lực"
       },
       {
-        "src": "/assets/clubs/activity/clb-nguon-nhan-luc/03.jpg",
+        "src": "clubs/activity/clb-nguon-nhan-luc/03.jpg",
         "alt": "Ảnh hoạt động 3 của Câu lạc bộ Nguồn nhân lực"
       },
       {
-        "src": "/assets/clubs/activity/clb-nguon-nhan-luc/04.jpg",
+        "src": "clubs/activity/clb-nguon-nhan-luc/04.jpg",
         "alt": "Ảnh hoạt động 4 của Câu lạc bộ Nguồn nhân lực"
       }
     ]
@@ -1380,7 +1380,7 @@
     "name": "Câu lạc bộ Robotics",
     "shortName": "RCUET",
     "monogram": "RC",
-    "logoUrl": "/assets/clubs/clb-robotics-2026-logo.png",
+    "logoUrl": "clubs/clb-robotics-2026-logo.png",
     "accentColor": "#146fd1",
     "category": "tech",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -1433,7 +1433,7 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-robotics/01.jpg",
+        "src": "clubs/activity/clb-robotics/01.jpg",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Robotics"
       }
     ]
@@ -1444,7 +1444,7 @@
     "name": "Câu lạc bộ Thiết kế và sáng tạo",
     "shortName": "UET Innovation Space",
     "monogram": "IS",
-    "logoUrl": "/assets/clubs/clb-thiet-ke-va-sang-tao-2026-logo.png",
+    "logoUrl": "clubs/clb-thiet-ke-va-sang-tao-2026-logo.png",
     "accentColor": "#8b3fd6",
     "category": "media",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -1489,7 +1489,7 @@
     "name": "Câu lạc bộ Trí tuệ nhân tạo",
     "shortName": "UET Artificial Intelligence",
     "monogram": "AI",
-    "logoUrl": "/assets/clubs/clb-tri-tue-nhan-tao-2026-logo.svg",
+    "logoUrl": "clubs/clb-tri-tue-nhan-tao-2026-logo.svg",
     "accentColor": "#0d8fb0",
     "category": "tech",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -1534,7 +1534,7 @@
     "name": "Câu lạc bộ Lý luận trẻ",
     "shortName": "",
     "monogram": "LLT",
-    "logoUrl": "/assets/clubs/clb-ly-luan-tre-2026-logo.png",
+    "logoUrl": "clubs/clb-ly-luan-tre-2026-logo.png",
     "accentColor": "#c0342f",
     "category": "academic",
     "governingBody": "Đoàn Thanh niên Trường Đại học Công nghệ",
@@ -1587,11 +1587,11 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-ly-luan-tre/01.jpg",
+        "src": "clubs/activity/clb-ly-luan-tre/01.jpg",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Lý luận trẻ"
       },
       {
-        "src": "/assets/clubs/activity/clb-ly-luan-tre/02.jpg",
+        "src": "clubs/activity/clb-ly-luan-tre/02.jpg",
         "alt": "Ảnh hoạt động 2 của Câu lạc bộ Lý luận trẻ"
       }
     ]
@@ -1602,7 +1602,7 @@
     "name": "Câu lạc bộ Vũ đạo",
     "shortName": "UET Youth Dance Crew",
     "monogram": "YD",
-    "logoUrl": "/assets/clubs/clb-vu-dao-2026-logo.png",
+    "logoUrl": "clubs/clb-vu-dao-2026-logo.png",
     "accentColor": "#e0417a",
     "category": "art",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -1668,7 +1668,7 @@
     "name": "Câu lạc bộ Vi mạch bán dẫn",
     "shortName": "SMUET",
     "monogram": "SM",
-    "logoUrl": "/assets/clubs/clb-vi-mach-ban-dan-2026-logo.png",
+    "logoUrl": "clubs/clb-vi-mach-ban-dan-2026-logo.png",
     "accentColor": "#5b46d9",
     "category": "tech",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -1712,7 +1712,7 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-vi-mach-ban-dan/01.png",
+        "src": "clubs/activity/clb-vi-mach-ban-dan/01.png",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Vi mạch bán dẫn"
       }
     ]
@@ -1723,7 +1723,7 @@
     "name": "Câu lạc bộ Thiết kế Hệ thống và Vi mạch",
     "shortName": "UET CHIP+",
     "monogram": "C+",
-    "logoUrl": "/assets/clubs/clb-thiet-ke-he-thong-va-vi-mach-2026-logo.png",
+    "logoUrl": "clubs/clb-thiet-ke-he-thong-va-vi-mach-2026-logo.png",
     "accentColor": "#0e7c8c",
     "category": "tech",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -1776,15 +1776,15 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-thiet-ke-he-thong-va-vi-mach/01.png",
+        "src": "clubs/activity/clb-thiet-ke-he-thong-va-vi-mach/01.png",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Thiết kế Hệ thống và Vi mạch"
       },
       {
-        "src": "/assets/clubs/activity/clb-thiet-ke-he-thong-va-vi-mach/02.jpg",
+        "src": "clubs/activity/clb-thiet-ke-he-thong-va-vi-mach/02.jpg",
         "alt": "Ảnh hoạt động 2 của Câu lạc bộ Thiết kế Hệ thống và Vi mạch"
       },
       {
-        "src": "/assets/clubs/activity/clb-thiet-ke-he-thong-va-vi-mach/03.jpg",
+        "src": "clubs/activity/clb-thiet-ke-he-thong-va-vi-mach/03.jpg",
         "alt": "Ảnh hoạt động 3 của Câu lạc bộ Thiết kế Hệ thống và Vi mạch"
       }
     ]
@@ -1795,7 +1795,7 @@
     "name": "Câu lạc bộ Khoa học vật liệu",
     "shortName": "UET MSC",
     "monogram": "MS",
-    "logoUrl": "/assets/clubs/clb-khoa-hoc-vat-lieu-2026-logo.jpg",
+    "logoUrl": "clubs/clb-khoa-hoc-vat-lieu-2026-logo.jpg",
     "accentColor": "#a8551b",
     "category": "tech",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -1877,7 +1877,7 @@
     "name": "Câu lạc bộ Sinh viên 5 tốt",
     "shortName": "",
     "monogram": "5T",
-    "logoUrl": "/assets/clubs/clb-sinh-vien-5-tot-2026-logo.jpg",
+    "logoUrl": "clubs/clb-sinh-vien-5-tot-2026-logo.jpg",
     "accentColor": "#1d6fb8",
     "category": "community",
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
@@ -1962,23 +1962,23 @@
     ],
     "activityImages": [
       {
-        "src": "/assets/clubs/activity/clb-sinh-vien-5-tot/01.png",
+        "src": "clubs/activity/clb-sinh-vien-5-tot/01.png",
         "alt": "Ảnh hoạt động 1 của Câu lạc bộ Sinh viên 5 tốt"
       },
       {
-        "src": "/assets/clubs/activity/clb-sinh-vien-5-tot/02.png",
+        "src": "clubs/activity/clb-sinh-vien-5-tot/02.png",
         "alt": "Ảnh hoạt động 2 của Câu lạc bộ Sinh viên 5 tốt"
       },
       {
-        "src": "/assets/clubs/activity/clb-sinh-vien-5-tot/03.png",
+        "src": "clubs/activity/clb-sinh-vien-5-tot/03.png",
         "alt": "Ảnh hoạt động 3 của Câu lạc bộ Sinh viên 5 tốt"
       },
       {
-        "src": "/assets/clubs/activity/clb-sinh-vien-5-tot/04.png",
+        "src": "clubs/activity/clb-sinh-vien-5-tot/04.png",
         "alt": "Ảnh hoạt động 4 của Câu lạc bộ Sinh viên 5 tốt"
       },
       {
-        "src": "/assets/clubs/activity/clb-sinh-vien-5-tot/05.png",
+        "src": "clubs/activity/clb-sinh-vien-5-tot/05.png",
         "alt": "Ảnh hoạt động 5 của Câu lạc bộ Sinh viên 5 tốt"
       }
     ]

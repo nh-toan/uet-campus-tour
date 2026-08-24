@@ -1,4 +1,4 @@
-// Runtime copy is preserved from docs/UET_INTRO_OFFICIAL_SOURCE.md.
+// Runtime copy is curated from the official UET introduction source linked in README.md.
 export const introContent = {
   context: {
     id: 'context',

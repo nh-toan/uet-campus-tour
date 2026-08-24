@@ -352,7 +352,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: url('/assets/map/aerial-campus.jpg') center 44% / cover no-repeat;
+  background: var(--media-aerial-campus) center 44% / cover no-repeat;
   content: '';
   filter: brightness(1.22) saturate(.58) contrast(.88);
   opacity: .13;
@@ -972,7 +972,7 @@
 
 .intro-strategy-section::before {
   z-index: -2;
-  background: url('/assets/map/aerial-campus.jpg') center 44% / cover no-repeat;
+  background: var(--media-aerial-campus) center 44% / cover no-repeat;
   filter: saturate(.68) contrast(.9) brightness(1.1);
   opacity: .1;
 }

@@ -1,115 +1,103 @@
 # UET Navigator
 
-UET Navigator là web app giới thiệu và tham quan Trường Đại học Công nghệ – ĐHQGHN tại Hòa Lạc. Ứng dụng gồm một React SPA, một Node.js HTTP server nhỏ và dữ liệu JSON local cho danh mục Liên chi/Khoa/Viện và Câu lạc bộ.
+UET Navigator là ứng dụng read-only giới thiệu và tham quan Trường Đại học Công nghệ – ĐHQGHN tại Hòa Lạc. Bản production gồm React/Vite SPA, Node.js HTTP server, hai JSON snapshot local và media được phân phối từ Cloudflare R2.
 
-Trạng thái triển khai, thay đổi chưa commit và TODO còn hiệu lực nằm trong [`STATUS.md`](./STATUS.md).
+Nội dung giới thiệu được biên tập từ [nguồn chính thức của UET](https://uet.vnu.edu.vn/gioi-thieu/?tab=tab-5); dữ liệu Liên chi và Câu lạc bộ nằm trong `backend/data`.
 
-## Kiến trúc hiện tại
+## Architecture
 
 ```text
-campus-tour/
-├── backend/
-│   ├── server.js                 # API, cache dữ liệu và production static server
-│   └── data/
-│       ├── lien-chi.json
-│       └── clubs.json
-├── frontend/
-│   ├── public/assets/            # asset production được source tham chiếu
-│   └── src/
-│       ├── App.jsx               # app shell, route, Intro, Liên chi và CLB
-│       ├── components/           # page/component tách riêng
-│       ├── content/              # content JavaScript hiện hành
-│       ├── features/campus-map/  # wrapper external virtual tour
-│       ├── lib/api.js            # API client cache/dedupe request
-│       └── styles/               # token và stylesheet theo page
-├── tools/                        # script offline xử lý/extract asset
-└── docs/                         # provenance cần giữ cho content chính thức
+Browser
+  → Cloudflare CDN/WAF
+    → Node.js: SPA + read-only JSON API
+  → Cloudflare R2: versioned content media
 ```
 
-Frontend dùng React 19, Vite 8, TypeScript cho module Map và CSS thuần. Routing là route nhẹ dựa trên `location.pathname`, `history.pushState` và `popstate`; project không dùng React Router. Backend chỉ dùng module built-in của Node.js.
+- Frontend: React 19, Vite 8, History API routing.
+- Backend: Node.js built-in modules; không database, auth, admin, upload hoặc mutation API.
+- Media: `r2-media-manifest.json` là source of truth cho source key, versioned object key, SHA-256, kích thước và trạng thái verification.
+- Tooling: `tools/` hỗ trợ tạo manifest, upload media mới/thay đổi, verify R2 và load-test release.
 
-## Yêu cầu và cài đặt
+## Install and development
 
-- Node.js `^20.19.0` hoặc `>=22.12.0` (theo yêu cầu của Vite 8).
-- npm.
-
-Từ Git root:
+Yêu cầu Node.js `^20.19.0` hoặc `>=22.12.0` và npm.
 
 ```bash
 npm ci
 npm --prefix frontend ci
-```
-
-Repository có hai lockfile độc lập: root cho orchestration và `frontend/package-lock.json` cho frontend.
-
-## Chạy development
-
-```bash
+source ~/.config/uet-navigator/r2.env
 npm run dev
 ```
 
-Lệnh trên chạy đồng thời:
+Backend chạy tại `http://127.0.0.1:3001`; Vite chạy tại `http://localhost:5173` và proxy `/api` sang backend. `VITE_MEDIA_BASE_URL` là public HTTPS base URL bắt buộc cho development và build; repository không còn local runtime-media fallback.
 
-- backend/API tại `http://localhost:3001`;
-- Vite frontend tại `http://localhost:5173`;
-- proxy `/api` từ Vite sang backend.
-
-Có thể chạy riêng bằng `npm run server` và `npm run client`.
-
-## Build và chạy production
+## Build and start
 
 ```bash
+source ~/.config/uet-navigator/r2.env
 npm run build
-UET_ADMIN_KEY='replace-with-a-secret' PORT=3001 npm start
+NODE_ENV=production HOST=127.0.0.1 PORT=3001 npm start
 ```
 
-`npm run build` tạo `frontend/dist/`. `npm start` khởi động `backend/server.js`, serve thư mục build và hỗ trợ SPA fallback cho các route đã khai báo. `frontend/dist/` là build artifact được ignore, không commit.
+`VITE_MEDIA_BASE_URL` phải được giữ trong runtime environment để backend đưa đúng media origin vào CSP. `PORT` mặc định là `3001`, `HOST` mặc định là `127.0.0.1`; chỉ bind `0.0.0.0` sau reverse proxy hoặc trên private network. Build không copy `frontend/public`, không sinh source map và chỉ chứa JS/CSS production.
 
-Luôn đặt `UET_ADMIN_KEY` bằng secret ở môi trường production. Source hiện vẫn có fallback development hardcode; xem rủi ro trong `STATUS.md`.
+## Routes and API
 
-## Route chính
+SPA phục vụ `/`, `/gioi-thieu`, `/ban-do`, `/doan-thanh-nien-hoi-sinh-vien`, `/lien-chi` và `/cau-lac-bo`.
 
-| Route | Nội dung |
-|---|---|
-| `/` | Hiển thị nội dung Giới thiệu mà không đổi URL |
-| `/gioi-thieu` | Giới thiệu, định hướng phát triển và cơ cấu tổ chức UET |
-| `/ban-do` | Nhúng external virtual tour từ `https://uet.vnu.asia` |
-| `/doan-thanh-nien-hoi-sinh-vien` | Đoàn Thanh niên – Hội Sinh viên và hoạt động nổi bật |
-| `/lien-chi` | Danh mục/detail 8 Khoa/Viện, search và filter |
-| `/cau-lac-bo` | Danh mục/detail 24 Câu lạc bộ, search và filter |
+| Method | Endpoint | Behavior |
+|---|---|---|
+| `GET`, `HEAD` | `/api/lien-chi` | Read-only startup snapshot |
+| `GET`, `HEAD` | `/api/clubs` | Read-only startup snapshot |
 
-`/ban-do` lazy-load `frontend/src/features/campus-map/ExternalVirtualTour.tsx`. Iframe hiện trỏ tới:
+Mọi `POST`, `PUT`, `PATCH` và `DELETE` trả `405` với `Allow: GET, HEAD`; server không đọc request body hoặc ghi dữ liệu.
 
-```text
-https://uet.vnu.asia/?startscene=18&startlookat=-107.94,37.84,140,0,0;
-```
+## R2 media workflow
 
-Tour là dịch vụ ngoài repository. Việc embed/fullscreen phụ thuộc availability và iframe policy của `uet.vnu.asia`; UI có loading state và link mở tour trong cửa sổ mới.
+Current acceptance/UAT uses the official temporary `r2.dev` URL. It is not the final public-production domain.
 
-## API hiện tại
+Để thêm hoặc thay media:
 
-| Method | Endpoint | Quyền | Chức năng |
-|---|---|---|---|
-| `GET` | `/api/lien-chi` | Public | Trả danh sách Liên chi/Khoa/Viện |
-| `POST` | `/api/lien-chi` | `x-admin-key` | Tạo mục mới |
-| `PATCH` | `/api/lien-chi/:id` | `x-admin-key` | Cập nhật một mục |
-| `DELETE` | `/api/lien-chi/:id` | `x-admin-key` | Xóa một mục |
-| `GET` | `/api/clubs` | Public | Trả danh sách Câu lạc bộ |
+1. Đặt source mới tại `frontend/public/assets/<source-key>` và cập nhật content/data dùng source key đó.
+2. Chạy `npm run media:manifest`; tool giữ các remote-only object đã verify và đánh dấu source mới/thay đổi là pending.
+3. Nạp upload environment từ local secret store, rồi chạy `npm run media:upload`. Uploader chỉ xử lý pending local sources, xác minh SHA-256 và đặt cache metadata immutable.
+4. Chạy `npm run media:verify`; verifier kiểm tra toàn bộ runtime object và cập nhật trạng thái manifest khi tất cả đều hợp lệ.
+5. Build với cùng `VITE_MEDIA_BASE_URL`, chạy visual regression, rồi xóa local source đã verify và chạy lại `npm run media:manifest`.
 
-Hai GET public dùng snapshot RAM, `ETag` và `Cache-Control: public, no-cache`. Mutation Liên chi được serialize, validate và ghi `backend/data/lien-chi.json` qua temporary file rồi rename; cache chỉ đổi sau khi ghi thành công. Không có mutation API cho CLB.
+Không đặt R2 write credentials hoặc token trong repository, biến `VITE_*` hay frontend bundle. `~/.config/uet-navigator/r2.env` là file local, đã nằm ngoài repository và không được stage.
 
-## Kiểm tra
+## Security and caching
+
+- CSP chỉ cho resource origins cần thiết; security headers gồm `nosniff`, Referrer Policy, Permissions Policy, clickjacking protection và HSTS trong production.
+- Static path được resolve bên trong `frontend/dist`; traversal và path không hợp lệ bị từ chối.
+- API được validate và nạp vào RAM một lần trước khi listen, dùng ETag và `Cache-Control: public, max-age=300, s-maxage=3600, stale-while-revalidate=86400`.
+- `index.html` dùng `no-cache`; hashed JS/CSS dùng `public, max-age=31536000, immutable`.
+- R2 object dùng versioned key, SHA-256 verification và immutable one-year caching.
+
+## Verification
 
 ```bash
+source ~/.config/uet-navigator/r2.env
+npm run media:verify
+npm run build
 npm run check
+npm audit --omit=dev
 git diff --check
-git status --short
 ```
 
-`npm run check` gồm syntax check backend, TypeScript check cho module Map và Vite production build. Repository hiện chưa có script lint hoặc automated test suite.
+Smoke-test tất cả SPA route, `GET`/`HEAD` trên hai API và xác nhận mutation methods trả `405`. Có thể chạy local load regression sau khi start server:
 
-## Documentation giữ lại
+```bash
+LOAD_TEST_BASE_URL=http://127.0.0.1:3001 npm run load:test
+```
 
-- [`README.md`](./README.md): kiến trúc, vận hành, route, API và production start.
-- [`STATUS.md`](./STATUS.md): trạng thái source/working tree, verification và TODO thật còn lại.
-- [`docs/UET_INTRO_OFFICIAL_SOURCE.md`](./docs/UET_INTRO_OFFICIAL_SOURCE.md): snapshot/provenance nội dung chính thức mà `frontend/src/content/introContent.js` tham chiếu.
+## Production deployment note
+
+Before final public deployment:
+
+- attach official R2 Custom Domain;
+- set `VITE_MEDIA_BASE_URL` to that domain;
+- verify 164/164 again;
+- rebuild and deploy.
+
+Không hardcode domain thay thế. `r2.dev` chỉ dành cho staging/UAT hiện tại.

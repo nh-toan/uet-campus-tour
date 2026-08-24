@@ -9,12 +9,16 @@
     "client": "npm --prefix frontend run dev",
     "build": "npm --prefix frontend run build",
     "start": "node backend/server.js",
-    "check": "node --check backend/server.js && npm --prefix frontend run build"
+    "check": "node --check backend/server.js && node --check tools/build-media-manifest.js && node --check tools/upload-r2-media.js && node --check tools/verify-r2-media.js && node --check tools/load-test.js && npm --prefix frontend run build",
+    "load:test": "node tools/load-test.js",
+    "media:manifest": "node tools/build-media-manifest.js",
+    "media:upload": "node tools/upload-r2-media.js",
+    "media:verify": "node tools/verify-r2-media.js"
   },
   "devDependencies": {
     "concurrently": "9.1.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": "^20.19.0 || >=22.12.0"
   }
 }
