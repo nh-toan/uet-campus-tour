@@ -4,6 +4,7 @@ const uetLogoUrl = '/assets/intro/uet.png';
 import { ArrowRight, Building2, ChevronDown, ExternalLink, Flag, Gem, GraduationCap, Handshake, Lightbulb, Menu, Megaphone, Microscope, Search, Target, Telescope, X } from 'lucide-react';
 import { introContent, introTabs } from './content/introContent';
 import { YouthUnionPage } from './components/YouthUnionPage';
+import { api } from './lib/api';
 
 const ExternalVirtualTour = lazy(() => import('./features/campus-map/ExternalVirtualTour'));
 
@@ -29,6 +30,12 @@ const introTaskIcons = {
   'organization-governance': Building2,
   'international-integration': Handshake
 };
+const introTabIcons = {
+  context: Target,
+  'mission-vision': Gem,
+  'key-tasks': Flag
+};
+const introCoreValueIcons = [Lightbulb, Handshake, Target, Gem];
 const lienChiEnglishNames = {
   'co-hoc-ky-thuat-tu-dong-hoa': 'Faculty of Engineering Mechanics and Automation (FEMA)',
   'cong-nghe-thong-tin': 'Faculty of Information Technology (FIT)',
@@ -39,13 +46,6 @@ const lienChiEnglishNames = {
   'vien-tri-tue-nhan-tao': 'Institute for Artificial Intelligence (IAI)',
   'cong-nghe-nong-nghiep': 'Faculty of Agricultural Technology (FAT)'
 };
-
-async function api(path) {
-  const response = await fetch(`/api${path}`, { cache: 'no-store' });
-  const data = await response.json().catch(() => ({ error: 'API không trả về dữ liệu hợp lệ.' }));
-  if (!response.ok) throw new Error(data.error || 'Không thể tải dữ liệu.');
-  return data;
-}
 
 function normalizeSearch(value) {
   return String(value || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
@@ -246,13 +246,14 @@ function StrategicContent() {
     <div className="site-container intro-page-container">
       <header className="intro-section-heading intro-strategy-heading">
         <p className="eyebrow">Định hướng phát triển</p>
-        <h2 id="strategy-title">Nền tảng và tầm nhìn phát triển bền vững</h2>
+        <h2 id="strategy-title">Nền tảng và tầm nhìn <span>phát triển bền vững</span></h2>
         <span className="intro-heading-line" aria-hidden="true" />
       </header>
       <div className="intro-primary-tabs" role="tablist" aria-label="Nội dung định hướng phát triển">
-        {introTabs.map((section, index) => {
+        {introTabs.flatMap((section, index) => {
           const isActive = activeSectionId === section.id;
-          return <button
+          const Icon = introTabIcons[section.id];
+          const tab = <button
             id={`intro-tab-${section.id}`}
             key={section.id}
             type="button"
@@ -264,12 +265,16 @@ function StrategicContent() {
             onClick={() => setActiveSectionId(section.id)}
             onKeyDown={event => onSectionKeyDown(event, index)}
           >
-            <span className="intro-primary-tab-number">{String(index + 1).padStart(2, '0')}</span>
-            <span className="intro-primary-tab-label">{section.label}</span>
+            <span className="intro-primary-tab-icon" aria-hidden="true"><Icon size={25} strokeWidth={1.8} /></span>
+            <span className="intro-primary-tab-copy">
+              <span className="intro-primary-tab-label">{section.label}</span>
+            </span>
           </button>;
+          if (index === introTabs.length - 1) return [tab];
+          return [tab, <span className="intro-primary-tab-separator" role="presentation" key={`${section.id}-separator`}><ArrowRight size={22} aria-hidden="true" /></span>];
         })}
       </div>
-      <div id="intro-strategy-panel" className="intro-section-panel" role="tabpanel" aria-labelledby={`intro-tab-${activeSection.id}`}>
+      <div id="intro-strategy-panel" key={activeSection.id} className="intro-section-panel" role="tabpanel" aria-labelledby={`intro-tab-${activeSection.id}`}>
         {activeSection.id === introContent.keyTasks.id
           ? <KeyTasksAccordion sections={introContent.keyTasks.sections} />
           : activeSection.id === introContent.missionVision.id
@@ -346,39 +351,46 @@ function MissionVisionContent({ sections }) {
       : { title: paragraph.slice(0, separator), description: paragraph.slice(separator + 1).trim() };
   });
 
-  return <div className="intro-mission-grid">
-    {[mission, vision].filter(Boolean).map((card, index) => <article className={`intro-mission-card intro-mission-card-${card.id}`} key={card.id}>
-      <span className="intro-mission-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-      <h3>{card.title}</h3>
-      <div className="intro-content-copy">
-        {card.paragraphs.map((paragraph, paragraphIndex) => <p key={`${card.id}-${paragraphIndex}`}>{paragraph}</p>)}
+  return <div className="intro-mission-layout">
+    <section className="intro-mission-foundation" aria-label="Sứ mạng và tầm nhìn">
+      {[mission, vision].filter(Boolean).map((card, index) => {
+        const Icon = introMissionIcons[card.id];
+        return <article className={`intro-mission-card intro-mission-card-${card.id}`} key={card.id}>
+          <header className="intro-mission-card-heading">
+            <span className="intro-mission-icon" aria-hidden="true"><Icon size={21} strokeWidth={1.8} /></span>
+            <h3>{card.title}</h3>
+          </header>
+          <div className="intro-content-copy">
+            {card.paragraphs.map((paragraph, paragraphIndex) => <p key={`${card.id}-${paragraphIndex}`}>{paragraph}</p>)}
+          </div>
+        </article>;
+      })}
+    </section>
+
+    {coreValues && <section className="intro-core-values" aria-labelledby="intro-core-values-title">
+      <header className="intro-core-values-heading">
+        <h3 id="intro-core-values-title">Giá trị cốt lõi</h3>
+      </header>
+      <div className="intro-core-values-grid">
+        {values.map((value, index) => {
+          const Icon = introCoreValueIcons[index % introCoreValueIcons.length];
+          return <article className="core-value-item" key={value.title}>
+            <span className="core-value-icon" aria-hidden="true"><Icon size={24} strokeWidth={1.7} /></span>
+            <h4>{value.title}</h4>
+            {value.description && <p>{value.description}</p>}
+          </article>;
+        })}
       </div>
-    </article>)}
+    </section>}
 
     {philosophy && <article className="intro-mission-card intro-mission-card-education-philosophy">
-      <p className="intro-mission-kicker"><span aria-hidden="true">03</span> / Education philosophy</p>
       <h3>{philosophy.title}</h3>
       <div className="intro-content-copy">
         {philosophy.paragraphs.map((paragraph, paragraphIndex) => <p key={`${philosophy.id}-${paragraphIndex}`}>{paragraph}</p>)}
       </div>
     </article>}
 
-    {coreValues && <section className="intro-core-values" aria-labelledby="intro-core-values-title">
-      <header className="intro-core-values-heading">
-        <p className="intro-mission-kicker"><span aria-hidden="true">04</span> / Core values</p>
-        <h3 id="intro-core-values-title">Giá trị cốt lõi</h3>
-      </header>
-      <div className="intro-core-values-grid">
-        {values.map((value, index) => <article className="core-value-item" key={value.title}>
-          <span className="index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-          <h4>{value.title}</h4>
-          {value.description && <p>{value.description}</p>}
-        </article>)}
-      </div>
-    </section>}
-
     {(vietnameseSlogan || englishSlogan) && <article className="intro-mission-card intro-mission-card-action-slogan">
-      <p className="intro-mission-kicker"><span aria-hidden="true">05</span> / Action manifesto</p>
       <h3>Khẩu hiệu hành động</h3>
       <div className="intro-content-copy">
         {vietnameseSlogan && <p className="intro-action-slogan-main">{vietnameseSlogan}</p>}
@@ -395,10 +407,11 @@ function KeyTasksAccordion({ sections }) {
     {sections.map((section, index) => {
       const isOpen = openSectionId === section.id;
       const panelId = `intro-accordion-panel-${section.id}`;
+      const buttonId = `intro-accordion-button-${section.id}`;
       const Icon = introTaskIcons[section.id];
       return <section className={`intro-accordion-item${isOpen ? ' open' : ''}`} key={section.id}>
         <h3>
-          <button type="button" aria-expanded={isOpen} aria-controls={panelId} onClick={() => setOpenSectionId(current => current === section.id ? null : section.id)}>
+          <button id={buttonId} type="button" aria-expanded={isOpen} aria-controls={panelId} onClick={() => setOpenSectionId(current => current === section.id ? null : section.id)}>
             <span className="intro-accordion-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
             <span className="intro-accordion-icon"><Icon size={20} aria-hidden="true" /></span>
             <span className="intro-accordion-title">{section.title}</span>
@@ -406,7 +419,7 @@ function KeyTasksAccordion({ sections }) {
             <ChevronDown size={21} aria-hidden="true" />
           </button>
         </h3>
-        {isOpen && <div id={panelId} className="intro-accordion-panel">
+        {isOpen && <div id={panelId} className="intro-accordion-panel" role="region" aria-labelledby={buttonId}>
           <ul>{section.items.map((item, itemIndex) => <li key={item}><span className="intro-task-index" aria-hidden="true">{String(itemIndex + 1).padStart(2, '0')}</span><span>{item}</span></li>)}</ul>
         </div>}
       </section>;
@@ -439,7 +452,7 @@ function SearchInput({ value, onChange, placeholder }) {
 }
 
 function Loading({ error }) {
-  return <section className="loading-page site-container"><p className="eyebrow">Đang tải</p><h1>{error || 'Đang tải dữ liệu từ máy chủ…'}</h1></section>;
+  return <section className="loading-page site-container" role={error ? 'alert' : 'status'}><p className="eyebrow">{error ? 'Không thể tải dữ liệu' : 'Đang tải'}</p><h1>{error || 'Đang tải dữ liệu từ máy chủ…'}</h1></section>;
 }
 
 function EntityCard({ item, type, meta, selected, onSelect, actionLabel }) {
@@ -451,14 +464,37 @@ function EntityCard({ item, type, meta, selected, onSelect, actionLabel }) {
   </button>;
 }
 
+function useMediaQuery(query) {
+  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(query);
+    const updateMatch = event => setMatches(event.matches);
+    setMatches(mediaQuery.matches);
+    mediaQuery.addEventListener('change', updateMatch);
+    return () => mediaQuery.removeEventListener('change', updateMatch);
+  }, [query]);
+
+  return matches;
+}
+
 function DetailPanel({ item, type, dark = false, onClose, subtitle = item.shortName, showActivityGallery = true }) {
+  const isModalViewport = useMediaQuery('(max-width: 1360px)');
   const detailSections = useMemo(() => {
     if (Array.isArray(item.sections)) return item.sections;
     const legacyItems = Array.isArray(item.paragraphs) ? item.paragraphs : [];
     return legacyItems.length ? [{ title: 'Giới thiệu', items: legacyItems }] : [];
   }, [item.paragraphs, item.sections]);
   const galleryItems = Array.isArray(item.activityImages) ? item.activityImages : [];
-  return <>
+
+  useEffect(() => {
+    if (!isModalViewport) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = previousOverflow; };
+  }, [isModalViewport]);
+
+  const panel = <>
     <div className="detail-modal-backdrop" aria-hidden="true" onClick={onClose} />
     <aside className={`detail-panel${dark ? ' detail-panel-dark' : ''}`} aria-label={`Thông tin ${item.name}`}>
       <div className="detail-close-bar"><button className="detail-close" type="button" onClick={onClose} aria-label="Đóng thông tin chi tiết"><X size={18} aria-hidden="true" /></button></div>
@@ -466,6 +502,9 @@ function DetailPanel({ item, type, dark = false, onClose, subtitle = item.shortN
       <div className="detail-body">{detailSections.map(section => { const blocks = groupParagraphs(section.items); return <section className="detail-section" key={section.title}><h3>{section.title}</h3>{blocks.map((block, index) => block.type === 'list' ? <ul key={index}>{block.items.map((text, itemIndex) => <li key={itemIndex}>{text}</li>)}</ul> : <p key={index}>{block.text}</p>)}</section>; })}{detailSections.length > 0 && item.governingBody && <section className="detail-section"><h3>Đơn vị chủ quản</h3><p>{item.governingBody}</p></section>}{showActivityGallery && dark && galleryItems.length > 0 && <section className="activity-gallery" aria-labelledby="activity-gallery-title"><div className="activity-gallery-head"><h3 id="activity-gallery-title">Các hoạt động nổi bật của CLB</h3></div><div className={`activity-gallery-grid ${galleryItems.length === 1 ? 'count-1' : galleryItems.length === 2 ? 'count-2' : galleryItems.length === 3 ? 'count-3' : 'count-many'}`}>{galleryItems.map(image => <figure key={image.src}><img src={image.src} alt="" loading="lazy" decoding="async" /></figure>)}</div></section>}<section className="detail-section detail-contact"><h3>Liên hệ</h3>{item.fanpageUrl ? <a className="btn btn-primary" href={item.fanpageUrl} target="_blank" rel="noreferrer">Fanpage <ExternalLink size={16} aria-hidden="true" /></a> : <p className="empty-contact">Đơn vị chưa cung cấp liên kết chính thức.</p>}</section></div>
     </aside>
   </>;
+
+  if (!isModalViewport) return panel;
+  return createPortal(<div className="detail-modal-root"><div className={`detail-modal-context ${dark ? 'club-page' : 'academic-page'}`}>{panel}</div></div>, document.body);
 }
 
 function useDirectorySelection(selectedId, setSelectedId, shown) {
@@ -493,7 +532,13 @@ function LienChiPage() {
   const [selectedId, setSelectedId] = useState(null);
   const [query, setQuery] = useState('');
 
-  useEffect(() => { api('/lien-chi').then(setItems).catch(reason => setError(reason.message)); }, []);
+  useEffect(() => {
+    let active = true;
+    api('/lien-chi')
+      .then(data => { if (active) setItems(data); })
+      .catch(reason => { if (active) setError(reason instanceof Error ? reason.message : 'Không thể tải dữ liệu.'); });
+    return () => { active = false; };
+  }, []);
   const availableItems = items || [];
   const needle = normalizeSearch(query.trim());
   const shown = needle ? availableItems.filter(item => normalizeSearch(`${item.name} ${lienChiEnglishNames[item.id] || ''} ${item.summary}`).includes(needle)) : availableItems;
@@ -514,7 +559,13 @@ function ClubPage() {
   const [selectedId, setSelectedId] = useState(null);
   const [query, setQuery] = useState('');
 
-  useEffect(() => { api('/clubs').then(setClubs).catch(reason => setError(reason.message)); }, []);
+  useEffect(() => {
+    let active = true;
+    api('/clubs')
+      .then(data => { if (active) setClubs(data); })
+      .catch(reason => { if (active) setError(reason instanceof Error ? reason.message : 'Không thể tải dữ liệu.'); });
+    return () => { active = false; };
+  }, []);
   const availableClubs = clubs || [];
   const available = clubCategories.filter(([id]) => availableClubs.some(club => club.category === id));
   const needle = normalizeSearch(query.trim());

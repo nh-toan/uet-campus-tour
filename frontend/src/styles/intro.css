@@ -83,7 +83,6 @@
 .intro-primary-tab.active { color: var(--text-primary); background: rgb(20 107 255 / 2.5%); box-shadow: none; }
 .intro-primary-tab::after { position: absolute; right: 16px; bottom: -1px; left: 16px; height: 3px; border-radius: 99px 99px 0 0; background: linear-gradient(90deg, var(--blue-600), var(--cyan-400)); content: ''; opacity: 0; transform: scaleX(.35); transform-origin: left; transition: opacity .2s ease, transform .2s ease; }
 .intro-primary-tab.active::after { opacity: 1; transform: scaleX(1); }
-.intro-primary-tab-number { display: block; margin-bottom: 10px; color: var(--blue-600); font: 700 11px/1 var(--font-mono); letter-spacing: .12em; }
 .intro-primary-tab-label { display: block; max-width: 24ch; }
 .intro-primary-tab-icon, .intro-primary-tab-arrow { display: none; }
 
@@ -105,8 +104,6 @@
 /* Mission, vision and values: editorial hierarchy rather than a card wall. */
 .intro-mission-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 42px; }
 .intro-mission-card { position: relative; min-width: 0; padding: 24px 0 30px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; box-shadow: none; }
-.intro-mission-number, .intro-mission-kicker { margin: 0 0 12px; color: var(--blue-600); font: 700 10px/1.3 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
-.intro-mission-kicker span { color: var(--orange-500); }
 .intro-mission-card h3 { margin: 0 0 15px; color: var(--text-primary); font-size: clamp(19px, 1.6vw, 23px); font-weight: 750; line-height: 1.28; letter-spacing: -.025em; }
 .intro-mission-card-education-philosophy { grid-column: 1 / -1; margin-top: 14px; padding: 42px 54px; border: 1px solid rgb(20 107 255 / 12%); border-radius: 14px; background: radial-gradient(circle at 85% 20%, rgb(76 201 255 / 9%), transparent 30%), linear-gradient(135deg, rgb(238 245 255 / 88%), rgb(248 251 255 / 96%)); }
 .intro-mission-card-education-philosophy h3 { margin-bottom: 18px; }
@@ -115,17 +112,14 @@
 .intro-mission-card-education-philosophy .intro-content-copy p:nth-child(3) { max-width: 900px; text-align: left; }
 .intro-core-values { grid-column: 1 / -1; margin-top: 18px; }
 .intro-core-values-heading { display: flex; align-items: baseline; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); }
-.intro-core-values-heading .intro-mission-kicker { margin: 0; }
 .intro-core-values-heading h3 { margin: 0; color: var(--text-primary); font-size: 20px; font-weight: 750; letter-spacing: -.02em; }
 .intro-core-values-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
 .core-value-item { min-width: 0; padding: 26px 22px 28px; border-right: 1px solid var(--line); }
 .core-value-item:first-child { padding-left: 0; }
 .core-value-item:last-child { padding-right: 0; border-right: 0; }
-.core-value-item .index { display: block; margin-bottom: 14px; color: var(--blue-600); font: 700 10px/1 var(--font-mono); letter-spacing: .1em; }
 .core-value-item h4 { min-height: 40px; margin: 0 0 13px; color: var(--text-primary); font-size: 16px; font-weight: 750; line-height: 1.25; text-transform: uppercase; }
 .core-value-item p { margin: 0; color: var(--text-secondary); font-size: 13.5px; line-height: 1.65; }
 .intro-mission-card-action-slogan { grid-column: 1 / -1; margin-top: 18px; padding: 26px 30px; border: 0; border-top: 1px solid rgb(20 107 255 / 18%); border-bottom: 1px solid rgb(20 107 255 / 18%); border-radius: 0; background: linear-gradient(90deg, transparent, rgb(20 107 255 / 5%), transparent); text-align: center; }
-.intro-mission-card-action-slogan .intro-mission-kicker { margin-bottom: 10px; }
 .intro-mission-card-action-slogan h3 { display: none; }
 .intro-mission-card-action-slogan .intro-content-copy p { color: var(--text-primary); font-size: clamp(20px, 1.8vw, 24px); font-weight: 750; line-height: 1.4; text-align: center; }
 .intro-mission-card-action-slogan .intro-content-copy p + p { margin-top: 8px; color: var(--blue-600); font: 600 12px/1.55 var(--font-mono); letter-spacing: .035em; }
@@ -159,7 +153,6 @@
 .intro-primary-tab { min-height: 82px; padding: 14px 22px 17px; border-right-color: color-mix(in srgb, var(--line) 55%, transparent); }
 .intro-primary-tab:hover, .intro-primary-tab.active { background: rgb(20 107 255 / 1.5%); }
 .intro-primary-tab::after { height: 2px; opacity: 0; }
-.intro-primary-tab-number { margin-bottom: 6px; color: color-mix(in srgb, var(--blue-600) 76%, var(--text-secondary)); font-size: 10px; font-weight: 650; letter-spacing: .1em; }
 .intro-primary-tab-label { font-size: 14px; letter-spacing: -.005em; }
 
 .intro-section-panel { padding-top: 30px; }
@@ -174,7 +167,6 @@
 .intro-mission-card { padding: 26px 0 32px; border-bottom-color: color-mix(in srgb, var(--line) 64%, transparent); }
 .intro-mission-card:not(.intro-mission-card-education-philosophy):not(.intro-mission-card-action-slogan) .intro-content-copy { max-width: 37rem; }
 .intro-mission-card h3 { margin-bottom: 19px; }
-.intro-mission-number, .intro-mission-kicker { color: color-mix(in srgb, var(--blue-600) 78%, var(--text-secondary)); font-size: 9px; font-weight: 650; letter-spacing: .09em; }
 .intro-mission-card-education-philosophy { margin-top: 20px; padding: 52px 62px 54px; border-color: rgb(20 107 255 / 8%); background: radial-gradient(circle at 84% 18%, rgb(76 201 255 / 4%), transparent 26%), linear-gradient(135deg, rgb(245 249 255 / 72%), rgb(251 253 255 / 84%)); }
 .intro-mission-card-education-philosophy h3 { margin-bottom: 22px; }
 .intro-mission-card-education-philosophy .intro-content-copy p:first-child { max-width: 860px; font-size: clamp(26px, 2.45vw, 34px); line-height: 1.32; }
@@ -187,12 +179,10 @@
 .core-value-item { padding: 30px 28px 32px; border-right-color: color-mix(in srgb, var(--line) 48%, transparent); }
 .core-value-item:first-child { padding-left: 8px; }
 .core-value-item:last-child { padding-right: 8px; }
-.core-value-item .index { margin-bottom: 16px; color: color-mix(in srgb, var(--blue-600) 68%, var(--text-secondary)); font-size: 9px; font-weight: 650; letter-spacing: .08em; }
 .core-value-item h4 { min-height: 42px; margin-bottom: 15px; font-size: 17px; font-weight: 780; letter-spacing: -.015em; }
 .core-value-item p { font-size: 13px; line-height: 1.76; }
 
 .intro-mission-card-action-slogan { margin-top: 24px; padding: 29px 30px 31px; border-top-color: rgb(20 107 255 / 12%); border-bottom-color: rgb(20 107 255 / 12%); background: linear-gradient(90deg, transparent, rgb(20 107 255 / 3%), transparent); }
-.intro-mission-card-action-slogan .intro-mission-kicker { margin-bottom: 13px; }
 .intro-mission-card-action-slogan .intro-content-copy p { font-size: 0; line-height: 1; }
 .intro-mission-card-action-slogan .intro-content-copy p::before { display: block; color: var(--text-primary); font-family: inherit; font-size: clamp(20px, 1.8vw, 24px); font-weight: 750; line-height: 1.4; content: 'Sáng tạo — Tiên phong — Chất lượng cao'; }
 .intro-mission-card-action-slogan .intro-content-copy p + p { margin-top: 8px; }
@@ -214,10 +204,6 @@
 .intro-mission-grid { font-family: 'Be Vietnam Pro', sans-serif; grid-template-columns: 1fr 1fr; gap: 0 64px; }
 .intro-mission-card-mission,
 .intro-mission-card-vision { padding: 30px 0 34px; border-bottom-color: transparent; }
-.intro-mission-card-mission .intro-mission-number::after { content: ' / MISSION'; }
-.intro-mission-card-vision .intro-mission-number::after { content: ' / VISION'; }
-.intro-mission-number,
-.intro-mission-kicker { color: color-mix(in srgb, var(--blue-600) 68%, var(--text-secondary)); font-size: 10px; font-weight: 600; letter-spacing: .08em; }
 .intro-mission-card h3 { margin-bottom: 18px; font-size: 24px; font-weight: 650; letter-spacing: -.02em; line-height: 1.25; }
 .intro-mission-card-mission .intro-content-copy,
 .intro-mission-card-vision .intro-content-copy { max-width: 35rem; }
@@ -228,7 +214,6 @@
 .intro-mission-card-education-philosophy::after { display: none; }
 .intro-mission-card-education-philosophy > * { position: relative; z-index: auto; }
 .intro-mission-card-education-philosophy::before { position: absolute; top: 0; left: 64px; width: 58px; height: 2px; background: linear-gradient(90deg, var(--blue-600), var(--cyan-400)); content: ''; }
-.intro-mission-card-education-philosophy .intro-mission-kicker { margin-bottom: 15px; }
 .intro-mission-card-education-philosophy h3 { margin-bottom: 24px; font-size: 20px; font-weight: 600; letter-spacing: -.018em; }
 .intro-mission-card-education-philosophy .intro-content-copy p:first-child { max-width: 780px; font-size: 40px; font-weight: 600; line-height: 1.15; letter-spacing: -.035em; }
 .intro-mission-card-education-philosophy .intro-content-copy p:nth-child(2) { margin-top: 18px; color: color-mix(in srgb, var(--blue-600) 72%, var(--text-secondary)); font-size: 11px; font-weight: 500; letter-spacing: 0; line-height: 1.55; }
@@ -237,19 +222,16 @@
 .intro-core-values { position: relative; margin-top: 64px; padding-top: 0; }
 .intro-core-values::before { display: none; }
 .intro-core-values-heading { display: block; padding: 0 0 24px; border-bottom: 0; }
-.intro-core-values-heading .intro-mission-kicker { margin-bottom: 10px; }
 .intro-core-values-heading h3 { font-size: 20px; font-weight: 600; letter-spacing: -.018em; }
 .intro-core-values-grid { column-gap: 40px; padding: 36px 0 44px; border-bottom: 0; }
 .core-value-item,
 .core-value-item:first-child,
 .core-value-item:last-child { position: relative; padding: 16px 0 0; border-right: 0; }
 .core-value-item::before { position: absolute; top: 0; left: 0; width: 36px; height: 2px; background: linear-gradient(90deg, var(--blue-600), var(--cyan-400)); content: ''; }
-.core-value-item .index { margin-bottom: 14px; color: color-mix(in srgb, var(--blue-600) 70%, var(--text-secondary)); font-size: 10px; font-weight: 600; letter-spacing: .06em; }
 .core-value-item h4 { min-height: 46px; margin-bottom: 14px; font-size: 18px; font-weight: 650; letter-spacing: -.015em; line-height: 1.3; text-transform: none; }
 .core-value-item p { font-size: 14.5px; font-weight: 400; line-height: 1.65; }
 
 .intro-mission-card-action-slogan { margin-top: 56px; padding: 52px 32px 56px; border-top-color: rgb(20 107 255 / 10%); border-bottom-color: rgb(20 107 255 / 8%); background: linear-gradient(90deg, transparent, rgb(20 107 255 / 2.25%), transparent); }
-.intro-mission-card-action-slogan .intro-mission-kicker { margin-bottom: 7px; }
 .intro-mission-card-action-slogan h3 { display: block; margin: 0 0 24px; color: color-mix(in srgb, var(--text-secondary) 82%, transparent); font: 600 10px/1.35 var(--font-mono); letter-spacing: .075em; text-transform: uppercase; }
 .intro-mission-card-action-slogan .intro-content-copy p::before { font-size: 28px; font-weight: 650; letter-spacing: -.02em; line-height: 1.3; }
 .intro-mission-card-action-slogan .intro-content-copy p + p { margin-top: 12px; }
@@ -322,7 +304,6 @@
   .intro-mission-grid { grid-template-columns: minmax(0, 1fr); }
   .intro-mission-card-education-philosophy { margin-top: 10px; padding: 30px 24px; }
   .intro-core-values-heading { display: block; }
-  .intro-core-values-heading .intro-mission-kicker { margin-bottom: 8px; }
   .intro-core-values-grid { grid-template-columns: minmax(0, 1fr); }
   .core-value-item, .core-value-item:first-child, .core-value-item:last-child { padding: 22px 0; border-right: 0; border-bottom: 1px solid var(--line); }
   .core-value-item:last-child { border-bottom: 0; }
@@ -450,16 +431,6 @@
 
 .intro-strategy-section .intro-primary-tab.active::after { opacity: 1; transform: none; }
 
-.intro-strategy-section .intro-primary-tab-number {
-  margin-bottom: 7px;
-  color: var(--blue-600);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: .08em;
-}
-
 .intro-strategy-section .intro-primary-tab-label {
   max-width: none;
   font-size: 14px;
@@ -552,19 +523,6 @@
 .intro-strategy-section .intro-mission-card-mission,
 .intro-strategy-section .intro-mission-card-vision { border-bottom-color: rgb(10 27 51 / 8%); }
 
-.intro-strategy-section .intro-mission-number,
-.intro-strategy-section .intro-mission-kicker {
-  margin: 0 0 8px;
-  color: var(--blue-600);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: .06em;
-}
-
-.intro-strategy-section .intro-mission-kicker span { color: inherit; }
-
 .intro-strategy-section .intro-mission-card h3 {
   margin: 8px 0 14px;
   font-size: 24px;
@@ -599,8 +557,6 @@
 
 .intro-strategy-section .intro-mission-card-education-philosophy::before,
 .intro-strategy-section .intro-mission-card-education-philosophy::after { display: none; }
-
-.intro-strategy-section .intro-mission-card-education-philosophy .intro-mission-kicker { margin-bottom: 12px; }
 
 .intro-strategy-section .intro-mission-card-education-philosophy h3 {
   margin: 0;
@@ -651,8 +607,6 @@
   border: 0;
 }
 
-.intro-strategy-section .intro-core-values-heading .intro-mission-kicker { margin-bottom: 10px; }
-
 .intro-strategy-section .intro-core-values-heading h3 {
   font-size: 20px;
   font-weight: 600;
@@ -679,16 +633,6 @@
   top: 0;
   width: 34px;
   height: 2px;
-}
-
-.intro-strategy-section .core-value-item .index {
-  margin-bottom: 10px;
-  color: var(--blue-600);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: .06em;
 }
 
 .intro-strategy-section .core-value-item h4 {
@@ -720,8 +664,6 @@
   box-shadow: none;
   text-align: center;
 }
-
-.intro-strategy-section .intro-mission-card-action-slogan .intro-mission-kicker { margin-bottom: 7px; }
 
 .intro-strategy-section .intro-mission-card-action-slogan h3 {
   display: block;
@@ -917,18 +859,6 @@
 /* Strategy typography refinement: align hierarchy with the page body scale. */
 .intro-strategy-section { font-family: var(--font-sans); }
 
-.intro-strategy-section .intro-mission-number {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: .055em;
-}
-
-.intro-strategy-section .intro-mission-kicker {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: .055em;
-}
-
 .intro-strategy-section .intro-mission-card-education-philosophy .intro-content-copy p:first-child {
   max-width: 900px;
   color: color-mix(in srgb, var(--text-primary) 88%, var(--blue-600));
@@ -962,9 +892,942 @@
 }
 
 @media (max-width: 767px) {
-  .intro-strategy-section .intro-mission-number { font-size: 12px; }
-  .intro-strategy-section .intro-mission-kicker { font-size: 11px; }
   .intro-strategy-section .intro-mission-card-education-philosophy .intro-content-copy p:first-child { font-size: clamp(32px, 8.8vw, 36px); }
   .intro-strategy-section .intro-mission-card-education-philosophy .intro-content-copy p:nth-child(2),
   .intro-strategy-section .intro-mission-card-action-slogan .intro-content-copy .intro-action-slogan-english { font-size: 12.5px; }
+}
+
+/* Readability polish only: preserve the strategy layout and tab behavior. */
+.intro-strategy-section .intro-primary-tab-label {
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.intro-strategy-section .intro-context-nav button {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: .025em;
+}
+
+.intro-strategy-section .intro-context-reading h3,
+.intro-strategy-section .intro-mission-card h3 {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.intro-strategy-section .intro-mission-card-education-philosophy h3,
+.intro-strategy-section .intro-core-values-heading h3 { font-size: 22px; font-weight: 700; }
+
+.intro-strategy-section .intro-content-copy p,
+.intro-strategy-section .intro-mission-card-mission .intro-content-copy p,
+.intro-strategy-section .intro-mission-card-vision .intro-content-copy p,
+.intro-strategy-section .core-value-item p,
+.intro-strategy-section .intro-accordion-panel li {
+  font-size: 16px;
+  line-height: 1.74;
+}
+
+@media (max-width: 767px) {
+  .intro-strategy-section .intro-primary-tab-label { font-size: 15px; }
+  .intro-strategy-section .intro-context-nav button { font-size: 12px; }
+  .intro-strategy-section .intro-context-reading h3,
+  .intro-strategy-section .intro-mission-card h3 { font-size: 24px; }
+  .intro-strategy-section .intro-content-copy p,
+  .intro-strategy-section .intro-mission-card-mission .intro-content-copy p,
+  .intro-strategy-section .intro-mission-card-vision .intro-content-copy p,
+  .intro-strategy-section .core-value-item p,
+  .intro-strategy-section .intro-accordion-panel li { font-size: 15.5px; line-height: 1.74; }
+}
+
+/* Strategy section V7: scoped integration of the approved visual prototype. */
+.intro-content-flow::before { opacity: .32; }
+
+.intro-strategy-section {
+  --strategy-panel: color-mix(in srgb, var(--panel-bg) 88%, transparent);
+  --strategy-panel-strong: color-mix(in srgb, var(--panel-bg) 96%, var(--surface-2));
+  --strategy-border: color-mix(in srgb, var(--blue-600) 18%, var(--line));
+  --strategy-muted-border: color-mix(in srgb, var(--blue-600) 10%, var(--line));
+  --strategy-shadow: 0 18px 48px color-mix(in srgb, var(--navy-900) 10%, transparent);
+  isolation: isolate;
+  overflow: hidden;
+  padding: 78px 0 88px;
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(circle at 12% 25%, color-mix(in srgb, var(--blue-600) 9%, transparent), transparent 34%),
+    radial-gradient(circle at 88% 18%, color-mix(in srgb, var(--cyan-400) 8%, transparent), transparent 32%),
+    var(--page-bg);
+}
+
+.intro-strategy-section::before,
+.intro-strategy-section::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+}
+
+.intro-strategy-section::before {
+  z-index: -2;
+  background: url('/assets/map/aerial-campus.jpg') center 44% / cover no-repeat;
+  filter: saturate(.68) contrast(.9) brightness(1.1);
+  opacity: .1;
+}
+
+.intro-strategy-section::after {
+  z-index: -1;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--page-bg) 74%, transparent), var(--page-bg) 94%);
+}
+
+:root[data-theme='dark'] .intro-strategy-section {
+  --strategy-panel: color-mix(in srgb, var(--panel-bg) 80%, transparent);
+  --strategy-panel-strong: color-mix(in srgb, var(--panel-bg) 92%, var(--surface-2));
+  --strategy-border: color-mix(in srgb, var(--blue-400) 24%, var(--line));
+  --strategy-muted-border: color-mix(in srgb, var(--blue-400) 14%, var(--line));
+  --strategy-shadow: 0 20px 58px rgb(0 0 0 / 24%);
+}
+
+:root[data-theme='dark'] .intro-strategy-section::before {
+  filter: brightness(.52) saturate(.72) contrast(.94);
+  opacity: .15;
+}
+
+.intro-strategy-section .intro-page-container {
+  width: min(calc(100% - 40px), 1280px);
+  margin-inline: auto;
+}
+
+.intro-strategy-section .intro-section-heading {
+  max-width: 1040px;
+  margin: 0 auto 34px;
+  text-align: center;
+}
+
+.intro-strategy-section .intro-section-heading .eyebrow {
+  margin-bottom: 12px;
+  color: var(--blue-600);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: .16em;
+}
+
+.intro-strategy-section .intro-section-heading h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: clamp(38px, 4vw, 62px);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -.045em;
+}
+
+.intro-strategy-section .intro-section-heading h2 span {
+  display: block;
+  color: var(--blue-600);
+}
+
+.intro-strategy-section .intro-heading-line {
+  width: 38px;
+  height: 3px;
+  margin: 18px auto 0;
+  border-radius: 99px;
+}
+
+.intro-strategy-section .intro-primary-tabs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 50px minmax(0, 1.35fr) 50px minmax(0, 1fr);
+  align-items: stretch;
+  margin: 0 0 24px;
+  border-top: 1px solid var(--strategy-border);
+  border-bottom: 1px solid var(--strategy-border);
+}
+
+.intro-strategy-section .intro-primary-tab {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 14px;
+  min-width: 0;
+  min-height: 104px;
+  align-items: center;
+  padding: 16px 8px;
+  border: 0;
+  border-radius: 0;
+  color: var(--text-secondary);
+  background: transparent;
+  box-shadow: none;
+  text-align: left;
+  transition: color .2s ease, background-color .2s ease;
+}
+
+.intro-strategy-section .intro-primary-tab::after {
+  right: 8px;
+  bottom: -1px;
+  left: 8px;
+  height: 3px;
+  border-radius: 99px 99px 0 0;
+  opacity: 0;
+  transform: scaleX(.35);
+  transform-origin: left;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.intro-strategy-section .intro-primary-tab.active {
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--blue-600) 3.5%, transparent);
+}
+
+.intro-strategy-section .intro-primary-tab.active::after { opacity: 1; transform: scaleX(1); }
+
+.intro-strategy-section .intro-primary-tab-icon {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border: 1px solid var(--strategy-border);
+  border-radius: 50%;
+  color: var(--blue-600);
+  background: var(--strategy-panel);
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--blue-600) 9%, transparent);
+  transition: border-color .2s ease, background-color .2s ease;
+}
+
+.intro-strategy-section .intro-primary-tab.active .intro-primary-tab-icon {
+  border-color: color-mix(in srgb, var(--blue-600) 46%, var(--line));
+  background: color-mix(in srgb, var(--blue-600) 8%, var(--strategy-panel-strong));
+}
+
+.intro-strategy-section .intro-primary-tab-copy { display: block; min-width: 0; }
+.intro-strategy-section .intro-primary-tab-label { display: block; max-width: 28ch; font-size: 15.5px; font-weight: 700; line-height: 1.4; }
+.intro-strategy-section .intro-primary-tab-separator { display: grid; place-items: center; color: color-mix(in srgb, var(--blue-600) 54%, transparent); }
+
+.intro-strategy-section .intro-section-panel {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  animation: intro-panel-enter .2s ease both;
+}
+
+.intro-strategy-section .intro-context-layout { grid-template-columns: 170px minmax(0, 1fr); gap: 16px; align-items: start; }
+
+.intro-strategy-section .intro-context-nav {
+  display: grid;
+  gap: 6px;
+  padding: 10px;
+  border: 1px solid var(--strategy-border);
+  border-radius: 18px;
+  background: var(--strategy-panel);
+  box-shadow: var(--strategy-shadow);
+  backdrop-filter: blur(10px);
+}
+
+.intro-strategy-section .intro-context-nav button {
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: .015em;
+  text-align: left;
+  text-transform: none;
+}
+
+.intro-strategy-section .intro-context-nav button::before { display: none; }
+.intro-strategy-section .intro-context-nav button:hover,
+.intro-strategy-section .intro-context-nav button.active { border-color: var(--strategy-border); color: var(--blue-600); background: color-mix(in srgb, var(--blue-600) 7%, var(--strategy-panel-strong)); }
+
+.intro-strategy-section .intro-context-reading {
+  min-width: 0;
+  padding: 30px 34px 34px;
+  border: 1px solid var(--strategy-border);
+  border-radius: 24px;
+  background: var(--strategy-panel);
+  box-shadow: var(--strategy-shadow);
+  backdrop-filter: blur(10px);
+}
+
+.intro-strategy-section .intro-context-reading::before { display: block; left: 34px; width: 56px; height: 3px; }
+.intro-strategy-section .intro-context-reading h3 { margin: 0 0 18px; color: var(--text-primary); font-size: 24px; font-weight: 700; line-height: 1.25; letter-spacing: -.02em; text-wrap: balance; }
+.intro-strategy-section .intro-content-copy p { overflow-wrap: break-word; color: var(--text-secondary); font-size: 16px; font-weight: 400; line-height: 1.75; }
+.intro-strategy-section .intro-context-reading .intro-content-copy p { text-align: justify; text-justify: inter-word; }
+
+.intro-strategy-section .intro-mission-layout {
+  display: grid;
+  grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.intro-strategy-section .intro-mission-foundation,
+.intro-strategy-section .intro-core-values,
+.intro-strategy-section .intro-mission-card-education-philosophy,
+.intro-strategy-section .intro-mission-card-action-slogan {
+  min-width: 0;
+  border: 1px solid var(--strategy-border);
+  border-radius: 24px;
+  background: var(--strategy-panel);
+  box-shadow: var(--strategy-shadow);
+  backdrop-filter: blur(10px);
+}
+
+.intro-strategy-section .intro-mission-foundation { padding: 28px 30px; }
+
+.intro-strategy-section .intro-mission-card {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.intro-strategy-section .intro-mission-foundation .intro-mission-card + .intro-mission-card { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--strategy-muted-border); }
+.intro-strategy-section .intro-mission-card-heading { display: flex; min-height: 44px; align-items: center; gap: 12px; margin-bottom: 14px; }
+
+.intro-strategy-section .intro-mission-icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--blue-600), var(--blue-500));
+}
+
+.intro-strategy-section .intro-mission-card h3,
+.intro-strategy-section .intro-core-values-heading h3 { margin: 0; color: var(--text-primary); font-size: 22px; font-weight: 700; line-height: 1.25; letter-spacing: -.02em; text-wrap: balance; }
+.intro-strategy-section .intro-mission-card-mission .intro-content-copy,
+.intro-strategy-section .intro-mission-card-vision .intro-content-copy { max-width: none; }
+.intro-strategy-section .intro-mission-card-mission .intro-content-copy p,
+.intro-strategy-section .intro-mission-card-vision .intro-content-copy p { font-size: 16px; line-height: 1.75; text-align: justify; text-justify: inter-word; }
+
+.intro-strategy-section .intro-core-values { grid-column: auto; margin: 0; padding: 24px; }
+.intro-strategy-section .intro-core-values-heading { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 0; border: 0; text-align: center; }
+.intro-strategy-section .intro-core-values-heading::before,
+.intro-strategy-section .intro-core-values-heading::after { width: 42px; height: 1px; background: linear-gradient(90deg, transparent, var(--blue-600)); content: ''; }
+.intro-strategy-section .intro-core-values-heading::after { transform: scaleX(-1); }
+.intro-strategy-section .intro-core-values-heading h3 { font-size: 19px; }
+
+.intro-strategy-section .intro-core-values-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: stretch; margin-top: 20px; padding: 0; border: 0; }
+
+.intro-strategy-section .core-value-item,
+.intro-strategy-section .core-value-item:first-child,
+.intro-strategy-section .core-value-item:last-child {
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px 18px;
+  border: 1px solid var(--strategy-muted-border);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--strategy-panel-strong) 82%, transparent);
+  text-align: center;
+  transition: border-color .2s ease, transform .2s ease;
+}
+
+.intro-strategy-section .core-value-item::before { display: none; }
+.intro-strategy-section .core-value-icon { display: grid; width: 56px; height: 56px; place-items: center; margin: 0 auto 12px; border: 1px solid color-mix(in srgb, var(--blue-600) 34%, var(--line)); border-radius: 50%; color: var(--blue-600); background: color-mix(in srgb, var(--blue-600) 6%, var(--strategy-panel-strong)); }
+.intro-strategy-section .core-value-item:nth-child(even) .core-value-icon,
+.intro-strategy-section .core-value-item:nth-child(even) h4 { color: var(--orange-500); }
+.intro-strategy-section .core-value-item h4 { display: flex; min-height: 2.7em; align-items: center; justify-content: center; margin: 0 0 10px; color: var(--blue-600); font-size: 16px; font-weight: 700; line-height: 1.35; letter-spacing: -.01em; text-transform: uppercase; text-wrap: balance; }
+.intro-strategy-section .core-value-item p { margin: 0; color: var(--text-secondary); font-size: 15px; line-height: 1.68; text-align: left; }
+
+.intro-strategy-section .intro-mission-card-education-philosophy {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  grid-column: 1 / -1;
+  margin: 8px 0 0;
+  padding: 38px 132px 42px 40px;
+  border-color: transparent;
+  background:
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--cyan-400) 7%, transparent), transparent 30%) padding-box,
+    linear-gradient(138deg, color-mix(in srgb, var(--blue-600) 5%, var(--strategy-panel-strong)), color-mix(in srgb, var(--cyan-400) 2%, var(--strategy-panel))) padding-box,
+    linear-gradient(112deg, color-mix(in srgb, var(--blue-600) 42%, var(--line)), color-mix(in srgb, var(--cyan-400) 29%, var(--line)) 64%, color-mix(in srgb, var(--blue-600) 18%, var(--strategy-border))) border-box;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 62%),
+    inset 0 0 28px color-mix(in srgb, var(--blue-600) 2%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--blue-600) 8%, transparent),
+    0 11px 28px color-mix(in srgb, var(--navy-900) 7%, transparent);
+}
+
+.intro-strategy-section .intro-mission-card-education-philosophy::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: block;
+  width: min(230px, 36%);
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue-600), var(--cyan-400), transparent);
+  content: '';
+  pointer-events: none;
+}
+
+.intro-strategy-section .intro-mission-card-education-philosophy::after {
+  position: absolute;
+  top: 31px;
+  right: 32px;
+  z-index: 0;
+  display: block;
+  width: 82px;
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--blue-600) 23%, var(--line));
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--blue-600) 62%, var(--cyan-400)) 0 6px, transparent 7px),
+    radial-gradient(ellipse at 50% 76%, transparent 0 23%, color-mix(in srgb, var(--blue-600) 42%, var(--cyan-400)) 24% 25%, transparent 26%),
+    radial-gradient(circle at 16% 70%, var(--cyan-400) 0 2px, transparent 3px),
+    radial-gradient(circle at 84% 38%, var(--blue-600) 0 2px, transparent 3px),
+    linear-gradient(145deg, color-mix(in srgb, var(--blue-600) 8%, var(--strategy-panel-strong)), color-mix(in srgb, var(--cyan-400) 4%, var(--strategy-panel)));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 54%),
+    0 0 0 5px color-mix(in srgb, var(--blue-600) 2.5%, transparent);
+  content: '';
+  opacity: .58;
+  pointer-events: none;
+}
+
+.intro-strategy-section .intro-mission-card-education-philosophy > * { position: relative; z-index: 1; }
+.intro-strategy-section .intro-mission-card-education-philosophy h3 { font-size: 23px; }
+.intro-strategy-section .intro-mission-card-education-philosophy .intro-content-copy p:first-child { max-width: 940px; margin-top: 22px; color: color-mix(in srgb, var(--text-primary) 91%, var(--blue-600)); font-size: clamp(32px, 3vw, 42px); font-weight: 700; line-height: 1.18; letter-spacing: -.032em; text-align: left; }
+.intro-strategy-section .intro-mission-card-education-philosophy .intro-content-copy p:nth-child(2) { max-width: 960px; margin-top: 12px; color: color-mix(in srgb, var(--blue-600) 76%, var(--text-secondary)); font-family: var(--font-mono); font-size: 14px; font-weight: 500; line-height: 1.6; text-align: left; }
+.intro-strategy-section .intro-mission-card-education-philosophy .intro-content-copy p:nth-child(3) { max-width: 1040px; margin-top: 22px; font-size: 16px; line-height: 1.78; text-align: justify; text-justify: inter-word; }
+
+.intro-strategy-section .intro-mission-card-action-slogan {
+  position: relative;
+  isolation: isolate;
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(100%, 920px);
+  margin: 12px auto 0;
+  padding: 25px 64px 28px;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--blue-600) 34%, var(--line));
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--cyan-400) 56%, transparent) 0 2px, transparent 3px),
+    radial-gradient(circle at 16% 24%, color-mix(in srgb, var(--cyan-400) 28%, transparent) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 84% 76%, color-mix(in srgb, var(--blue-600) 26%, transparent) 0 1.5px, transparent 2.5px),
+    linear-gradient(90deg, transparent, color-mix(in srgb, var(--blue-600) 48%, var(--cyan-400)), transparent) top center / 68% 1px no-repeat,
+    linear-gradient(color-mix(in srgb, var(--blue-600) 1.7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--blue-600) 1.7%, transparent) 1px, transparent 1px),
+    linear-gradient(145deg, color-mix(in srgb, var(--strategy-panel-strong) 74%, transparent), color-mix(in srgb, var(--strategy-panel) 84%, transparent));
+  background-size: auto, auto, auto, 68% 1px, 44px 44px, 44px 44px, auto;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 56%),
+    inset 0 0 22px color-mix(in srgb, var(--blue-600) 2%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--cyan-400) 9%, transparent),
+    0 8px 22px color-mix(in srgb, var(--navy-900) 5%, transparent);
+  text-align: center;
+}
+.intro-strategy-section .intro-mission-card-action-slogan::before,
+.intro-strategy-section .intro-mission-card-action-slogan::after { position: absolute; top: 50%; z-index: -1; color: var(--blue-600); font: 700 72px/1 var(--font-sans); opacity: .055; transform: translateY(-56%); }
+.intro-strategy-section .intro-mission-card-action-slogan::before { left: 20px; content: '“'; }
+.intro-strategy-section .intro-mission-card-action-slogan::after { right: 20px; content: '”'; }
+.intro-strategy-section .intro-mission-card-action-slogan h3 { margin: 0 0 13px; color: color-mix(in srgb, var(--blue-600) 66%, var(--text-primary)); font: 700 13px/1.4 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
+.intro-strategy-section .intro-mission-card-action-slogan h3::after {
+  display: block;
+  width: min(220px, 45%);
+  height: 5px;
+  margin: 13px auto 0;
+  background:
+    radial-gradient(circle at left, var(--blue-600) 0 2px, transparent 2.5px),
+    radial-gradient(circle at right, var(--cyan-400) 0 2px, transparent 2.5px),
+    linear-gradient(90deg, transparent, color-mix(in srgb, var(--blue-600) 64%, var(--cyan-400)), transparent) center / 100% 1px no-repeat;
+  content: '';
+}
+.intro-strategy-section .intro-mission-card-action-slogan .intro-content-copy p,
+.intro-strategy-section .intro-mission-card-action-slogan .intro-content-copy p::before { content: none; text-align: center; }
+.intro-strategy-section .intro-mission-card-action-slogan .intro-content-copy .intro-action-slogan-main { color: color-mix(in srgb, var(--text-primary) 76%, var(--blue-600)); font-size: clamp(28px, 2.6vw, 34px); font-style: italic; font-weight: 650; line-height: 1.38; letter-spacing: -.018em; }
+.intro-strategy-section .intro-mission-card-action-slogan .intro-content-copy .intro-action-slogan-english { margin-top: 7px; color: color-mix(in srgb, var(--blue-600) 78%, var(--text-secondary)); font-family: var(--font-mono); font-size: 13px; font-style: normal; font-weight: 500; line-height: 1.6; }
+
+.intro-strategy-section .intro-accordion { display: grid; gap: 10px; border: 0; }
+
+.intro-strategy-section .intro-accordion-item {
+  overflow: hidden;
+  border: 1px solid var(--strategy-border);
+  border-radius: 16px;
+  background: var(--strategy-panel);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--navy-900) 7%, transparent);
+  backdrop-filter: blur(10px);
+  transition: border-color .2s ease, background-color .2s ease;
+}
+
+.intro-strategy-section .intro-accordion-item.open { border-color: color-mix(in srgb, var(--blue-600) 38%, var(--line)); background: var(--strategy-panel-strong); }
+
+.intro-strategy-section .intro-accordion-item h3 button {
+  display: grid;
+  grid-template-columns: 30px 42px minmax(0, 1fr) auto 24px;
+  gap: 14px;
+  width: 100%;
+  min-height: 78px;
+  align-items: center;
+  padding: 14px 18px;
+  border: 0;
+  color: var(--text-primary);
+  background: transparent;
+  font-weight: 400;
+}
+
+.intro-strategy-section .intro-accordion-item h3 button:hover { color: var(--blue-600); }
+.intro-strategy-section .intro-accordion-number { color: var(--blue-600); font: 600 11px/1.3 var(--font-mono); letter-spacing: .08em; }
+.intro-strategy-section .intro-accordion-icon { width: 42px; height: 42px; border: 1px solid var(--strategy-muted-border); border-radius: 50%; color: var(--blue-600); background: color-mix(in srgb, var(--blue-600) 6%, var(--strategy-panel-strong)); }
+.intro-strategy-section .intro-accordion-title { display: block; min-width: 0; font-size: 17px; font-weight: 700; line-height: 1.4; text-wrap: balance; }
+.intro-strategy-section .intro-accordion-count { color: var(--text-secondary); font: 600 10px/1.25 var(--font-mono); letter-spacing: .07em; text-transform: uppercase; white-space: nowrap; }
+.intro-strategy-section .intro-accordion-item h3 button > svg { color: var(--blue-600); transition: transform .2s ease; }
+.intro-strategy-section .intro-accordion-item.open h3 button > svg { transform: rotate(180deg); }
+.intro-strategy-section .intro-accordion-panel { max-width: none; padding: 0 24px 22px 104px; animation: intro-accordion-enter .2s ease both; }
+.intro-strategy-section .intro-accordion-panel ul { max-width: 1080px; margin: 0; padding: 0; }
+.intro-strategy-section .intro-accordion-panel li { grid-template-columns: 30px minmax(0, 1fr); gap: 12px; padding: 10px 0; color: var(--text-secondary); font-size: 16px; font-weight: 400; line-height: 1.74; text-align: left; }
+.intro-strategy-section .intro-accordion-panel li > span:last-child { text-align: justify; text-justify: inter-word; }
+.intro-strategy-section .intro-task-index { padding-top: 4px; color: var(--orange-500); font: 600 10px/1 var(--font-mono); letter-spacing: .07em; }
+
+@keyframes intro-panel-enter {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes intro-accordion-enter {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (hover: hover) {
+  .intro-strategy-section .intro-primary-tab:hover { color: var(--text-primary); }
+  .intro-strategy-section .core-value-item:hover { border-color: color-mix(in srgb, var(--blue-600) 48%, var(--line)); transform: translateY(-2px); }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .intro-strategy-section { padding: 60px 0 70px; }
+  .intro-strategy-section .intro-page-container { width: min(calc(100% - 48px), 1280px); }
+  .intro-strategy-section .intro-primary-tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .intro-strategy-section .intro-primary-tab-separator { display: none; }
+  .intro-strategy-section .intro-primary-tab { grid-template-columns: 48px minmax(0, 1fr); min-height: 98px; padding: 14px 12px; }
+  .intro-strategy-section .intro-primary-tab-icon { width: 46px; height: 46px; }
+  .intro-strategy-section .intro-mission-layout { grid-template-columns: minmax(0, 1fr); }
+  .intro-strategy-section .intro-mission-foundation { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+  .intro-strategy-section .intro-mission-foundation .intro-mission-card + .intro-mission-card { margin: 0; padding: 0 0 0 28px; border-top: 0; border-left: 1px solid var(--strategy-muted-border); }
+}
+
+@media (max-width: 767px) {
+  .intro-strategy-section { padding: 44px 0 54px; }
+  .intro-strategy-section .intro-page-container { width: min(calc(100% - 28px), 1280px); }
+  .intro-strategy-section .intro-section-heading { margin-bottom: 24px; text-align: center; }
+  .intro-strategy-section .intro-section-heading .eyebrow { font-size: 11px; }
+  .intro-strategy-section .intro-section-heading h2 { font-size: clamp(31px, 9.6vw, 38px); }
+  .intro-strategy-section .intro-heading-line { margin-left: auto; }
+  .intro-strategy-section .intro-primary-tabs {
+    display: grid;
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    margin: 0 0 20px;
+    overflow: visible;
+    padding: 0;
+    border: 0;
+    scroll-padding: 0;
+    scroll-snap-type: none;
+  }
+  .intro-strategy-section .intro-primary-tab-separator { display: none; }
+  .intro-strategy-section .intro-primary-tab { width: 100%; grid-template-columns: 48px minmax(0, 1fr); min-height: 88px; padding: 12px 14px; border: 1px solid var(--strategy-border); border-radius: 16px; background: var(--strategy-panel); scroll-snap-align: none; }
+  .intro-strategy-section .intro-primary-tab.active { border-color: color-mix(in srgb, var(--blue-600) 48%, var(--line)); }
+  .intro-strategy-section .intro-primary-tab::after { right: 14px; left: 14px; }
+  .intro-strategy-section .intro-primary-tab-icon { width: 46px; height: 46px; }
+  .intro-strategy-section .intro-primary-tab-label { font-size: 15px; }
+  .intro-strategy-section .intro-section-panel { animation-duration: .18s; }
+  .intro-strategy-section .intro-context-layout { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .intro-strategy-section .intro-context-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 7px; }
+  .intro-strategy-section .intro-context-nav button { min-height: 44px; padding: 9px 8px; text-align: center; }
+  .intro-strategy-section .intro-context-reading { padding: 24px 20px 26px; border-radius: 18px; }
+  .intro-strategy-section .intro-context-reading::before { left: 20px; }
+  .intro-strategy-section .intro-context-reading h3 { font-size: 22px; }
+  .intro-strategy-section .intro-content-copy p { font-size: 15.5px; line-height: 1.74; text-align: left; }
+  .intro-strategy-section .intro-context-reading .intro-content-copy p,
+  .intro-strategy-section .intro-mission-card-mission .intro-content-copy p,
+  .intro-strategy-section .intro-mission-card-vision .intro-content-copy p,
+  .intro-strategy-section .intro-mission-card-education-philosophy .intro-content-copy p:nth-child(3) { text-align: left; text-justify: auto; }
+  .intro-strategy-section .intro-mission-layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .intro-strategy-section .intro-mission-foundation,
+  .intro-strategy-section .intro-core-values,
+  .intro-strategy-section .intro-mission-card-education-philosophy,
+  .intro-strategy-section .intro-mission-card-action-slogan { border-radius: 18px; }
+  .intro-strategy-section .intro-mission-foundation,
+  .intro-strategy-section .intro-core-values { padding: 20px; }
+  .intro-strategy-section .intro-mission-card h3 { font-size: 21px; }
+  .intro-strategy-section .intro-mission-card-mission .intro-content-copy p,
+  .intro-strategy-section .intro-mission-card-vision .intro-content-copy p { font-size: 15.5px; line-height: 1.74; }
+  .intro-strategy-section .intro-core-values-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .intro-strategy-section .core-value-item,
+  .intro-strategy-section .core-value-item:first-child,
+  .intro-strategy-section .core-value-item:last-child { padding: 18px 14px; }
+  .intro-strategy-section .core-value-item p { font-size: 15px; line-height: 1.7; }
+  .intro-strategy-section .intro-mission-card-education-philosophy {
+    margin-top: 10px;
+    padding: 24px 20px 30px;
+    background:
+      radial-gradient(circle at 92% 8%, color-mix(in srgb, var(--cyan-400) 3.5%, transparent), transparent 24%) padding-box,
+      linear-gradient(138deg, color-mix(in srgb, var(--blue-600) 4%, var(--strategy-panel-strong)), color-mix(in srgb, var(--cyan-400) 1.5%, var(--strategy-panel))) padding-box,
+      linear-gradient(112deg, color-mix(in srgb, var(--blue-600) 38%, var(--line)), color-mix(in srgb, var(--cyan-400) 25%, var(--line)) 64%, color-mix(in srgb, var(--blue-600) 15%, var(--strategy-border))) border-box;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 52%), 0 0 0 1px color-mix(in srgb, var(--blue-600) 7%, transparent), 0 8px 18px color-mix(in srgb, var(--navy-900) 5%, transparent);
+  }
+  .intro-strategy-section .intro-mission-card-education-philosophy::after { top: 18px; right: 16px; width: 58px; border-radius: 18px; opacity: .32; }
+  .intro-strategy-section .intro-mission-card-education-philosophy h3 { padding-right: 68px; font-size: 21px; }
+  .intro-strategy-section .intro-mission-card-education-philosophy .intro-content-copy p:first-child { margin-top: 20px; font-size: clamp(27px, 7.8vw, 30px); line-height: 1.22; }
+  .intro-strategy-section .intro-mission-card-education-philosophy .intro-content-copy p:nth-child(2) { font-size: 12.5px; }
+  .intro-strategy-section .intro-mission-card-education-philosophy .intro-content-copy p:nth-child(3) { font-size: 15.5px; line-height: 1.74; }
+  .intro-strategy-section .intro-mission-card-action-slogan { margin-top: 16px; padding: 24px 34px 27px; background-size: auto, auto, auto, 72% 1px, 56px 56px, 56px 56px, auto; box-shadow: inset 0 1px 0 rgb(255 255 255 / 48%), 0 7px 18px color-mix(in srgb, var(--navy-900) 4%, transparent); backdrop-filter: none; }
+  .intro-strategy-section .intro-mission-card-action-slogan::before,
+  .intro-strategy-section .intro-mission-card-action-slogan::after { font-size: 44px; opacity: .055; }
+  .intro-strategy-section .intro-mission-card-action-slogan::before { left: 9px; }
+  .intro-strategy-section .intro-mission-card-action-slogan::after { right: 9px; }
+  .intro-strategy-section .intro-mission-card-action-slogan h3 { font-size: 11px; letter-spacing: .07em; }
+  .intro-strategy-section .intro-mission-card-action-slogan h3::after { width: min(170px, 56%); }
+  .intro-strategy-section .intro-mission-card-action-slogan .intro-content-copy .intro-action-slogan-main { font-size: clamp(22px, 6.4vw, 26px); line-height: 1.4; }
+  .intro-strategy-section .intro-mission-card-action-slogan .intro-content-copy .intro-action-slogan-english { font-size: 12.5px; }
+  .intro-strategy-section .intro-accordion-item h3 button { grid-template-columns: 26px 40px minmax(0, 1fr) 22px; grid-template-rows: auto auto; gap: 6px 10px; min-height: 76px; padding: 13px 14px; }
+  .intro-strategy-section .intro-accordion-number { grid-column: 1; grid-row: 1; }
+  .intro-strategy-section .intro-accordion-icon { grid-column: 2; grid-row: 1; width: 40px; height: 40px; }
+  .intro-strategy-section .intro-accordion-title { grid-column: 3; grid-row: 1; font-size: 16px; }
+  .intro-strategy-section .intro-accordion-count { grid-column: 3; grid-row: 2; font-size: 10px; }
+  .intro-strategy-section .intro-accordion-item h3 button > svg { grid-column: 4; grid-row: 1 / span 2; }
+  .intro-strategy-section .intro-accordion-panel { padding: 0 16px 18px; }
+  .intro-strategy-section .intro-accordion-panel li { grid-template-columns: 26px minmax(0, 1fr); gap: 10px; font-size: 15.5px; line-height: 1.74; }
+  .intro-strategy-section .intro-accordion-panel li > span:last-child { text-align: left; text-justify: auto; }
+}
+
+@media (max-width: 420px) {
+  .intro-strategy-section .intro-page-container { width: min(calc(100% - 22px), 1280px); }
+  .intro-strategy-section .intro-section-heading h2 { font-size: clamp(30px, 9.6vw, 34px); }
+  .intro-strategy-section .intro-primary-tabs { width: 100%; margin: 0 0 20px; padding: 0; scroll-padding: 0; }
+  .intro-strategy-section .intro-context-reading,
+  .intro-strategy-section .intro-mission-foundation,
+  .intro-strategy-section .intro-core-values,
+  .intro-strategy-section .intro-mission-card-education-philosophy { padding: 16px; }
+  .intro-strategy-section .intro-mission-card-education-philosophy h3 { padding-right: 62px; }
+  .intro-strategy-section .intro-mission-card-education-philosophy::after { top: 14px; right: 12px; width: 56px; }
+  .intro-strategy-section .intro-mission-card-action-slogan { padding: 22px 26px 24px; }
+  .intro-strategy-section .intro-mission-card-action-slogan::before { left: 5px; }
+  .intro-strategy-section .intro-mission-card-action-slogan::after { right: 5px; }
+  .intro-strategy-section .intro-core-values-grid { grid-template-columns: minmax(0, 1fr); }
+  .intro-strategy-section .core-value-item h4 { min-height: 0; }
+  .intro-strategy-section .core-value-item p { text-align: left; }
+  .intro-strategy-section .intro-accordion-item h3 button { grid-template-columns: 24px 36px minmax(0, 1fr) 20px; padding-inline: 11px; }
+  .intro-strategy-section .intro-accordion-icon { width: 36px; height: 36px; }
+  .intro-strategy-section .intro-accordion-title { font-size: 15.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-strategy-section .intro-section-panel,
+  .intro-strategy-section .intro-accordion-panel { animation: none; }
+  .intro-strategy-section .core-value-item { transform: none; }
+}
+
+/* Dark strategy depth: restrained global-tech atmosphere without changing composition. */
+:root[data-theme='dark'] .intro-strategy-section::after {
+  background-image:
+    radial-gradient(circle at 18% 30%, color-mix(in srgb, var(--blue-400) 32%, transparent) 0 1px, transparent 2px),
+    radial-gradient(circle at 76% 62%, color-mix(in srgb, var(--cyan-400) 24%, transparent) 0 1px, transparent 2px),
+    radial-gradient(circle at 88% 20%, color-mix(in srgb, var(--cyan-400) 11%, transparent), transparent 32%),
+    linear-gradient(color-mix(in srgb, var(--blue-400) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--blue-400) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(180deg, color-mix(in srgb, var(--page-bg) 70%, transparent), var(--page-bg) 94%);
+  background-size: auto, auto, auto, 56px 56px, 56px 56px, auto;
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-primary-tab.active::after {
+  background: linear-gradient(90deg, var(--blue-500), var(--cyan-400));
+  box-shadow: 0 0 13px color-mix(in srgb, var(--cyan-400) 34%, transparent);
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-primary-tab.active .intro-primary-tab-icon {
+  border-color: color-mix(in srgb, var(--cyan-400) 48%, var(--line));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 8%),
+    0 0 0 4px color-mix(in srgb, var(--blue-500) 6%, transparent),
+    0 0 22px color-mix(in srgb, var(--cyan-400) 18%, transparent);
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-primary-tab-separator:nth-child(2) {
+  color: color-mix(in srgb, var(--blue-400) 68%, transparent);
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--blue-500) 22%, transparent));
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-primary-tab-separator:nth-child(4) {
+  color: color-mix(in srgb, var(--cyan-400) 72%, transparent);
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--cyan-400) 22%, transparent));
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-foundation,
+:root[data-theme='dark'] .intro-strategy-section .intro-core-values {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--blue-400) 34%, var(--line));
+  background:
+    radial-gradient(circle at 10% 0%, color-mix(in srgb, var(--blue-500) 14%, transparent), transparent 38%),
+    linear-gradient(145deg, color-mix(in srgb, var(--panel-bg) 94%, var(--blue-600)), color-mix(in srgb, var(--surface) 92%, var(--navy-800)));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 7%),
+    inset 0 0 42px color-mix(in srgb, var(--blue-600) 4%, transparent),
+    0 22px 58px rgb(0 0 0 / 30%),
+    0 0 42px color-mix(in srgb, var(--blue-500) 8%, transparent);
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-foundation::before,
+:root[data-theme='dark'] .intro-strategy-section .intro-core-values::before,
+:root[data-theme='dark'] .intro-strategy-section .intro-core-values::after {
+  position: absolute;
+  content: '';
+  pointer-events: none;
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-foundation::before {
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, transparent, color-mix(in srgb, var(--cyan-400) 42%, transparent), transparent) top / 100% 1px no-repeat,
+    radial-gradient(circle at 88% 16%, color-mix(in srgb, var(--cyan-400) 10%, transparent), transparent 28%);
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-foundation > *,
+:root[data-theme='dark'] .intro-strategy-section .intro-core-values > * {
+  position: relative;
+  z-index: 1;
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-foundation .intro-mission-card + .intro-mission-card {
+  border-color: color-mix(in srgb, var(--cyan-400) 20%, var(--strategy-muted-border));
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-icon {
+  border: 1px solid color-mix(in srgb, var(--cyan-400) 42%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--blue-600) 88%, var(--cyan-400)), var(--blue-500));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 18%),
+    0 0 0 5px color-mix(in srgb, var(--blue-500) 8%, transparent),
+    0 0 24px color-mix(in srgb, var(--blue-500) 24%, transparent);
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-core-values {
+  border: 1px solid transparent;
+  background:
+    radial-gradient(circle at 92% 8%, color-mix(in srgb, var(--cyan-400) 14%, transparent), transparent 34%) padding-box,
+    radial-gradient(circle at 8% 92%, color-mix(in srgb, var(--orange-500) 5%, transparent), transparent 26%) padding-box,
+    linear-gradient(155deg, color-mix(in srgb, var(--panel-bg) 95%, var(--blue-600)), color-mix(in srgb, var(--surface) 90%, var(--navy-800))) padding-box,
+    linear-gradient(125deg, color-mix(in srgb, var(--blue-500) 58%, var(--line)), color-mix(in srgb, var(--cyan-400) 44%, var(--line)) 54%, color-mix(in srgb, var(--orange-500) 18%, var(--line))) border-box;
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-core-values::before {
+  inset: 0;
+  z-index: -2;
+  background-image:
+    radial-gradient(circle at 16% 20%, color-mix(in srgb, var(--cyan-400) 40%, transparent) 0 1px, transparent 2px),
+    radial-gradient(circle at 72% 74%, color-mix(in srgb, var(--orange-500) 28%, transparent) 0 1px, transparent 2px),
+    linear-gradient(color-mix(in srgb, var(--blue-400) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--blue-400) 7%, transparent) 1px, transparent 1px);
+  background-size: auto, auto, 32px 32px, 32px 32px;
+  mask-image: linear-gradient(135deg, transparent 8%, #000 46%, transparent 92%);
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-core-values::after {
+  top: -116px;
+  right: -76px;
+  z-index: -1;
+  width: 238px;
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--cyan-400) 18%, transparent);
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at center, transparent 47%, color-mix(in srgb, var(--cyan-400) 10%, transparent) 48%, transparent 49%),
+    linear-gradient(90deg, transparent 49.5%, color-mix(in srgb, var(--cyan-400) 9%, transparent) 50%, transparent 50.5%),
+    radial-gradient(circle, color-mix(in srgb, var(--blue-500) 9%, transparent), transparent 66%);
+  box-shadow:
+    inset 0 0 38px color-mix(in srgb, var(--blue-500) 9%, transparent),
+    0 0 54px color-mix(in srgb, var(--cyan-400) 7%, transparent);
+  opacity: .8;
+  transform: rotate(-14deg);
+}
+
+:root[data-theme='dark'] .intro-strategy-section .core-value-item,
+:root[data-theme='dark'] .intro-strategy-section .core-value-item:first-child,
+:root[data-theme='dark'] .intro-strategy-section .core-value-item:last-child {
+  --core-accent: var(--blue-500);
+  border-color: color-mix(in srgb, var(--core-accent) 26%, var(--line));
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--core-accent) 7%, transparent), transparent 42%),
+    linear-gradient(145deg, color-mix(in srgb, var(--control-bg) 82%, transparent), color-mix(in srgb, var(--panel-bg) 88%, transparent));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 5%),
+    0 10px 26px rgb(0 0 0 / 16%);
+}
+
+:root[data-theme='dark'] .intro-strategy-section .core-value-item:nth-child(2) { --core-accent: var(--cyan-400); }
+:root[data-theme='dark'] .intro-strategy-section .core-value-item:nth-child(3) { --core-accent: var(--orange-500); }
+:root[data-theme='dark'] .intro-strategy-section .core-value-item:nth-child(4) { --core-accent: var(--cyan-400); }
+
+:root[data-theme='dark'] .intro-strategy-section .core-value-item .core-value-icon,
+:root[data-theme='dark'] .intro-strategy-section .core-value-item h4 { color: var(--core-accent); }
+
+:root[data-theme='dark'] .intro-strategy-section .core-value-icon {
+  border-color: color-mix(in srgb, var(--core-accent) 50%, var(--line));
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--core-accent) 12%, var(--control-bg)), color-mix(in srgb, var(--panel-bg) 94%, transparent));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 8%),
+    0 0 0 4px color-mix(in srgb, var(--core-accent) 6%, transparent),
+    0 0 0 5px color-mix(in srgb, var(--core-accent) 13%, transparent),
+    0 0 22px color-mix(in srgb, var(--core-accent) 17%, transparent);
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-card-education-philosophy {
+  border-color: transparent;
+  background:
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--cyan-400) 9%, transparent), transparent 30%) padding-box,
+    linear-gradient(138deg, color-mix(in srgb, var(--panel-bg) 95%, var(--blue-600)), color-mix(in srgb, var(--surface) 93%, var(--navy-800))) padding-box,
+    linear-gradient(112deg, color-mix(in srgb, var(--blue-500) 56%, var(--line)), color-mix(in srgb, var(--cyan-400) 41%, var(--line)) 64%, color-mix(in srgb, var(--blue-500) 24%, var(--line))) border-box;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 7%),
+    inset 0 0 34px color-mix(in srgb, var(--blue-600) 3%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--cyan-400) 11%, transparent),
+    0 13px 32px rgb(0 0 0 / 21%),
+    0 0 20px color-mix(in srgb, var(--cyan-400) 3%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-card-education-philosophy::before {
+  box-shadow: 0 0 9px color-mix(in srgb, var(--cyan-400) 17%, transparent);
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-card-education-philosophy::after {
+  border-color: color-mix(in srgb, var(--cyan-400) 34%, var(--line));
+  background:
+    radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--blue-400) 82%, var(--cyan-400)) 0 7px, transparent 8px),
+    radial-gradient(ellipse at 50% 76%, transparent 0 23%, color-mix(in srgb, var(--cyan-400) 58%, var(--blue-500)) 24% 26%, transparent 27%),
+    radial-gradient(circle at 16% 70%, var(--cyan-400) 0 2px, transparent 3px),
+    radial-gradient(circle at 84% 38%, var(--blue-400) 0 2px, transparent 3px),
+    linear-gradient(145deg, color-mix(in srgb, var(--blue-600) 14%, var(--control-bg)), color-mix(in srgb, var(--navy-800) 90%, transparent));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 9%),
+    0 0 0 5px color-mix(in srgb, var(--blue-500) 4%, transparent),
+    0 0 18px color-mix(in srgb, var(--cyan-400) 7%, transparent);
+  opacity: .54;
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-card-education-philosophy .intro-content-copy p:nth-child(2) {
+  color: color-mix(in srgb, var(--cyan-400) 72%, var(--blue-400));
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-card-action-slogan {
+  border-color: color-mix(in srgb, var(--cyan-400) 34%, var(--line));
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--cyan-400) 64%, transparent) 0 2px, transparent 3px),
+    radial-gradient(circle at 16% 24%, color-mix(in srgb, var(--cyan-400) 36%, transparent) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 84% 76%, color-mix(in srgb, var(--blue-400) 32%, transparent) 0 1.5px, transparent 2.5px),
+    linear-gradient(90deg, transparent, color-mix(in srgb, var(--blue-500) 40%, var(--cyan-400)), transparent) top center / 68% 1px no-repeat,
+    linear-gradient(color-mix(in srgb, var(--blue-400) 2.5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--blue-400) 2.5%, transparent) 1px, transparent 1px),
+    linear-gradient(145deg, color-mix(in srgb, var(--panel-bg) 76%, transparent), color-mix(in srgb, var(--surface) 78%, transparent));
+  background-size: auto, auto, auto, 68% 1px, 44px 44px, 44px 44px, auto;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 5%),
+    inset 0 0 24px color-mix(in srgb, var(--blue-600) 2.5%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--cyan-400) 9%, transparent),
+    0 9px 24px rgb(0 0 0 / 17%),
+    0 0 14px color-mix(in srgb, var(--blue-500) 3%, transparent);
+}
+
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-card-action-slogan::before,
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-card-action-slogan::after { color: var(--cyan-400); opacity: .065; }
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-card-action-slogan h3 { color: color-mix(in srgb, var(--cyan-400) 76%, var(--blue-400)); }
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-card-action-slogan .intro-content-copy .intro-action-slogan-main { color: color-mix(in srgb, var(--text-primary) 68%, var(--blue-400)); }
+:root[data-theme='dark'] .intro-strategy-section .intro-mission-card-action-slogan .intro-content-copy .intro-action-slogan-english { color: color-mix(in srgb, var(--cyan-400) 48%, var(--text-secondary)); }
+
+@media (hover: hover) {
+  :root[data-theme='dark'] .intro-strategy-section .core-value-item:hover {
+    border-color: color-mix(in srgb, var(--core-accent) 56%, var(--line));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 8%),
+      0 16px 34px rgb(0 0 0 / 24%),
+      0 0 26px color-mix(in srgb, var(--core-accent) 13%, transparent);
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root[data-theme='dark'] .intro-strategy-section .core-value-item:hover { transform: none; }
+}
+
+@media (max-width: 767px) {
+  :root[data-theme='dark'] .intro-strategy-section::after {
+    background-image:
+      radial-gradient(circle at 88% 20%, color-mix(in srgb, var(--cyan-400) 6%, transparent), transparent 28%),
+      linear-gradient(180deg, color-mix(in srgb, var(--page-bg) 72%, transparent), var(--page-bg) 95%);
+    background-size: auto;
+  }
+
+  :root[data-theme='dark'] .intro-strategy-section .intro-mission-foundation,
+  :root[data-theme='dark'] .intro-strategy-section .intro-core-values,
+  :root[data-theme='dark'] .intro-strategy-section .intro-mission-card-education-philosophy,
+  :root[data-theme='dark'] .intro-strategy-section .intro-mission-card-action-slogan {
+    backdrop-filter: blur(5px);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 6%),
+      inset 0 0 30px color-mix(in srgb, var(--blue-600) 3%, transparent),
+      0 14px 36px rgb(0 0 0 / 25%),
+      0 0 26px color-mix(in srgb, var(--blue-500) 6%, transparent);
+  }
+
+  :root[data-theme='dark'] .intro-strategy-section .intro-mission-card-education-philosophy {
+    background:
+      radial-gradient(circle at 92% 8%, color-mix(in srgb, var(--cyan-400) 4%, transparent), transparent 24%) padding-box,
+      linear-gradient(138deg, color-mix(in srgb, var(--panel-bg) 96%, var(--blue-600)), color-mix(in srgb, var(--surface) 94%, var(--navy-800))) padding-box,
+      linear-gradient(112deg, color-mix(in srgb, var(--blue-500) 44%, var(--line)), color-mix(in srgb, var(--cyan-400) 31%, var(--line)) 64%, color-mix(in srgb, var(--blue-500) 20%, var(--line))) border-box;
+  }
+
+  :root[data-theme='dark'] .intro-strategy-section .intro-mission-card-education-philosophy,
+  :root[data-theme='dark'] .intro-strategy-section .intro-mission-card-action-slogan {
+    backdrop-filter: blur(2px);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 5%), 0 9px 24px rgb(0 0 0 / 17%), 0 0 16px color-mix(in srgb, var(--blue-500) 3%, transparent);
+  }
+
+  :root[data-theme='dark'] .intro-strategy-section .intro-mission-card-education-philosophy::after { opacity: .28; box-shadow: inset 0 1px 0 rgb(255 255 255 / 6%), 0 0 0 4px color-mix(in srgb, var(--blue-500) 3%, transparent); }
+  :root[data-theme='dark'] .intro-strategy-section .intro-mission-card-action-slogan { background-size: auto, auto, auto, 72% 1px, 56px 56px, 56px 56px, auto; }
+  :root[data-theme='dark'] .intro-strategy-section .intro-mission-card-action-slogan::before,
+  :root[data-theme='dark'] .intro-strategy-section .intro-mission-card-action-slogan::after { opacity: .045; }
+
+  :root[data-theme='dark'] .intro-strategy-section .intro-core-values::before { opacity: .5; }
+
+  :root[data-theme='dark'] .intro-strategy-section .intro-core-values::after {
+    top: -92px;
+    right: -72px;
+    width: 190px;
+    opacity: .36;
+  }
+
+  :root[data-theme='dark'] .intro-strategy-section .core-value-item,
+  :root[data-theme='dark'] .intro-strategy-section .core-value-item:first-child,
+  :root[data-theme='dark'] .intro-strategy-section .core-value-item:last-child {
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 4%), 0 7px 18px rgb(0 0 0 / 14%);
+  }
+
+  :root[data-theme='dark'] .intro-strategy-section .core-value-icon {
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 7%),
+      0 0 0 4px color-mix(in srgb, var(--core-accent) 5%, transparent),
+      0 0 15px color-mix(in srgb, var(--core-accent) 12%, transparent);
+  }
 }
