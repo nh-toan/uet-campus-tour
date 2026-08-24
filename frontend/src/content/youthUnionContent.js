@@ -47,9 +47,9 @@ export const featuredActivities = [
 ];
 
 export const youthUnionMedia = {
-  youthUnionLogo: '/assets/youth-union/logos/doan-thanh-nien.png',
-  studentAssociationLogo: '/assets/youth-union/logos/hoi-sinh-vien.png',
-  heroImage: '/assets/youth-union/hero/header.jpg',
+  youthUnionLogo: '/assets/youth-union/logos/doan-thanh-nien.webp',
+  studentAssociationLogo: '/assets/youth-union/logos/hoi-sinh-vien.webp',
+  heroImage: '/assets/youth-union/activities/ngay-hoi-truyen-thong.jpg',
   affiliatedImage: '/assets/youth-union/features/affiliated-units.jpg',
   clubsImage: '/assets/youth-union/features/clubs.jpg'
 };

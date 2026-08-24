@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import {
   ArrowRight,
   BookOpen,
@@ -53,32 +54,66 @@ function SectionHeading({ eyebrow, title, description, id }) {
 }
 
 function ActivityModal({ activity, onClose }) {
+  const closeButtonRef = useRef(null);
+
   useEffect(() => {
-    const onKeyDown = event => { if (event.key === 'Escape') onClose(); };
+    const previouslyFocused = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    const previousPaddingRight = document.body.style.paddingRight;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    const bodyPaddingRight = Number.parseFloat(window.getComputedStyle(document.body).paddingRight) || 0;
+    const onKeyDown = event => {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      onClose();
+    };
+
+    document.body.style.overflow = 'hidden';
+    if (scrollbarWidth > 0) document.body.style.paddingRight = `${bodyPaddingRight + scrollbarWidth}px`;
+    closeButtonRef.current?.focus();
     window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = previousOverflow;
+      document.body.style.paddingRight = previousPaddingRight;
+      if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus();
+    };
   }, [onClose]);
 
-  return <div className="youth-activity-modal-backdrop" role="presentation" onMouseDown={event => { if (event.target === event.currentTarget) onClose(); }}>
+  return createPortal(<div className="youth-activity-modal-backdrop" role="presentation" onClick={event => { if (event.target === event.currentTarget) onClose(); }}>
     <section className="youth-activity-modal" role="dialog" aria-modal="true" aria-labelledby={`activity-dialog-${activity.id}`}>
-      <button className="youth-activity-modal-close" type="button" onClick={onClose} aria-label="Đóng hoạt động"><X size={22} aria-hidden="true" /></button>
+      <button ref={closeButtonRef} className="youth-activity-modal-close" type="button" onClick={onClose} aria-label="Đóng hoạt động"><X size={22} aria-hidden="true" /></button>
       <header className="youth-activity-modal-header"><h2 id={`activity-dialog-${activity.id}`}>{activity.title}</h2></header>
       <div className="youth-activity-modal-media">
         <img src={activity.image} alt={activity.title} />
         {activity.gallery?.map(image => <img key={image} src={image} alt="Hình ảnh hoạt động bổ sung" loading="lazy" decoding="async" />)}
       </div>
     </section>
-  </div>;
+  </div>, document.body);
 }
 
 export function YouthUnionPage({ navigate }) {
   const [selectedActivity, setSelectedActivity] = useState(null);
+  const closeActivity = useCallback(() => setSelectedActivity(null), []);
 
   return <div className="youth-page">
     <section className="youth-hero youth-reference-hero" aria-labelledby="youth-hero-title">
-      <h1 className="visually-hidden" id="youth-hero-title">Tuổi trẻ Trường Đại học Công nghệ: Kết nối - Kiến tạo - Đổi mới</h1>
-      <div className="youth-reference-hero-image" aria-hidden="true">
-        <img src="/assets/youth-union/hero/visual-header-reference.png" alt="" />
+      <div className="youth-reference-hero-media" aria-hidden="true">
+        <img src={youthUnionMedia.heroImage} alt="" />
+        <div className="youth-reference-hero-media-blend" />
+      </div>
+      <div className="site-container youth-container youth-reference-hero-inner">
+        <div className="youth-reference-hero-copy">
+          <div className="youth-logos">
+            <OrganizationLogo image={youthUnionMedia.youthUnionLogo} label="ĐTN" alt="Logo Đoàn Thanh niên" />
+            <OrganizationLogo image={youthUnionMedia.studentAssociationLogo} label="HSV" alt="Logo Hội Sinh viên" />
+          </div>
+          <p className="youth-reference-hero-label"><span>Đoàn Thanh niên – Hội Sinh viên</span><span>Trường Đại học Công nghệ</span></p>
+          <h1 id="youth-hero-title"><span>Tuổi trẻ Trường</span><span>Đại học Công nghệ</span></h1>
+          <p className="youth-reference-hero-tagline">Kết nối – Kiến tạo – Đổi mới</p>
+          <p className="youth-reference-hero-description">{youthUnionOverview.intro}</p>
+        </div>
       </div>
     </section>
 
@@ -150,6 +185,6 @@ export function YouthUnionPage({ navigate }) {
       </div>
     </section>
 
-    {selectedActivity && <ActivityModal activity={selectedActivity} onClose={() => setSelectedActivity(null)} />}
+    {selectedActivity && <ActivityModal activity={selectedActivity} onClose={closeActivity} />}
   </div>;
 }
