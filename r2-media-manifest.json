@@ -8,7 +8,7 @@
     "localAssetCount": 71,
     "localAssetBytes": 34428263,
     "runtimeAssetCount": 164,
-    "runtimeAssetBytes": 284917972,
+    "runtimeAssetBytes": 285076066,
     "pendingUploadCount": 0,
     "verifiedCount": 164
   },
@@ -2148,9 +2148,9 @@
     {
       "sourcePath": "frontend/public/assets/intro/uet-organization-chart.webp",
       "sourceKey": "intro/uet-organization-chart.webp",
-      "objectKey": "intro/uet-organization-chart.c642e1d0260d.webp",
-      "sha256": "c642e1d0260dcd435bf0e5697a5d041ab9db77c7dceca04b83a5fab7e0792ca8",
-      "sourceBytes": 103438,
+      "objectKey": "intro/uet-organization-chart.b2decddcaa2f.webp",
+      "sha256": "b2decddcaa2fddd245d49701879ccca094be7cc56f25ec72b9ff8c44e6da4a6d",
+      "sourceBytes": 261532,
       "sourcePresent": false,
       "category": "content-media",
       "runtimeReferenced": true,

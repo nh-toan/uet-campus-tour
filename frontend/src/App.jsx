@@ -152,7 +152,7 @@ function IntroPage() {
 function OrganizationChart() {
   return <div className="intro-organization-diagram">
     <div className="intro-organization-preview">
-      <img src={mediaUrl('intro/uet-organization-chart.webp')} alt="Sơ đồ cơ cấu tổ chức Trường Đại học Công nghệ" width="1448" height="1086" loading="lazy" decoding="async" />
+      <img src={mediaUrl('intro/uet-organization-chart.webp')} alt="Sơ đồ cơ cấu tổ chức Trường Đại học Công nghệ" width="2400" height="1802" loading="lazy" decoding="async" />
     </div>
   </div>;
 }

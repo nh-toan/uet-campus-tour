@@ -46,3 +46,4 @@ export const youthUnionMedia = {
 };
 
 export const youthUnionFacebookUrl = 'https://www.facebook.com/DTNHSV.UET.VNU';
+export const youthUnionWebsiteUrl = 'https://tuoitrecongnghe.uet.vnu.edu.vn/';

@@ -293,6 +293,7 @@
 .youth-facebook-icon { display: grid; width: 58px; height: 58px; place-items: center; border: 1px solid rgb(255 255 255 / 24%); border-radius: 16px; background: rgb(255 255 255 / 9%); }
 .youth-facebook-card h2 { margin: 0; color: var(--white); font-size: 22px; font-weight: 700; line-height: 1.22; letter-spacing: -.02em; }
 .youth-facebook-card p:last-child { margin: 6px 0 0; color: rgb(255 255 255 / 80%); font-size: 13px; line-height: 1.5; }
+.youth-contact-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
 .youth-facebook-card a { display: inline-flex; min-height: 42px; align-items: center; justify-content: center; gap: 9px; padding: 0 18px; border: 1px solid rgb(255 255 255 / 32%); border-radius: 11px; color: var(--white); background: rgb(255 255 255 / 9%); font-size: 14px; font-weight: 750; transition: border-color .2s ease, background-color .2s ease; }
 .youth-facebook-card a:hover { border-color: rgb(255 255 255 / 62%); background: rgb(255 255 255 / 16%); }
 
@@ -361,6 +362,7 @@
   .youth-activity-overlay > span { font-size: 13px; }
   .youth-facebook-section { padding: 42px 0 48px; }
   .youth-facebook-card { grid-template-columns: minmax(0, 1fr); gap: 17px; padding: 25px 22px; }
+  .youth-contact-actions { display: grid; grid-template-columns: minmax(0, 1fr); }
   .youth-facebook-card a { width: 100%; }
   .youth-activity-modal-backdrop { padding: 14px; }
   .youth-activity-modal { max-height: calc(100dvh - 28px); border-radius: 18px; }

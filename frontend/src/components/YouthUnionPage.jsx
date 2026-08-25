@@ -16,6 +16,7 @@ import {
   affiliatedUnits,
   featuredActivities,
   youthUnionFacebookUrl,
+  youthUnionWebsiteUrl,
   youthUnionMedia,
   youthUnionOverview
 } from '../content/youthUnionContent';
@@ -174,12 +175,15 @@ export function YouthUnionPage({ navigate }) {
       </div>
     </section>
 
-    <section className="youth-facebook-section" aria-label="Facebook Đoàn Thanh niên – Hội Sinh viên UET">
+    <section className="youth-facebook-section" aria-label="Kênh thông tin Đoàn Thanh niên – Hội Sinh viên UET">
       <div className="site-container youth-container">
         <div className="youth-facebook-card">
           <span className="youth-facebook-icon"><MessageCircle size={27} aria-hidden="true" /></span>
-          <div><p className="eyebrow">Cập nhật cùng ĐTN – HSV UET</p><h2>Kết nối và đồng hành cùng tuổi trẻ UET</h2><p>Theo dõi Facebook để không bỏ lỡ các tin tức, sự kiện và hoạt động mới nhất.</p></div>
-          <a href={youthUnionFacebookUrl} target="_blank" rel="noopener noreferrer">Theo dõi Facebook <ExternalLink size={17} aria-hidden="true" /></a>
+          <div><p className="eyebrow">Cập nhật cùng ĐTN – HSV UET</p><h2>Kết nối và đồng hành cùng tuổi trẻ UET</h2><p>Theo dõi Facebook và website Tuổi trẻ Công nghệ để không bỏ lỡ các tin tức, sự kiện và hoạt động mới nhất.</p></div>
+          <div className="youth-contact-actions">
+            <a href={youthUnionWebsiteUrl} target="_blank" rel="noopener noreferrer">Truy cập website <ExternalLink size={17} aria-hidden="true" /></a>
+            <a href={youthUnionFacebookUrl} target="_blank" rel="noopener noreferrer">Theo dõi Facebook <ExternalLink size={17} aria-hidden="true" /></a>
+          </div>
         </div>
       </div>
     </section>
