@@ -6,6 +6,7 @@ const projectRoot = path.resolve(__dirname, '..');
 const publicAssetsRoot = path.join(projectRoot, 'frontend', 'public', 'assets');
 const manifestPath = path.join(projectRoot, 'r2-media-manifest.json');
 const generatedMapPath = path.join(projectRoot, 'frontend', 'src', 'config', 'mediaObjects.js');
+const compatibilityAliasPath = path.join(projectRoot, 'frontend', 'src', 'config', 'mediaAliases.js');
 const scanRoots = [
   path.join(projectRoot, 'backend', 'data'),
   path.join(projectRoot, 'backend', 'server.js'),
@@ -58,7 +59,7 @@ function optimizationFor(key, size) {
 
 const referencedKeys = new Set();
 for (const sourceFile of scanRoots.flatMap(listFiles)) {
-  if (sourceFile === generatedMapPath || !sourceExtensions.has(path.extname(sourceFile).toLowerCase())) continue;
+  if ([generatedMapPath, compatibilityAliasPath].includes(sourceFile) || !sourceExtensions.has(path.extname(sourceFile).toLowerCase())) continue;
   const source = fs.readFileSync(sourceFile, 'utf8');
   for (const match of source.matchAll(mediaReferencePattern)) referencedKeys.add(match[1]);
 }

@@ -16,32 +16,32 @@ const ROOT = path.resolve(__dirname, '..');
 const DOCX_FILE = path.join(ROOT, 'UET.CLB.docx');
 const OUTPUT_FILE = path.join(ROOT, 'backend', 'data', 'clubs.json');
 
-/** Bảng danh mục CLB: [tên trong file Word, tên hiển thị, viết tắt trên logo, đơn vị chủ quản, fanpage, nhóm, màu] */
+/** Bảng danh mục CLB: [tên trong file Word, tên hiển thị, viết tắt trên logo, đơn vị chủ quản, fanpage, các nhóm, màu] */
 const CLUB_DIRECTORY = [
-  ['CLB Nghệ thuật (PC)', 'CLB Nghệ thuật', 'Passion Club', 'PC', 'hoi-sinh-vien', 'https://www.facebook.com/PCuet', 'art', '#e8447f'],
-  ['CLB Hỗ trợ Sinh viên (SGUET)', 'CLB Hỗ trợ Sinh viên', 'SGUET', 'SG', 'hoi-sinh-vien', 'https://www.facebook.com/SupportGroupUET', 'community', '#2f7fd1'],
-  ['CLB Vận động hiến máu', 'CLB Vận động hiến máu', 'Người Việt Trẻ', 'NVT', 'hoi-sinh-vien', 'https://www.facebook.com/NguoiVietTre0601', 'community', '#d63131'],
-  ['CLB Thư viện Hội Sinh viên', 'CLB Thư viện Hội Sinh viên', 'LSA', 'LSA', 'hoi-sinh-vien', 'https://www.facebook.com/TVHSV.UET', 'academic', '#0f8a6e'],
-  ['CLB Bóng đá (UETFC)', 'CLB Bóng đá', 'UET FC', 'FC', 'hoi-sinh-vien', 'https://www.facebook.com/uetfc.vnu', 'sport', '#1f7a3d'],
-  ['CLB Nhảy cổ động (GALAXY)', 'CLB Nhảy cổ động', 'GALAXY', 'GX', 'hoi-sinh-vien', 'https://www.facebook.com/UET.GALAXY.Cheerleading', 'art', '#7b45d6'],
-  ['CLB Cầu Lông', 'CLB Cầu lông', 'B-UET', 'BL', 'hoi-sinh-vien', 'https://www.facebook.com/clbcaulonguet', 'sport', '#12897f'],
-  ['CLB Bóng rổ', 'CLB Bóng rổ', 'UET Basketball', 'BR', 'hoi-sinh-vien', 'https://www.facebook.com/UET.BasketballClub', 'sport', '#e2661f'],
-  ['CLB Thuyết trình', 'CLB Thuyết trình', 'UET Presentation', 'TT', 'hoi-sinh-vien', 'https://www.facebook.com/CaulacboThuyettrinh/', 'academic', '#1c5fa8'],
-  ['CLB Truyền thông', 'CLB Truyền thông', 'UETLC', 'LC', 'hoi-sinh-vien', 'https://www.facebook.com/uetlc.club', 'media', '#c2317a'],
-  ['CLB Hàng không Vũ trụ', 'CLB Hàng không Vũ trụ', 'ACUET', 'AC', 'hoi-sinh-vien', 'https://www.facebook.com/AerospaceClubUET', 'tech', '#3b5bd4'],
-  ['CLB Tiếng Anh', 'CLB Tiếng Anh', 'English Club', 'EC', 'hoi-sinh-vien', 'https://www.facebook.com/EnglishClub.UET', 'academic', '#d4472a'],
-  ['CLB Tiếng Nhật', 'CLB Tiếng Nhật', 'JAPIT', 'JP', 'hoi-sinh-vien', 'https://www.facebook.com/uet.clbtiengnhat', 'academic', '#d6355c'],
-  ['CLB Điện tử và Tự động hóa (UETX)', 'CLB Điện tử và Tự động hóa', 'UETX', 'X', 'hoi-sinh-vien', 'https://www.facebook.com/uetX.club/', 'tech', '#0b7fa6'],
-  ['CLB Nguồn nhân lực (HRTech)', 'CLB Nguồn nhân lực', 'HRTech', 'HR', 'hoi-sinh-vien', 'https://www.facebook.com/hrtechclub', 'academic', '#8a3fbf'],
-  ['CLB Robotics (RCUET)', 'CLB Robotics', 'RCUET', 'RC', 'hoi-sinh-vien', 'https://www.facebook.com/clbrobotics.uet', 'tech', '#146fd1'],
-  ['CLB Thiết kế và sáng tạo', 'CLB Thiết kế và Sáng tạo', 'UET-IS', 'IS', 'hoi-sinh-vien', '', 'media', '#8b3fd6'],
-  ['CLB Trí tuệ nhân tạo', 'CLB Trí tuệ nhân tạo', 'AI-UET', 'AI', 'hoi-sinh-vien', 'https://www.facebook.com/UETARTIFICIALINTELLIGENCE', 'tech', '#0d8fb0'],
-  ['CLB Lý luận trẻ', 'CLB Lý luận trẻ', 'CLB Lý luận trẻ UET', 'LLT', 'doan-thanh-nien', 'https://www.facebook.com/CLBLLT.UET/', 'academic', '#c0342f'],
-  ['CLB Vũ đạo (YDC)', 'CLB Vũ đạo', 'YDC', 'YD', 'hoi-sinh-vien', 'https://www.facebook.com/share/17JBR4zqhe/', 'art', '#e0417a'],
-  ['CLB Vi mạch bán dẫn (SMUET)', 'CLB Vi mạch bán dẫn', 'SMUET', 'SM', 'hoi-sinh-vien', 'https://www.facebook.com/smuet.smc', 'tech', '#5b46d9'],
-  ['CLB Thiết kế Hệ thống và Vi mạch (UET CHIP+)', 'CLB Thiết kế Hệ thống và Vi mạch', 'UET CHIP+', 'C+', 'hoi-sinh-vien', 'https://www.facebook.com/uetchipplus', 'tech', '#0e7c8c'],
-  ['CLB Khoa học vật liệu (UET MSC)', 'CLB Khoa học Vật liệu', 'UET MSC', 'MS', 'hoi-sinh-vien', 'https://www.facebook.com/msc.uet', 'tech', '#a8551b'],
-  ['CLB Sinh viên 5 tốt', 'CLB Sinh viên 5 tốt', 'SV5T UET', '5T', 'hoi-sinh-vien', 'https://www.facebook.com/share/14tLYfytV96/', 'community', '#1d6fb8']
+  ['CLB Nghệ thuật (PC)', 'CLB Nghệ thuật', 'Passion Club', 'PC', 'hoi-sinh-vien', 'https://www.facebook.com/PCuet', ['Nghệ thuật & Văn hóa'], '#e8447f'],
+  ['CLB Hỗ trợ Sinh viên (SGUET)', 'CLB Hỗ trợ Sinh viên', 'SGUET', 'SG', 'hoi-sinh-vien', 'https://www.facebook.com/SupportGroupUET', ['Tình nguyện/Hỗ trợ cộng đồng'], '#2f7fd1'],
+  ['CLB Vận động hiến máu', 'CLB Vận động hiến máu', 'Người Việt Trẻ', 'NVT', 'hoi-sinh-vien', 'https://www.facebook.com/NguoiVietTre0601', ['Tình nguyện/Hỗ trợ cộng đồng'], '#d63131'],
+  ['CLB Thư viện Hội Sinh viên', 'CLB Thư viện Hội Sinh viên', 'LSA', 'LSA', 'hoi-sinh-vien', 'https://www.facebook.com/TVHSV.UET', ['Tình nguyện/Hỗ trợ cộng đồng'], '#0f8a6e'],
+  ['CLB Bóng đá (UETFC)', 'CLB Bóng đá', 'UET FC', 'FC', 'hoi-sinh-vien', 'https://www.facebook.com/uetfc.vnu', ['Thể thao'], '#1f7a3d'],
+  ['CLB Nhảy cổ động (GALAXY)', 'CLB Nhảy cổ động', 'GALAXY', 'GX', 'hoi-sinh-vien', 'https://www.facebook.com/UET.GALAXY.Cheerleading', ['Nghệ thuật & Văn hóa'], '#7b45d6'],
+  ['CLB Cầu Lông', 'CLB Cầu lông', 'B-UET', 'BL', 'hoi-sinh-vien', 'https://www.facebook.com/clbcaulonguet', ['Thể thao'], '#12897f'],
+  ['CLB Bóng rổ', 'CLB Bóng rổ', 'UET Basketball', 'BR', 'hoi-sinh-vien', 'https://www.facebook.com/UET.BasketballClub', ['Thể thao'], '#e2661f'],
+  ['CLB Thuyết trình', 'CLB Thuyết trình', 'UET Presentation', 'TT', 'hoi-sinh-vien', 'https://www.facebook.com/CaulacboThuyettrinh/', ['Học thuật/Kỹ năng'], '#1c5fa8'],
+  ['CLB Truyền thông', 'CLB Truyền thông', 'UETLC', 'LC', 'hoi-sinh-vien', 'https://www.facebook.com/uetlc.club', ['Truyền thông/Sự kiện'], '#c2317a'],
+  ['CLB Hàng không Vũ trụ', 'CLB Hàng không Vũ trụ', 'ACUET', 'AC', 'hoi-sinh-vien', 'https://www.facebook.com/AerospaceClubUET', ['Học thuật/Kỹ năng'], '#3b5bd4'],
+  ['CLB Tiếng Anh', 'CLB Tiếng Anh', 'English Club', 'EC', 'hoi-sinh-vien', 'https://www.facebook.com/EnglishClub.UET', ['Học thuật/Kỹ năng'], '#d4472a'],
+  ['CLB Tiếng Nhật', 'CLB Tiếng Nhật', 'JAPIT', 'JP', 'hoi-sinh-vien', 'https://www.facebook.com/uet.clbtiengnhat', ['Học thuật/Kỹ năng'], '#d6355c'],
+  ['CLB Điện tử và Tự động hóa (UETX)', 'CLB Điện tử và Tự động hóa', 'UETX', 'X', 'hoi-sinh-vien', 'https://www.facebook.com/uetX.club/', ['Học thuật/Kỹ năng'], '#0b7fa6'],
+  ['CLB Nguồn nhân lực (HRTech)', 'CLB Nguồn nhân lực', 'HRTech', 'HR', 'hoi-sinh-vien', 'https://www.facebook.com/hrtechclub', ['Học thuật/Kỹ năng'], '#8a3fbf'],
+  ['CLB Robotics (RCUET)', 'CLB Robotics', 'RCUET', 'RC', 'hoi-sinh-vien', 'https://www.facebook.com/clbrobotics.uet', ['Học thuật/Kỹ năng'], '#146fd1'],
+  ['CLB Thiết kế và sáng tạo', 'CLB Thiết kế và Sáng tạo', 'UET-IS', 'IS', 'hoi-sinh-vien', '', ['Học thuật/Kỹ năng'], '#8b3fd6'],
+  ['CLB Trí tuệ nhân tạo', 'CLB Trí tuệ nhân tạo', 'AI-UET', 'AI', 'hoi-sinh-vien', 'https://www.facebook.com/UETARTIFICIALINTELLIGENCE', ['Học thuật/Kỹ năng'], '#0d8fb0'],
+  ['CLB Lý luận trẻ', 'CLB Lý luận trẻ', 'CLB Lý luận trẻ UET', 'LLT', 'doan-thanh-nien', 'https://www.facebook.com/CLBLLT.UET/', ['Học thuật/Kỹ năng'], '#c0342f'],
+  ['CLB Vũ đạo (YDC)', 'CLB Vũ đạo', 'YDC', 'YD', 'hoi-sinh-vien', 'https://www.facebook.com/share/17JBR4zqhe/', ['Nghệ thuật & Văn hóa'], '#e0417a'],
+  ['CLB Vi mạch bán dẫn (SMUET)', 'CLB Vi mạch bán dẫn', 'SMUET', 'SM', 'hoi-sinh-vien', 'https://www.facebook.com/smuet.smc', ['Học thuật/Kỹ năng'], '#5b46d9'],
+  ['CLB Thiết kế Hệ thống và Vi mạch (UET CHIP+)', 'CLB Thiết kế Hệ thống và Vi mạch', 'UET CHIP+', 'C+', 'hoi-sinh-vien', 'https://www.facebook.com/uetchipplus', ['Học thuật/Kỹ năng'], '#0e7c8c'],
+  ['CLB Khoa học vật liệu (UET MSC)', 'CLB Khoa học Vật liệu', 'UET MSC', 'MS', 'hoi-sinh-vien', 'https://www.facebook.com/msc.uet', ['Học thuật/Kỹ năng'], '#a8551b'],
+  ['CLB Sinh viên 5 tốt', 'CLB Sinh viên 5 tốt', 'SV5T UET', '5T', 'hoi-sinh-vien', 'https://www.facebook.com/share/14tLYfytV96/', ['Học thuật/Kỹ năng', 'Tình nguyện/Hỗ trợ cộng đồng'], '#1d6fb8']
 ];
 
 const GOVERNING_BODIES = {
@@ -186,7 +186,7 @@ function main() {
   const unmatched = [...groups.keys()].filter(title => !CLUB_DIRECTORY.some(([docTitle]) => docTitle === title));
   if (unmatched.length) console.warn('Tiêu đề trong Word chưa khớp danh mục:', unmatched);
 
-  const clubs = CLUB_DIRECTORY.map(([docTitle, name, shortName, monogram, governing, fanpageUrl, category, accentColor], index) => {
+  const clubs = CLUB_DIRECTORY.map(([docTitle, name, shortName, monogram, governing, fanpageUrl, categories, accentColor], index) => {
     const paragraphs = groups.get(docTitle) || [];
     const id = toSlug(name);
     return {
@@ -197,7 +197,7 @@ function main() {
       monogram,
       logoUrl: `/assets/clubs/${id}.svg`,
       accentColor,
-      category,
+      categories,
       governingBody: GOVERNING_BODIES[governing],
       fanpageUrl,
       summary: buildSummary(paragraphs),

@@ -16,15 +16,6 @@ export const affiliatedUnits = [
   'Liên chi Đoàn – Liên chi Hội Viện Công nghệ Hàng không Vũ trụ'
 ];
 
-export const clubCategories = [
-  { id: 'academic-technology', label: 'Học thuật – Công nghệ', icon: 'book' },
-  { id: 'scientific-research', label: 'Nghiên cứu khoa học', icon: 'research' },
-  { id: 'culture-arts', label: 'Văn hóa – Nghệ thuật', icon: 'arts' },
-  { id: 'sports-health', label: 'Thể thao – Sức khỏe', icon: 'sports' },
-  { id: 'skills-community', label: 'Kỹ năng – Cộng đồng', icon: 'community' },
-  { id: 'media-events', label: 'Truyền thông – Sự kiện', icon: 'media' }
-];
-
 export const featuredActivities = [
   { id: 'dai-hoi', title: 'ĐẠI HỘI ĐOÀN – HỘI', image: 'youth-union/activities/dai-hoi.jpg', gallery: ['youth-union/activities/dai-hoi-doan.jpg'] },
   { id: 'sinh-vien-5-tot', title: 'PHONG TRÀO SINH VIÊN 5 TỐT', image: 'youth-union/activities/sinh-vien-5-tot.jpg' },

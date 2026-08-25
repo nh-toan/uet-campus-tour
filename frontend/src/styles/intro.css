@@ -55,13 +55,13 @@
   pointer-events: none;
 }
 .hero-inner { position: relative; z-index: 1; display: flex; align-items: center; min-height: inherit; }
-.hero-copy { width: min(47%, 650px); padding: 70px 0 64px; }
+.hero-copy { width: min(47%, 650px); padding: 70px 0 64px; container-type: inline-size; }
 .hero-copy .eyebrow { margin-bottom: 14px; color: var(--cyan-400); }
-.hero-copy h1 { max-width: 640px; color: var(--white); font-size: clamp(50px, 4.3vw, 66px); font-weight: 800; line-height: 1.03; letter-spacing: -.045em; white-space: normal; }
+.hero-copy h1 { max-width: 640px; color: var(--white); font-size: clamp(22px, 7.8cqw, 52px); font-weight: 800; line-height: 1.03; letter-spacing: -.045em; white-space: normal; }
 .hero-copy h1 > span { display: block; }
 .hero-copy h1 span, .hero-title-location { color: var(--blue-400); }
 .hero-copy h1 .hero-title-primary { color: inherit; }
-.hero-title-primary { white-space: normal; }
+.hero-title-primary { white-space: nowrap; }
 .hero-copy .hero-tagline { margin: 22px 0 0; color: var(--cyan-400); font-size: clamp(18px, 1.45vw, 21px); font-weight: 600; line-height: 1.42; }
 .hero-copy .hero-description { max-width: 570px; margin: 12px 0 0; color: rgb(255 255 255 / 84%); font-size: 16px; line-height: 1.68; }
 
@@ -247,23 +247,11 @@
 .intro-organization-lead { max-width: 720px; margin: 0 auto 30px; color: var(--text-secondary); font-size: 15.5px; line-height: 1.68; text-align: center; }
 .intro-organization-diagram { width: min(100%, 1280px); margin: 0 auto; }
 .intro-organization-preview { display: block; width: 100%; padding: 0; overflow: hidden; border: 1px solid rgb(20 107 255 / 14%); border-radius: 14px; background: #f7fbff; box-shadow: 0 14px 40px rgb(10 27 51 / 7%); }
-.intro-organization-preview:hover { border-color: rgb(20 107 255 / 35%); }
 .intro-organization-preview img { width: 100%; height: auto; background: #f7fbff; }
-.intro-organization-link { display: inline-flex; align-items: center; gap: 8px; margin: 18px auto 0; padding: 5px 0; border: 0; border-bottom: 1px solid transparent; color: var(--blue-600); background: transparent; font-size: 14px; font-weight: 700; transition: transform .2s ease, border-color .2s ease; }
-.intro-organization-link:hover { border-color: currentColor; transform: translateX(2px); }
-.intro-organization-link svg { transition: transform .2s ease; }
-.intro-organization-link:hover svg { transform: translateX(2px); }
-.intro-organization-link-wrap { text-align: center; }
 
 /* Branded milestone */
 .intro-milestone-artwork-section { position: relative; z-index: 1; overflow: hidden; margin: 0; padding: 0; background: var(--navy-950); }
 .intro-milestone-artwork { display: block; width: 100%; height: auto; opacity: .98; filter: saturate(.82) contrast(.98) brightness(.82); }
-
-/* Existing organization lightbox behavior remains local to Intro. */
-.intro-lightbox { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 18px; background: #031426; }
-.intro-lightbox-close { position: fixed; top: 16px; right: 16px; z-index: 2; display: grid; width: 46px; height: 46px; place-items: center; padding: 0; border: 1px solid rgb(255 255 255 / 30%); border-radius: 50%; color: var(--white); background: var(--navy-900); }
-.intro-lightbox-image { position: relative; isolation: isolate; width: min(1448px, calc(100vw - 36px)); max-height: calc(100dvh - 36px); overflow: auto; border-radius: 12px; background: #f7fbff; box-shadow: 0 28px 80px rgb(0 0 0 / 45%); overscroll-behavior: contain; touch-action: pan-x pan-y pinch-zoom; -webkit-overflow-scrolling: touch; }
-.intro-lightbox-image img { display: block; width: 1448px; max-width: none; height: auto; }
 
 :root[data-theme='dark'] .intro-context-reading { border-color: var(--line); background: color-mix(in srgb, var(--panel-bg) 92%, var(--surface-2)); }
 
@@ -281,7 +269,6 @@
   .intro-hero { min-height: 520px; border-radius: 0 0 18px 18px; }
   .hero-inner { align-items: flex-end; }
   .hero-copy { width: 100%; padding: 150px 0 38px; }
-  .hero-copy h1 { font-size: clamp(38px, 10.5vw, 48px); }
   .hero-copy .hero-tagline { margin-top: 19px; font-size: 17px; }
   .hero-copy .hero-description { font-size: 15px; line-height: 1.68; }
   .hero-media img { width: 100%; height: 100%; opacity: .68; object-position: 64% center; }
@@ -328,8 +315,6 @@
   .intro-organization-lead { margin: 0 0 30px; font-size: 15px; text-align: left; }
   .intro-organization-preview { border-radius: 12px; }
   .intro-milestone-artwork-section { min-height: 0; padding: 0; }
-  .intro-lightbox { padding: 12px; }
-  .intro-lightbox-image { width: calc(100vw - 24px); max-height: calc(100dvh - 24px); }
 }
 
 /* Keep the following milestone artwork beneath the organization section if sections ever intersect. */
