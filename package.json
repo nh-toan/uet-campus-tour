@@ -9,9 +9,10 @@
     "client": "npm --prefix frontend run dev",
     "build": "npm --prefix frontend run build",
     "start": "node backend/server.js",
-    "check": "node --check backend/server.js && node --check tools/build-media-manifest.js && node --check tools/upload-r2-media.js && node --check tools/verify-r2-media.js && node --check tools/load-test.js && npm --prefix frontend run build",
+    "check": "node --check backend/server.js && node --check tools/build-media-manifest.js && node --check tools/upload-r2-media.js && node --check tools/verify-r2-media.js && node --check tools/verify-media-references.js && node --check tools/load-test.js && npm run media:references && npm --prefix frontend run build",
     "load:test": "node tools/load-test.js",
     "media:manifest": "node tools/build-media-manifest.js",
+    "media:references": "node tools/verify-media-references.js",
     "media:upload": "node tools/upload-r2-media.js",
     "media:verify": "node tools/verify-r2-media.js"
   },

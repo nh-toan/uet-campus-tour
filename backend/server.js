@@ -13,7 +13,7 @@ const LIEN_CHI_FILE = path.join(DATA_DIRECTORY, 'lien-chi.json');
 const CLUBS_FILE = path.join(DATA_DIRECTORY, 'clubs.json');
 const APP_ROUTES = new Set(['/', '/gioi-thieu', '/ban-do', '/doan-thanh-nien-hoi-sinh-vien', '/lien-chi', '/cau-lac-bo']);
 const MIME_TYPES = { '.avif': 'image/avif', '.css': 'text/css; charset=utf-8', '.gif': 'image/gif', '.html': 'text/html; charset=utf-8', '.ico': 'image/x-icon', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.woff': 'font/woff', '.woff2': 'font/woff2' };
-const CLUB_CATEGORIES = new Set(['academic', 'tech', 'art', 'sport', 'media', 'community']);
+const CLUB_CATEGORIES = new Set(['Học thuật/Kỹ năng', 'Nghệ thuật & Văn hóa', 'Thể thao', 'Tình nguyện/Hỗ trợ cộng đồng', 'Truyền thông/Sự kiện']);
 const CACHEABLE_STATIC_EXTENSIONS = new Set(['.avif', '.gif', '.ico', '.png', '.jpg', '.jpeg', '.webp', '.svg', '.woff', '.woff2']);
 const VITE_HASHED_ASSET_PATTERN = /-[a-zA-Z0-9_-]{8,}\.(?:css|js)$/;
 const PUBLIC_API_CACHE_CONTROL = 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400';
@@ -22,23 +22,23 @@ const STATIC_ASSET_CACHE_CONTROL = 'public, max-age=86400';
 const REVALIDATE_CACHE_CONTROL = 'no-cache';
 const DEFAULT_CLUB_BACKGROUND = 'clubs/backgrounds/default.jpg';
 const CLUB_BACKGROUND_IMAGES = Object.freeze({
-  'clb-nghe-thuat': 'clubs/backgrounds/clb-nghe-thuat.jpg',
-  'clb-van-dong-hien-mau': 'clubs/backgrounds/clb-van-dong-hien-mau.jpg',
+  'clb-nghe-thuat': 'clubs/backgrounds/clb-nghe-thuat.webp',
+  'clb-van-dong-hien-mau': 'clubs/backgrounds/clb-van-dong-hien-mau.webp',
   'clb-nguon-nhan-luc': 'clubs/backgrounds/clb-nguon-nhan-luc.jpg',
-  'clb-thu-vien-hoi-sinh-vien': 'clubs/backgrounds/clb-thu-vien-hoi-sinh-vien.jpg',
+  'clb-thu-vien-hoi-sinh-vien': 'clubs/backgrounds/clb-thu-vien-hoi-sinh-vien.webp',
   'clb-nhay-co-dong': 'clubs/backgrounds/clb-nhay-co-dong.jpg',
   'clb-cau-long': 'clubs/backgrounds/clb-cau-long.jpg',
   'clb-bong-ro': 'clubs/backgrounds/clb-bong-ro.jpg',
-  'clb-thuyet-trinh': 'clubs/backgrounds/clb-thuyet-trinh.jpg',
-  'clb-hang-khong-vu-tru': 'clubs/backgrounds/clb-hang-khong-vu-tru.png',
+  'clb-thuyet-trinh': 'clubs/backgrounds/clb-thuyet-trinh.webp',
+  'clb-hang-khong-vu-tru': 'clubs/backgrounds/clb-hang-khong-vu-tru.webp',
   'clb-tieng-anh': 'clubs/backgrounds/clb-tieng-anh.jpg',
-  'clb-tieng-nhat': 'clubs/backgrounds/clb-tieng-nhat.jpg',
+  'clb-tieng-nhat': 'clubs/backgrounds/clb-tieng-nhat.webp',
   'clb-dien-tu-va-tu-dong-hoa': 'clubs/backgrounds/clb-dien-tu-va-tu-dong-hoa.png',
   'clb-robotics': 'clubs/backgrounds/clb-robotics.jpg',
-  'clb-ly-luan-tre': 'clubs/backgrounds/clb-ly-luan-tre.jpg',
+  'clb-ly-luan-tre': 'clubs/backgrounds/clb-ly-luan-tre.webp',
   'clb-thiet-ke-he-thong-va-vi-mach': 'clubs/backgrounds/clb-thiet-ke-he-thong-va-vi-mach.jpg',
-  'clb-sinh-vien-5-tot': 'clubs/backgrounds/clb-sinh-vien-5-tot.png',
-  'clb-ho-tro-sinh-vien': 'clubs/backgrounds/clb-ho-tro-sinh-vien.jpg'
+  'clb-sinh-vien-5-tot': 'clubs/backgrounds/clb-sinh-vien-5-tot.webp',
+  'clb-ho-tro-sinh-vien': 'clubs/backgrounds/clb-ho-tro-sinh-vien.webp'
 });
 
 let publicDataCache = null;
@@ -76,11 +76,16 @@ function normalizeClubActivityImages(value, clubId) {
     return src && alt ? { src, alt } : null;
   }).filter(Boolean).slice(0, 20);
 }
+function normalizeClubCategories(value) {
+  const categories = [...new Set((Array.isArray(value) ? value : []).filter(category => CLUB_CATEGORIES.has(category)))];
+  if (!categories.length) throw new Error('Câu lạc bộ phải thuộc ít nhất một nhóm hợp lệ.');
+  return categories;
+}
 function normalizeClub(input, index) {
   const id = typeof input?.id === 'string' && /^[a-z0-9-]+$/.test(input.id) ? input.id : `clb-${index + 1}`;
   const paragraphs = normalizeParagraphs(input?.paragraphs, 'Đoạn giới thiệu câu lạc bộ');
   const sections = normalizeClubSections(input?.sections);
-  return { id, sortOrder: Number.isInteger(input?.sortOrder) ? input.sortOrder : index + 1, name: normalizeText(input?.name, 'Tên câu lạc bộ', 160, true), shortName: normalizeText(input?.shortName, 'Tên viết tắt', 80), monogram: normalizeText(input?.monogram, 'Chữ lồng logo', 6), logoUrl: normalizePublicLogo(input?.logoUrl, 'clubs'), backgroundImage: normalizeClubBackground(input?.backgroundImage) || CLUB_BACKGROUND_IMAGES[id] || DEFAULT_CLUB_BACKGROUND, accentColor: normalizeColor(input?.accentColor, '#087ea4'), category: CLUB_CATEGORIES.has(input?.category) ? input.category : 'community', governingBody: normalizeText(input?.governingBody, 'Đơn vị chủ quản', 200), fanpageUrl: normalizeLink(input?.fanpageUrl), summary: normalizeText(input?.summary, 'Câu dẫn', 400), sections: sections.length ? sections : (paragraphs.length ? [{ title: 'Giới thiệu', items: paragraphs }] : []), activityImages: normalizeClubActivityImages(input?.activityImages, id), paragraphs };
+  return { id, sortOrder: Number.isInteger(input?.sortOrder) ? input.sortOrder : index + 1, name: normalizeText(input?.name, 'Tên câu lạc bộ', 160, true), shortName: normalizeText(input?.shortName, 'Tên viết tắt', 80), monogram: normalizeText(input?.monogram, 'Chữ lồng logo', 6), logoUrl: normalizePublicLogo(input?.logoUrl, 'clubs'), backgroundImage: normalizeClubBackground(input?.backgroundImage) || CLUB_BACKGROUND_IMAGES[id] || DEFAULT_CLUB_BACKGROUND, accentColor: normalizeColor(input?.accentColor, '#087ea4'), categories: normalizeClubCategories(input?.categories), governingBody: normalizeText(input?.governingBody, 'Đơn vị chủ quản', 200), fanpageUrl: normalizeLink(input?.fanpageUrl), summary: normalizeText(input?.summary, 'Câu dẫn', 400), sections: sections.length ? sections : (paragraphs.length ? [{ title: 'Giới thiệu', items: paragraphs }] : []), activityImages: normalizeClubActivityImages(input?.activityImages, id), paragraphs };
 }
 async function readJson(filePath) { return JSON.parse(await fs.readFile(filePath, 'utf8')); }
 async function readLienChi() { const items = await readJson(LIEN_CHI_FILE); if (!Array.isArray(items)) throw new Error('Dữ liệu Liên chi không hợp lệ.'); return items.map(normalizeLienChi).sort((a, b) => a.sortOrder - b.sortOrder); }

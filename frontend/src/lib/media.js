@@ -1,3 +1,4 @@
+import { resolveMediaSourceKey } from '../config/mediaAliases';
 import { mediaVersions } from '../config/mediaObjects';
 
 function getMediaBaseUrl(value) {
@@ -19,10 +20,11 @@ function normalizeMediaKey(value) {
 }
 
 export function mediaUrl(value) {
-  const sourceKey = normalizeMediaKey(value);
-  if (!sourceKey) return '';
+  const requestedKey = normalizeMediaKey(value);
+  if (!requestedKey) return '';
+  const sourceKey = resolveMediaSourceKey(requestedKey);
   const version = mediaVersions[sourceKey];
-  if (!version) return `${mediaBaseUrl}/${sourceKey}`;
+  if (!version) throw new Error(`Unresolved runtime media key: ${requestedKey}`);
   const extensionIndex = sourceKey.lastIndexOf('.');
   const objectKey = `${sourceKey.slice(0, extensionIndex)}.${version}${sourceKey.slice(extensionIndex)}`;
   return `${mediaBaseUrl}/${objectKey}`;
@@ -30,6 +32,6 @@ export function mediaUrl(value) {
 
 export function applyMediaCssVariables() {
   const root = document.documentElement;
-  root.style.setProperty('--media-aerial-campus', `url("${mediaUrl('map/aerial-campus.jpg')}")`);
-  root.style.setProperty('--media-map-tech-hero', `url("${mediaUrl('map/map_tech_hero.png')}")`);
+  root.style.setProperty('--media-aerial-campus', `url("${mediaUrl('map/aerial-campus.webp')}")`);
+  root.style.setProperty('--media-map-tech-hero', `url("${mediaUrl('map/map_tech_hero.webp')}")`);
 }

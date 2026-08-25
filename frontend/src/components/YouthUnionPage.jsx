@@ -4,7 +4,6 @@ import {
   ArrowRight,
   BookOpen,
   ExternalLink,
-  FlaskConical,
   HeartHandshake,
   Megaphone,
   MessageCircle,
@@ -15,18 +14,17 @@ import {
 } from 'lucide-react';
 import {
   affiliatedUnits,
-  clubCategories,
   featuredActivities,
   youthUnionFacebookUrl,
   youthUnionMedia,
   youthUnionOverview
 } from '../content/youthUnionContent';
+import { clubCategories } from '../content/clubCategories';
 import { mediaUrl } from '../lib/media';
 import '../styles/youth-union.css';
 
 const categoryIcons = {
   book: BookOpen,
-  research: FlaskConical,
   arts: Palette,
   sports: Trophy,
   community: HeartHandshake,
@@ -101,7 +99,7 @@ export function YouthUnionPage({ navigate }) {
   return <div className="youth-page">
     <section className="youth-hero youth-reference-hero" aria-labelledby="youth-hero-title">
       <div className="youth-reference-hero-media" aria-hidden="true">
-        <img src={mediaUrl(youthUnionMedia.heroImage)} alt="" fetchPriority="high" />
+        <img src={mediaUrl(youthUnionMedia.heroImage)} alt="" width="1672" height="941" loading="eager" decoding="async" fetchPriority="high" />
         <div className="youth-reference-hero-media-blend" />
       </div>
       <div className="site-container youth-container youth-reference-hero-inner">

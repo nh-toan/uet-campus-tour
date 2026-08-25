@@ -7,7 +7,9 @@
     "monogram": "PC",
     "logoUrl": "clubs/clb-nghe-thuat-2026-logo.png",
     "accentColor": "#e8447f",
-    "category": "art",
+    "categories": [
+      "Nghệ thuật & Văn hóa"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/PCuet",
     "summary": "PASSION CLUB – CLB Nghệ Thuật trường Đại học Công nghệ, ĐHQGHN",
@@ -135,7 +137,9 @@
     "monogram": "SG",
     "logoUrl": "clubs/clb-ho-tro-sinh-vien-2026-logo.png",
     "accentColor": "#2f7fd1",
-    "category": "community",
+    "categories": [
+      "Tình nguyện/Hỗ trợ cộng đồng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/SupportGroupUET",
     "summary": "SGUET – Câu lạc bộ Hỗ trợ sinh viên Trường Đại học Công nghệ",
@@ -207,7 +211,9 @@
     "monogram": "NVT",
     "logoUrl": "clubs/clb-van-dong-hien-mau-2026-logo.png",
     "accentColor": "#d63131",
-    "category": "community",
+    "categories": [
+      "Tình nguyện/Hỗ trợ cộng đồng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/NguoiVietTre0601",
     "summary": "Người Việt Trẻ - CLB Sinh viên vận động hiến máu Trường ĐH Công nghệ",
@@ -319,7 +325,9 @@
     "monogram": "LSA",
     "logoUrl": "clubs/clb-thu-vien-hoi-sinh-vien-2026-logo.png",
     "accentColor": "#0f8a6e",
-    "category": "academic",
+    "categories": [
+      "Tình nguyện/Hỗ trợ cộng đồng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/TVHSV.UET",
     "summary": "LSA - CLB Thư viện Hội Sinh viên, Trường Đại học Công nghệ, ĐHQGHN",
@@ -427,7 +435,9 @@
     "monogram": "FC",
     "logoUrl": "clubs/clb-bong-da-2026-logo.png",
     "accentColor": "#1f7a3d",
-    "category": "sport",
+    "categories": [
+      "Thể thao"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/uetfc.vnu",
     "summary": "UET FC - CLB Bóng đá trường Đại học Công nghệ - Đại học Quốc gia Hà Nội",
@@ -506,7 +516,9 @@
     "monogram": "GX",
     "logoUrl": "clubs/clb-nhay-co-dong-2026-logo.png",
     "accentColor": "#7b45d6",
-    "category": "art",
+    "categories": [
+      "Nghệ thuật & Văn hóa"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/UETGalaxyCheerleading/",
     "summary": "GALAXY - UET Cheerleading Squad",
@@ -619,7 +631,9 @@
     "monogram": "BL",
     "logoUrl": "clubs/clb-cau-long-2026-logo.png",
     "accentColor": "#12897f",
-    "category": "sport",
+    "categories": [
+      "Thể thao"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/clbcaulonguet",
     "summary": "Câu lạc bộ Cầu lông - Trường Đại học Công nghệ (B-UET)",
@@ -691,7 +705,9 @@
     "monogram": "BR",
     "logoUrl": "clubs/clb-bong-ro-2026-logo.png",
     "accentColor": "#e2661f",
-    "category": "sport",
+    "categories": [
+      "Thể thao"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/UET.BasketballClub",
     "summary": "Câu lạc bộ Bóng rổ ĐH Công nghệ - UET Basketball Club",
@@ -763,7 +779,9 @@
     "monogram": "TT",
     "logoUrl": "clubs/clb-thuyet-trinh-2026-logo.png",
     "accentColor": "#1c5fa8",
-    "category": "academic",
+    "categories": [
+      "Học thuật/Kỹ năng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/CaulacboThuyettrinh/",
     "summary": "Câu lạc bộ Thuyết trình - Đại học Công Nghệ",
@@ -850,7 +868,9 @@
     "monogram": "LC",
     "logoUrl": "clubs/clb-truyen-thong-2026-logo.png",
     "accentColor": "#c2317a",
-    "category": "media",
+    "categories": [
+      "Truyền thông/Sự kiện"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/uetlc.club",
     "summary": "CLB Truyền thông - UETLC",
@@ -912,7 +932,9 @@
     "monogram": "AC",
     "logoUrl": "clubs/clb-hang-khong-vu-tru-2026-logo.png",
     "accentColor": "#3b5bd4",
-    "category": "tech",
+    "categories": [
+      "Học thuật/Kỹ năng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/AerospaceClubUET.ACUET",
     "summary": "Câu lạc bộ Hàng không Vũ trụ trường Đại học Công nghệ - ACUET",
@@ -1032,7 +1054,9 @@
     "monogram": "EC",
     "logoUrl": "clubs/clb-tieng-anh-2026-logo.png",
     "accentColor": "#d4472a",
-    "category": "academic",
+    "categories": [
+      "Học thuật/Kỹ năng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/EnglishClub.UET",
     "summary": "English Club - CLB Tiếng Anh Trường Đại học Công nghệ",
@@ -1104,7 +1128,9 @@
     "monogram": "JP",
     "logoUrl": "clubs/clb-tieng-nhat-2026-logo.png",
     "accentColor": "#d6355c",
-    "category": "academic",
+    "categories": [
+      "Học thuật/Kỹ năng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/uet.clbtiengnhat",
     "summary": "JAPIT - Câu lạc bộ Tiếng Nhật Trường Đại học Công nghệ",
@@ -1172,7 +1198,9 @@
     "monogram": "X",
     "logoUrl": "clubs/clb-dien-tu-va-tu-dong-hoa-2026-logo.png",
     "accentColor": "#0b7fa6",
-    "category": "tech",
+    "categories": [
+      "Học thuật/Kỹ năng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/uetX.club",
     "summary": "CLB Điện tử và Tự động hóa - uetX",
@@ -1277,7 +1305,9 @@
     "monogram": "HR",
     "logoUrl": "clubs/clb-nguon-nhan-luc-2026-logo.png",
     "accentColor": "#8a3fbf",
-    "category": "academic",
+    "categories": [
+      "Học thuật/Kỹ năng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/hrtechclub",
     "summary": "CLB Nguồn nhân lực HRTech - Trường Đại học Công nghệ",
@@ -1382,7 +1412,9 @@
     "monogram": "RC",
     "logoUrl": "clubs/clb-robotics-2026-logo.png",
     "accentColor": "#146fd1",
-    "category": "tech",
+    "categories": [
+      "Học thuật/Kỹ năng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/clbrobotics.uet",
     "summary": "Câu lạc bộ Robotics Trường Đại Học Công nghệ - RCUET",
@@ -1446,7 +1478,9 @@
     "monogram": "IS",
     "logoUrl": "clubs/clb-thiet-ke-va-sang-tao-2026-logo.png",
     "accentColor": "#8b3fd6",
-    "category": "media",
+    "categories": [
+      "Học thuật/Kỹ năng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "",
     "summary": "UET Innovation Space - CLB Thiết kế và Sáng tạo Trường Đại học Công Nghệ",
@@ -1491,7 +1525,9 @@
     "monogram": "AI",
     "logoUrl": "clubs/clb-tri-tue-nhan-tao-2026-logo.svg",
     "accentColor": "#0d8fb0",
-    "category": "tech",
+    "categories": [
+      "Học thuật/Kỹ năng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/UETARTIFICIALINTELLIGENCE",
     "summary": "UET Artificial Intelligence - CLB Trí tuệ Nhân tạo",
@@ -1536,7 +1572,9 @@
     "monogram": "LLT",
     "logoUrl": "clubs/clb-ly-luan-tre-2026-logo.png",
     "accentColor": "#c0342f",
-    "category": "academic",
+    "categories": [
+      "Học thuật/Kỹ năng"
+    ],
     "governingBody": "Đoàn Thanh niên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/CLBLLT.UET/",
     "summary": "Câu lạc bộ Lý luận trẻ - Trường Đại học Công nghệ",
@@ -1604,7 +1642,9 @@
     "monogram": "YD",
     "logoUrl": "clubs/clb-vu-dao-2026-logo.png",
     "accentColor": "#e0417a",
-    "category": "art",
+    "categories": [
+      "Nghệ thuật & Văn hóa"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/share/17JBR4zqhe/",
     "summary": "YDC - UET Youth Dance Crew",
@@ -1670,7 +1710,9 @@
     "monogram": "SM",
     "logoUrl": "clubs/clb-vi-mach-ban-dan-2026-logo.png",
     "accentColor": "#5b46d9",
-    "category": "tech",
+    "categories": [
+      "Học thuật/Kỹ năng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/smuet.smc",
     "summary": "SMUET CLUB – Cùng nhau kiến tạo tương lai công nghệ!",
@@ -1725,7 +1767,9 @@
     "monogram": "C+",
     "logoUrl": "clubs/clb-thiet-ke-he-thong-va-vi-mach-2026-logo.png",
     "accentColor": "#0e7c8c",
-    "category": "tech",
+    "categories": [
+      "Học thuật/Kỹ năng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/uetchipplus",
     "summary": "CLB Thiết kế Hệ thống và Vi mạch Trường Đại học Công nghệ - UET CHIP+",
@@ -1797,7 +1841,9 @@
     "monogram": "MS",
     "logoUrl": "clubs/clb-khoa-hoc-vat-lieu-2026-logo.jpg",
     "accentColor": "#a8551b",
-    "category": "tech",
+    "categories": [
+      "Học thuật/Kỹ năng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/msc.uet",
     "summary": "UET Materials Science - CLB Khoa Học Vật Liệu Trường Đại học Công nghệ",
@@ -1879,7 +1925,10 @@
     "monogram": "5T",
     "logoUrl": "clubs/clb-sinh-vien-5-tot-2026-logo.jpg",
     "accentColor": "#1d6fb8",
-    "category": "community",
+    "categories": [
+      "Học thuật/Kỹ năng",
+      "Tình nguyện/Hỗ trợ cộng đồng"
+    ],
     "governingBody": "Hội Sinh viên Trường Đại học Công nghệ",
     "fanpageUrl": "https://www.facebook.com/5ss.uet",
     "summary": "Câu lạc bộ Sinh viên 5 Tốt - Trường Đại học Công nghệ",

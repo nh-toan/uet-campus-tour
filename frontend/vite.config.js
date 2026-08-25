@@ -19,8 +19,19 @@ export default defineConfig(({ mode }) => {
     console.warn('Building with r2.dev for staging/UAT; use an official R2 Custom Domain for public production.');
   }
 
+  const mediaOriginHints = {
+    name: 'media-origin-hints',
+    transformIndexHtml: {
+      order: 'pre',
+      handler: () => [
+        { tag: 'link', attrs: { rel: 'preconnect', href: mediaBaseUrl.origin }, injectTo: 'head-prepend' },
+        { tag: 'link', attrs: { rel: 'dns-prefetch', href: `//${mediaBaseUrl.host}` }, injectTo: 'head-prepend' }
+      ]
+    }
+  };
+
   return {
-    plugins: [react()],
+    plugins: [react(), mediaOriginHints],
     server: {
       port: 5173,
       proxy: {
