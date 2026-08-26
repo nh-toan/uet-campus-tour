@@ -25,11 +25,10 @@ Yêu cầu Node.js `^20.19.0` hoặc `>=22.12.0` và npm.
 ```bash
 npm ci
 npm --prefix frontend ci
-source ~/.config/uet-navigator/r2.env
 npm run dev
 ```
 
-Backend chạy tại `http://127.0.0.1:3001`; Vite chạy tại `http://localhost:5173` và proxy `/api` sang backend. `VITE_MEDIA_BASE_URL` là public HTTPS base URL bắt buộc cho development và build; repository không còn local runtime-media fallback.
+Backend chạy tại `http://127.0.0.1:3001`; Vite chạy tại `http://localhost:5173` và proxy `/api` sang backend. Khi development không có `VITE_MEDIA_BASE_URL`, frontend dùng các asset hiện có trong `frontend/public`. Có thể nạp biến môi trường R2 để kiểm tra đầy đủ những media chỉ tồn tại trên remote. Production build vẫn bắt buộc public HTTPS base URL.
 
 ## Build and start
 

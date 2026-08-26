@@ -13,6 +13,67 @@
   background: var(--navy-950);
 }
 
+.external-virtual-tour__google-maps {
+  position: absolute;
+  right: clamp(14px, 2.2vw, 28px);
+  bottom: clamp(14px, 2.2vw, 28px);
+  z-index: 3;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  min-width: 260px;
+  padding: 12px 14px;
+  border: 1px solid rgb(255 255 255 / 30%);
+  border-radius: 16px;
+  color: var(--white);
+  background: rgb(4 21 42 / 88%);
+  box-shadow: 0 14px 38px rgb(0 0 0 / 32%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.external-virtual-tour__google-maps:hover {
+  border-color: rgb(89 161 255 / 76%);
+  background: rgb(8 36 67 / 94%);
+  transform: translateY(-2px);
+}
+
+.external-virtual-tour__google-maps-icon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border-radius: 12px;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+  box-shadow: 0 8px 22px rgb(20 107 255 / 35%);
+}
+
+.external-virtual-tour__google-maps-copy {
+  display: grid;
+  gap: 2px;
+  line-height: 1.3;
+}
+
+.external-virtual-tour__google-maps-label {
+  color: rgb(255 255 255 / 64%);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.external-virtual-tour__google-maps-copy strong {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.external-virtual-tour__google-maps-external {
+  color: rgb(255 255 255 / 70%);
+}
+
 .external-virtual-tour__frame {
   border: 0;
   background: var(--navy-950);
@@ -98,11 +159,34 @@
 
 @media (prefers-reduced-motion: reduce) {
   .external-virtual-tour__frame,
-  .external-virtual-tour__fallback {
+  .external-virtual-tour__fallback,
+  .external-virtual-tour__google-maps {
     transition: none;
   }
 
   .external-virtual-tour__spinner {
     animation: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .external-virtual-tour__google-maps {
+    right: 12px;
+    bottom: 12px;
+    min-width: 0;
+    padding: 10px 12px;
+  }
+
+  .external-virtual-tour__google-maps-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .external-virtual-tour__google-maps-label {
+    display: none;
+  }
+
+  .external-virtual-tour__google-maps-copy strong {
+    font-size: 13px;
   }
 }
