@@ -119,7 +119,7 @@ export const mediaVersions = Object.freeze({
   "clubs/clb-van-dong-hien-mau-2026-logo.png": "76e4d08aa308",
   "clubs/clb-vi-mach-ban-dan-2026-logo.png": "d4b886f15a7f",
   "clubs/clb-vu-dao-2026-logo.png": "f49ac3642aa5",
-  "intro/uet-20-years-banner.webp": "2c5b3025364c",
+  "intro/uet-20-years-banner.png": "6057a56a8eec",
   "intro/uet-organization-chart.webp": "b2decddcaa2f",
   "intro/uet.png": "a962b54841d5",
   "lien-chi/backgrounds/fat.jpg": "606bba23846f",

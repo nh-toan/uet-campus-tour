@@ -1,0 +1,11 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "frontend/dist",
+  "rewrites": [
+    { "source": "/gioi-thieu", "destination": "/index.html" },
+    { "source": "/ban-do", "destination": "/index.html" },
+    { "source": "/doan-thanh-nien-hoi-sinh-vien", "destination": "/index.html" },
+    { "source": "/lien-chi", "destination": "/index.html" },
+    { "source": "/cau-lac-bo", "destination": "/index.html" }
+  ]
+}

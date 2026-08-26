@@ -5,10 +5,10 @@
   "localAssetsRetainedUntilVerified": false,
   "summary": {
     "managedAssetCount": 220,
-    "localAssetCount": 71,
-    "localAssetBytes": 34428263,
+    "localAssetCount": 72,
+    "localAssetBytes": 36099387,
     "runtimeAssetCount": 164,
-    "runtimeAssetBytes": 285076066,
+    "runtimeAssetBytes": 286566574,
     "pendingUploadCount": 0,
     "verifiedCount": 164
   },
@@ -2133,16 +2133,16 @@
       "migrationStatus": "not-required"
     },
     {
-      "sourcePath": "frontend/public/assets/intro/uet-20-years-banner.webp",
-      "sourceKey": "intro/uet-20-years-banner.webp",
-      "objectKey": "intro/uet-20-years-banner.2c5b3025364c.webp",
-      "sha256": "2c5b3025364ccc080ef877a2e7209265c29dc778192d22d469f3675fd05adba3",
-      "sourceBytes": 180616,
-      "sourcePresent": false,
+      "sourcePath": "frontend/public/assets/intro/uet-20-years-banner.png",
+      "sourceKey": "intro/uet-20-years-banner.png",
+      "objectKey": "intro/uet-20-years-banner.6057a56a8eec.png",
+      "sha256": "6057a56a8eecc0e3293fa92197f8282c107b1529a2b74b74cd46c4dbc4eb6535",
+      "sourceBytes": 1671124,
+      "sourcePresent": true,
       "category": "content-media",
       "runtimeReferenced": true,
       "uploadRequired": true,
-      "optimization": "keep-or-optimize-losslessly",
+      "optimization": "review-transparency-then-webp",
       "migrationStatus": "verified-r2"
     },
     {

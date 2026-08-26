@@ -55,6 +55,13 @@ function SectionHeading({ eyebrow, title, description, id }) {
 
 function ActivityModal({ activity, onClose }) {
   const closeButtonRef = useRef(null);
+  const albumGroups = activity.albums?.reduce((groups, album) => {
+    const year = String(album.year);
+    const group = groups.find(item => item.year === year);
+    if (group) group.albums.push(album);
+    else groups.push({ year, albums: [album] });
+    return groups;
+  }, []) ?? [];
 
   useEffect(() => {
     const previouslyFocused = document.activeElement;
@@ -85,9 +92,27 @@ function ActivityModal({ activity, onClose }) {
     <section className="youth-activity-modal" role="dialog" aria-modal="true" aria-labelledby={`activity-dialog-${activity.id}`}>
       <button ref={closeButtonRef} className="youth-activity-modal-close" type="button" onClick={onClose} aria-label="Đóng hoạt động"><X size={22} aria-hidden="true" /></button>
       <header className="youth-activity-modal-header"><h2 id={`activity-dialog-${activity.id}`}>{activity.title}</h2></header>
-      <div className="youth-activity-modal-media">
-        <img src={mediaUrl(activity.image)} alt={activity.title} decoding="async" />
-        {activity.gallery?.map(image => <img key={image} src={mediaUrl(image)} alt="Hình ảnh hoạt động bổ sung" loading="lazy" decoding="async" />)}
+      <div className="youth-activity-modal-body">
+        <img className="youth-activity-modal-cover" src={mediaUrl(activity.image)} alt={activity.title} decoding="async" />
+        <div className="youth-activity-modal-content">
+          <p className="youth-activity-modal-description">{activity.description}</p>
+          {albumGroups.length > 0 && <div className="youth-activity-album-groups" aria-label="Album ảnh sự kiện">
+            {albumGroups.map(group => <section className="youth-activity-album-group" key={group.year} aria-labelledby={`activity-${activity.id}-${group.year}`}>
+              <h3 id={`activity-${activity.id}-${group.year}`}>{group.year}</h3>
+              <div className="youth-activity-album-list">
+                {group.albums.map(album => <article className="youth-activity-album-card" key={album.url}>
+                  <div>
+                    <h4>{album.title}</h4>
+                    {album.description && <p>{album.description}</p>}
+                  </div>
+                  <a href={album.url} target="_blank" rel="noopener noreferrer" aria-label={`Xem album ${album.title} trên Facebook`}>
+                    Xem album <ExternalLink size={16} aria-hidden="true" />
+                  </a>
+                </article>)}
+              </div>
+            </section>)}
+          </div>}
+        </div>
       </div>
     </section>
   </div>, document.body);
@@ -165,11 +190,11 @@ export function YouthUnionPage({ navigate }) {
 
     <section className="youth-activities-section" aria-labelledby="youth-activities-title">
       <div className="site-container youth-container">
-        <SectionHeading eyebrow="Dấu ấn sinh viên" title="Hoạt động nổi bật" description="Bấm vào mỗi hoạt động để xem hình ảnh." id="youth-activities-title" />
+        <SectionHeading eyebrow="Dấu ấn sinh viên" title="Hoạt động nổi bật" description="Bấm vào mỗi hoạt động để xem thông tin và album ảnh." id="youth-activities-title" />
         <div className="youth-activities-grid">
           {featuredActivities.map(activity => <button className="youth-activity" type="button" key={activity.id} onClick={() => setSelectedActivity(activity)} aria-haspopup="dialog">
             <img src={mediaUrl(activity.image)} alt="" loading="lazy" decoding="async" />
-            <span className="youth-activity-overlay"><Sparkles size={16} aria-hidden="true" /><span>{activity.title}</span><small>XEM HÌNH ẢNH</small></span>
+            <span className="youth-activity-overlay"><Sparkles size={16} aria-hidden="true" /><span>{activity.title}</span><small>XEM CHI TIẾT</small></span>
           </button>)}
         </div>
       </div>

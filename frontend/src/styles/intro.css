@@ -827,7 +827,7 @@
     gap: 6px 10px;
     min-height: 72px;
   }
-  .intro-strategy-section .intro-accordion-number { grid-column: 1; grid-row: 1; }
+  .intro-strategy-section .intro-accordion-number { grid-column: 1; grid-row: 1; font-size: 16px; }
   .intro-strategy-section .intro-accordion-icon { grid-column: 2; grid-row: 1; width: 28px; height: 28px; }
   .intro-strategy-section .intro-accordion-title { grid-column: 3; grid-row: 1; font-size: 16px; }
   .intro-strategy-section .intro-accordion-count { grid-column: 3; grid-row: 2; font-size: 9px; }
@@ -1220,7 +1220,7 @@
   border-radius: 18px;
   background: color-mix(in srgb, var(--strategy-panel-strong) 82%, transparent);
   text-align: center;
-  transition: border-color .2s ease, transform .2s ease;
+  transition: border-color .2s ease, box-shadow .2s ease;
 }
 
 .intro-strategy-section .core-value-item::before { display: none; }
@@ -1369,17 +1369,41 @@
 }
 
 .intro-strategy-section .intro-accordion-item h3 button:hover { color: var(--blue-600); }
-.intro-strategy-section .intro-accordion-number { color: var(--blue-600); font: 600 11px/1.3 var(--font-mono); letter-spacing: .08em; }
+.intro-strategy-section .intro-accordion-number {
+  color: var(--blue-600);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  font-weight: 750;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
 .intro-strategy-section .intro-accordion-icon { width: 42px; height: 42px; border: 1px solid var(--strategy-muted-border); border-radius: 50%; color: var(--blue-600); background: color-mix(in srgb, var(--blue-600) 6%, var(--strategy-panel-strong)); }
 .intro-strategy-section .intro-accordion-title { display: block; min-width: 0; font-size: 17px; font-weight: 700; line-height: 1.4; text-wrap: balance; }
-.intro-strategy-section .intro-accordion-count { color: var(--text-secondary); font: 600 10px/1.25 var(--font-mono); letter-spacing: .07em; text-transform: uppercase; white-space: nowrap; }
+.intro-strategy-section .intro-accordion-count {
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+}
 .intro-strategy-section .intro-accordion-item h3 button > svg { color: var(--blue-600); transition: transform .2s ease; }
 .intro-strategy-section .intro-accordion-item.open h3 button > svg { transform: rotate(180deg); }
 .intro-strategy-section .intro-accordion-panel { max-width: none; padding: 0 24px 22px 104px; animation: intro-accordion-enter .2s ease both; }
 .intro-strategy-section .intro-accordion-panel ul { max-width: 1080px; margin: 0; padding: 0; }
-.intro-strategy-section .intro-accordion-panel li { grid-template-columns: 30px minmax(0, 1fr); gap: 12px; padding: 10px 0; color: var(--text-secondary); font-size: 16px; font-weight: 400; line-height: 1.74; text-align: left; }
+.intro-strategy-section .intro-accordion-panel li { align-items: baseline; grid-template-columns: 30px minmax(0, 1fr); gap: 12px; padding: 10px 0; color: var(--text-secondary); font-size: 16px; font-weight: 400; line-height: 1.74; text-align: left; }
 .intro-strategy-section .intro-accordion-panel li > span:last-child { text-align: justify; text-justify: inter-word; }
-.intro-strategy-section .intro-task-index { padding-top: 4px; color: var(--orange-500); font: 600 10px/1 var(--font-mono); letter-spacing: .07em; }
+.intro-strategy-section .intro-task-index {
+  padding-top: 0;
+  color: var(--orange-500);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
 
 @keyframes intro-panel-enter {
   from { opacity: 0; transform: translateY(5px); }
@@ -1393,7 +1417,10 @@
 
 @media (hover: hover) {
   .intro-strategy-section .intro-primary-tab:hover { color: var(--text-primary); }
-  .intro-strategy-section .core-value-item:hover { border-color: color-mix(in srgb, var(--blue-600) 48%, var(--line)); transform: translateY(-2px); }
+  .intro-strategy-section .core-value-item:hover {
+    border-color: color-mix(in srgb, var(--blue-600) 48%, var(--line));
+    box-shadow: 0 8px 22px color-mix(in srgb, var(--navy-900) 7%, transparent);
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
@@ -1487,7 +1514,7 @@
   .intro-strategy-section .intro-accordion-number { grid-column: 1; grid-row: 1; }
   .intro-strategy-section .intro-accordion-icon { grid-column: 2; grid-row: 1; width: 40px; height: 40px; }
   .intro-strategy-section .intro-accordion-title { grid-column: 3; grid-row: 1; font-size: 16px; }
-  .intro-strategy-section .intro-accordion-count { grid-column: 3; grid-row: 2; font-size: 10px; }
+  .intro-strategy-section .intro-accordion-count { grid-column: 3; grid-row: 2; font-size: 13px; }
   .intro-strategy-section .intro-accordion-item h3 button > svg { grid-column: 4; grid-row: 1 / span 2; }
   .intro-strategy-section .intro-accordion-panel { padding: 0 16px 18px; }
   .intro-strategy-section .intro-accordion-panel li { grid-template-columns: 26px minmax(0, 1fr); gap: 10px; font-size: 15.5px; line-height: 1.74; }
@@ -1748,12 +1775,44 @@
       inset 0 1px 0 rgb(255 255 255 / 8%),
       0 16px 34px rgb(0 0 0 / 24%),
       0 0 26px color-mix(in srgb, var(--core-accent) 13%, transparent);
-    transform: translateY(-2px);
+    transform: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   :root[data-theme='dark'] .intro-strategy-section .core-value-item:hover { transform: none; }
+}
+
+/* Keep the introduction page at the original desktop density on wide screens. */
+@media (min-width: 1200px) {
+  .intro-hero { min-height: clamp(480px, 51vh, 550px); }
+  .intro-hero .site-container { max-width: 1320px; }
+  .hero-copy h1 { font-size: clamp(22px, 7.2cqw, 48px); }
+  .hero-copy .hero-tagline { font-size: clamp(17px, 1.3vw, 20px); }
+  .hero-copy .hero-description { font-size: 15px; }
+
+  .intro-strategy-section { padding: 64px 0 70px; }
+  .intro-strategy-section .intro-page-container { width: min(calc(100% - 64px), 1200px); }
+  .intro-strategy-section .intro-section-heading { margin-bottom: 28px; }
+  .intro-strategy-section .intro-section-heading h2 { font-size: clamp(36px, 3.2vw, 48px); }
+  .intro-strategy-section .intro-primary-tab { min-height: 92px; }
+  .intro-strategy-section .intro-primary-tab-icon { width: 48px; height: 48px; }
+  .intro-strategy-section .intro-primary-tab-label { font-size: 14.5px; }
+  .intro-strategy-section .intro-content-copy p { font-size: 15px; }
+  .intro-strategy-section .intro-context-reading { padding: 26px 30px 30px; }
+  .intro-strategy-section .intro-mission-foundation { padding: 24px 26px; }
+  .intro-strategy-section .intro-core-values { padding: 22px; }
+  .intro-strategy-section .intro-accordion-item h3 button { min-height: 72px; }
+
+  .intro-organization-section { padding: 64px 0 68px; }
+  .intro-organization-section .intro-page-container { max-width: 1200px; }
+  .intro-organization-diagram { width: min(100%, 1160px); }
+
+  .intro-milestone-artwork-section {
+    width: min(calc(100% - 64px), 1600px);
+    margin: 0 auto 48px;
+    border-radius: 20px;
+  }
 }
 
 @media (max-width: 767px) {

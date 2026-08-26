@@ -272,7 +272,7 @@
 .youth-activity-overlay svg { display: block; margin-bottom: 6px; color: var(--youth-cyan); }
 .youth-activity-overlay > span { display: block; color: var(--white); font-size: 14px; font-weight: 700; line-height: 1.25; letter-spacing: -.012em; overflow-wrap: anywhere; }
 .youth-activity-overlay small { display: block; margin-top: 6px; color: rgb(255 255 255 / 72%); font-size: 10px; font-weight: 750; letter-spacing: .05em; }
-.youth-activity:focus-visible, .youth-activity-modal-close:focus-visible { outline: 3px solid var(--youth-cyan); outline-offset: 3px; }
+.youth-activity:focus-visible, .youth-activity-modal-close:focus-visible, .youth-activity-album-card a:focus-visible { outline: 3px solid var(--youth-cyan); outline-offset: 3px; }
 
 .youth-facebook-section { padding: 52px 0 56px; }
 
@@ -298,12 +298,23 @@
 .youth-facebook-card a:hover { border-color: rgb(255 255 255 / 62%); background: rgb(255 255 255 / 16%); }
 
 .youth-activity-modal-backdrop { --youth-text: #f5f8fc; --youth-cyan: #64d2ff; position: fixed; z-index: 1000; inset: 0; display: grid; min-height: 100dvh; place-items: center; overflow-y: auto; overscroll-behavior: contain; padding: 28px; color: var(--youth-text); background: rgb(2 12 29 / 78%); backdrop-filter: blur(7px); }
-.youth-activity-modal { position: relative; display: flex; width: min(960px, 100%); max-height: calc(100dvh - 56px); flex-direction: column; overflow: hidden; border: 1px solid rgb(125 193 255 / 32%); border-radius: 22px; background: #0b2038; box-shadow: 0 26px 78px rgb(0 0 0 / 42%); }
+.youth-activity-modal { position: relative; display: flex; width: min(980px, 100%); max-height: calc(100dvh - 56px); flex-direction: column; overflow: hidden; border: 1px solid rgb(125 193 255 / 32%); border-radius: 22px; background: #0b2038; box-shadow: 0 26px 78px rgb(0 0 0 / 42%); }
 .youth-activity-modal-close { position: absolute; z-index: 2; top: 14px; right: 14px; display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid rgb(255 255 255 / 28%); border-radius: 50%; color: var(--white); background: rgb(3 20 38 / 65%); cursor: pointer; }
 .youth-activity-modal-header { padding: clamp(24px, 3vw, 34px) clamp(62px, 7vw, 84px) clamp(19px, 2.5vw, 28px) clamp(24px, 3vw, 38px); }
 .youth-activity-modal-header h2 { margin: 0; color: var(--youth-text); font-size: clamp(22px, 3vw, 34px); line-height: 1.24; letter-spacing: -.03em; }
-.youth-activity-modal-media { display: grid; min-height: 0; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; overflow-y: auto; overscroll-behavior: contain; padding: 10px; background: #07182e; }
-.youth-activity-modal-media img { display: block; width: 100%; height: auto; border-radius: 14px; object-fit: contain; }
+.youth-activity-modal-body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 10px 10px 30px; background: #07182e; }
+.youth-activity-modal-cover { display: block; width: 100%; max-height: min(430px, 46vh); border-radius: 14px; object-fit: cover; object-position: center; }
+.youth-activity-modal-content { padding: 24px 22px 0; }
+.youth-activity-modal-description { max-width: 76ch; margin: 0; color: #c2d2e3; font-size: 15px; line-height: 1.7; }
+.youth-activity-album-groups { display: grid; gap: 24px; margin-top: 26px; }
+.youth-activity-album-group h3 { display: flex; align-items: center; gap: 12px; margin: 0 0 11px; color: var(--youth-cyan); font-size: 14px; font-weight: 800; letter-spacing: .08em; }
+.youth-activity-album-group h3::after { height: 1px; flex: 1; background: rgb(255 255 255 / 10%); content: ''; }
+.youth-activity-album-list { display: grid; gap: 10px; }
+.youth-activity-album-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 22px; align-items: center; padding: 17px 18px; border: 1px solid rgb(255 255 255 / 10%); border-radius: 14px; background: rgb(255 255 255 / 4%); }
+.youth-activity-album-card h4 { margin: 0; color: #f5f8fc; font-size: 15px; line-height: 1.4; }
+.youth-activity-album-card p { max-width: 66ch; margin: 6px 0 0; color: #9fb3c9; font-size: 13px; line-height: 1.55; }
+.youth-activity-album-card a { display: inline-flex; min-height: 40px; align-items: center; justify-content: center; gap: 8px; padding: 0 15px; border: 1px solid rgb(100 210 255 / 36%); border-radius: 10px; color: #e8f7ff; background: rgb(37 128 255 / 17%); font-size: 13px; font-weight: 750; white-space: nowrap; transition: border-color .2s ease, background-color .2s ease, transform .2s ease; }
+.youth-activity-album-card a:hover { border-color: rgb(100 210 255 / 70%); background: rgb(37 128 255 / 29%); transform: translateY(-1px); }
 
 @media (min-width: 1700px) {
   .youth-activities-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
@@ -367,11 +378,15 @@
   .youth-activity-modal-backdrop { padding: 14px; }
   .youth-activity-modal { max-height: calc(100dvh - 28px); border-radius: 18px; }
   .youth-activity-modal-header { padding: 24px 58px 19px 22px; }
-  .youth-activity-modal-media { grid-template-columns: minmax(0, 1fr); }
+  .youth-activity-modal-body { padding: 8px 8px 22px; }
+  .youth-activity-modal-cover { max-height: 34vh; border-radius: 12px; }
+  .youth-activity-modal-content { padding: 20px 12px 0; }
+  .youth-activity-album-card { grid-template-columns: minmax(0, 1fr); gap: 14px; padding: 15px; }
+  .youth-activity-album-card a { width: 100%; }
 }
 
 @media (max-width: 340px) { .youth-activities-grid { grid-template-columns: minmax(0, 1fr); } }
-@media (prefers-reduced-motion: reduce) { .youth-showcase-cta, .youth-showcase-cta svg, .youth-activity, .youth-activity > img, .youth-facebook-card a { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .youth-showcase-cta, .youth-showcase-cta svg, .youth-activity, .youth-activity > img, .youth-facebook-card a, .youth-activity-album-card a { transition: none; } }
 
 
 /* Full-bleed editorial hero aligned with the geometry of the general introduction page. */

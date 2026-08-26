@@ -21,19 +21,62 @@
     <meta name="twitter:description" content="Khám phá Trường Đại học Công nghệ – ĐHQGHN tại Hòa Lạc." />
     <meta name="twitter:image" content="https://uet.vnu.asia/skin/og-image.jpg" />
     <title>Welcome UET</title>
+    <style>
+      .app-bootstrap {
+        --bootstrap-blue: #146bff;
+        --bootstrap-cyan: #4cc9ff;
+        display: grid;
+        min-height: 100vh;
+        min-height: 100dvh;
+        place-content: center;
+        gap: 18px;
+        padding: 32px;
+        color: #16304f;
+        background: radial-gradient(circle at 70% 18%, rgb(76 201 255 / 16%), transparent 28rem), #f4f8fd;
+        font: 600 13px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        letter-spacing: .06em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      .app-bootstrap-mark {
+        display: grid;
+        width: 52px;
+        height: 52px;
+        place-items: center;
+        margin: 0 auto;
+        border-radius: 15px;
+        color: #fff;
+        background: linear-gradient(145deg, var(--bootstrap-blue), #073467);
+        box-shadow: 0 14px 34px rgb(20 107 255 / 22%);
+        font-size: 20px;
+        font-weight: 800;
+      }
+      .app-bootstrap p { margin: 0; }
+      .app-bootstrap-line { width: min(220px, 64vw); height: 3px; overflow: hidden; border-radius: 99px; background: rgb(20 107 255 / 12%); }
+      .app-bootstrap-line::after { display: block; width: 42%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--bootstrap-blue), var(--bootstrap-cyan)); content: ''; animation: bootstrap-slide 1s ease-in-out infinite alternate; }
+      .app-bootstrap.is-error { color: #8b1e2d; letter-spacing: 0; text-transform: none; }
+      .app-bootstrap.is-error .app-bootstrap-line { display: none; }
+      @keyframes bootstrap-slide { from { transform: translateX(-15%); } to { transform: translateX(155%); } }
+      @media (prefers-color-scheme: dark) {
+        .app-bootstrap { color: #d8e9fa; background: radial-gradient(circle at 70% 18%, rgb(20 107 255 / 18%), transparent 28rem), #06172a; }
+        .app-bootstrap-line { background: rgb(255 255 255 / 11%); }
+      }
+      @media (prefers-reduced-motion: reduce) { .app-bootstrap-line::after { animation: none; transform: none; } }
+    </style>
   </head>
   <body>
     <div id="root">
-      <main class="app-fallback" role="status">
-        <p>ĐANG KHỞI TẠO UET NAVIGATOR…</p>
-        <span>Nếu thông báo này không tự biến mất, giao diện React chưa tải được.</span>
+      <main class="app-bootstrap" role="status" aria-live="polite">
+        <span class="app-bootstrap-mark" aria-hidden="true">U</span>
+        <p>Đang chuẩn bị UET Navigator</p>
+        <span class="app-bootstrap-line" aria-hidden="true"></span>
       </main>
     </div>
     <script>
       window.addEventListener('error', function (event) {
         var root = document.getElementById('root');
         if (root && !root.dataset.mounted) {
-          root.innerHTML = '<main class="app-fallback"><p>KHÔNG THỂ TẢI GIAO DIỆN REACT</p><span>' + String(event.message || 'Lỗi JavaScript không xác định.') + '</span></main>';
+          root.innerHTML = '<main class="app-bootstrap is-error" role="alert"><span class="app-bootstrap-mark" aria-hidden="true">!</span><p>Không thể tải giao diện. Vui lòng tải lại trang.</p></main>';
         }
       });
     </script>

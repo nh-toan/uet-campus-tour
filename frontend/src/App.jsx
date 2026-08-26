@@ -1,15 +1,14 @@
-import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { ArrowRight, Building2, ChevronDown, ExternalLink, Flag, Gem, GraduationCap, Handshake, Lightbulb, Menu, Megaphone, Microscope, Target, Telescope, X } from 'lucide-react';
-import { clubCategories } from './content/clubCategories';
-import { introContent, introTabs } from './content/introContent';
-import { YouthUnionPage } from './components/YouthUnionPage';
-import { api } from './lib/api';
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { ArrowRight, Menu, X } from 'lucide-react';
 import { mediaUrl } from './lib/media';
 
-const uetLogoUrl = mediaUrl('intro/uet.png');
+const IntroPage = lazy(() => import('./pages/IntroPage'));
+const MapPage = lazy(() => import('./pages/MapPage'));
+const YouthUnionPage = lazy(() => import('./components/YouthUnionPage').then(module => ({ default: module.YouthUnionPage })));
+const LienChiPage = lazy(() => import('./pages/LienChiPage'));
+const ClubPage = lazy(() => import('./pages/ClubPage'));
 
-const ExternalVirtualTour = lazy(() => import('./features/campus-map/ExternalVirtualTour'));
+const uetLogoUrl = mediaUrl('intro/uet.png');
 
 const sections = [
   ['ban-do', 'Bản đồ khuôn viên'],
@@ -18,46 +17,25 @@ const sections = [
   ['lien-chi', 'Liên chi Khoa/ Viện'],
   ['cau-lac-bo', 'Câu lạc bộ']
 ];
-const introMissionIcons = {
-  mission: Flag,
-  vision: Telescope,
-  'education-philosophy': Lightbulb,
-  'core-values': Gem,
-  'action-slogan': Megaphone
-};
-const introTaskIcons = {
-  training: GraduationCap,
-  'science-technology': Microscope,
-  'organization-governance': Building2,
-  'international-integration': Handshake
-};
-const introTabIcons = {
-  context: Target,
-  'mission-vision': Gem,
-  'key-tasks': Flag
-};
-const introCoreValueIcons = [Lightbulb, Handshake, Target, Gem];
-const lienChiEnglishNames = {
-  'co-hoc-ky-thuat-tu-dong-hoa': 'Faculty of Engineering Mechanics and Automation (FEMA)',
-  'cong-nghe-thong-tin': 'Faculty of Information Technology (FIT)',
-  'dien-tu-vien-thong': 'Faculty of Electronics and Telecommunications (FET)',
-  'cong-nghe-xay-dung-giao-thong': 'Faculty of Civil Engineering (FCE)',
-  'vat-ly-ky-thuat-cong-nghe-nano': 'Faculty of Engineering Physics and Nanotechnology (FEPN)',
-  'vien-cong-nghe-hang-khong-vu-tru': 'School of Aerospace Engineering (SAE)',
-  'vien-tri-tue-nhan-tao': 'Institute for Artificial Intelligence (IAI)',
-  'cong-nghe-nong-nghiep': 'Faculty of Agricultural Technology (FAT)'
-};
 
 function currentRoute() {
   return location.pathname.replace(/\/+$/, '').slice(1) || 'gioi-thieu';
 }
 
-function VirtualTourFrame({ className = '' }) {
-  return <div id="map-viewer" className={className}>
-    <Suspense fallback={<div className="map-wait" role="status"><strong>Đang tải bản đồ khuôn viên…</strong><span>Đang chuẩn bị không gian tham quan.</span></div>}>
-      <ExternalVirtualTour />
-    </Suspense>
-  </div>;
+function RouteLoading() {
+  return <section className="route-loading" role="status" aria-live="polite">
+    <span className="route-loading-mark" aria-hidden="true">U</span>
+    <p>Đang chuẩn bị nội dung</p>
+    <span className="route-loading-line" aria-hidden="true" />
+  </section>;
+}
+
+function ActivePage({ route, navigate }) {
+  if (route === 'ban-do') return <MapPage />;
+  if (route === 'doan-thanh-nien-hoi-sinh-vien') return <YouthUnionPage navigate={navigate} />;
+  if (route === 'lien-chi') return <LienChiPage />;
+  if (route === 'cau-lac-bo') return <ClubPage />;
+  return <IntroPage />;
 }
 
 export default function App() {
@@ -90,11 +68,9 @@ export default function App() {
   return <div className="app-shell">
     <Header current={activeRoute} navigate={navigate} theme={theme} onThemeToggle={() => setTheme(value => value === 'dark' ? 'light' : 'dark')} />
     <main>
-      {activeRoute === 'gioi-thieu' && <IntroPage />}
-      {activeRoute === 'ban-do' && <MapPage />}
-      {activeRoute === 'doan-thanh-nien-hoi-sinh-vien' && <YouthUnionPage navigate={navigate} />}
-      {activeRoute === 'lien-chi' && <LienChiPage />}
-      {activeRoute === 'cau-lac-bo' && <ClubPage />}
+      <Suspense fallback={<RouteLoading />}>
+        <ActivePage route={activeRoute} navigate={navigate} />
+      </Suspense>
     </main>
   </div>;
 }
@@ -125,404 +101,4 @@ function Header({ current, navigate, theme, onThemeToggle }) {
       </nav>}
     </div>
   </header>;
-}
-
-function IntroPage() {
-  return <>
-    <section className="intro-hero">
-      <div className="hero-media" aria-hidden="true">
-        <img src={mediaUrl('map/map_tech_hero.webp')} alt="" width="1672" height="941" loading="eager" decoding="async" fetchPriority="high" />
-        <div className="hero-media-blend" />
-      </div>
-      <div className="site-container hero-inner">
-        <div className="hero-copy">
-          <h1><span className="hero-title-primary">Trường Đại học Công nghệ</span><span className="hero-title-location">ĐHQGHN – Hòa Lạc</span></h1>
-          <p className="hero-tagline">Công nghệ tiên phong, Kiến tạo tương lai</p>
-          <p className="hero-description">UET Navigator giúp bạn khám phá toàn diện Trường Đại học Công nghệ – ĐHQGHN: từ bản đồ, khoa & viện, câu lạc bộ đến cộng đồng sinh viên năng động. Hành trình bắt đầu từ đây.</p>
-        </div>
-      </div>
-    </section>
-    <div className="intro-content-flow tech-bg">
-      <StrategicContent />
-      <IntroClosingSection />
-    </div>
-  </>;
-}
-
-function OrganizationChart() {
-  return <div className="intro-organization-diagram">
-    <div className="intro-organization-preview">
-      <img src={mediaUrl('intro/uet-organization-chart.webp')} alt="Sơ đồ cơ cấu tổ chức Trường Đại học Công nghệ" width="2400" height="1802" loading="lazy" decoding="async" />
-    </div>
-  </div>;
-}
-
-function MilestoneSection() {
-  return <section className="intro-milestone-artwork-section" aria-label="Hơn 20 năm phát triển của UET">
-    <img className="intro-milestone-artwork" src={mediaUrl('intro/uet-20-years-banner.webp')} alt="Hơn 20 năm phát triển và khẳng định vị thế trên bản đồ giáo dục toàn cầu" loading="lazy" decoding="async" />
-  </section>;
-}
-
-function IntroClosingSection() {
-  return <>
-    <section className="intro-organization-section" aria-labelledby="organization-title">
-      <div className="site-container intro-page-container">
-        <header className="intro-section-heading">
-          <h2 id="organization-title">Cơ cấu tổ chức</h2>
-          <span className="intro-heading-line" aria-hidden="true" />
-        </header>
-        <OrganizationChart />
-      </div>
-    </section>
-    <MilestoneSection />
-  </>;
-}
-
-function StrategicContent() {
-  const [activeSectionId, setActiveSectionId] = useState(introContent.context.id);
-  const activeSection = introTabs.find(section => section.id === activeSectionId) ?? introContent.context;
-
-  const onSectionKeyDown = (event, currentIndex) => {
-    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
-    event.preventDefault();
-    const lastIndex = introTabs.length - 1;
-    const direction = ['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : -1;
-    const nextIndex = event.key === 'Home'
-      ? 0
-      : event.key === 'End'
-        ? lastIndex
-        : (currentIndex + direction + introTabs.length) % introTabs.length;
-    const nextSection = introTabs[nextIndex];
-    setActiveSectionId(nextSection.id);
-    document.getElementById(`intro-tab-${nextSection.id}`)?.focus();
-  };
-
-  return <section className="intro-strategy-section" aria-labelledby="strategy-title">
-    <div className="site-container intro-page-container">
-      <header className="intro-section-heading intro-strategy-heading">
-        <p className="eyebrow">Định hướng phát triển</p>
-        <h2 id="strategy-title">Nền tảng và tầm nhìn <span>phát triển bền vững</span></h2>
-        <span className="intro-heading-line" aria-hidden="true" />
-      </header>
-      <div className="intro-primary-tabs" role="tablist" aria-label="Nội dung định hướng phát triển">
-        {introTabs.flatMap((section, index) => {
-          const isActive = activeSectionId === section.id;
-          const Icon = introTabIcons[section.id];
-          const tab = <button
-            id={`intro-tab-${section.id}`}
-            key={section.id}
-            type="button"
-            role="tab"
-            aria-selected={isActive}
-            aria-controls="intro-strategy-panel"
-            tabIndex={isActive ? 0 : -1}
-            className={`intro-primary-tab${isActive ? ' active' : ''}`}
-            onClick={() => setActiveSectionId(section.id)}
-            onKeyDown={event => onSectionKeyDown(event, index)}
-          >
-            <span className="intro-primary-tab-icon" aria-hidden="true"><Icon size={25} strokeWidth={1.8} /></span>
-            <span className="intro-primary-tab-copy">
-              <span className="intro-primary-tab-label">{section.label}</span>
-            </span>
-          </button>;
-          if (index === introTabs.length - 1) return [tab];
-          return [tab, <span className="intro-primary-tab-separator" role="presentation" key={`${section.id}-separator`}><ArrowRight size={22} aria-hidden="true" /></span>];
-        })}
-      </div>
-      <div id="intro-strategy-panel" key={activeSection.id} className="intro-section-panel" role="tabpanel" aria-labelledby={`intro-tab-${activeSection.id}`}>
-        {activeSection.id === introContent.keyTasks.id
-          ? <KeyTasksAccordion sections={introContent.keyTasks.sections} />
-          : activeSection.id === introContent.missionVision.id
-            ? <MissionVisionContent sections={introContent.missionVision.sections} />
-            : <ContextContent sections={introContent.context.sections} />}
-      </div>
-    </div>
-  </section>;
-}
-
-function ContextContent({ sections }) {
-  const [activeContextId, setActiveContextId] = useState(sections[0]?.id ?? null);
-  const activeContext = sections.find(section => section.id === activeContextId) ?? sections[0];
-
-  const onContextKeyDown = (event, currentIndex) => {
-    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
-    event.preventDefault();
-    const lastIndex = sections.length - 1;
-    const direction = ['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : -1;
-    const nextIndex = event.key === 'Home'
-      ? 0
-      : event.key === 'End'
-        ? lastIndex
-        : (currentIndex + direction + sections.length) % sections.length;
-    const nextSection = sections[nextIndex];
-    setActiveContextId(nextSection.id);
-    document.getElementById(`intro-context-tab-${nextSection.id}`)?.focus();
-  };
-
-  if (!activeContext) return null;
-
-  return <div className="intro-context-layout">
-    <div className="intro-context-nav" role="tablist" aria-label="Bối cảnh phát triển">
-      {sections.map((section, index) => {
-        const isActive = activeContext.id === section.id;
-        return <button
-          id={`intro-context-tab-${section.id}`}
-          key={section.id}
-          type="button"
-          role="tab"
-          aria-selected={isActive}
-          aria-controls="intro-context-panel"
-          tabIndex={isActive ? 0 : -1}
-          className={isActive ? 'active' : ''}
-          onClick={() => setActiveContextId(section.id)}
-          onKeyDown={event => onContextKeyDown(event, index)}
-        >{section.title}</button>;
-      })}
-    </div>
-    <article id="intro-context-panel" className="intro-context-reading" role="tabpanel" aria-labelledby={`intro-context-tab-${activeContext.id}`}>
-      <h3>{activeContext.title}</h3>
-      <div className="intro-content-copy">
-        {activeContext.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-      </div>
-    </article>
-  </div>;
-}
-
-function MissionVisionContent({ sections }) {
-  const mission = sections.find(section => section.id === 'mission');
-  const vision = sections.find(section => section.id === 'vision');
-  const philosophy = sections.find(section => section.id === 'education-philosophy');
-  const coreValues = sections.find(section => section.id === 'core-values');
-  const valueParagraphs = coreValues?.paragraphs.slice(1, -2) ?? [];
-  const actionSlogans = coreValues?.paragraphs.slice(-2) ?? [];
-  const [vietnameseSlogan, englishSlogan] = actionSlogans.map(slogan => slogan
-    .replace(/^[–-]\s*Khẩu hiệu hành động\s+tiếng\s+(Việt|Anh)\s*:\s*/i, '')
-    .replace(/[\u201C\u201D]/g, '')
-    .trim());
-  const values = valueParagraphs.map(paragraph => {
-    const separator = paragraph.indexOf(':');
-    return separator === -1
-      ? { title: paragraph, description: '' }
-      : { title: paragraph.slice(0, separator), description: paragraph.slice(separator + 1).trim() };
-  });
-
-  return <div className="intro-mission-layout">
-    <section className="intro-mission-foundation" aria-label="Sứ mạng và tầm nhìn">
-      {[mission, vision].filter(Boolean).map((card, index) => {
-        const Icon = introMissionIcons[card.id];
-        return <article className={`intro-mission-card intro-mission-card-${card.id}`} key={card.id}>
-          <header className="intro-mission-card-heading">
-            <span className="intro-mission-icon" aria-hidden="true"><Icon size={21} strokeWidth={1.8} /></span>
-            <h3>{card.title}</h3>
-          </header>
-          <div className="intro-content-copy">
-            {card.paragraphs.map((paragraph, paragraphIndex) => <p key={`${card.id}-${paragraphIndex}`}>{paragraph}</p>)}
-          </div>
-        </article>;
-      })}
-    </section>
-
-    {coreValues && <section className="intro-core-values" aria-labelledby="intro-core-values-title">
-      <header className="intro-core-values-heading">
-        <h3 id="intro-core-values-title">Giá trị cốt lõi</h3>
-      </header>
-      <div className="intro-core-values-grid">
-        {values.map((value, index) => {
-          const Icon = introCoreValueIcons[index % introCoreValueIcons.length];
-          return <article className="core-value-item" key={value.title}>
-            <span className="core-value-icon" aria-hidden="true"><Icon size={24} strokeWidth={1.7} /></span>
-            <h4>{value.title}</h4>
-            {value.description && <p>{value.description}</p>}
-          </article>;
-        })}
-      </div>
-    </section>}
-
-    {philosophy && <article className="intro-mission-card intro-mission-card-education-philosophy">
-      <h3>{philosophy.title}</h3>
-      <div className="intro-content-copy">
-        {philosophy.paragraphs.map((paragraph, paragraphIndex) => <p key={`${philosophy.id}-${paragraphIndex}`}>{paragraph}</p>)}
-      </div>
-    </article>}
-
-    {(vietnameseSlogan || englishSlogan) && <article className="intro-mission-card intro-mission-card-action-slogan">
-      <h3>Khẩu hiệu hành động</h3>
-      <div className="intro-content-copy">
-        {vietnameseSlogan && <p className="intro-action-slogan-main">{vietnameseSlogan}</p>}
-        {englishSlogan && <p className="intro-action-slogan-english">{englishSlogan}</p>}
-      </div>
-    </article>}
-  </div>;
-}
-
-function KeyTasksAccordion({ sections }) {
-  const [openSectionId, setOpenSectionId] = useState(sections[0]?.id ?? null);
-
-  return <div className="intro-accordion">
-    {sections.map((section, index) => {
-      const isOpen = openSectionId === section.id;
-      const panelId = `intro-accordion-panel-${section.id}`;
-      const buttonId = `intro-accordion-button-${section.id}`;
-      const Icon = introTaskIcons[section.id];
-      return <section className={`intro-accordion-item${isOpen ? ' open' : ''}`} key={section.id}>
-        <h3>
-          <button id={buttonId} type="button" aria-expanded={isOpen} aria-controls={panelId} onClick={() => setOpenSectionId(current => current === section.id ? null : section.id)}>
-            <span className="intro-accordion-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-            <span className="intro-accordion-icon"><Icon size={20} aria-hidden="true" /></span>
-            <span className="intro-accordion-title">{section.title}</span>
-            <span className="intro-accordion-count">{String(section.items.length).padStart(2, '0')} nhiệm vụ</span>
-            <ChevronDown size={21} aria-hidden="true" />
-          </button>
-        </h3>
-        {isOpen && <div id={panelId} className="intro-accordion-panel" role="region" aria-labelledby={buttonId}>
-          <ul>{section.items.map((item, itemIndex) => <li key={item}><span className="intro-task-index" aria-hidden="true">{String(itemIndex + 1).padStart(2, '0')}</span><span>{item}</span></li>)}</ul>
-        </div>}
-      </section>;
-    })}
-  </div>;
-}
-
-function MapPage() {
-  return <section className="explorer-page" aria-label="Bản đồ khuôn viên UET"><VirtualTourFrame className="explorer-map-viewer" /></section>;
-}
-
-function Logo({ item }) {
-  const [broken, setBroken] = useState(false);
-  const monogram = item.monogram || item.name.replace(/^(CLB|Liên chi)\s+/i, '').slice(0, 3).toUpperCase();
-  return !item.logoUrl || broken ? <span className="entity-logo is-monogram" aria-hidden="true">{monogram}</span> : <img className="entity-logo" src={mediaUrl(item.logoUrl)} alt={`Logo ${item.name}`} width="128" height="128" loading="lazy" decoding="async" onError={() => setBroken(true)} />;
-}
-
-function groupParagraphs(paragraphs = []) {
-  return paragraphs.reduce((groups, item) => {
-    const previous = groups[groups.length - 1];
-    if (item.isBullet && previous?.type === 'list') previous.items.push(item.text);
-    else if (item.isBullet) groups.push({ type: 'list', items: [item.text] });
-    else groups.push({ type: 'text', text: item.text });
-    return groups;
-  }, []);
-}
-
-function Loading({ error }) {
-  return <section className="loading-page site-container" role={error ? 'alert' : 'status'}><p className="eyebrow">{error ? 'Không thể tải dữ liệu' : 'Đang tải'}</p><h1>{error || 'Đang tải dữ liệu từ máy chủ…'}</h1></section>;
-}
-
-function EntityCard({ item, type, meta, selected, onSelect, actionLabel, hidden = false }) {
-  const metaText = meta ?? item.summary ?? 'Thông tin đang được cập nhật';
-  return <button type="button" className={`entity-card${selected ? ' selected' : ''}${item.backgroundImage ? ' has-background-image' : ''}`} onClick={onSelect} aria-pressed={selected} hidden={hidden}>
-    {item.backgroundImage && <img className="entity-visual-media" src={mediaUrl(item.backgroundImage)} alt="" loading="lazy" decoding="async" />}
-    <Logo item={item} /><span className="entity-type">{type}</span><h2>{item.name}</h2>{metaText && <span className="entity-meta">{metaText}</span>}<span className="entity-link">{actionLabel} <ArrowRight size={15} aria-hidden="true" /></span>
-  </button>;
-}
-
-function useMediaQuery(query) {
-  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia(query);
-    const updateMatch = event => setMatches(event.matches);
-    setMatches(mediaQuery.matches);
-    mediaQuery.addEventListener('change', updateMatch);
-    return () => mediaQuery.removeEventListener('change', updateMatch);
-  }, [query]);
-
-  return matches;
-}
-
-function DetailPanel({ item, type, dark = false, onClose, subtitle = item.shortName, showActivityGallery = true }) {
-  const isModalViewport = useMediaQuery('(max-width: 1360px)');
-  const detailSections = useMemo(() => {
-    if (Array.isArray(item.sections)) return item.sections;
-    const legacyItems = Array.isArray(item.paragraphs) ? item.paragraphs : [];
-    return legacyItems.length ? [{ title: 'Giới thiệu', items: legacyItems }] : [];
-  }, [item.paragraphs, item.sections]);
-  const galleryItems = Array.isArray(item.activityImages) ? item.activityImages : [];
-
-  useEffect(() => {
-    if (!isModalViewport) return undefined;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = previousOverflow; };
-  }, [isModalViewport]);
-
-  const panel = <>
-    <div className="detail-modal-backdrop" aria-hidden="true" onClick={onClose} />
-    <aside className={`detail-panel${dark ? ' detail-panel-dark' : ''}`} aria-label={`Thông tin ${item.name}`}>
-      <div className="detail-close-bar"><button className="detail-close" type="button" onClick={onClose} aria-label="Đóng thông tin chi tiết"><X size={18} aria-hidden="true" /></button></div>
-      <div className={`detail-visual${item.backgroundImage ? ' has-background-image' : ''}`}>{item.backgroundImage && <span className="detail-visual-media" style={{ backgroundImage: `url("${mediaUrl(item.backgroundImage)}")` }} aria-hidden="true" />}<Logo item={item} /><span className="entity-type">{type}</span><h2>{item.name}</h2>{subtitle && <p className="detail-short">{subtitle}</p>}{item.summary && <p>{item.summary}</p>}</div>
-      <div className="detail-body">{detailSections.map(section => { const blocks = groupParagraphs(section.items); return <section className="detail-section" key={section.title}><h3>{section.title}</h3>{blocks.map((block, index) => block.type === 'list' ? <ul key={index}>{block.items.map((text, itemIndex) => <li key={itemIndex}>{text}</li>)}</ul> : <p key={index}>{block.text}</p>)}</section>; })}{detailSections.length > 0 && item.governingBody && <section className="detail-section"><h3>Đơn vị chủ quản</h3><p>{item.governingBody}</p></section>}{showActivityGallery && dark && galleryItems.length > 0 && <section className="activity-gallery" aria-labelledby="activity-gallery-title"><div className="activity-gallery-head"><h3 id="activity-gallery-title">Các hoạt động nổi bật của CLB</h3></div><div className={`activity-gallery-grid ${galleryItems.length === 1 ? 'count-1' : galleryItems.length === 2 ? 'count-2' : galleryItems.length === 3 ? 'count-3' : 'count-many'}`}>{galleryItems.map(image => <figure key={image.src}><img src={mediaUrl(image.src)} alt="" loading="lazy" decoding="async" /></figure>)}</div></section>}<section className="detail-section detail-contact"><h3>Liên hệ</h3>{item.fanpageUrl ? <a className="btn btn-primary" href={item.fanpageUrl} target="_blank" rel="noreferrer">Fanpage <ExternalLink size={16} aria-hidden="true" /></a> : <p className="empty-contact">Đơn vị chưa cung cấp liên kết chính thức.</p>}</section></div>
-    </aside>
-  </>;
-
-  if (!isModalViewport) return panel;
-  return createPortal(<div className="detail-modal-root"><div className={`detail-modal-context ${dark ? 'club-page' : 'academic-page'}`}>{panel}</div></div>, document.body);
-}
-
-function useDirectorySelection(selectedId, setSelectedId, shown) {
-  const selected = selectedId === null ? null : shown.find(item => item.id === selectedId) || null;
-
-  useEffect(() => {
-    if (selectedId !== null && !selected) setSelectedId(null);
-  }, [selected, selectedId, setSelectedId]);
-
-  useEffect(() => {
-    if (selectedId === null) return undefined;
-    const onKeyDown = event => {
-      if (event.key === 'Escape') setSelectedId(null);
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [selectedId, setSelectedId]);
-
-  return selected;
-}
-
-function LienChiPage() {
-  const [items, setItems] = useState(null);
-  const [error, setError] = useState('');
-  const [selectedId, setSelectedId] = useState(null);
-
-  useEffect(() => {
-    let active = true;
-    api('/lien-chi')
-      .then(data => { if (active) setItems(data); })
-      .catch(reason => { if (active) setError(reason instanceof Error ? reason.message : 'Không thể tải dữ liệu.'); });
-    return () => { active = false; };
-  }, []);
-  const availableItems = items || [];
-  const selected = useDirectorySelection(selectedId, setSelectedId, availableItems);
-  if (!items) return <Loading error={error} />;
-
-  return <section className="directory-page academic-page tech-bg"><div className={`site-container directory-layout${selected ? ' has-detail' : ' is-full-width'}`}><div><header className="directory-head directory-hero"><h1>Khám phá Liên chi Khoa / Viện</h1></header><div className="entity-grid">{availableItems.map(item => <EntityCard key={item.id} item={item} type="Liên chi Đoàn - Liên chi Hội" meta={lienChiEnglishNames[item.id]} selected={selected?.id === item.id} onSelect={() => setSelectedId(current => current === item.id ? null : item.id)} actionLabel="Xem giới thiệu" />)}</div></div>{selected && <DetailPanel item={selected} type={`Liên chi · ${selected.unitType}`} subtitle={lienChiEnglishNames[selected.id]} showLienChiGallery onClose={() => setSelectedId(null)} />}</div></section>;
-}
-
-function clubDisplayName(club) {
-  return club.shortName;
-}
-
-function clubCategoryLabel(club) {
-  return club.categories.join(' · ');
-}
-
-function ClubPage() {
-  const [clubs, setClubs] = useState(null);
-  const [error, setError] = useState('');
-  const [filter, setFilter] = useState('all');
-  const [selectedId, setSelectedId] = useState(null);
-
-  useEffect(() => {
-    let active = true;
-    api('/clubs')
-      .then(data => { if (active) setClubs(data); })
-      .catch(reason => { if (active) setError(reason instanceof Error ? reason.message : 'Không thể tải dữ liệu.'); });
-    return () => { active = false; };
-  }, []);
-  const availableClubs = clubs || [];
-  const available = clubCategories.filter(category => availableClubs.some(club => club.categories.includes(category.label)));
-  const activeCategory = available.find(category => category.id === filter);
-  const shown = activeCategory ? availableClubs.filter(club => club.categories.includes(activeCategory.label)) : availableClubs;
-  const shownIds = new Set(shown.map(club => club.id));
-  const selected = useDirectorySelection(selectedId, setSelectedId, shown);
-  if (!clubs) return <Loading error={error} />;
-
-  return <section className="directory-page club-page tech-bg"><div className={`site-container directory-layout${selected ? ' has-detail' : ' is-full-width'}`}><div><header className="directory-head directory-hero"><p className="eyebrow">Cộng đồng câu lạc bộ</p><h1>Kết nối đam mê — Kiến tạo giá trị — Lan tỏa ảnh hưởng</h1><p>Khám phá một cộng đồng đa dạng, nơi mỗi ý tưởng và sở thích đều có không gian để phát triển.</p></header><div className="chips" aria-label="Lọc câu lạc bộ">{[{ id: 'all', label: 'Tất cả' }, ...available].map(category => <button key={category.id} className={`chip${filter === category.id ? ' active' : ''}`} onClick={() => setFilter(category.id)} aria-pressed={filter === category.id}>{category.label}</button>)}</div><div className="entity-grid club-grid">{availableClubs.map(club => <EntityCard key={club.id} item={club} type={clubCategoryLabel(club)} meta={clubDisplayName(club)} selected={selected?.id === club.id} onSelect={() => setSelectedId(current => current === club.id ? null : club.id)} actionLabel="Khám phá" hidden={!shownIds.has(club.id)} />)}</div>{!shown.length && <p className="empty-state">Không tìm thấy CLB khớp bộ lọc.</p>}</div>{selected && <DetailPanel item={{ ...selected, backgroundImage: '' }} type={`UET Hòa Lạc · ${clubCategoryLabel(selected)}`} subtitle={clubDisplayName(selected)} dark onClose={() => setSelectedId(null)} />}</div></section>;
 }

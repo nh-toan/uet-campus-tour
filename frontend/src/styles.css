@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap');
 @import './styles/tokens.css';
 
 * { box-sizing: border-box; }
@@ -13,7 +13,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: none; box-
 
 .site-container { width: min(calc(100% - (var(--page-gutter) * 2)), var(--container)); margin-inline: auto; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-.eyebrow { margin: 0 0 14px; color: var(--blue-600); font: 600 12px/1.2 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; }
+.eyebrow { margin: 0 0 14px; color: var(--blue-600); font: 700 12px/1.3 var(--font-sans); letter-spacing: .08em; text-transform: uppercase; }
 h1, h2, h3, p { margin-top: 0; }
 h1 { margin-bottom: 0; font-size: clamp(38px, 4.1vw, 64px); line-height: 1.02; letter-spacing: -.045em; font-weight: 800; }
 h1 span { color: var(--blue-400); }
@@ -1117,4 +1117,162 @@ body {
 }
 :root[data-theme='dark'] .club-page::after {
   opacity: .07;
+}
+
+/* Directory details use the same centered modal scale as Youth Union activities. */
+.detail-modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 28px;
+  pointer-events: auto;
+}
+
+.detail-modal-context { display: contents; }
+.detail-modal-context::before,
+.detail-modal-context::after { display: none !important; }
+
+.detail-modal-root .detail-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  background: rgb(2 12 29 / 78%);
+  backdrop-filter: blur(7px);
+}
+
+.detail-modal-root .detail-panel {
+  position: relative;
+  inset: auto;
+  z-index: 1;
+  width: min(980px, 100%);
+  max-width: 980px;
+  max-height: calc(100dvh - 56px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 22px;
+  pointer-events: auto;
+}
+
+.detail-modal-root .detail-close-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: 58px;
+  padding: 12px 12px 0;
+}
+
+.detail-modal-root .detail-visual { min-height: 0; padding: 26px 30px 30px; }
+.detail-modal-root .detail-body { padding: 28px 30px 30px; columns: 1; }
+
+/* Exactly four club cards per desktop row: 24 clubs = 4 columns × 6 rows. */
+.directory-layout.is-full-width .club-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.activity-gallery-open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.activity-gallery-open img { transition: transform .22s ease, filter .22s ease; }
+.activity-gallery-open:hover img { filter: brightness(1.06); transform: scale(1.025); }
+.activity-gallery-open:focus-visible { outline: 3px solid var(--blue-500); outline-offset: -3px; }
+
+.activity-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  padding: 28px;
+  background: rgb(1 8 20 / 90%);
+  backdrop-filter: blur(9px);
+}
+
+.activity-lightbox-content {
+  position: relative;
+  display: grid;
+  width: min(1280px, 100%);
+  max-height: calc(100dvh - 56px);
+  place-items: center;
+}
+
+.activity-lightbox-content > img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100dvh - 92px);
+  border-radius: 16px;
+  object-fit: contain;
+  box-shadow: 0 28px 90px rgb(0 0 0 / 52%);
+}
+
+.activity-lightbox-close,
+.activity-lightbox-nav {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 28%);
+  border-radius: 50%;
+  color: var(--white);
+  background: rgb(3 20 38 / 72%);
+  backdrop-filter: blur(6px);
+}
+
+.activity-lightbox-close { top: 14px; right: 14px; }
+.activity-lightbox-nav { top: 50%; transform: translateY(-50%); }
+.activity-lightbox-nav.previous { left: 14px; }
+.activity-lightbox-nav.next { right: 14px; }
+.activity-lightbox-close:hover,
+.activity-lightbox-nav:hover { border-color: rgb(255 255 255 / 62%); background: rgb(20 107 255 / 72%); }
+
+.activity-lightbox-counter {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: var(--white);
+  background: rgb(3 20 38 / 76%);
+  font-size: 13px;
+  font-weight: 700;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 1100px) {
+  .directory-layout.is-full-width .club-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .detail-modal-root { padding: 14px; }
+  .detail-modal-root .detail-panel { max-height: calc(100dvh - 28px); border-radius: 18px; }
+  .detail-modal-root .detail-visual,
+  .detail-modal-root .detail-body { padding: 22px 20px; }
+  .directory-layout.is-full-width .club-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .activity-lightbox { padding: 12px; }
+  .activity-lightbox-content > img { max-height: calc(100dvh - 24px); border-radius: 12px; }
+  .activity-lightbox-close { top: 8px; right: 8px; }
+  .activity-lightbox-nav { width: 42px; height: 42px; }
+  .activity-lightbox-nav.previous { left: 8px; }
+  .activity-lightbox-nav.next { right: 8px; }
+}
+
+@media (max-width: 480px) {
+  .directory-layout.is-full-width .club-grid { grid-template-columns: 1fr; }
 }

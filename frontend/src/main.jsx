@@ -2,8 +2,7 @@ import { Component, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.jsx';
 import { applyMediaCssVariables } from './lib/media';
-import './styles.css';
-import './styles/intro.css';
+import './styles/shell.css';
 
 class AppErrorBoundary extends Component {
   constructor(props) {
