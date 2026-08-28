@@ -1,3 +1,5 @@
+import futureDisplayInnovationContestImage from '../assets/future-display-innovation-contest-2025.jpg';
+
 export const youthUnionOverview = {
   intro: 'Là môi trường để sinh viên rèn luyện, kết nối và phát huy tinh thần tiên phong, bản lĩnh, sáng tạo, tình nguyện và hội nhập.',
   affiliatedCount: 8,
@@ -74,6 +76,15 @@ export const featuredActivities = [
     ]
   },
   {
+    id: 'future-display-innovation-contest',
+    title: 'FUTURE DISPLAY INNOVATION CONTEST',
+    image: futureDisplayInnovationContestImage,
+    description: 'Cuộc thi đổi mới sáng tạo về công nghệ hiển thị, tạo cơ hội để sinh viên phát triển ý tưởng, hoàn thiện giải pháp và giới thiệu sản phẩm trước hội đồng chuyên môn.',
+    albums: [
+      { year: 2025, title: 'Future Display Innovation Contest', url: 'https://www.facebook.com/media/set/?set=a.1354465382997591&type=3' }
+    ]
+  },
+  {
     id: 'code-camp',
     title: 'UET CODE CAMP',
     image: 'youth-union/activities/code-camp.jpg',
@@ -146,7 +157,7 @@ export const featuredActivities = [
   },
   {
     id: 'procon-uet-2026',
-    title: 'PROCON UET 2026',
+    title: 'PROCON UET',
     image: 'youth-union/activities/procon-uet-2026.jpg',
     description: 'Cuộc thi lập trình thi đấu dành cho sinh viên UET, đồng thời tuyển chọn đội tuyển tham dự PROCON Việt Nam.',
     albums: [

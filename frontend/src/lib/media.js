@@ -23,6 +23,8 @@ function normalizeMediaKey(value) {
 }
 
 export function mediaUrl(value) {
+  const directLocalPath = String(value || '').trim();
+  if (/^\/[A-Za-z0-9_./-]+$/.test(directLocalPath) && !directLocalPath.includes('..')) return directLocalPath;
   const requestedKey = normalizeMediaKey(value);
   if (!requestedKey) return '';
   const sourceKey = resolveMediaSourceKey(requestedKey);
