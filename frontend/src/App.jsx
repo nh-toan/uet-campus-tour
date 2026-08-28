@@ -3,14 +3,17 @@ import { ArrowRight, Menu, X } from 'lucide-react';
 import { mediaUrl } from './lib/media';
 
 const IntroPage = lazy(() => import('./pages/IntroPage'));
+const AcademicPlanPage = lazy(() => import('./pages/AcademicPlanPage'));
 const MapPage = lazy(() => import('./pages/MapPage'));
 const YouthUnionPage = lazy(() => import('./components/YouthUnionPage').then(module => ({ default: module.YouthUnionPage })));
 const LienChiPage = lazy(() => import('./pages/LienChiPage'));
 const ClubPage = lazy(() => import('./pages/ClubPage'));
 
 const uetLogoUrl = mediaUrl('intro/uet.png');
+const defaultRoute = 'ke-hoach-nam-hoc';
 
 const sections = [
+  [defaultRoute, 'Cẩm nang Tân sinh viên'],
   ['ban-do', 'Bản đồ khuôn viên'],
   ['gioi-thieu', 'Giới thiệu chung'],
   ['doan-thanh-nien-hoi-sinh-vien', 'Đoàn Thanh niên – Hội Sinh viên'],
@@ -19,7 +22,8 @@ const sections = [
 ];
 
 function currentRoute() {
-  return location.pathname.replace(/\/+$/, '').slice(1) || 'gioi-thieu';
+  const path = location.pathname.replace(/\/+$/, '').slice(1);
+  return !path || path === 'trang-chu' ? defaultRoute : path;
 }
 
 function RouteLoading() {
@@ -31,11 +35,13 @@ function RouteLoading() {
 }
 
 function ActivePage({ route, navigate }) {
+  if (route === 'ke-hoach-nam-hoc') return <AcademicPlanPage />;
   if (route === 'ban-do') return <MapPage />;
   if (route === 'doan-thanh-nien-hoi-sinh-vien') return <YouthUnionPage navigate={navigate} />;
   if (route === 'lien-chi') return <LienChiPage />;
   if (route === 'cau-lac-bo') return <ClubPage />;
-  return <IntroPage />;
+  if (route === 'gioi-thieu') return <IntroPage />;
+  return <AcademicPlanPage />;
 }
 
 export default function App() {
@@ -63,7 +69,7 @@ export default function App() {
     setRoute(path);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  const activeRoute = sections.some(([id]) => id === route) ? route : 'gioi-thieu';
+  const activeRoute = sections.some(([id]) => id === route) ? route : defaultRoute;
 
   return <div className="app-shell">
     <Header current={activeRoute} navigate={navigate} theme={theme} onThemeToggle={() => setTheme(value => value === 'dark' ? 'light' : 'dark')} />
@@ -85,7 +91,7 @@ function Header({ current, navigate, theme, onThemeToggle }) {
 
   return <header className="site-header">
     <div className="site-container header-inner">
-      <button className="brand" onClick={() => goTo('gioi-thieu')} aria-label="Về trang giới thiệu Trường Đại học Công nghệ">
+      <button className="brand" onClick={() => goTo(defaultRoute)} aria-label="Về Cẩm nang Tân sinh viên">
         <img className="brand-crest" src={uetLogoUrl} alt="Logo Trường Đại học Công nghệ" width="52" height="52" loading="eager" decoding="async" fetchPriority="high" />
         <span className="brand-copy"><small>ĐẠI HỌC QUỐC GIA HÀ NỘI</small><strong>TRƯỜNG ĐẠI HỌC CÔNG NGHỆ</strong></span>
       </button>
