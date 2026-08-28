@@ -35,13 +35,13 @@ function RouteLoading() {
 }
 
 function ActivePage({ route, navigate }) {
-  if (route === 'ke-hoach-nam-hoc') return <AcademicPlanPage />;
+  if (route === 'ke-hoach-nam-hoc') return <AcademicPlanPage navigate={navigate} />;
   if (route === 'ban-do') return <MapPage />;
   if (route === 'doan-thanh-nien-hoi-sinh-vien') return <YouthUnionPage navigate={navigate} />;
   if (route === 'lien-chi') return <LienChiPage />;
   if (route === 'cau-lac-bo') return <ClubPage />;
   if (route === 'gioi-thieu') return <IntroPage />;
-  return <AcademicPlanPage />;
+  return <AcademicPlanPage navigate={navigate} />;
 }
 
 export default function App() {

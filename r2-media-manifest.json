@@ -2,17 +2,30 @@
   "schemaVersion": 1,
   "generatedBy": "npm run media:manifest",
   "mediaBaseEnvironmentVariable": "VITE_MEDIA_BASE_URL",
-  "localAssetsRetainedUntilVerified": true,
+  "localAssetsRetainedUntilVerified": false,
   "summary": {
-    "managedAssetCount": 224,
-    "localAssetCount": 78,
-    "localAssetBytes": 40676870,
-    "runtimeAssetCount": 168,
-    "runtimeAssetBytes": 290102583,
-    "pendingUploadCount": 5,
-    "verifiedCount": 163
+    "managedAssetCount": 225,
+    "localAssetCount": 79,
+    "localAssetBytes": 40865038,
+    "runtimeAssetCount": 169,
+    "runtimeAssetBytes": 290290751,
+    "pendingUploadCount": 0,
+    "verifiedCount": 169
   },
   "assets": [
+    {
+      "sourcePath": "frontend/public/assets/academic-plan/banner-footer.jpeg",
+      "sourceKey": "academic-plan/banner-footer.jpeg",
+      "objectKey": "academic-plan/banner-footer.9f74703cb9e6.jpeg",
+      "sha256": "9f74703cb9e649ef50bcdca23aa71adebfbd7025de12024ede1ba5693870bce5",
+      "sourceBytes": 188168,
+      "sourcePresent": true,
+      "category": "content-media",
+      "runtimeReferenced": true,
+      "uploadRequired": true,
+      "optimization": "keep-or-optimize-losslessly",
+      "migrationStatus": "verified-r2"
+    },
     {
       "sourcePath": "frontend/public/assets/academic-plan/campus-radial-collage.png",
       "sourceKey": "academic-plan/campus-radial-collage.png",
@@ -24,7 +37,7 @@
       "runtimeReferenced": true,
       "uploadRequired": true,
       "optimization": "review-transparency-then-webp",
-      "migrationStatus": "pending-upload-and-url-verification"
+      "migrationStatus": "verified-r2"
     },
     {
       "sourcePath": "frontend/public/assets/academic-plan/one-uet-logo.png",
@@ -37,7 +50,7 @@
       "runtimeReferenced": true,
       "uploadRequired": true,
       "optimization": "keep-or-optimize-losslessly",
-      "migrationStatus": "pending-upload-and-url-verification"
+      "migrationStatus": "verified-r2"
     },
     {
       "sourcePath": "frontend/public/assets/academic-plan/students-uet-cutout.png",
@@ -50,7 +63,7 @@
       "runtimeReferenced": true,
       "uploadRequired": true,
       "optimization": "convert-photo-to-webp-before-upload",
-      "migrationStatus": "pending-upload-and-url-verification"
+      "migrationStatus": "verified-r2"
     },
     {
       "sourcePath": "frontend/public/assets/academic-plan/uet-vision-logo.png",
@@ -63,7 +76,7 @@
       "runtimeReferenced": true,
       "uploadRequired": true,
       "optimization": "keep-or-optimize-losslessly",
-      "migrationStatus": "pending-upload-and-url-verification"
+      "migrationStatus": "verified-r2"
     },
     {
       "sourcePath": "frontend/public/assets/clubs/activity/clb-bong-ro/01.jpg",
@@ -2624,7 +2637,7 @@
       "runtimeReferenced": true,
       "uploadRequired": true,
       "optimization": "keep-or-optimize-losslessly",
-      "migrationStatus": "pending-upload-and-url-verification"
+      "migrationStatus": "verified-r2"
     },
     {
       "sourcePath": "frontend/public/assets/youth-union/activities/giai-phap-dai-hoc-thong-minh.jpg",
