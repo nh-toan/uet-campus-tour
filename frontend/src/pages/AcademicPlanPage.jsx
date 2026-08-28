@@ -3,12 +3,13 @@ import { ArrowRight, BookOpen, CalendarDays, ExternalLink, GraduationCap, UsersR
 import ActivityModal from '../components/ActivityModal';
 import { featuredActivities, youthUnionFacebookUrl, youthUnionMedia } from '../content/youthUnionContent';
 import { mediaUrl } from '../lib/media';
-import campusRadialCollage from '../assets/academic-plan/campus-radial-collage.png';
-import oneUetLogo from '../assets/academic-plan/one-uet-logo.png';
-import uetVisionLogo from '../assets/academic-plan/uet-vision-logo.png';
-import studentsCutout from '../assets/academic-plan/students-uet-cutout.png';
-import winterCampaignImage from '../assets/academic-plan/mua-dong-am.jpg';
 import '../styles/academic-plan.css';
+
+const campusRadialCollage = 'academic-plan/campus-radial-collage.png';
+const oneUetLogo = 'academic-plan/one-uet-logo.png';
+const uetVisionLogo = 'academic-plan/uet-vision-logo.png';
+const studentsCutout = 'academic-plan/students-uet-cutout.png';
+const winterCampaignImage = 'youth-union/activities/mua-dong-am.jpg';
 
 const academicPlan = {
   semester1: {
@@ -121,13 +122,13 @@ function AcademicHero() {
         <span className="academic-hero__dot academic-hero__dot--bottom" aria-hidden="true" />
         <div className="academic-hero__student-stage">
           <div className="academic-hero__student-bg" aria-hidden="true" />
-          <div className="academic-hero__students-cutout"><img src={studentsCutout} alt="Bốn sinh viên UET" width="2870" height="1092" loading="eager" decoding="async" fetchPriority="high" /></div>
+          <div className="academic-hero__students-cutout"><img src={mediaUrl(studentsCutout)} alt="Bốn sinh viên UET" width="2870" height="1092" loading="eager" decoding="async" fetchPriority="high" /></div>
         </div>
         <div className="academic-hero__badge">
-          <img src={oneUetLogo} alt="ONE UET" width="1764" height="1583" loading="eager" decoding="async" />
+          <img src={mediaUrl(oneUetLogo)} alt="ONE UET" width="1764" height="1583" loading="eager" decoding="async" />
         </div>
         <div className="academic-hero__vision-mark">
-          <img src={uetVisionLogo} alt="One vision, one identity, one mission" width="1764" height="1583" loading="eager" decoding="async" />
+          <img src={mediaUrl(uetVisionLogo)} alt="One vision, one identity, one mission" width="1764" height="1583" loading="eager" decoding="async" />
         </div>
         <span className="academic-hero__identity-line" aria-hidden="true">
           <ArcText text="ONE VISION · ONE IDENTITY · ONE MISSION" startAngle={165} endAngle={105} radius={47} />
@@ -169,7 +170,7 @@ function AcademicTimeline() {
             </nav>
           </div>
           <figure className="academic-campus-wheel">
-            <img src={campusRadialCollage} alt="Không gian học tập và khuôn viên UET" width="1080" height="1350" loading="lazy" decoding="async" />
+            <img src={mediaUrl(campusRadialCollage)} alt="Không gian học tập và khuôn viên UET" width="1080" height="1350" loading="lazy" decoding="async" />
           </figure>
           <div className="academic-timeline-layout__right">
             <SemesterTimeline semester={academicPlan.semester2} />
@@ -249,14 +250,14 @@ function AcademicCTA() {
   return <section className="academic-cta" aria-labelledby="academic-cta-title">
     <img className="academic-cta__background" src={mediaUrl(youthUnionMedia.heroImage)} alt="" loading="lazy" decoding="async" />
     <div className="academic-plan-container academic-cta__content">
-      <div className="academic-cta__mark" aria-hidden="true"><img src={uetVisionLogo} alt="" width="1764" height="1583" loading="lazy" decoding="async" /></div>
+      <div className="academic-cta__mark" aria-hidden="true"><img src={mediaUrl(uetVisionLogo)} alt="" width="1764" height="1583" loading="lazy" decoding="async" /></div>
       <div className="academic-cta__copy">
         <span className="academic-cta__icon"><UsersRound size={30} aria-hidden="true" /></span>
         <h2 className="academic-cta__title" id="academic-cta-title">Tham gia – Kết nối – Tỏa sáng cùng UET!</h2>
         <p className="academic-cta__text">Đừng bỏ lỡ bất kỳ hoạt động nào trong năm học mới.</p>
         <a className="academic-plan-btn academic-plan-btn--light" href={youthUnionFacebookUrl} target="_blank" rel="noopener noreferrer">Theo dõi Fanpage Đoàn – Hội UET <ExternalLink size={17} aria-hidden="true" /></a>
       </div>
-      <span className="academic-cta__one" aria-hidden="true"><img src={oneUetLogo} alt="" width="1764" height="1583" loading="lazy" decoding="async" /></span>
+      <span className="academic-cta__one" aria-hidden="true"><img src={mediaUrl(oneUetLogo)} alt="" width="1764" height="1583" loading="lazy" decoding="async" /></span>
     </div>
   </section>;
 }

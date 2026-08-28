@@ -2,17 +2,69 @@
   "schemaVersion": 1,
   "generatedBy": "npm run media:manifest",
   "mediaBaseEnvironmentVariable": "VITE_MEDIA_BASE_URL",
-  "localAssetsRetainedUntilVerified": false,
+  "localAssetsRetainedUntilVerified": true,
   "summary": {
-    "managedAssetCount": 220,
-    "localAssetCount": 72,
-    "localAssetBytes": 36099387,
-    "runtimeAssetCount": 164,
-    "runtimeAssetBytes": 286566574,
-    "pendingUploadCount": 0,
-    "verifiedCount": 164
+    "managedAssetCount": 224,
+    "localAssetCount": 78,
+    "localAssetBytes": 40676870,
+    "runtimeAssetCount": 168,
+    "runtimeAssetBytes": 290102583,
+    "pendingUploadCount": 5,
+    "verifiedCount": 163
   },
   "assets": [
+    {
+      "sourcePath": "frontend/public/assets/academic-plan/campus-radial-collage.png",
+      "sourceKey": "academic-plan/campus-radial-collage.png",
+      "objectKey": "academic-plan/campus-radial-collage.1ff08ade8316.png",
+      "sha256": "1ff08ade83165d2eef923120cd93214c8eb77607e88023301447b16929f9ac65",
+      "sourceBytes": 993135,
+      "sourcePresent": true,
+      "category": "content-media",
+      "runtimeReferenced": true,
+      "uploadRequired": true,
+      "optimization": "review-transparency-then-webp",
+      "migrationStatus": "pending-upload-and-url-verification"
+    },
+    {
+      "sourcePath": "frontend/public/assets/academic-plan/one-uet-logo.png",
+      "sourceKey": "academic-plan/one-uet-logo.png",
+      "objectKey": "academic-plan/one-uet-logo.71876af72f31.png",
+      "sha256": "71876af72f3181269e6754458a88a4327460cf3f9d8a9a908ea880badd1ce743",
+      "sourceBytes": 59454,
+      "sourcePresent": true,
+      "category": "content-media",
+      "runtimeReferenced": true,
+      "uploadRequired": true,
+      "optimization": "keep-or-optimize-losslessly",
+      "migrationStatus": "pending-upload-and-url-verification"
+    },
+    {
+      "sourcePath": "frontend/public/assets/academic-plan/students-uet-cutout.png",
+      "sourceKey": "academic-plan/students-uet-cutout.png",
+      "objectKey": "academic-plan/students-uet-cutout.c603d936750a.png",
+      "sha256": "c603d936750af3dfbfcb43e830cd1e1ca650e7971d96310570b661bc05aefcbf",
+      "sourceBytes": 2386187,
+      "sourcePresent": true,
+      "category": "content-media",
+      "runtimeReferenced": true,
+      "uploadRequired": true,
+      "optimization": "convert-photo-to-webp-before-upload",
+      "migrationStatus": "pending-upload-and-url-verification"
+    },
+    {
+      "sourcePath": "frontend/public/assets/academic-plan/uet-vision-logo.png",
+      "sourceKey": "academic-plan/uet-vision-logo.png",
+      "objectKey": "academic-plan/uet-vision-logo.14c641204dc6.png",
+      "sha256": "14c641204dc6e531141eb3a826468c58119d29e2f12273a67035c3a02b1c02dc",
+      "sourceBytes": 130277,
+      "sourcePresent": true,
+      "category": "content-media",
+      "runtimeReferenced": true,
+      "uploadRequired": true,
+      "optimization": "keep-or-optimize-losslessly",
+      "migrationStatus": "pending-upload-and-url-verification"
+    },
     {
       "sourcePath": "frontend/public/assets/clubs/activity/clb-bong-ro/01.jpg",
       "sourceKey": "clubs/activity/clb-bong-ro/01.jpg",
@@ -2549,19 +2601,6 @@
       "migrationStatus": "verified-r2"
     },
     {
-      "sourcePath": "frontend/public/assets/youth-union/activities/dai-hoi-doan.jpg",
-      "sourceKey": "youth-union/activities/dai-hoi-doan.jpg",
-      "objectKey": "youth-union/activities/dai-hoi-doan.6c104a4fe53e.jpg",
-      "sha256": "6c104a4fe53ec4efac71d60988ceb1b21fbe984840a19040b963bb7979d7ab27",
-      "sourceBytes": 465747,
-      "sourcePresent": false,
-      "category": "content-media",
-      "runtimeReferenced": true,
-      "uploadRequired": true,
-      "optimization": "keep-or-optimize-losslessly",
-      "migrationStatus": "verified-r2"
-    },
-    {
       "sourcePath": "frontend/public/assets/youth-union/activities/dai-hoi.jpg",
       "sourceKey": "youth-union/activities/dai-hoi.jpg",
       "objectKey": "youth-union/activities/dai-hoi.69ba6d775cf1.jpg",
@@ -2573,6 +2612,19 @@
       "uploadRequired": true,
       "optimization": "keep-or-optimize-losslessly",
       "migrationStatus": "verified-r2"
+    },
+    {
+      "sourcePath": "frontend/public/assets/youth-union/activities/future-display-innovation-contest.jpg",
+      "sourceKey": "youth-union/activities/future-display-innovation-contest.jpg",
+      "objectKey": "youth-union/activities/future-display-innovation-contest.68f70ea35ccb.jpg",
+      "sha256": "68f70ea35ccb60cb84184538190283fbd30716a9d7227b034aabdf375a8049aa",
+      "sourceBytes": 432703,
+      "sourcePresent": true,
+      "category": "content-media",
+      "runtimeReferenced": true,
+      "uploadRequired": true,
+      "optimization": "keep-or-optimize-losslessly",
+      "migrationStatus": "pending-upload-and-url-verification"
     },
     {
       "sourcePath": "frontend/public/assets/youth-union/activities/giai-phap-dai-hoc-thong-minh.jpg",
@@ -2658,7 +2710,7 @@
       "objectKey": "youth-union/activities/mua-dong-am.67354813e852.jpg",
       "sha256": "67354813e85254604d884396ac69a4371a0e74b1598bebd91a845dff8e970777",
       "sourceBytes": 575727,
-      "sourcePresent": false,
+      "sourcePresent": true,
       "category": "content-media",
       "runtimeReferenced": true,
       "uploadRequired": true,

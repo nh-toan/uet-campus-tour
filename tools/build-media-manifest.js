@@ -15,7 +15,7 @@ const scanRoots = [
 ];
 const sourceExtensions = new Set(['.css', '.html', '.js', '.jsx', '.json', '.ts', '.tsx']);
 const mediaExtensions = new Set(['.avif', '.gif', '.jpg', '.jpeg', '.png', '.svg', '.webp']);
-const mediaReferencePattern = /(?:\/assets\/)?((?:clubs|intro|lien-chi|map|youth-union)\/[A-Za-z0-9_./-]+\.(?:avif|gif|jpe?g|png|svg|webp))/gi;
+const mediaReferencePattern = /(?:\/assets\/)?((?:academic-plan|clubs|intro|lien-chi|map|youth-union)\/[A-Za-z0-9_./-]+\.(?:avif|gif|jpe?g|png|svg|webp))/gi;
 
 function readExistingManifest() {
   if (!fs.existsSync(manifestPath)) return new Map();
