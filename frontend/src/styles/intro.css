@@ -1204,7 +1204,7 @@
 .intro-strategy-section .intro-core-values-heading::before,
 .intro-strategy-section .intro-core-values-heading::after { width: 42px; height: 1px; background: linear-gradient(90deg, transparent, var(--blue-600)); content: ''; }
 .intro-strategy-section .intro-core-values-heading::after { transform: scaleX(-1); }
-.intro-strategy-section .intro-core-values-heading h3 { font-size: 19px; }
+.intro-strategy-section .intro-core-values-heading h3 { font-size: 22px; }
 
 .intro-strategy-section .intro-core-values-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: stretch; margin-top: 20px; padding: 0; border: 0; }
 
@@ -1228,7 +1228,14 @@
 .intro-strategy-section .core-value-item:nth-child(even) .core-value-icon,
 .intro-strategy-section .core-value-item:nth-child(even) h4 { color: var(--orange-500); }
 .intro-strategy-section .core-value-item h4 { display: flex; min-height: 2.7em; align-items: center; justify-content: center; margin: 0 0 10px; color: var(--blue-600); font-size: 16px; font-weight: 700; line-height: 1.35; letter-spacing: -.01em; text-transform: uppercase; text-wrap: balance; }
-.intro-strategy-section .core-value-item p { margin: 0; color: var(--text-secondary); font-size: 15px; line-height: 1.68; text-align: left; }
+.intro-strategy-section .core-value-item p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: justify;
+  text-justify: inter-word;
+}
 
 .intro-strategy-section .intro-mission-card-education-philosophy {
   position: relative;
@@ -1391,7 +1398,11 @@
 }
 .intro-strategy-section .intro-accordion-item h3 button > svg { color: var(--blue-600); transition: transform .2s ease; }
 .intro-strategy-section .intro-accordion-item.open h3 button > svg { transform: rotate(180deg); }
-.intro-strategy-section .intro-accordion-panel { max-width: none; padding: 0 24px 22px 104px; animation: intro-accordion-enter .2s ease both; }
+.intro-strategy-section .intro-accordion-panel {
+  max-width: none;
+  padding: 0 clamp(24px, 8.67%, 104px) 22px;
+  animation: intro-accordion-enter .2s ease both;
+}
 .intro-strategy-section .intro-accordion-panel ul { max-width: 1080px; margin: 0; padding: 0; }
 .intro-strategy-section .intro-accordion-panel li { align-items: baseline; grid-template-columns: 30px minmax(0, 1fr); gap: 12px; padding: 10px 0; color: var(--text-secondary); font-size: 16px; font-weight: 400; line-height: 1.74; text-align: left; }
 .intro-strategy-section .intro-accordion-panel li > span:last-child { text-align: justify; text-justify: inter-word; }
