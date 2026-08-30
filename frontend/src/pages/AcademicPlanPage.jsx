@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { ArrowRight, BookOpen, CalendarDays, ExternalLink, GraduationCap, UsersRound } from 'lucide-react';
 import ActivityModal from '../components/ActivityModal';
-import { featuredActivities, youthUnionFacebookUrl, youthUnionMedia } from '../content/youthUnionContent';
+import { featuredActivities, youthUnionMedia } from '../content/youthUnionContent';
 import { mediaUrl } from '../lib/media';
 import '../styles/academic-plan.css';
 
@@ -9,6 +9,7 @@ const campusRadialCollage = 'academic-plan/campus-radial-collage.png';
 const oneUetLogo = 'academic-plan/one-uet-logo.png';
 const uetVisionLogo = 'academic-plan/uet-vision-logo.png';
 const studentsCutout = 'academic-plan/students-uet-cutout.png';
+const footerBanner = 'academic-plan/banner-footer.jpeg';
 const winterCampaignImage = 'youth-union/activities/mua-dong-am.jpg';
 
 const academicPlan = {
@@ -161,14 +162,7 @@ function AcademicTimeline() {
         <p className="academic-plan-eyebrow academic-plan-eyebrow--center">Lộ trình học tập</p>
         <h2 className="academic-plan-section-title" id="academic-timeline-title">Kế hoạch học tập cho sinh viên K71</h2>
         <div className="academic-timeline-layout">
-          <div className="academic-timeline-layout__left">
-            <SemesterTimeline semester={academicPlan.semester1} />
-            <nav className="academic-study-links" aria-label="Tài liệu và dịch vụ học tập">
-              <a className="academic-plan-btn academic-plan-btn--primary" href="https://handbook.uet.vnu.edu.vn/" target="_blank" rel="noopener noreferrer"><BookOpen size={19} aria-hidden="true" /><span>Handbook UET</span><ExternalLink size={15} aria-hidden="true" /></a>
-              <a className="academic-plan-btn academic-study-links__hub" href="https://studenthub.uet.edu.vn/login" target="_blank" rel="noopener noreferrer"><GraduationCap size={19} aria-hidden="true" /><span>Student HUB UET</span><ExternalLink size={15} aria-hidden="true" /></a>
-              <a className="academic-plan-btn academic-plan-btn--action" href="https://drive.google.com/file/d/1ams5rQstWBuk-Gg_ik4273qJwRhAxxzG/view?usp=drivesdk" target="_blank" rel="noopener noreferrer"><CalendarDays size={19} aria-hidden="true" /><span>Chi tiết kế hoạch năm học</span><ExternalLink size={15} aria-hidden="true" /></a>
-            </nav>
-          </div>
+          <SemesterTimeline semester={academicPlan.semester1} />
           <figure className="academic-campus-wheel">
             <img src={mediaUrl(campusRadialCollage)} alt="Không gian học tập và khuôn viên UET" width="1080" height="1350" loading="lazy" decoding="async" />
           </figure>
@@ -176,6 +170,11 @@ function AcademicTimeline() {
             <SemesterTimeline semester={academicPlan.semester2} />
             <SemesterTimeline semester={academicPlan.summerSemester} />
           </div>
+          <nav className="academic-study-links" aria-label="Tài liệu và dịch vụ học tập">
+            <a className="academic-plan-btn academic-plan-btn--primary" href="https://handbook.uet.vnu.edu.vn/" target="_blank" rel="noopener noreferrer"><BookOpen size={19} aria-hidden="true" /><span>Handbook UET</span><ExternalLink size={15} aria-hidden="true" /></a>
+            <a className="academic-plan-btn academic-study-links__hub" href="https://studenthub.uet.edu.vn/login" target="_blank" rel="noopener noreferrer"><GraduationCap size={19} aria-hidden="true" /><span>Student HUB UET</span><ExternalLink size={15} aria-hidden="true" /></a>
+            <a className="academic-plan-btn academic-plan-btn--action" href="https://drive.google.com/file/d/1ams5rQstWBuk-Gg_ik4273qJwRhAxxzG/view?usp=drivesdk" target="_blank" rel="noopener noreferrer"><CalendarDays size={19} aria-hidden="true" /><span>Chi tiết kế hoạch năm học</span><ExternalLink size={15} aria-hidden="true" /></a>
+          </nav>
         </div>
       </div>
     </div>
@@ -246,27 +245,23 @@ function ActivitiesSection() {
   </section>;
 }
 
-function AcademicCTA() {
-  return <section className="academic-cta" aria-labelledby="academic-cta-title">
-    <img className="academic-cta__background" src={mediaUrl(youthUnionMedia.heroImage)} alt="" loading="lazy" decoding="async" />
-    <div className="academic-plan-container academic-cta__content">
-      <div className="academic-cta__mark" aria-hidden="true"><img src={mediaUrl(uetVisionLogo)} alt="" width="1764" height="1583" loading="lazy" decoding="async" /></div>
-      <div className="academic-cta__copy">
-        <span className="academic-cta__icon"><UsersRound size={30} aria-hidden="true" /></span>
-        <h2 className="academic-cta__title" id="academic-cta-title">Tham gia – Kết nối – Tỏa sáng cùng UET!</h2>
-        <p className="academic-cta__text">Đừng bỏ lỡ bất kỳ hoạt động nào trong năm học mới.</p>
-        <a className="academic-plan-btn academic-plan-btn--light" href={youthUnionFacebookUrl} target="_blank" rel="noopener noreferrer">Theo dõi Fanpage Đoàn – Hội UET <ExternalLink size={17} aria-hidden="true" /></a>
-      </div>
-      <span className="academic-cta__one" aria-hidden="true"><img src={mediaUrl(oneUetLogo)} alt="" width="1764" height="1583" loading="lazy" decoding="async" /></span>
-    </div>
+function AcademicCTA({ onNavigate }) {
+  const openYouthUnion = event => {
+    event.preventDefault();
+    onNavigate('doan-thanh-nien-hoi-sinh-vien');
+  };
+
+  return <section className="academic-cta" aria-label="Tham gia, kết nối và tỏa sáng cùng UET">
+    <img className="academic-cta__banner" src={mediaUrl(footerBanner)} alt="Tham gia, kết nối, tỏa sáng cùng UET" width="1918" height="692" loading="lazy" decoding="async" />
+    <a className="academic-cta__link" href="/doan-thanh-nien-hoi-sinh-vien" onClick={openYouthUnion}>Theo dõi Fanpage Đoàn – Hội UET <ArrowRight size={22} aria-hidden="true" /></a>
   </section>;
 }
 
-export default function AcademicPlanPage() {
+export default function AcademicPlanPage({ navigate }) {
   return <div className="academic-plan-page">
     <AcademicHero />
     <AcademicTimeline />
     <ActivitiesSection />
-    <AcademicCTA />
+    <AcademicCTA onNavigate={navigate} />
   </div>;
 }
