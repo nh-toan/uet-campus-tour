@@ -10,11 +10,11 @@ const LienChiPage = lazy(() => import('./pages/LienChiPage'));
 const ClubPage = lazy(() => import('./pages/ClubPage'));
 
 const uetLogoUrl = mediaUrl('intro/uet.png');
-const defaultRoute = 'ke-hoach-nam-hoc';
+const defaultRoute = 'ban-do';
 
 const sections = [
-  [defaultRoute, 'Cẩm nang Tân sinh viên'],
-  ['ban-do', 'Bản đồ khuôn viên'],
+  ['ke-hoach-nam-hoc', 'Cẩm nang Tân sinh viên'],
+  [defaultRoute, 'Bản đồ khuôn viên'],
   ['gioi-thieu', 'Giới thiệu chung'],
   ['doan-thanh-nien-hoi-sinh-vien', 'Đoàn Thanh niên – Hội Sinh viên'],
   ['lien-chi', 'Liên chi Khoa/ Viện'],
@@ -91,7 +91,7 @@ function Header({ current, navigate, theme, onThemeToggle }) {
 
   return <header className="site-header">
     <div className="site-container header-inner">
-      <button className="brand" onClick={() => goTo(defaultRoute)} aria-label="Về Cẩm nang Tân sinh viên">
+      <button className="brand" onClick={() => goTo(defaultRoute)} aria-label="Về trang chủ bản đồ khuôn viên">
         <img className="brand-crest" src={uetLogoUrl} alt="Logo Trường Đại học Công nghệ" width="52" height="52" loading="eager" decoding="async" fetchPriority="high" />
         <span className="brand-copy"><small>ĐẠI HỌC QUỐC GIA HÀ NỘI</small><strong>TRƯỜNG ĐẠI HỌC CÔNG NGHỆ</strong></span>
       </button>

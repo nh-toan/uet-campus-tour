@@ -169,6 +169,12 @@
   }
 }
 
+@media (max-width: 1536px) {
+  .external-virtual-tour__google-maps {
+    display: none;
+  }
+}
+
 @media (max-width: 520px) {
   .external-virtual-tour__google-maps {
     right: 12px;
